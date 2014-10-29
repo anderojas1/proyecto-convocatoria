@@ -9,6 +9,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import controlador.DriverUsuario;
+
 /**
  *
  * @author anderojas
@@ -29,8 +31,12 @@ public class VentanaLogin extends JFrame {
     
     private final ManejaEventos driverEventos;
     
+    private DriverUsuario controladorUsuario;
     
-    public VentanaLogin () { 
+    
+    public VentanaLogin () {
+        
+        controladorUsuario = new DriverUsuario();
         
         lbtitulo = new JLabel("Sistema de Convocatoria Docente");
         lbusername = new JLabel("Usuario");
@@ -49,14 +55,15 @@ public class VentanaLogin extends JFrame {
         
         agregarComponentes();
         acomodarComponentes();
-        addFeatures();
+        addFeatures();        
         
-        setVisible(true);
         setSize(500, 350);
         setResizable(false);
         setLocationRelativeTo(null);
         
         setTitle("Sistema Convocatoria Docente");
+        
+        setVisible(true); 
         
         
     }
@@ -109,6 +116,21 @@ public class VentanaLogin extends JFrame {
     }
     
     
+    public void verificarUsuarioAdmin () {
+        
+        if (controladorUsuario.consultarUsuarioAdmin() == false) {
+            
+            JOptionPane.showMessageDialog(null, "Advertencia: No existe administrador de la aplicación");
+            
+            VentanaRegUsuario registrarAdmin = new VentanaRegUsuario(false);
+            
+            dispose();
+            
+        }
+        
+    }
+    
+    
     public boolean validarCampos () {
         
         boolean flag = false;
@@ -134,7 +156,8 @@ public class VentanaLogin extends JFrame {
             
                 if (validarCampos() == true) {
                 
-                    System.out.println("iniciar\n");
+                    VentanaRegUsuario registro = new VentanaRegUsuario(true);
+                    dispose();
                 
                 }
                 

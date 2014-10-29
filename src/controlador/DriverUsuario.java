@@ -4,12 +4,27 @@
  */
 package controlador;
 
+import AccesoDatos.DaoUsuario;
+
 /**
  *
  * @author jorgeaer
  */
 public class DriverUsuario {
     
-        
+    private DaoUsuario daoUsuario;
     
+    
+    public DriverUsuario() {
+        
+        daoUsuario = new DaoUsuario();
+        
+    }
+    
+    
+    public boolean consultarUsuarioAdmin () {
+        
+        return daoUsuario.consultarUsuario();
+        
+    }
 }

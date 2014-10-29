@@ -20,9 +20,10 @@ public class Usuario {
     private String identificacion;
     private boolean estado;
     private boolean empleo;
+    private String tipo;
 
     public Usuario(String nombre1, String nombre2, String apellido1, String apellido2, 
-            String tipo, String user, String pass, String id) {
+            String tipoID, String user, String pass, String id, String cargo) {
         
         nombreUno = nombre1;
         nombreDos = nombre2;
@@ -30,10 +31,11 @@ public class Usuario {
         apellidoDos = apellido2;
         username = user;
         password = pass;
-        tipoIdentificacion = tipo;
+        tipoIdentificacion = tipoID;
         identificacion = id;
         estado = false;
         empleo = true;
+        tipo = cargo;
         
     }
     
@@ -138,6 +140,13 @@ public class Usuario {
     public boolean getEstado () {
         
         return estado;
+        
+    }
+    
+    
+    public String getTipo () {
+        
+        return tipo;
         
     }
     
