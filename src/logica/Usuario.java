@@ -18,12 +18,12 @@ public class Usuario {
     private String password;
     private String tipoIdentificacion;
     private String identificacion;
+    private String cargo;
     private boolean estado;
     private boolean empleo;
-    private String tipo;
 
     public Usuario(String nombre1, String nombre2, String apellido1, String apellido2, 
-            String tipoID, String user, String pass, String id, String cargo) {
+            String tipoID, String user, String pass, String id, String tipoCargo) {
         
         nombreUno = nombre1;
         nombreDos = nombre2;
@@ -33,9 +33,9 @@ public class Usuario {
         password = pass;
         tipoIdentificacion = tipoID;
         identificacion = id;
+	cargo = tipoCargo;
         estado = false;
         empleo = true;
-        tipo = cargo;
         
     }
     
@@ -82,6 +82,10 @@ public class Usuario {
         
     }
     
+    public String getCargo(){
+    
+        return cargo;
+    }
     
     public String getNombreUno () {
         
@@ -140,13 +144,6 @@ public class Usuario {
     public boolean getEstado () {
         
         return estado;
-        
-    }
-    
-    
-    public String getTipo () {
-        
-        return tipo;
         
     }
     
