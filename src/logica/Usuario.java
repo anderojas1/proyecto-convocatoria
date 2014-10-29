@@ -18,11 +18,12 @@ public class Usuario {
     private String password;
     private String tipoIdentificacion;
     private String identificacion;
+    private String cargo;
     private boolean estado;
     private boolean empleo;
 
     public Usuario(String nombre1, String nombre2, String apellido1, String apellido2, 
-            String tipo, String user, String pass, String id) {
+            String tipo, String user, String pass, String id, String cargo) {
         
         nombreUno = nombre1;
         nombreDos = nombre2;
@@ -32,6 +33,7 @@ public class Usuario {
         password = pass;
         tipoIdentificacion = tipo;
         identificacion = id;
+	this.cargo = cargo;
         estado = false;
         empleo = true;
         
