@@ -5,6 +5,7 @@
 package controlador;
 
 import AccesoDatos.DaoUsuario;
+import logica.Usuario;
 
 /**
  *
@@ -19,6 +20,15 @@ public class DriverUsuario {
         
         daoUsuario = new DaoUsuario();
         
+    }
+    
+    public void guardar(String nom1, String nom2, String apell1, String apell2, String tipoIden,
+                        String indent, String nomUsu, String pass, String pass2, String tipoUsuario){
+    
+        Usuario usu = new Usuario(nom1, nom2, apell1, apell2, tipoIden, nomUsu, pass, indent, tipoUsuario );
+        
+        daoUsuario.crearUsuario(usu);
+    
     }
     
     

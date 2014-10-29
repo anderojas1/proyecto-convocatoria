@@ -1,4 +1,5 @@
 package Gui;
+import controlador.*;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -51,6 +52,8 @@ public class VentanaRegUsuario extends JFrame{
   
   private ManejaEventos manejador;
   
+  private DriverUsuario contusuario;
+  
   
   //Constructor de la Clase 
   
@@ -75,6 +78,8 @@ public class VentanaRegUsuario extends JFrame{
 
 public void iniciarComponentes(boolean inicio){
 
+    contusuario = new DriverUsuario();
+    
   lbPrimerNom = new JLabel("Primer Nombre *");
   lbSegundoNom = new JLabel("Segundo Nombre");
   lbPrimerApell = new JLabel("Primer Apellido *");
@@ -193,7 +198,50 @@ public void acomodarComponentes(){
     
 
   }
+
+public void guardar(){
+
+    String nom1 = campoPNombre.getText();
+    String nom2 = campoSNombre.getText();
+    String apell1 = campoPApelli.getText();
+    String apell2 = campoSApelli.getText();
+    String tipoIden = (String) comboTipoDoc.getSelectedItem();
+    String indent = campoIdent.getText();
+    String nomUsu = campoNomUsu.getText();
+    String pass = passW.getText();
+    String pass2 = passWC.getText();
+    String tipoUsuario = (String) comboTipoUsu.getSelectedItem();
     
+    boolean temp = false;
+    
+    temp = validadorPassW(pass, pass2);
+    
+    if(temp == true){
+ 
+        contusuario.guardar(nom1, nom2, apell1, apell2, tipoIden, indent, nomUsu, pass, pass2, tipoUsuario);
+    
+    }else{
+    
+        JOptionPane.showMessageDialog(null, "Error en las contrase;as");
+    }
+ }
+
+
+public boolean validadorPassW(String pass1, String pass2){
+
+   boolean validacion = false;
+   
+    if(pass1 == pass2){
+    
+        validacion = true;
+        
+    }
+   
+   return validacion;
+    
+}
+
+
 public void asignarEventos(){
 
     btAceptar.addActionListener(manejador);
