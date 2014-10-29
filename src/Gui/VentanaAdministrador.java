@@ -130,6 +130,7 @@ public class VentanaAdministrador extends JFrame {
                 
                 VentanaRegUsuario registrar = new VentanaRegUsuario(true);
                 registrar.asignarEventos();
+                dispose();
                 
             }
 

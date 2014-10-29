@@ -120,23 +120,24 @@ public class VentanaLogin extends JFrame {
         
         String user = jtfusername.getText();
         String pass = jtfpassword.getText();
+        System.out.println(pass);
         
-        String tipo = controladorUsuario.tipoUsuario(user, pass); 
+        String tipo = controladorUsuario.tipoUsuario(user, pass);
         
-        if (tipo.equals("administrador")) {
-            
-            // crear ventana administrador
-            
-        }
-        
-        else if (tipo.equals("supervisor")) {
-            
-            // crear ventana supervisor
-        }
-        
-        else if (tipo.equals("digitador")) {
-            
-            // crear ventana digitador
+        switch (tipo) {
+            case "Administrador":
+                
+                VentanaAdministrador adim = new VentanaAdministrador();
+                this.dispose();
+                break;
+            case "Supervisor":
+                VentanaIniSupervisor sprv = new VentanaIniSupervisor();
+                this.dispose();
+                break;
+            case "Digitador":
+                VentanaPrincipalDigitador dig = new VentanaPrincipalDigitador();
+                this.dispose();
+                break;
         }
         
     }
