@@ -58,8 +58,8 @@ public class VentanaRegUsuario extends JFrame{
   
     super("Registro Nuevo Usuario");
     
-    iniciarComponentes();
-    agergarComponentes(inicio);
+    iniciarComponentes(inicio);
+    agergarComponentes();
     acomodarComponentes();
     asignarEventos();
     
@@ -73,7 +73,7 @@ public class VentanaRegUsuario extends JFrame{
   }
   
 
-public void iniciarComponentes(){
+public void iniciarComponentes(boolean inicio){
 
   lbPrimerNom = new JLabel("Primer Nombre *");
   lbSegundoNom = new JLabel("Segundo Nombre");
@@ -102,9 +102,17 @@ public void iniciarComponentes(){
   comboTipoDoc.addItem("Cedula Extranjeria");
   
   comboTipoUsu =  new JComboBox();
-  comboTipoUsu.addItem("Supervisor");
-  comboTipoUsu.addItem("Digitador");  
-
+  
+  if(inicio == false){
+  
+      comboTipoUsu.addItem("Administrador");
+        
+  }else {
+  
+      comboTipoUsu.addItem("Supervisor");
+      comboTipoUsu.addItem("Digitador");
+  }
+  
   btCancelar = new JButton("Cancelar");
   btAceptar =  new JButton("Aceptar");
   
@@ -117,7 +125,7 @@ public void iniciarComponentes(){
   }
   
   
-public void agergarComponentes(boolean inicio){
+public void agergarComponentes(){
 
     panelPrin.add(lbPrimerNom); 
     panelPrin.add(lbSegundoNom);
@@ -141,12 +149,8 @@ public void agergarComponentes(boolean inicio){
     panelPrin.add(passW);
     panelPrin.add(passWC);
     
-    if(inicio == true){
     
-        panelPrin.add(comboTipoDoc);
-    
-    }else{}
-    
+    panelPrin.add(comboTipoDoc);
     panelPrin.add(comboTipoUsu);
     
     panelPrin.add(btAceptar);
