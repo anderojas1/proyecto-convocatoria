@@ -121,8 +121,23 @@ public class VentanaLogin extends JFrame {
         String user = jtfusername.getText();
         String pass = jtfpassword.getText();
         
-        System.out.println(controladorUsuario.tipoUsuario(user, pass)); // Aquí se captura el perfil del usuario. Coloquen los if para construir las
-                                                                        // respectivas ventanas
+        String tipo = controladorUsuario.tipoUsuario(user, pass); 
+        
+        if (tipo.equals("administrador")) {
+            
+            // crear ventana administrador
+            
+        }
+        
+        else if (tipo.equals("supervisor")) {
+            
+            // crear ventana supervisor
+        }
+        
+        else if (tipo.equals("digitador")) {
+            
+            // crear ventana digitador
+        }
         
     }
     
