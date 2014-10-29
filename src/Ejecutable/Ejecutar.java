@@ -19,6 +19,8 @@ public class Ejecutar {
         VentanaLogin iniciar = new VentanaLogin();
         iniciar.addEvents();
         
+        iniciar.verificarUsuarioAdmin();
+        
         iniciar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
