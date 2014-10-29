@@ -22,6 +22,8 @@ import java.awt.event.ActionListener;
     final ManejaEvento driverEventos;
 
     
+    
+    
     public VentanaIniSupervisor(){
         cont = getContentPane(); 
         inicioSupervisor = new JPanel();

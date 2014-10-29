@@ -5,11 +5,13 @@
  */
 package Gui;
 
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
 import controlador.DriverUsuario;
+
 
 /**
  *
@@ -56,7 +58,7 @@ public class VentanaLogin extends JFrame {
         agregarComponentes();
         acomodarComponentes();
         addFeatures();        
-        
+        pack();
         setSize(500, 350);
         setResizable(false);
         setLocationRelativeTo(null);
