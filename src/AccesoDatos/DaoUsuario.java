@@ -30,19 +30,19 @@ public class DaoUsuario {
     }
     
     
-    public void crearUsuario (Usuario user) {
+    public void crearUsuario (Usuario user) throws SQLException {
         
         sentenciaSql ="INSERT INTO Usuario VALUES ('" + user.getIdentificacion() + "', '" + user.getTipoIdentificacion()+ "', '"
                 + "" + user.getNombreUno() + "'," + " '" + user.getNombreDos() + "', '" + user.getApellidoUno() + "', '" + user.getApellidoDos() + "', '"
                 + user.getUsername() + "'," + " '" + user.getPassword() + "', " + user.getEstado() + ", " + user.getEstadoEmpleo() + ", '"
-                + "" + user.getTipo() + "');";
+                + "" + user.getCargo()+ "');";
         
         guardarUsuario();
         
     }
     
     
-    public void guardarUsuario () {
+    public void guardarUsuario () throws SQLException {
         
         try{
             
@@ -56,13 +56,49 @@ public class DaoUsuario {
             
         } catch(SQLException ex) { 
             
-            JOptionPane.showMessageDialog(null, "Error en base de datos. No se puede guardar");
+            throw ex;
         
         } catch (NullPointerException ex) {
             
             JOptionPane.showMessageDialog(null, "Error en base de datos. No se puede conectar");
             
         }
+        
+    }
+    
+    
+    public String identificarTipo (String usuario, String pass) {
+        
+        String tipo = "";
+        
+        sentenciaSql = "select * from USUARIO where username = '" + usuario + "' and password = '" + pass + "';";
+        
+        try{
+            
+            conectar= fachadaConectar.conectar();
+            
+            sentencia = conectar.createStatement();
+
+            registros = sentencia.executeQuery(sentenciaSql);
+            
+            while (registros.next()) {
+            
+                return registros.getString(11);
+                
+            }
+            
+        } catch(SQLException ex) { 
+            
+            JOptionPane.showMessageDialog(null, "Error en base de datos. No se puede guardar");
+            return tipo;
+        
+        } catch (NullPointerException ex) {
+            
+            JOptionPane.showMessageDialog(null, "Error en base de datos. No se puede conectar");
+            
+        }
+        
+        return tipo;
         
     }
     
@@ -94,6 +130,7 @@ public class DaoUsuario {
         }
         
         return flag_register;
+        
     }
     
 }

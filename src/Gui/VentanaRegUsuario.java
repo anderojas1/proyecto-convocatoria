@@ -64,7 +64,6 @@ public class VentanaRegUsuario extends JFrame{
     iniciarComponentes(inicio);
     agergarComponentes();
     acomodarComponentes();
-    asignarEventos();
     
     
     
@@ -200,30 +199,37 @@ public void acomodarComponentes(){
   }
 
 public void guardar(){
-
-    String nom1 = campoPNombre.getText();
-    String nom2 = campoSNombre.getText();
-    String apell1 = campoPApelli.getText();
-    String apell2 = campoSApelli.getText();
-    String tipoIden = (String) comboTipoDoc.getSelectedItem();
-    String indent = campoIdent.getText();
-    String nomUsu = campoNomUsu.getText();
-    String pass = passW.getText();
-    String pass2 = passWC.getText();
-    String tipoUsuario = (String) comboTipoUsu.getSelectedItem();
     
-    boolean temp = false;
-    
-    temp = validadorPassW(pass, pass2);
-    
-    if(temp == true){
- 
-        contusuario.guardar(nom1, nom2, apell1, apell2, tipoIden, indent, nomUsu, pass, pass2, tipoUsuario);
-    
-    }else{
-    
-        JOptionPane.showMessageDialog(null, "Error en las contrase;as");
+    if (validarCampos() == true) {
+        
+        if (validadorPassW(passW.getText(), passWC.getText())) {
+        
+            String nom1 = campoPNombre.getText();
+            String nom2 = campoSNombre.getText();
+            String apell1 = campoPApelli.getText();
+            String apell2 = campoSApelli.getText();
+            String tipoIden = (String) comboTipoDoc.getSelectedItem();
+            String indent = campoIdent.getText();
+            String nomUsu = campoNomUsu.getText();
+            String pass = passW.getText();
+            String pass2 = passWC.getText();
+            String tipoUsuario = (String) comboTipoUsu.getSelectedItem();
+            
+            contusuario.guardar(nom1, nom2, apell1, apell2, tipoIden, indent, nomUsu, pass, pass2, tipoUsuario);
+            
+            VentanaLogin nuevoLogin = new VentanaLogin();
+            nuevoLogin.addEvents();
+            
+            dispose();
+            
+        }
+        
+        else JOptionPane.showMessageDialog(null, "Error en las contraseñas");
+        
     }
+    
+    else JOptionPane.showMessageDialog(null, "Hay campos obligatorios sin llenar");
+    
  }
 
 
@@ -231,7 +237,7 @@ public boolean validadorPassW(String pass1, String pass2){
 
    boolean validacion = false;
    
-    if(pass1 == pass2){
+    if(pass1.equals(pass2)){
     
         validacion = true;
         
@@ -239,6 +245,21 @@ public boolean validadorPassW(String pass1, String pass2){
    
    return validacion;
     
+}
+
+
+public boolean validarCampos () {
+    
+    boolean flag = true;
+    
+    if (campoPNombre.getText().isEmpty()) flag = false;
+    else if (campoPApelli.getText().isEmpty()) flag = false;
+    else if (campoIdent.getText().isEmpty()) flag = false;
+    else if (campoNomUsu.getText().isEmpty()) flag = false;
+    else if (passW.getText().isEmpty()) flag = false;
+    else if (passWC.getText().isEmpty()) flag = false;
+    
+    return flag;
 }
 
 
@@ -257,7 +278,7 @@ public void asignarEventos(){
            
             if(e.getSource() == btAceptar){
                 
-                //ingresar informacion para mandar a la base de datos
+                guardar();
                 
             }else if(e.getSource() == btCancelar){
             

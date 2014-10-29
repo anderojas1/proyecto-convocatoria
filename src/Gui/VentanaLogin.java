@@ -23,7 +23,7 @@ public class VentanaLogin extends JFrame {
     private final JLabel lbolvidar;
     
     private final JTextField jtfusername;
-    private final JTextField jtfpassword;
+    private final JPasswordField jtfpassword;
     
     private final JButton jbiniciar;
     
@@ -43,7 +43,7 @@ public class VentanaLogin extends JFrame {
         lbpassword = new JLabel("Contraseña");
         lbolvidar = new JLabel("¿Olvidó sus datos de acceso?");
         
-        jtfpassword = new JTextField();
+        jtfpassword = new JPasswordField();
         jtfusername = new JTextField();
         
         jbiniciar = new JButton("Ingresar");
@@ -62,7 +62,7 @@ public class VentanaLogin extends JFrame {
         setLocationRelativeTo(null);
         
         setTitle("Sistema Convocatoria Docente");
-        
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true); 
         
         
@@ -116,6 +116,17 @@ public class VentanaLogin extends JFrame {
     }
     
     
+    public void identificarTipoUsuario () {
+        
+        String user = jtfusername.getText();
+        String pass = jtfpassword.getText();
+        
+        System.out.println(controladorUsuario.tipoUsuario(user, pass)); // Aquí se captura el perfil del usuario. Coloquen los if para construir las
+                                                                        // respectivas ventanas
+        
+    }
+    
+    
     public void verificarUsuarioAdmin () {
         
         if (controladorUsuario.consultarUsuarioAdmin() == false) {
@@ -123,6 +134,7 @@ public class VentanaLogin extends JFrame {
             JOptionPane.showMessageDialog(null, "Advertencia: No existe administrador de la aplicación");
             
             VentanaRegUsuario registrarAdmin = new VentanaRegUsuario(false);
+            registrarAdmin.asignarEventos();
             
             dispose();
             
@@ -156,7 +168,7 @@ public class VentanaLogin extends JFrame {
             
                 if (validarCampos() == true) {
                 
-                    VentanaRegUsuario registro = new VentanaRegUsuario(true);
+                    identificarTipoUsuario ();
                     dispose();
                 
                 }

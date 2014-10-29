@@ -5,6 +5,8 @@
 package controlador;
 
 import AccesoDatos.DaoUsuario;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import logica.Usuario;
 
 /**
@@ -27,7 +29,17 @@ public class DriverUsuario {
     
         Usuario usu = new Usuario(nom1, nom2, apell1, apell2, tipoIden, nomUsu, pass, indent, tipoUsuario );
         
-        daoUsuario.crearUsuario(usu);
+        try {
+            
+            daoUsuario.crearUsuario(usu);
+            
+            JOptionPane.showMessageDialog(null, "Se ha guardado el usuario con extito");
+            
+        } catch (SQLException ex) {
+            
+            JOptionPane.showMessageDialog(null, "Error al guardar el usuario. Por favor intente nuevamente");
+            
+        }
     
     }
     
@@ -35,6 +47,13 @@ public class DriverUsuario {
     public boolean consultarUsuarioAdmin () {
         
         return daoUsuario.consultarUsuario();
+        
+    }
+    
+    
+    public String tipoUsuario (String username, String password) {
+        
+        return daoUsuario.identificarTipo (username, password);
         
     }
 }
