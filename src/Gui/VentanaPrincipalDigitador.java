@@ -12,7 +12,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class VentanaPrincipalDigitador extends JFrame implements ActionListener{
+public class VentanaPrincipalDigitador extends JFrame{
 
     
     private JLabel titulo;
@@ -20,11 +20,12 @@ public class VentanaPrincipalDigitador extends JFrame implements ActionListener{
     private JButton editar;
     private JButton consultar;
     private JButton cerrar;
+    final ManejaEvento driverEventos;
     
    public  VentanaPrincipalDigitador(){
        
        
-        
+        driverEventos = new ManejaEvento();
         this.setTitle("Ventana Principal Digitador");
         
         this.setLayout(null);
@@ -55,6 +56,8 @@ public class VentanaPrincipalDigitador extends JFrame implements ActionListener{
         cerrar.setBounds(new Rectangle(340,250 ,150 ,50 ));
         this.add (cerrar);
         
+        cerrar.addActionListener(driverEventos);
+        
        
         // Se le dice a la ventana que termine el programa cuando se la cierre
        
@@ -67,10 +70,21 @@ public class VentanaPrincipalDigitador extends JFrame implements ActionListener{
         
        
    }
+
+ 
     
-    public void actionPerformed(ActionEvent e) {
-       
-    }
+    private class ManejaEvento implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            if(ae.getSource() == cerrar){
+                VentanaLogin nuevoLogin = new VentanaLogin();
+                nuevoLogin.addEvents();
+                dispose();
+            }
+        }
+         
+     }
     
     
     

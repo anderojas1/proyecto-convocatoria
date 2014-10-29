@@ -20,7 +20,7 @@ import java.awt.event.ActionListener;
     private JLabel encabezado;
     private JButton informe, genero, ciudad, jornada, mejores, consultar, total, salir;
     final ManejaEvento driverEventos;
-    private VentanaLogin ventanaL;
+
     
     public VentanaIniSupervisor(){
         cont = getContentPane(); 
@@ -91,8 +91,9 @@ import java.awt.event.ActionListener;
         @Override
         public void actionPerformed(ActionEvent ae) {
             if(ae.getSource() == salir){
-                cont.setVisible(false);                
-                ventanaL = new VentanaLogin();
+                VentanaLogin nuevoLogin = new VentanaLogin();
+                nuevoLogin.addEvents();
+                dispose();
             }
         }
          

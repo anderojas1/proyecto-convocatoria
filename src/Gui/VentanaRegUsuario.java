@@ -54,12 +54,16 @@ public class VentanaRegUsuario extends JFrame{
   
   private DriverUsuario contusuario;
   
+  private DriverUsuario controladorUsuario;
+  
   
   //Constructor de la Clase 
   
   public VentanaRegUsuario(boolean inicio){
   
     super("Registro Nuevo Usuario");
+    
+    controladorUsuario = new DriverUsuario();
     
     iniciarComponentes(inicio);
     agergarComponentes();

@@ -143,8 +143,8 @@ public class VentanaLogin extends JFrame {
     }
     
     
-    public void verificarUsuarioAdmin () {
-        
+    public boolean verificarUsuarioAdmin () {
+        boolean respuesta=false;
         if (controladorUsuario.consultarUsuarioAdmin() == false) {
             
             JOptionPane.showMessageDialog(null, "Advertencia: No existe administrador de la aplicación");
@@ -153,9 +153,11 @@ public class VentanaLogin extends JFrame {
             registrarAdmin.asignarEventos();
             
             dispose();
-            
+            return false;
         }
-        
+        else{
+            return true;
+        }
     }
     
     
