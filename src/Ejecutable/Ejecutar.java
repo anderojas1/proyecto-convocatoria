@@ -20,8 +20,6 @@ public class Ejecutar {
         iniciar.addEvents();
         
         iniciar.verificarUsuarioAdmin();
-        
-        iniciar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
 }

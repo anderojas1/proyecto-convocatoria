@@ -127,6 +127,10 @@ public class VentanaAdministrador extends JFrame {
             }
 
             if (e.getSource() == JBCreateUser) {
+                
+                VentanaRegUsuario registrar = new VentanaRegUsuario(true);
+                registrar.asignarEventos();
+                
             }
 
             if (e.getSource() == JBModifConv) {
@@ -136,7 +140,10 @@ public class VentanaAdministrador extends JFrame {
 
             if (e.getSource() == JBCerrarSesion) {
 
-                componentepadre.setVisible(false);
+                VentanaLogin nuevoLogin = new VentanaLogin();
+                nuevoLogin.addEvents();
+                
+                dispose();
 
             }
         }
