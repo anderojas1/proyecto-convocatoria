@@ -1,4 +1,4 @@
-package ventanapruebas;
+package Gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -54,14 +54,16 @@ public class VentanaRegUsuario extends JFrame{
   
   //Constructor de la Clase 
   
-  public VentanaRegUsuario(){
+  public VentanaRegUsuario(boolean inicio){
   
     super("Registro Nuevo Usuario");
     
     iniciarComponentes();
-    agergarComponentes();
+    agergarComponentes(inicio);
     acomodarComponentes();
     asignarEventos();
+    
+    
     
     getContentPane().add(panelPrin);
     setSize(new Dimension(500, 520));
@@ -115,7 +117,7 @@ public void iniciarComponentes(){
   }
   
   
-public void agergarComponentes(){
+public void agergarComponentes(boolean inicio){
 
     panelPrin.add(lbPrimerNom); 
     panelPrin.add(lbSegundoNom);
@@ -139,7 +141,12 @@ public void agergarComponentes(){
     panelPrin.add(passW);
     panelPrin.add(passWC);
     
-    panelPrin.add(comboTipoDoc);
+    if(inicio == true){
+    
+        panelPrin.add(comboTipoDoc);
+    
+    }else{}
+    
     panelPrin.add(comboTipoUsu);
     
     panelPrin.add(btAceptar);
