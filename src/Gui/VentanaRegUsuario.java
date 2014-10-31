@@ -189,8 +189,8 @@ public class VentanaRegUsuario extends JFrame {
 
     public void guardar() {
 
-
         try {
+            
             String[] campos = new String[10];
             String[] camposOblig = new String[5];
             
@@ -228,14 +228,25 @@ public class VentanaRegUsuario extends JFrame {
 
             contusuario.guardar(campos[0], campos[1], campos[2], campos[3], campos[4], campos[5], campos[6], campos[7], campos[8], tipoUsuario);
 
-            VentanaLogin nuevoLogin = new VentanaLogin();
-            nuevoLogin.addEvents();
+            if (tipoUsuario.equalsIgnoreCase("administrador") {
+                
+                VentanaLogin nuevoLogin = new VentanaLogin();
+                nuevoLogin.addEvents();
 
-            dispose();
+                dispose();
+                
+            } else {
+                
+                VentanaAdministrador ventanaAdmin = new VentanaAdministrador();
+                
+                dispose();
+                
+            }
 
         } catch (MyException e) {
 
             JOptionPane.showMessageDialog(this, e.getMessage(), "ERROR CAMPOS", JOptionPane.ERROR_MESSAGE);
+            
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Error en No de identificación: "+e.getMessage(), "ERROR IDENTIFICACION", JOptionPane.ERROR_MESSAGE);
         }
