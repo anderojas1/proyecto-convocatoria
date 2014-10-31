@@ -15,7 +15,7 @@ import logica.Usuario;
  */
 public class DriverUsuario {
     
-    private DaoUsuario daoUsuario;
+    private final DaoUsuario daoUsuario;
     
     
     public DriverUsuario() {
@@ -27,7 +27,7 @@ public class DriverUsuario {
     public void guardar(String nom1, String nom2, String apell1, String apell2, String tipoIden,
                         String indent, String nomUsu, String pass, String pass2, String tipoUsuario){
     
-        Usuario usu = new Usuario(nom1, nom2, apell1, apell2, tipoIden, nomUsu, pass, indent, tipoUsuario );
+        Usuario usu = new Usuario(nom1, nom2, apell1, apell2, tipoIden, nomUsu, pass, indent, tipoUsuario);
         
         try {
             

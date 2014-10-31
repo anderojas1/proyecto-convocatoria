@@ -122,44 +122,56 @@ public class VentanaLogin extends JFrame {
         
         String user = jtfusername.getText();
         String pass = jtfpassword.getText();
-        System.out.println(pass);
         
         String tipo = controladorUsuario.tipoUsuario(user, pass);
         
         switch (tipo) {
-            case "Administrador":
+            
+            case "Administrador": {
                 
-                VentanaAdministrador adim = new VentanaAdministrador();
+                VentanaAdministrador admin = new VentanaAdministrador();
                 this.dispose();
-                break;
-            case "Supervisor":
+                
+            }break;
+                
+            case "Supervisor": {
+                            
                 VentanaIniSupervisor sprv = new VentanaIniSupervisor();
                 this.dispose();
-                break;
-            case "Digitador":
+                
+            }break;
+                
+            case "Digitador": {
+                
                 VentanaPrincipalDigitador dig = new VentanaPrincipalDigitador();
                 this.dispose();
-                break;
+                
+            }break;
+                
+            default: {
+                
+                JOptionPane.showMessageDialog(null, "Usuario o contraseña inválidos", "Error", JOptionPane.ERROR_MESSAGE);
+                jtfpassword.setText("");
+                jtfusername.setText("");
+                
+            }
         }
         
     }
     
     
-    public boolean verificarUsuarioAdmin () {
-        boolean respuesta=false;
+    public void verificarUsuarioAdmin () {
+        
         if (controladorUsuario.consultarUsuarioAdmin() == false) {
             
-            JOptionPane.showMessageDialog(null, "Advertencia: No existe administrador de la aplicación");
+            JOptionPane.showMessageDialog(null, "Advertencia: No existe administrador de la aplicación", "Advertencia", JOptionPane.WARNING_MESSAGE);
             
             VentanaRegUsuario registrarAdmin = new VentanaRegUsuario(false);
             registrarAdmin.asignarEventos();
             
             dispose();
-            return false;
         }
-        else{
-            return true;
-        }
+        
     }
     
     
@@ -189,7 +201,6 @@ public class VentanaLogin extends JFrame {
                 if (validarCampos() == true) {
                 
                     identificarTipoUsuario ();
-                    dispose();
                 
                 }
                 

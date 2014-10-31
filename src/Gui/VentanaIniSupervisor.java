@@ -100,11 +100,5 @@ import java.awt.event.ActionListener;
         }
          
      }
-     
-      public static void main (String [] args) {
-        VentanaIniSupervisor ventana= new VentanaIniSupervisor();
-        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-   
-    }
 
 }

@@ -15,7 +15,9 @@ import logica.Usuario;
  */
 public class DaoUsuario {
     
-    private Fachada fachadaConectar;
+    private final Fachada fachadaConectar;
+    private String sqlDatosAcceso;
+    private String sqlDatos;
     private String sentenciaSql;
     
     private Connection conectar;
@@ -32,10 +34,11 @@ public class DaoUsuario {
     
     public void crearUsuario (Usuario user) throws SQLException {
         
-        sentenciaSql ="INSERT INTO Usuario VALUES ('" + user.getIdentificacion() + "', '" + user.getTipoIdentificacion()+ "', '"
-                + "" + user.getNombreUno() + "'," + " '" + user.getNombreDos() + "', '" + user.getApellidoUno() + "', '" + user.getApellidoDos() + "', '"
-                + user.getUsername() + "'," + " '" + user.getPassword() + "', " + user.getEstado() + ", " + user.getEstadoEmpleo() + ", '"
-                + "" + user.getCargo()+ "');";
+        sqlDatos ="INSERT INTO Usuario VALUES ('" + user.getIdentificacion() + "', '" + user.getTipoIdentificacion()+ "', '"
+                + user.getNombreUno() + "', '" + user.getNombreDos() + "', '" + user.getApellidoUno() + "', '" + user.getApellidoDos() + "', "
+                + user.getEstado() + ", " + user.getEstadoEmpleo() + ", '" + user.getCargo() + "');";
+        
+        sqlDatosAcceso = "INSERT INTO ACCESO VALUES ('" + user.getUsername() + "', '" + user.getPassword() + "', '" + user.getIdentificacion() + "');";
         
         guardarUsuario();
         
@@ -49,8 +52,8 @@ public class DaoUsuario {
             conectar= fachadaConectar.conectar();
             
             sentencia = conectar.createStatement();
-
-            sentencia.executeUpdate(sentenciaSql);
+            sentencia.executeUpdate(sqlDatos);
+            sentencia.executeUpdate(sqlDatosAcceso);
             
             conectar.close();
             
@@ -71,7 +74,7 @@ public class DaoUsuario {
         
         String tipo = "";
         
-        sentenciaSql = "select * from USUARIO where username = '" + usuario + "' and password = '" + pass + "';";
+        sentenciaSql = "select cargo from USUARIO NATURAL JOIN ACCESO where username = '" + usuario + "' and password = '" + pass + "';";
         
         try{
             
@@ -83,7 +86,7 @@ public class DaoUsuario {
             
             while (registros.next()) {
             
-                return registros.getString(11);
+                return registros.getString(1);
                 
             }
             

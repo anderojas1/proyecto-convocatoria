@@ -202,33 +202,43 @@ public void acomodarComponentes(){
 
   }
 
-public void guardar(){
-    
-    if (validarCampos() == true) {
+    public void guardar() {
+
+        if (validarCampos() == true) {
+
+            if (validadorPassW(passW.getText(), passWC.getText())) {
+
+                String nom1 = campoPNombre.getText();
+                String nom2 = campoSNombre.getText();
+                String apell1 = campoPApelli.getText();
+                String apell2 = campoSApelli.getText();
+                String tipoIden = (String) comboTipoDoc.getSelectedItem();
+                String indent = campoIdent.getText();
+                String nomUsu = campoNomUsu.getText();
+                String pass = passW.getText();
+                String pass2 = passWC.getText();
+                String tipoUsuario = (String) comboTipoUsu.getSelectedItem();
+
+                contusuario.guardar(nom1, nom2, apell1, apell2, tipoIden, indent, nomUsu, pass, pass2, tipoUsuario);
+
+                if (tipoUsuario.equalsIgnoreCase("administrador")) {
+
+                    VentanaLogin nuevoLogin = new VentanaLogin();
+                    nuevoLogin.addEvents();
+
+                    dispose();
+
+                } else {
+                    
+                    VentanaAdministrador ventanaAdmin = new VentanaAdministrador();
+                    
+                    dispose();
+                    
+                }
+
+            }
         
-        if (validadorPassW(passW.getText(), passWC.getText())) {
-        
-            String nom1 = campoPNombre.getText();
-            String nom2 = campoSNombre.getText();
-            String apell1 = campoPApelli.getText();
-            String apell2 = campoSApelli.getText();
-            String tipoIden = (String) comboTipoDoc.getSelectedItem();
-            String indent = campoIdent.getText();
-            String nomUsu = campoNomUsu.getText();
-            String pass = passW.getText();
-            String pass2 = passWC.getText();
-            String tipoUsuario = (String) comboTipoUsu.getSelectedItem();
-            
-            contusuario.guardar(nom1, nom2, apell1, apell2, tipoIden, indent, nomUsu, pass, pass2, tipoUsuario);
-            
-            VentanaLogin nuevoLogin = new VentanaLogin();
-            nuevoLogin.addEvents();
-            
-            dispose();
-            
-        }
-        
-        else JOptionPane.showMessageDialog(null, "Error en las contraseñas");
+        else JOptionPane.showMessageDialog(null, "Error en las contraseñas", "Error", JOptionPane.ERROR_MESSAGE);
         
     }
     
