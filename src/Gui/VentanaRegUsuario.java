@@ -228,7 +228,7 @@ public class VentanaRegUsuario extends JFrame {
 
             contusuario.guardar(campos[0], campos[1], campos[2], campos[3], campos[4], campos[5], campos[6], campos[7], campos[8], tipoUsuario);
 
-            if (tipoUsuario.equalsIgnoreCase("administrador") {
+            if (tipoUsuario.equalsIgnoreCase("administrador")) {
                 
                 VentanaLogin nuevoLogin = new VentanaLogin();
                 nuevoLogin.addEvents();
