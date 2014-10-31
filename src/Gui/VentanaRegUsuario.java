@@ -52,13 +52,13 @@ public class VentanaRegUsuario extends JFrame {
         controladorUsuario = new DriverUsuario();
 
         iniciarComponentes(inicio);
-        agergarComponentes();
+        agregarComponentes();
         acomodarComponentes();
-
-
 
         getContentPane().add(panelPrin);
         setSize(new Dimension(500, 520));
+        setResizable(false);
+        setLocationRelativeTo(null);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -118,7 +118,7 @@ public class VentanaRegUsuario extends JFrame {
 
     }
 
-    public final void agergarComponentes() {
+    public final void agregarComponentes() {
 
         panelPrin.add(lbPrimerNom);
         panelPrin.add(lbSegundoNom);
@@ -215,10 +215,7 @@ public class VentanaRegUsuario extends JFrame {
             campos[7] = passW.getText();
             camposOblig[4] = campos[7];
             
-            campos[8] = passWC.getText();
-            
-            System.out.println(passW.getSelectedText());
-            
+            campos[8] = passWC.getText();            
 
             validator.validateEmptyFields(camposOblig);
             validator.validatePass(campos[7], campos[8]);

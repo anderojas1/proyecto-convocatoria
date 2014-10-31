@@ -36,9 +36,10 @@ public class DaoUsuario {
         
         sqlDatos ="INSERT INTO Usuario VALUES ('" + user.getIdentificacion() + "', '" + user.getTipoIdentificacion()+ "', '"
                 + user.getNombreUno() + "', '" + user.getNombreDos() + "', '" + user.getApellidoUno() + "', '" + user.getApellidoDos() + "', "
-                + user.getEstado() + ", " + user.getEstadoEmpleo() + ", '" + user.getCargo() + "');";
+                + user.getEstadoEmpleo() + ", '" + user.getCargo() + "');";
         
-        sqlDatosAcceso = "INSERT INTO ACCESO VALUES ('" + user.getUsername() + "', '" + user.getPassword() + "', '" + user.getIdentificacion() + "');";
+        sqlDatosAcceso = "INSERT INTO ACCESO VALUES ('" + user.getUsername() + "', '" + user.getPassword() + "', "
+                + user.getEstado() + ", '" + user.getIdentificacion() + "');";
         
         guardarUsuario();
         

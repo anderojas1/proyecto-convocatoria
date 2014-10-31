@@ -33,7 +33,7 @@ public class DriverUsuario {
             
             daoUsuario.crearUsuario(usu);
             
-            JOptionPane.showMessageDialog(null, "Se ha guardado el usuario con extito");
+            JOptionPane.showMessageDialog(null, "Se ha guardado el usuario con exito");
             
         } catch (SQLException ex) {
             
