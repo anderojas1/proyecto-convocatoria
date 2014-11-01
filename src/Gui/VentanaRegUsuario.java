@@ -54,6 +54,7 @@ public class VentanaRegUsuario extends JFrame {
         iniciarComponentes(inicio);
         agregarComponentes();
         acomodarComponentes();
+        asignarEventos();
 
         getContentPane().add(panelPrin);
         setSize(new Dimension(500, 520));
@@ -252,49 +253,98 @@ public class VentanaRegUsuario extends JFrame {
 
     public void asignarEventos() {
 
-        btAceptar.addActionListener(manejador);
-        btCancelar.addActionListener(manejador);
+        btAceptar.addMouseListener(manejador);
+        btCancelar.addMouseListener(manejador);
+        campoPNombre.addMouseListener(manejador);
+        campoSNombre.addMouseListener(manejador);
+        campoPApelli.addMouseListener(manejador);
+        campoSApelli.addMouseListener(manejador);
+        campoIdent.addMouseListener(manejador);
+        campoNomUsu.addMouseListener(manejador);
 
     }
 
-    private class ManejaEventos implements ActionListener, MouseListener {
+    private class ManejaEventos implements MouseListener {
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-            if (e.getSource() == btAceptar) {
-
-                guardar();
-
-            } else if (e.getSource() == btCancelar) {
-
-                dispose();
-
-            }
-        }
+       
 
         @Override
         public void mouseClicked(MouseEvent me) {
+            
+            if (me.getSource() == campoPNombre){
+            
+                if(campoPNombre.getText().equals("Primer Nombre")){
+                
+                    campoPNombre.setText("");
+                
+                }
+                
+            }else if (me.getSource() == campoSNombre){
+            
+                if(campoSNombre.getText().equals("Segundo Nombre")){
+                
+                    campoSNombre.setText("");
+                
+                }
+                            
+            }else if (me.getSource() == campoPApelli){
+                
+                if(campoPApelli.getText().equals("Primer Apellido")){
+                
+                    campoPApelli.setText("");
+                
+                }
+                            
+            }else if (me.getSource() == campoSApelli){
+            
+                if(campoSApelli.getText().equals("Segundo Apellido")){
+                
+                    campoSApelli.setText("");
+                
+                }
+                            
+            }else if (me.getSource() == campoIdent){
+            
+                if(campoIdent.getText().equals("Numero de Identificacion")){
+                
+                    campoIdent.setText("");
+                
+                }
+                            
+            }else if (me.getSource() == campoNomUsu){
+            
+                if(campoNomUsu.getText().equals("Nombre de Usuario")){
+                
+                    campoNomUsu.setText("");
+                
+                }
+                            
+            }else if (me.getSource() == btAceptar) {
+
+                guardar();
+
+            } else if (me.getSource() == btCancelar) {
+
+                dispose();
+
+            } 
+        
         }
 
         @Override
         public void mousePressed(MouseEvent me) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 
         @Override
         public void mouseReleased(MouseEvent me) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 
         @Override
         public void mouseEntered(MouseEvent me) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 
         @Override
         public void mouseExited(MouseEvent me) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     }
 }
