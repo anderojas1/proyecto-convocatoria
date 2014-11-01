@@ -54,7 +54,6 @@ public class VentanaRegUsuario extends JFrame {
         iniciarComponentes(inicio);
         agregarComponentes();
         acomodarComponentes();
-        asignarEventos();
 
         getContentPane().add(panelPrin);
         setSize(new Dimension(500, 520));
