@@ -115,6 +115,9 @@ public class VentanaLogin extends JFrame {
         jbiniciar.addMouseListener(driverEventos);
         lbolvidar.addMouseListener(driverEventos);
         
+        jtfpassword.addKeyListener(driverEventos);
+        jtfusername.addKeyListener(driverEventos);
+        
     }
     
     
@@ -190,7 +193,18 @@ public class VentanaLogin extends JFrame {
     }
     
     
-    private class ManejaEventos implements MouseListener {
+    public void iniciarSesion () {
+        
+        if (validarCampos() == true) {
+                
+            identificarTipoUsuario ();
+                
+        }
+        
+    }
+    
+    
+    private class ManejaEventos implements MouseListener, KeyListener {
         
         
         @Override
@@ -198,11 +212,7 @@ public class VentanaLogin extends JFrame {
             
             if (me.getSource() == jbiniciar) {
             
-                if (validarCampos() == true) {
-                
-                    identificarTipoUsuario ();
-                
-                }
+                iniciarSesion();
                 
             }
             
@@ -248,6 +258,29 @@ public class VentanaLogin extends JFrame {
             }
             
         }        
+
+        @Override
+        public void keyTyped(KeyEvent ke) {
+            
+            
+        }
+
+        @Override
+        public void keyPressed(KeyEvent ke) {
+            
+            if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
+                
+                iniciarSesion();
+                
+            }
+            
+        }
+
+        @Override
+        public void keyReleased(KeyEvent ke) {
+            
+            
+        }
         
     }
     
