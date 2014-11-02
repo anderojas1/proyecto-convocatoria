@@ -25,7 +25,7 @@ public class VentanaLogin extends JFrame {
     private final JLabel lbolvidar;
     
     private final JTextField jtfusername;
-    private final JPasswordField jtfpassword;
+    private final JPasswordField jpfpassword;
     
     private final JButton jbiniciar;
     
@@ -33,7 +33,7 @@ public class VentanaLogin extends JFrame {
     
     private final ManejaEventos driverEventos;
     
-    private DriverUsuario controladorUsuario;
+    private final DriverUsuario controladorUsuario;
     
     
     public VentanaLogin () {
@@ -45,7 +45,8 @@ public class VentanaLogin extends JFrame {
         lbpassword = new JLabel("Contraseña");
         lbolvidar = new JLabel("¿Olvidó sus datos de acceso?");
         
-        jtfpassword = new JPasswordField();
+        jpfpassword = new JPasswordField();
+        
         jtfusername = new JTextField();
         
         jbiniciar = new JButton("Ingresar");
@@ -57,8 +58,8 @@ public class VentanaLogin extends JFrame {
         
         agregarComponentes();
         acomodarComponentes();
-        addFeatures();        
-        pack();
+        addFeatures(); 
+        
         setSize(500, 350);
         setResizable(false);
         setLocationRelativeTo(null);
@@ -74,7 +75,7 @@ public class VentanaLogin extends JFrame {
     private void addFeatures () {
         
         jbiniciar.setToolTipText("Clic para iniciar sesión");
-        jtfpassword.setToolTipText("Ingrese su contraseña de acceso");
+        jpfpassword.setToolTipText("Ingrese su contraseña de acceso");
         jtfusername.setToolTipText("Ingrese usuario de acceso");
         
         lbolvidar.setFont(new Font("Arial", 0, 10));
@@ -89,7 +90,7 @@ public class VentanaLogin extends JFrame {
         panel.add(lbusername);
         panel.add(lbpassword);
         panel.add(jtfusername);
-        panel.add(jtfpassword);
+        panel.add(jpfpassword);
         panel.add(jbiniciar);
         panel.add(lbolvidar);
         panel.setLayout(null);
@@ -103,7 +104,8 @@ public class VentanaLogin extends JFrame {
         lbusername.setBounds(80, 100, 120, 30);
         jtfusername.setBounds(220, 100, 200, 30);
         lbpassword.setBounds(80, 150, 120, 30);
-        jtfpassword.setBounds(220, 150, 200, 30);
+        jpfpassword.setBounds(220, 150, 200, 30);
+        
         lbolvidar.setBounds(220, 190, 140, 10);
         
         jbiniciar.setBounds(300, 240, 120, 30);
@@ -115,7 +117,7 @@ public class VentanaLogin extends JFrame {
         jbiniciar.addMouseListener(driverEventos);
         lbolvidar.addMouseListener(driverEventos);
         
-        jtfpassword.addKeyListener(driverEventos);
+        jpfpassword.addKeyListener(driverEventos);
         jtfusername.addKeyListener(driverEventos);
         
     }
@@ -124,7 +126,7 @@ public class VentanaLogin extends JFrame {
     public void identificarTipoUsuario () {
         
         String user = jtfusername.getText();
-        String pass = jtfpassword.getText();
+        String pass = jpfpassword.getText();
         
         String tipo = controladorUsuario.tipoUsuario(user, pass);
         
@@ -154,7 +156,7 @@ public class VentanaLogin extends JFrame {
             default: {
                 
                 JOptionPane.showMessageDialog(null, "Usuario o contraseña inválidos", "Error", JOptionPane.ERROR_MESSAGE);
-                jtfpassword.setText("");
+                jpfpassword.setText("");
                 jtfusername.setText("");
                 
             }
@@ -182,7 +184,7 @@ public class VentanaLogin extends JFrame {
         
         boolean flag = false;
         
-        if (!jtfpassword.getText().equals("") && !jtfusername.getText().equals("")) {
+        if (!jpfpassword.getText().equals("") && !jtfusername.getText().equals("")) {
             
             flag = true;
             
@@ -200,6 +202,8 @@ public class VentanaLogin extends JFrame {
             identificarTipoUsuario ();
                 
         }
+        
+        else JOptionPane.showMessageDialog(this, "Debe ingresar sus datos de acceso", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
         
     }
     
