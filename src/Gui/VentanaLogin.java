@@ -35,14 +35,18 @@ public class VentanaLogin extends JFrame {
     
     private final DriverUsuario controladorUsuario;
     
+    private final ViewValidator validador;
+    
     
     public VentanaLogin () {
+        
+        validador = new ViewValidator();
         
         controladorUsuario = new DriverUsuario();
         
         lbtitulo = new JLabel("Sistema de Convocatoria Docente");
-        lbusername = new JLabel("Usuario");
-        lbpassword = new JLabel("Contraseña");
+        lbusername = new JLabel("Usuario *");
+        lbpassword = new JLabel("Contraseña *");
         lbolvidar = new JLabel("¿Olvidó sus datos de acceso?");
         
         jpfpassword = new JPasswordField();
@@ -76,7 +80,7 @@ public class VentanaLogin extends JFrame {
         
         jbiniciar.setToolTipText("Clic para iniciar sesión");
         jpfpassword.setToolTipText("Ingrese su contraseña de acceso");
-        jtfusername.setToolTipText("Ingrese usuario de acceso");
+        jtfusername.setToolTipText("Ingrese su usuario de acceso");
         
         lbolvidar.setFont(new Font("Arial", 0, 10));
         lbolvidar.setToolTipText("Clic si olvidó sus datos de acceso");
@@ -180,30 +184,24 @@ public class VentanaLogin extends JFrame {
     }
     
     
-    public boolean validarCampos () {
-        
-        boolean flag = false;
-        
-        if (!jpfpassword.getText().equals("") && !jtfusername.getText().equals("")) {
-            
-            flag = true;
-            
-        }
-        
-        return flag;
-        
-    }
-    
-    
     public void iniciarSesion () {
         
-        if (validarCampos() == true) {
+        String [] campos = new String[2];
+        
+        campos[0] = jtfusername.getText();
+        campos[1] = jpfpassword.getText();
+        
+        try {
+            
+            validador.validateEmptyFields(campos);
                 
             identificarTipoUsuario ();
                 
+        } catch (MyException ex) {
+                
+            JOptionPane.showMessageDialog(this, "Debe ingresar sus datos de acceso", "Error", JOptionPane.ERROR_MESSAGE);
+            
         }
-        
-        else JOptionPane.showMessageDialog(this, "Debe ingresar sus datos de acceso", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
         
     }
     

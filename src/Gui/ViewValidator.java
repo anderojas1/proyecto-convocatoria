@@ -15,10 +15,14 @@ public class ViewValidator {
      * @param data Un arreglo de String que contiene los campos.
      * @throws MyException Lanza Exceptiones de tipo MyException.
      */
-    public void validateEmptyFields(String[] data) throws MyException{
+    public void validateEmptyFields(String[] data) throws MyException {
+        
         for (String data1 : data) {
+            
             validateEmptyField(data1);
+            
         }
+        
     }
     
     
@@ -28,10 +32,14 @@ public class ViewValidator {
      * @param datum Dato dato a evalidar.
      * @throws MyException 
      */
-    public void validateEmptyField(String datum) throws MyException{
+    public void validateEmptyField (String datum) throws MyException {
+        
         if("".equals(datum)){
-            throw new MyException("Debes completar todos los campos obligatorios.");
+            
+            throw new MyException("Se deben completar todos los campos marcados con *");
+            
         }
+        
     }
     
      /**
@@ -40,6 +48,7 @@ public class ViewValidator {
      * @throws NumberFormatException 
      */
     public void validateInteger(String dato) throws NumberFormatException{
+        
         int integerDatum = Integer.parseInt(dato);
     } 
     
@@ -52,8 +61,11 @@ public class ViewValidator {
     public void validatePass(String pass1, String pass2) throws MyException {
     
         if(!pass1.equals(pass2)){
+            
             throw new MyException("Las contraseñas deben coincidir");
+            
         }
+        
     }
     
 }

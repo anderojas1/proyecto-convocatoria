@@ -5,6 +5,10 @@
  */
 package logica;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.StringTokenizer;
+
 /**
  *
  * @author anderojas
@@ -14,13 +18,22 @@ public class Convocatoria {
     private String nombre;
     private final String fechaInicio;
     private String fechaCierre;
+    private String estado;
+    private final String codigo;
     
     
-    public Convocatoria (String nombreConvocatoria, String fecha_inicio, String fecha_cierre) {
+    public Convocatoria (String nombreConvocatoria, String fecha_inicio, String fecha_cierre, String codigo_convocatoria, String estadoCon) {
         
         nombre = nombreConvocatoria;
         fechaInicio = fecha_inicio;
         fechaCierre = fecha_cierre;
+        codigo = codigo_convocatoria;
+        estado = estadoCon;
+        
+    }
+    
+    
+    private void actualizarEstadoConvocatoria () {
         
     }
     

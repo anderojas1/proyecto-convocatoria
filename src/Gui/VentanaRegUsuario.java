@@ -4,8 +4,6 @@ import controlador.*;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.*;
@@ -41,15 +39,12 @@ public class VentanaRegUsuario extends JFrame {
     //declaracion objetos de control
     private ManejaEventos manejador;
     private DriverUsuario contusuario;
-    private DriverUsuario controladorUsuario;
     private ViewValidator validator;
 
     //Constructor de la Clase 
     public VentanaRegUsuario(boolean inicio) {
 
         super("Registro Nuevo Usuario");
-
-        controladorUsuario = new DriverUsuario();
 
         iniciarComponentes(inicio);
         agregarComponentes();
@@ -154,7 +149,7 @@ public class VentanaRegUsuario extends JFrame {
 
     }
 
-    public void acomodarComponentes() {
+    private void acomodarComponentes() {
 
         lbTitulo.setBounds(160, 30, 200, 30);
 
