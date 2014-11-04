@@ -381,6 +381,7 @@ public class VentanaRegDatoPersona extends JFrame {
         campoSApelli.addMouseListener(manejador);
         campoNumIdent.addMouseListener(manejador);
         campoNumCel.addMouseListener(manejador);
+        btSiguient.addMouseListener(manejador);
     }
     
     public void configurarVentana (VentanaPrincipalDigitador digitador) {
@@ -412,7 +413,7 @@ public class VentanaRegDatoPersona extends JFrame {
                     
                     datos[6] = (String) comboJorTrabajo.getSelectedItem();
                     
-                    datos[7] = (String )comboDia.getSelectedItem()+"/"+comboMes.getSelectedItem()+"/"+comboAnio.getSelectedItem();
+                    datos[7] = comboDia.getSelectedItem().toString()+"/"+comboMes.getSelectedItem().toString()+"/"+ comboAnio.getSelectedItem().toString();
                    
                     datos[8] = campoNumCel.getText();
                     datosObligatorios[3] = datos[8];
@@ -497,8 +498,8 @@ public class VentanaRegDatoPersona extends JFrame {
                 
             }else if (me.getSource() == btSiguient) {
 
-                JOptionPane.showMessageDialog(null, "Se guardara la informacion personal");
                 
+                guardarInfo();
                 
                 
 
