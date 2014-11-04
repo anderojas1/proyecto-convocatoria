@@ -37,6 +37,11 @@ public class VentanaRegDatoPersona extends JFrame {
     private JComboBox comboSexo;
     private JComboBox comboLugResi;
     private JComboBox comboLugNaci;
+    //Combox de la fecha modificar a calendario
+    private JComboBox comboDia;
+    private JComboBox comboMes;
+    private JComboBox comboAnio;
+    
     private JButton btCancelar;
     private JButton btSiguient;
     //declaracion paneles
@@ -56,9 +61,11 @@ public class VentanaRegDatoPersona extends JFrame {
         iniciarComponentes();
         agregarComponentes();
         acomodarComponentes();
+        asignarEventos();
+        
 
         getContentPane().add(panelPrin);
-        setSize(new Dimension(600, 450));
+        setSize(new Dimension(900, 450));
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -91,14 +98,14 @@ public class VentanaRegDatoPersona extends JFrame {
         campoPApelli = new JTextField("Primer Apellido");
         campoSApelli = new JTextField("Segundo Apellido");
         campoNumIdent = new JTextField("Numero Documento");
-        campoNumCel = new JTextField("3134443311");
+        campoNumCel = new JTextField("(+57) 313-444-33-11");
 
         comboTipoDoc = new JComboBox();
         comboTipoDoc.addItem("Cedula Ciudadania");
         comboTipoDoc.addItem("Cedula Extranjeria");
 
         comboJorTrabajo = new JComboBox();
-        comboJorTrabajo.addItem("Manana");
+        comboJorTrabajo.addItem("Mañana");
         comboJorTrabajo.addItem("Tarde");
         comboJorTrabajo.addItem("Ambas");
         
@@ -240,6 +247,30 @@ public class VentanaRegDatoPersona extends JFrame {
         comboSexo =  new JComboBox();
         comboSexo.addItem("Hombre");
         comboSexo.addItem("Mujer");
+        
+        comboDia = new JComboBox();
+        
+        for(int i = 1; i < 32; i++){
+            
+            comboDia.addItem(i);
+        
+        }
+        
+        comboMes = new JComboBox();
+        
+        for(int i = 1; i < 13; i++){
+            
+            comboMes.addItem(i);
+        
+        }
+        
+        comboAnio = new JComboBox();
+        
+        for(int i = 10; i < 97; i++){
+            
+            comboAnio.addItem("19"+i);
+        
+        }
 
               
         btCancelar = new JButton("Cancelar");
@@ -262,10 +293,12 @@ public class VentanaRegDatoPersona extends JFrame {
         panelPrin.add(lbJorTrabajo);
         panelPrin.add(lbFechaNaci);
         panelPrin.add(lbNumeroCel);
+        panelPrin.add(lbNumeroDoc);
         panelPrin.add(lbTipoDocumen);
         panelPrin.add(lbSexo);
         panelPrin.add(lbLugarNacimiento);
         panelPrin.add(lbLugarResiden);
+        panelPrin.add(lbTitulo);
 
         panelPrin.add(campoPNombre);
         panelPrin.add(campoSNombre);
@@ -280,6 +313,9 @@ public class VentanaRegDatoPersona extends JFrame {
         panelPrin.add(comboMunicipio);
         panelPrin.add(comboSexo);
         panelPrin.add(comboTipoDoc);
+        panelPrin.add(comboDia);
+        panelPrin.add(comboMes);
+        panelPrin.add(comboAnio);
 
         panelPrin.add(btSiguient);
         panelPrin.add(btCancelar);
@@ -291,23 +327,44 @@ public class VentanaRegDatoPersona extends JFrame {
 
     private void acomodarComponentes() {
 
-        lbTitulo.setBounds(160, 30, 200, 30);
+        lbTitulo.setBounds(360, 30, 200, 30);
 
         lbPrimerNom.setBounds(30, 80, 150, 30);
-        campoPNombre.setBounds(250, 80, 200, 25);
+        campoPNombre.setBounds(230, 80, 200, 25);
         lbSegundoNom.setBounds(30, 110, 150, 30);
-        campoSNombre.setBounds(250, 110, 200, 25);
+        campoSNombre.setBounds(230, 110, 200, 25);
         lbPrimerApell.setBounds(30, 140, 150, 30);
-        campoPApelli.setBounds(250, 140, 200, 25);
+        campoPApelli.setBounds(230, 140, 200, 25);
         lbSegundoApell.setBounds(30, 170, 150, 30);
-        campoSApelli.setBounds(250, 170, 200, 25);
-        lbTipoDocumen.setBounds(30, 200, 150, 30);
-        comboTipoDoc.setBounds(250, 200, 200, 25);
-        lbNumeroDoc.setBounds(30, 230, 150, 30);
-        campoNumIdent.setBounds(250, 230, 200, 25);
+        campoSApelli.setBounds(230, 170, 200, 25);
+      
+        lbNumeroDoc.setBounds(30, 200, 150, 30);
+        campoNumIdent.setBounds(230, 200, 200, 25);
+        lbMunicipio.setBounds(30, 230, 150, 30);
+        comboMunicipio.setBounds(230, 230, 200, 25);
+        lbJorTrabajo.setBounds(30, 260, 150, 30);
+        comboJorTrabajo.setBounds(230, 260, 200, 25);
         
-        btSiguient.setBounds(250, 400, 95, 30);
-        btCancelar.setBounds(355, 400, 95, 30);
+        lbFechaNaci.setBounds(470, 80, 150, 30);
+        comboDia.setBounds(650, 80, 45, 25);
+        comboMes.setBounds(710, 80, 45, 25);
+        comboAnio.setBounds(770, 80, 80, 25);        
+        
+        
+        lbNumeroCel.setBounds(470, 110, 150, 30);
+        campoNumCel.setBounds(650, 110, 200, 25);
+        lbTipoDocumen.setBounds(470, 140, 150, 30);
+        comboTipoDoc.setBounds(650, 140, 200, 25);
+        
+        lbSexo.setBounds(470, 170, 150, 30);
+        comboSexo.setBounds(650, 170, 200, 25);
+        lbLugarResiden.setBounds(470, 200, 150, 30);
+        comboLugResi.setBounds(650, 200, 200, 25);
+        lbLugarNacimiento.setBounds(470, 230, 150, 30);
+        comboLugNaci.setBounds(650, 230, 200, 25);
+       
+        btSiguient.setBounds(555, 350, 110, 30);
+        btCancelar.setBounds(700, 350, 110, 30);
 
 
 
@@ -315,8 +372,15 @@ public class VentanaRegDatoPersona extends JFrame {
     }
     
 
-    public void guardar() {
-//Agregar codigo para el boton siguiente 
+    public void asignarEventos() {
+
+        btCancelar.addMouseListener(manejador);
+        campoPNombre.addMouseListener(manejador);
+        campoSNombre.addMouseListener(manejador);
+        campoPApelli.addMouseListener(manejador);
+        campoSApelli.addMouseListener(manejador);
+        campoNumIdent.addMouseListener(manejador);
+        campoNumCel.addMouseListener(manejador);
     }
 
     private class ManejaEventos implements MouseListener {
@@ -360,20 +424,26 @@ public class VentanaRegDatoPersona extends JFrame {
                             
             }else if (me.getSource() == campoNumIdent){
             
-                if(campoNumIdent.getText().equals("Numero de Documento")){
+                if(campoNumIdent.getText().equals("Numero Documento")){
                 
                     campoNumIdent.setText("");
                 
                 }
                                             
+            }else if(me.getSource() == campoNumCel){
+                
+                  if(campoNumCel.getText().equals("(+57) 313-444-33-11")){
+                
+                    campoNumCel.setText("");
+                
+                }
+                
             }else if (me.getSource() == btSiguient) {
 
                 JOptionPane.showMessageDialog(null, "Se guardara la informacion personal");
 
             } else if (me.getSource() == btCancelar) {
                 
-                ventana_digitador.setVisible(true);
-
                 dispose();
 
             } 
