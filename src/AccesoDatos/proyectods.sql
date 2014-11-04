@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS USUARIO, ACCESO, CONVOCATORIA CASCADE;
+DROP TABLE IF EXISTS Aspirante;
 
 CREATE TABLE USUARIO (
 identificacion varchar(20) NOT NULL PRIMARY KEY,
@@ -26,7 +27,7 @@ CREATE TABLE ACCESO (
 
 
 
-DROP TABLE IF EXISTS CONVOCATORIA CASCADE;
+
 
 CREATE TABLE CONVOCATORIA (
 
@@ -41,3 +42,26 @@ CREATE TABLE CONVOCATORIA (
     REFERENCES ACCESO (username)
 
 );
+
+
+
+CREATE TABLE Aspirante (
+
+identificacion varchar (20) PRIMARY KEY,
+tipo_id varchar (50) NOT NULL,
+p_nombre varchar (10) NOT NULL,
+s_nombre varchar (10),
+p_apellido varchar (10) NOT NULL,
+s_apellido varchar (10),
+municipio_trabaja varchar (20) NOT NULL,
+sexo varchar (10) NOT NULL,
+jornada varchar (50) NOT NULL,
+lugar_residencia varchar (50),
+fecha_nacimiento varchar(10) NOT NULL,
+lugar_nacimiento varchar (50) NOT NULL,
+tel varchar (20)
+);
+
+
+
+
