@@ -244,6 +244,50 @@ public class VentanaCrearConvocatoria extends JFrame {
     }
     
     
+    private void verificarFechas(int año, int mes, int dia) throws Exception {
+
+        try {
+
+            if (mes == 4 || mes == 6 || mes == 9 || mes == 11) {
+
+                if (dia > 30) {
+
+                    throw new Exception("Fecha inválida");
+
+                }
+
+            } else if (mes == 2) {
+
+                if (año % 4 == 0) {
+
+                    if (dia > 29) {
+
+                        throw new Exception("Fecha inválida");
+
+                    }
+
+                } else {
+
+                    if (dia > 28) {
+
+                        throw new Exception("Fecha inválida");
+
+                    }
+
+                }
+
+            }
+
+
+        } catch (Exception ex) {
+
+            System.out.print(ex.getMessage());
+
+        }
+
+    }
+    
+    
     private void registrarConvocatoria () {
         
         String campos [] = new String[2];
@@ -278,6 +322,9 @@ public class VentanaCrearConvocatoria extends JFrame {
             if (fechaInicio.after(Calendar.getInstance()))
             
                 try {
+                    
+                    verificarFechas(añoFin, mesFin, diaFin);
+                    verificarFechas(añoIni, mesIni, diaIni);
 
                     validar.validateEmptyFields(campos);
 
@@ -290,6 +337,10 @@ public class VentanaCrearConvocatoria extends JFrame {
 
                     JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 
+                } catch (Exception ex) {
+                    
+                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    
                 }
             
             else {
