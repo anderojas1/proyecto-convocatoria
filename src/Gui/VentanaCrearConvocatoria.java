@@ -275,20 +275,29 @@ public class VentanaCrearConvocatoria extends JFrame {
         
         else {
             
-            try {
+            if (fechaInicio.after(Calendar.getInstance()))
+            
+                try {
+
+                    validar.validateEmptyFields(campos);
+
+                    String fechafin = añoFin + "/" + mesFin + "/" + diaFin;
+                    String fechaini = añoIni + "/" + mesIni + "/" + diaIni;
+
+                    controlaConvocatoria.guardarConvocatoria(campos[1], fechaini, fechafin, "abierta", campos[0], admin.getUsuario());
+
+                } catch (MyException ex) {
+
+                    JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+
+                }
+            
+            else {
                 
-                validar.validateEmptyFields(campos);
-                
-                String fechafin = añoFin + "/" + mesFin + "/" + diaFin;
-                String fechaini = añoIni + "/" + mesIni + "/" + diaIni;
-                
-                controlaConvocatoria.guardarConvocatoria(campos[1], fechaini, fechafin, "abierta", campos[0], admin.getUsuario());
-                
-            } catch (MyException ex) {
-                
-                JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "La fecha de inicio no debe ser anterior a la fecha actual", "Error", JOptionPane.ERROR_MESSAGE);
                 
             }
+            
         }
         
     }
