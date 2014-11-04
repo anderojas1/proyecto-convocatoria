@@ -26,19 +26,19 @@ public class DriverConvocatoria {
     }
     
     
-    public void guardarConvocatoria (String nombre, String fecha_ini, String fecha_fin, String estado, String codigo, String id_admin) {
+    public void guardarConvocatoria (String nombre, String fecha_ini, String fecha_fin, String estado, String codigo, String usuario) {
         
         Convocatoria crearConv = new Convocatoria(nombre, fecha_ini, fecha_fin, codigo, estado);
         
         try {
             
-            daoConvocatoria.crearConvocatoria(crearConv, id_admin);
+            daoConvocatoria.crearConvocatoria(crearConv, usuario);
             
             JOptionPane.showMessageDialog(null, "Se ha creado la convocatoria con exito", "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
             
         } catch (SQLException ex) {
             
-            JOptionPane.showMessageDialog(null, "Error creando la convocatoria", "Registro fallido", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Registro fallido", JOptionPane.ERROR_MESSAGE);
             
         }
     }

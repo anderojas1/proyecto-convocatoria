@@ -77,6 +77,13 @@ public class VentanaAdministrador extends JFrame {
         JBModifConv.addActionListener(eventmanager);
 
     }
+    
+    
+    public String getUsuario () {
+        
+        return user;
+        
+    }
 
     private void AcommodateComponents() {
         container = this.getContentPane();

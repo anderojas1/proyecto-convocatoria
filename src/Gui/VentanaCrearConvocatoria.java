@@ -257,13 +257,13 @@ public class VentanaCrearConvocatoria extends JFrame {
         int mesIni = Integer.parseInt(jcbmesInicio.getSelectedItem().toString());
         int diaIni = Integer.parseInt(jcbdiaInicio.getSelectedItem().toString());
         
-        fechaInicio.set(añoIni, 1, 1);
+        fechaInicio.set(añoIni, mesIni, diaIni);
         
         Calendar fechaFinal = new GregorianCalendar();
         
-        int añoFin = (Integer)jcbañoInicio.getSelectedItem();
-        int mesFin = Integer.parseInt(jcbañoInicio.getSelectedItem().toString());
-        int diaFin = Integer.parseInt(jcbañoInicio.getSelectedItem().toString());
+        int añoFin = (Integer)jcbañoFinal.getSelectedItem();
+        int mesFin = Integer.parseInt(jcbmesFinal.getSelectedItem().toString());
+        int diaFin = Integer.parseInt(jcbdiaFinal.getSelectedItem().toString());
         
         fechaFinal.set(añoFin, mesFin, diaFin);
         
@@ -282,7 +282,7 @@ public class VentanaCrearConvocatoria extends JFrame {
                 String fechafin = añoFin + "/" + mesFin + "/" + diaFin;
                 String fechaini = añoIni + "/" + mesIni + "/" + diaIni;
                 
-                //controlaConvocatoria.guardarConvocatoria(campos[1], fechaini, fechafin, "abierta", campos[0]);
+                controlaConvocatoria.guardarConvocatoria(campos[1], fechaini, fechafin, "abierta", campos[0], admin.getUsuario());
                 
             } catch (MyException ex) {
                 

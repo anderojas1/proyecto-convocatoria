@@ -29,10 +29,10 @@ public class DaoConvocatoria {
     }
     
     
-    public void crearConvocatoria (Convocatoria convoca, String id_admin) throws SQLException {
+    public void crearConvocatoria (Convocatoria convoca, String usuario) throws SQLException {
         
         sqlDatosConvocatoria = "INSERT INTO CONVOCATORIA VALUES ('" + convoca.getCodigo() + "','" + convoca.getNombre() + "','"
-                + convoca.getFechaInicio() + "','" + convoca.getFechaCierre() + "','" + convoca.getEstado() + "','" + id_admin + "');";
+                + convoca.getFechaInicio() + "','" + convoca.getFechaCierre() + "','" + convoca.getEstado() + "','" + usuario + "');";
         
         ejecutarSentencia();
         
