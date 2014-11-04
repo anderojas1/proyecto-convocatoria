@@ -72,4 +72,18 @@ public class Convocatoria {
         
     }
     
+    
+    public String getCodigo () {
+        
+        return codigo;
+        
+    }
+    
+    
+    public String getEstado () {
+        
+        return estado;
+        
+    }
+    
 }

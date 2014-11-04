@@ -36,7 +36,7 @@ public class VentanaAdministrador extends JFrame {
         
         pack();
         
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(0);
         setSize(600, 200);
         setResizable(true);
         setVisible(true); 
@@ -106,6 +106,23 @@ public class VentanaAdministrador extends JFrame {
 
 
     }
+    
+    
+    public void crearUsuario () {
+        
+        VentanaRegUsuario registrar = new VentanaRegUsuario(true);
+        registrar.asignarEventos();
+        registrar.configurarVentana(this);
+        
+        setVisible(false);
+        
+    }
+    
+    
+    public void crearConvocatoria () {
+        
+        
+    }
 
     public class EventManager implements ActionListener {
 
@@ -122,15 +139,13 @@ public class VentanaAdministrador extends JFrame {
 
             if (e.getSource() == JBAbrirConv) {
 
-                JOptionPane.showMessageDialog(null, "Lo sentimos estamos en desarrollo", "Error", JOptionPane.ERROR_MESSAGE);
+                crearConvocatoria();
 
             }
 
-            if (e.getSource() == JBCreateUser) {
+            if (e.getSource() == JBCreateUser) {                
                 
-                VentanaRegUsuario registrar = new VentanaRegUsuario(true);
-                registrar.asignarEventos();
-                dispose();
+                crearUsuario();
                 
             }
 

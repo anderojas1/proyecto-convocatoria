@@ -41,12 +41,12 @@ public class DaoUsuario {
         sqlDatosAcceso = "INSERT INTO ACCESO VALUES ('" + user.getUsername() + "', '" + user.getPassword() + "', "
                 + user.getEstado() + ", '" + user.getIdentificacion() + "');";
         
-        guardarUsuario();
+        ejecutarSentencia();
         
     }
     
     
-    public void guardarUsuario () throws SQLException {
+    public void ejecutarSentencia () throws SQLException {
         
         try{
             

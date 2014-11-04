@@ -33,7 +33,7 @@ public class DriverUsuario {
             
             daoUsuario.crearUsuario(usu);
             
-            JOptionPane.showMessageDialog(null, "Se ha guardado el usuario con exito");
+            JOptionPane.showMessageDialog(null, "Se ha guardado el usuario con exito", "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
             
         } catch (SQLException ex) {
             

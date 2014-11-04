@@ -40,6 +40,8 @@ public class VentanaRegUsuario extends JFrame {
     private ManejaEventos manejador;
     private DriverUsuario contusuario;
     private ViewValidator validator;
+    
+    private VentanaAdministrador ventana_admin;
 
     //Constructor de la Clase 
     public VentanaRegUsuario(boolean inicio) {
@@ -55,7 +57,7 @@ public class VentanaRegUsuario extends JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(0);
 
     }
 
@@ -180,6 +182,13 @@ public class VentanaRegUsuario extends JFrame {
 
 
 
+    }
+    
+    
+    public void configurarVentana (VentanaAdministrador admin) {
+        
+        ventana_admin = admin;
+        
     }
 
     public void guardar() {
@@ -318,6 +327,8 @@ public class VentanaRegUsuario extends JFrame {
                 guardar();
 
             } else if (me.getSource() == btCancelar) {
+                
+                ventana_admin.setVisible(true);
 
                 dispose();
 
