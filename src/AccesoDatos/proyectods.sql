@@ -65,3 +65,15 @@ tel varchar (20)
 
 
 
+INSERT INTO USUARIO VALUES ('1', 'Cedula Ciudadania', 'kellys', 'andrea', 'santa', 'gutierrez', true, 'Administrador');
+
+
+INSERT INTO USUARIO VALUES ('2', 'Cedula Ciudadania', 'andre', 'fabia', 'lopez', 'gutierrez', true, 'Digitador');
+
+INSERT INTO USUARIO VALUES ('3', 'Cedula Ciudadania', 'jhon', 'will', 'smith', 'gutierrez', true, 'Supervisor');
+
+
+INSERT INTO ACCESO VALUES ('kellys', 'kellys', false , '1');
+INSERT INTO ACCESO VALUES ('andre', 'andre', false , '2');
+INSERT INTO ACCESO VALUES ('jhon', 'jhon', false , '3');
+
