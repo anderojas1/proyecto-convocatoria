@@ -21,7 +21,9 @@ public class DriverAspirante {
         daoaspirante = new DaoAspirante();
     }
     
-    public void guardarAspirante(String p_nombre, String s_nombre, String p_apellido, String s_apellido, String identificacion, String tipo_id, String municipio_trabaja, String sexo, String jornada, String lugar_residencia, String fecha_nacimiento, String lugar_nacimiento, String tel){
+    public void guardarAspirante(String p_nombre, String s_nombre, String p_apellido, String s_apellido, String identificacion, 
+                                    String tipo_id, String municipio_trabaja, String sexo, String jornada,
+                                String lugar_residencia, String fecha_nacimiento, String lugar_nacimiento, String tel){
    
         Aspirante asp = new Aspirante(p_nombre, s_nombre, p_apellido, s_apellido, identificacion, tipo_id, municipio_trabaja, sexo, jornada, lugar_residencia, fecha_nacimiento, lugar_nacimiento, tel);
         

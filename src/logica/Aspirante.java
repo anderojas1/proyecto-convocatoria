@@ -24,7 +24,11 @@ public class Aspirante {
     private String lugar_nacimiento;
     private String tel;
 
-    public Aspirante(String p_nombre, String s_nombre, String p_apellido, String s_apellido, String identificacion, String tipo_id, String municipio_trabaja, String sexo, String jornada, String lugar_residencia, String fecha_nacimiento, String lugar_nacimiento, String tel) {
+    public Aspirante(String p_nombre, String s_nombre, String p_apellido, String s_apellido, 
+                      String identificacion, String tipo_id, String municipio_trabaja, 
+                      String sexo, String jornada, String lugar_residencia, String fecha_nacimiento, 
+                      String lugar_nacimiento, String tel) {
+        
         this.p_nombre = p_nombre;
         this.s_nombre = s_nombre;
         this.p_apellido = p_apellido;
