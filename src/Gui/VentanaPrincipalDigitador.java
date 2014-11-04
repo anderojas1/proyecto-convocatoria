@@ -20,63 +20,79 @@ public class VentanaPrincipalDigitador extends JFrame{
     private JButton editar;
     private JButton consultar;
     private JButton cerrar;
-    private final ManejaEvento driverEventos;
-    
+    private ManejaEvento driverEventos; 
     private String user;
+    private VentanaRegDatoPersona registroPersonal;
+    private Container cont;
+    private JPanel inicioDigitador;
     
     public  VentanaPrincipalDigitador(String username){
         
-        user = username;
-       
-        driverEventos = new ManejaEvento();
-        this.setTitle("Ventana Principal Digitador");
-        
-        this.setLayout(null);
-        this.setSize(560, 400);
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setVisible(true);
-        
-        //se crea el label y se adiciona en la ventana
+        //user = username;
+        cont = getContentPane(); 
+        inicioDigitador = new JPanel();        
         titulo = new JLabel("Sistema de Seleccion de Docentes TIC");
-        titulo.setBounds(new Rectangle(55,0 , 440,80 ));
-        titulo.setFont(new Font("Verdana", 0, 22));
-        this.add (titulo);
-        
-        // Se crea el botón y se adiciona  en la ventana
         ingresar = new JButton("Ingresar Aspirante");
-        ingresar.setBounds(new Rectangle(20,100 ,150 ,50 ));
-        this.add (ingresar);
-        
         editar = new JButton("Editar ASpirante");
-        editar.setBounds(new Rectangle(200,100 ,150 ,50 ));
-        this.add (editar);
-
         consultar = new JButton("Consultar Aspirante");
-        consultar.setBounds(new Rectangle(380,100 ,150 ,50 ));
-        this.add (consultar);
-
-        cerrar = new JButton("Cerrar Sesion");
-        cerrar.setBounds(new Rectangle(340,250 ,150 ,50 ));
-        this.add (cerrar);
-        
-        cerrar.addActionListener(driverEventos);
-        
-       
-        // Se le dice a la ventana que termine el programa cuando se la cierre
+        cerrar = new JButton("Cerrar Sesion");  
+        driverEventos = new ManejaEvento(); 
        
         
-        // Se le da un tamaño automático a la ventana para que quepa todo su
-        // contenido.
+        Dimension di = new Dimension(800, 500);
+        setSize(650,350);
+        setMaximumSize(di);    
+        setResizable(false);
+        setDefaultCloseOperation(0);
         
-       
-        // Se hace visible la ventana
+        initComponents();
+        AcommodateComponents();
+        ListenerEvent();
         
+        cont.add(inicioDigitador);
+        setVisible(true);
        
    }
+    
+    public void initComponents(){
+        
+        
+        inicioDigitador.setLayout(null);    
+        inicioDigitador.add (titulo);
+        inicioDigitador.add (ingresar);
+        inicioDigitador.add (editar);
+        inicioDigitador.add (consultar);
+        inicioDigitador.add (cerrar);     
+        
+        
+    }
 
+     private void AcommodateComponents() {
+         
+        titulo.setBounds(new Rectangle(55, 0, 440, 80));
+        titulo.setFont(new Font("Verdana", 0, 22));
+        ingresar.setBounds(new Rectangle(20, 100, 150, 50));
+        editar.setBounds(new Rectangle(200,100 ,150 ,50 ));
+        consultar.setBounds(new Rectangle(380,100 ,150 ,50 ));
+        cerrar.setBounds(new Rectangle(340,250 ,150 ,50 ));
+     }
+     
+     public void ListenerEvent(){
+         cerrar.addActionListener(driverEventos);
+        ingresar.addActionListener(driverEventos); 
+     }
+     
+     public void ingresarAspirante(){
+         VentanaRegDatoPersona registrar = new VentanaRegDatoPersona();
+         registrar.asignarEventos();
+         registrar.configurarVentana(this);
+         setVisible(false);
+     }
  
     
     private class ManejaEvento implements ActionListener{
+        
+     
 
         @Override
         public void actionPerformed(ActionEvent ae) {
@@ -84,6 +100,11 @@ public class VentanaPrincipalDigitador extends JFrame{
                 VentanaLogin nuevoLogin = new VentanaLogin();
                 nuevoLogin.addEvents();
                 dispose();
+            }
+            
+            if(ae.getSource() == ingresar){
+                ingresarAspirante();
+                
             }
         }
          

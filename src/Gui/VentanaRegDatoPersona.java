@@ -48,7 +48,7 @@ public class VentanaRegDatoPersona extends JFrame {
     private JPanel panelPrin;
     //declaracion objetos de control
     private ManejaEventos manejador;
-    private DriverConvocatoria contConvo;
+    private DriverAspirante contAspirante;
     private ViewValidator validator;
     
     private VentanaPrincipalDigitador ventana_digitador;
@@ -61,7 +61,7 @@ public class VentanaRegDatoPersona extends JFrame {
         iniciarComponentes();
         agregarComponentes();
         acomodarComponentes();
-        asignarEventos();
+        //asignarEventos();
         
 
         getContentPane().add(panelPrin);
@@ -75,7 +75,7 @@ public class VentanaRegDatoPersona extends JFrame {
 
     public final void iniciarComponentes() {
 
-        contConvo = new DriverConvocatoria();
+        contAspirante = new DriverAspirante();
         validator = new ViewValidator();
 
         lbPrimerNom = new JLabel("Primer Nombre *");
@@ -382,8 +382,65 @@ public class VentanaRegDatoPersona extends JFrame {
         campoNumIdent.addMouseListener(manejador);
         campoNumCel.addMouseListener(manejador);
     }
+    
+    public void configurarVentana (VentanaPrincipalDigitador digitador) {
+        
+        ventana_digitador = digitador;
+        
+    }
+    
+    public void guardarInfo(){
+        String datos[] = new String[13];
+        String datosObligatorios[] = new String[4];
+                
+                try{
+                    
+                    datos[0] = campoPNombre.getText();
+                    datosObligatorios[0] = datos[0];
+                    
+                    datos[1] = campoSNombre.getText();
+                    
+                    datos[2] = campoPApelli.getText();
+                    datosObligatorios[1] = datos[2];
+                    
+                    datos[3] = campoSApelli.getText();
+                    
+                    datos[4] = campoNumIdent.getText();
+                    datosObligatorios[2]=datos[4];
+                    
+                    datos[5] = (String) comboMunicipio.getSelectedItem();
+                    
+                    datos[6] = (String) comboJorTrabajo.getSelectedItem();
+                    
+                    datos[7] = (String )comboDia.getSelectedItem()+"/"+comboMes.getSelectedItem()+"/"+comboAnio.getSelectedItem();
+                   
+                    datos[8] = campoNumCel.getText();
+                    datosObligatorios[3] = datos[8];
+                    
+                    datos[9] = (String) comboTipoDoc.getSelectedItem();
+                    
+                    datos[10] = (String) comboSexo.getSelectedItem();
+                    
+                    datos[11] = (String) comboLugResi.getSelectedItem();
+                    
+                    datos[12] = (String) comboLugNaci.getSelectedItem();
+ 
+                    
+                    validator.validateEmptyFields(datosObligatorios);
+                    validator.validateInteger(datos[4]);
+                    
+                    contAspirante.guardarAspirante(datos[0], datos[1], datos[2], datos[3], datos[4], datos[9], datos[5], datos[10], datos[6], datos[11], datos[7], datos[12], datos[8]);
+                    
+                }catch(MyException e){
+                    
+                    JOptionPane.showMessageDialog(this, e.getMessage(), "ERROR CAMPOS", JOptionPane.ERROR_MESSAGE);
+                }     
+                catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "Error en No de identificación: "+e.getMessage(), "ERROR IDENTIFICACION", JOptionPane.ERROR_MESSAGE);
+                }
+    }
 
-    private class ManejaEventos implements MouseListener {
+    private class ManejaEventos implements MouseListener{
 
        
 
@@ -441,9 +498,13 @@ public class VentanaRegDatoPersona extends JFrame {
             }else if (me.getSource() == btSiguient) {
 
                 JOptionPane.showMessageDialog(null, "Se guardara la informacion personal");
+                
+                
+                
 
             } else if (me.getSource() == btCancelar) {
                 
+                ventana_digitador.setVisible(true);
                 dispose();
 
             } 
@@ -465,13 +526,17 @@ public class VentanaRegDatoPersona extends JFrame {
         @Override
         public void mouseExited(MouseEvent me) {
         }
+
+        //@Override
+       /* public void actionPerformed(ActionEvent e) {
+            
+           // if(e.getSource() == btCancelar){
+             //   ventana_digitador.setVisible(true);
+              //  dispose();
+            //}
+            
+        }*/
     }
 
-public static void main(String Arg []){
-
-VentanaRegDatoPersona v =  new VentanaRegDatoPersona();
-
-}
-
-
+    
 }
