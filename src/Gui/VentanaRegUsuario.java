@@ -238,7 +238,11 @@ public class VentanaRegUsuario extends JFrame {
                 
             } else {
                 
-                VentanaAdministrador ventanaAdmin = new VentanaAdministrador();
+                if (ventana_admin != null) {
+                    
+                    ventana_admin.setVisible(true);
+                    
+                }
                 
                 dispose();
                 

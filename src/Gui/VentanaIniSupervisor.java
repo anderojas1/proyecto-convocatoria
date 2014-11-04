@@ -21,10 +21,13 @@ import java.awt.event.ActionListener;
     private JButton informe, genero, ciudad, jornada, mejores, consultar, total, salir;
     final ManejaEvento driverEventos;
 
+    private String usuario;
     
     
-    
-    public VentanaIniSupervisor(){
+    public VentanaIniSupervisor(String user){
+        
+        usuario = user;
+        
         cont = getContentPane(); 
         inicioSupervisor = new JPanel();
         encabezado = new JLabel("Sistema de Selección de Docentes TIC");

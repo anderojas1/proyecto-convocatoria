@@ -14,18 +14,18 @@ import javax.swing.JOptionPane;
  */
 public class Fachada {
     
-    private String url;
-    private String user;
-    private String password;
+    private final String url;
+    private final String user;
+    private final String password;
     
     private Connection conexion;
     
     
     public Fachada () {
         
-        url = "jdbc:postgresql://localhost:5432/georgerr";
-        user = "georgerr";
-        password = "georgerr";
+        url = "jdbc:postgresql://localhost:5432/pruebas";
+        user = "anderojas";
+        password = "univalle";
         
     }
     

@@ -10,6 +10,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import javax.swing.*;
 
 /**
@@ -244,6 +246,50 @@ public class VentanaCrearConvocatoria extends JFrame {
     
     private void registrarConvocatoria () {
         
+        String campos [] = new String[2];
+        
+        campos[0] = jtfcodigo.getText();
+        campos[1] = jtfnombre.getText();
+        
+        Calendar fechaInicio = new GregorianCalendar();
+        
+        int añoIni = (Integer)jcbañoInicio.getSelectedItem();
+        int mesIni = Integer.parseInt(jcbmesInicio.getSelectedItem().toString());
+        int diaIni = Integer.parseInt(jcbdiaInicio.getSelectedItem().toString());
+        
+        fechaInicio.set(añoIni, 1, 1);
+        
+        Calendar fechaFinal = new GregorianCalendar();
+        
+        int añoFin = (Integer)jcbañoInicio.getSelectedItem();
+        int mesFin = Integer.parseInt(jcbañoInicio.getSelectedItem().toString());
+        int diaFin = Integer.parseInt(jcbañoInicio.getSelectedItem().toString());
+        
+        fechaFinal.set(añoFin, mesFin, diaFin);
+        
+        if (!fechaFinal.after(fechaInicio)) {
+            
+            JOptionPane.showMessageDialog(this, "La fecha de finalización debe ser posterior a la fecha de inicio", "Error", JOptionPane.ERROR_MESSAGE);
+            
+        }
+        
+        else {
+            
+            try {
+                
+                validar.validateEmptyFields(campos);
+                
+                String fechafin = añoFin + "/" + mesFin + "/" + diaFin;
+                String fechaini = añoIni + "/" + mesIni + "/" + diaIni;
+                
+                //controlaConvocatoria.guardarConvocatoria(campos[1], fechaini, fechafin, "abierta", campos[0]);
+                
+            } catch (MyException ex) {
+                
+                JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+                
+            }
+        }
         
     }
     

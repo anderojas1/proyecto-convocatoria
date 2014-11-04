@@ -28,11 +28,16 @@ public class VentanaAdministrador extends JFrame {
     private JPanel JPpanelPrincipal;
     private EventManager eventmanager;
     private Container container;
+    
+    private String user;
 
     // End of variables declaration
-    public VentanaAdministrador() {
+    public VentanaAdministrador(String usuario) {
+        
         initComponents();
         AcommodateComponents();
+        
+        user = usuario;
         
         pack();
         

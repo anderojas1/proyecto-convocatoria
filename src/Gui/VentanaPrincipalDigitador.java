@@ -20,10 +20,13 @@ public class VentanaPrincipalDigitador extends JFrame{
     private JButton editar;
     private JButton consultar;
     private JButton cerrar;
-    final ManejaEvento driverEventos;
+    private final ManejaEvento driverEventos;
     
-   public  VentanaPrincipalDigitador(){
-       
+    private String user;
+    
+    public  VentanaPrincipalDigitador(String username){
+        
+        user = username;
        
         driverEventos = new ManejaEvento();
         this.setTitle("Ventana Principal Digitador");

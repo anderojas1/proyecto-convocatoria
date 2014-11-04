@@ -38,6 +38,6 @@ CREATE TABLE CONVOCATORIA (
     creador varchar(20) NOT NULL,
 
     CONSTRAINT creador_fk FOREIGN KEY (creador)
-    REFERENCES USUARIO (identificacion)
+    REFERENCES ACCESO (username)
 
 );

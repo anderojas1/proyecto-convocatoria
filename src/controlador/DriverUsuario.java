@@ -56,4 +56,7 @@ public class DriverUsuario {
         return daoUsuario.identificarTipo (username, password);
         
     }
+    
+    
+    //public String ejecutarConsultas ()
 }

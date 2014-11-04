@@ -138,21 +138,21 @@ public class VentanaLogin extends JFrame {
             
             case "Administrador": {
                 
-                VentanaAdministrador admin = new VentanaAdministrador();
+                VentanaAdministrador admin = new VentanaAdministrador(user);
                 this.dispose();
                 
             }break;
                 
             case "Supervisor": {
                             
-                VentanaIniSupervisor sprv = new VentanaIniSupervisor();
+                VentanaIniSupervisor sprv = new VentanaIniSupervisor(user);
                 this.dispose();
                 
             }break;
                 
             case "Digitador": {
                 
-                VentanaPrincipalDigitador dig = new VentanaPrincipalDigitador();
+                VentanaPrincipalDigitador dig = new VentanaPrincipalDigitador(user);
                 this.dispose();
                 
             }break;
