@@ -121,6 +121,11 @@ public class VentanaAdministrador extends JFrame {
     
     public void crearConvocatoria () {
         
+        VentanaCrearConvocatoria crear = new VentanaCrearConvocatoria();
+        crear.agregarEventos();
+        crear.setVentanaAdmin(this);
+        
+        setVisible(false);
         
     }
 

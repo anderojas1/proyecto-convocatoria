@@ -23,13 +23,22 @@ public class VentanaCrearConvocatoria extends JFrame {
     private JLabel lbnombre;
     private JLabel lbfechaInicio;
     private JLabel lbfechaFin;
+    private JLabel lbañoInicio;
+    private JLabel lbmesInicio;
+    private JLabel lbdiaInicio;
+    private JLabel lbañoFinal;
+    private JLabel lbmesFinal;
+    private JLabel lbdiaFinal;
     
     private JTextField jtfcodigo;
     private JTextField jtfnombre;
     
-    private JSpinner jsaño;
-    private JSpinner jsmes;
-    private JSpinner jsdia;
+    private JComboBox jcbañoInicio;
+    private JComboBox jcbmesInicio;
+    private JComboBox jcbdiaInicio;
+    private JComboBox jcbañoFinal;
+    private JComboBox jcbmesFinal;
+    private JComboBox jcbdiaFinal;
     
     private JButton jbcrear;
     private JButton jbcancelar;
@@ -40,6 +49,10 @@ public class VentanaCrearConvocatoria extends JFrame {
     
     private ViewValidator validar;
     
+    private ManejarEventos driverEvent;
+    
+    private VentanaAdministrador admin;
+    
     public VentanaCrearConvocatoria () {
             
         super("Crear Convocatoria");
@@ -48,20 +61,22 @@ public class VentanaCrearConvocatoria extends JFrame {
         agregarComponentes();
         acomodarComponentes();
 
-        setSize(500, 350);
+        setSize(530, 450);
         setResizable(false);
         setLocationRelativeTo(null);
 
         setTitle("Sistema Convocatoria Docente");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
+        setDefaultCloseOperation(0);
             
     }
     
     
     private void inicializarComponentes () {
         
-        panel = new JPanel(null);
+        panel = new JPanel();
+        getContentPane().add(panel);
 
         validar = new ViewValidator();
 
@@ -70,27 +85,164 @@ public class VentanaCrearConvocatoria extends JFrame {
         lbnombre = new JLabel("Nombre *");
         lbfechaInicio = new JLabel("Fecha inicio *");
         lbfechaFin = new JLabel("Fecha fin *");
+        lbañoInicio = new JLabel("Año:");
+        lbmesInicio = new JLabel("Mes:");
+        lbdiaInicio = new JLabel("Día:");
+        
+        lbañoFinal = new JLabel("Año:");
+        lbmesFinal = new JLabel("Mes:");
+        lbdiaFinal = new JLabel("Día:");
         
         jtfcodigo = new JTextField();
         jtfnombre = new JTextField();
 
-        jsaño = new JSpinner();
-        jsmes = new JSpinner();
-        jsdia = new JSpinner();
+        jcbañoInicio = new JComboBox();
+        jcbmesInicio = new JComboBox();
+        jcbdiaInicio = new JComboBox();
+        jcbañoFinal = new JComboBox();
+        jcbmesFinal = new JComboBox();
+        jcbdiaFinal = new JComboBox();
+        
+        agregarFechas();
     
         jbcrear = new JButton("Crear");
         jbcancelar = new JButton("Cancelar");
         
+        controlaConvocatoria = new DriverConvocatoria();
+        driverEvent = new ManejarEventos();
+        
+    }
+    
+    
+    private void agregarFechas () {
+        
+        for (int i = 2014; i <= 2020; i++) {
+            
+            jcbañoInicio.addItem(i);
+            jcbañoFinal.addItem(i);
+            
+        }
+        
+        for (int i = 1; i <= 12; i++) {
+            
+            if (i < 10) {
+                
+                jcbmesInicio.addItem("0" + i);
+                jcbmesFinal.addItem("0" + i);
+            }
+            
+            else {
+                
+                jcbmesInicio.addItem(i);
+                jcbmesFinal.addItem(i);
+            }
+            
+        }
+        
+        
+        for (int i = 1; i <= 31; i++) {
+            
+            if (i < 10) {
+                
+                jcbdiaInicio.addItem("0" + i);
+                jcbdiaFinal.addItem("0" + i);
+                
+                
+            }
+            
+            else {
+                
+                jcbdiaInicio.addItem(i);
+                jcbdiaFinal.addItem(i);
+                
+            }
+            
+        }
+
     }
     
     
     private void agregarComponentes () {
         
+        panel.add(lbtitulo);
+        panel.add(lbnombre);
+        panel.add(lbcodigo);
+        panel.add(lbfechaInicio);
+        panel.add(lbfechaFin);
+        panel.add(lbtitulo);
+        panel.add(lbañoInicio);
+        panel.add(lbmesInicio);
+        panel.add(lbdiaInicio);
+        panel.add(lbañoFinal);
+        panel.add(lbmesFinal);
+        panel.add(lbdiaFinal);
+        
+        panel.add(jtfcodigo);
+        panel.add(jtfnombre);
+        
+        panel.add(jcbañoInicio);
+        panel.add(jcbmesInicio);
+        panel.add(jcbdiaInicio);
+        panel.add(jcbañoFinal);
+        panel.add(jcbmesFinal);
+        panel.add(jcbdiaFinal);
+        
+        panel.add(jbcrear);
+        panel.add(jbcancelar);
+        
+        panel.setLayout(null);
         
     }
     
     
     private void acomodarComponentes () {
+        
+        lbtitulo.setBounds(150, 20, 300, 30);
+        
+        lbcodigo.setBounds(50, 100, 100, 30);
+        jtfcodigo.setBounds(170, 100, 310, 30);
+        
+        lbnombre.setBounds(50, 150, 100, 30);
+        jtfnombre.setBounds(170, 150, 310, 30);
+        
+        lbfechaInicio.setBounds(50, 200, 100, 30);
+        lbañoInicio.setBounds(170, 200, 40, 30);
+        jcbañoInicio.setBounds(210, 200, 70, 30);
+        lbmesInicio.setBounds(290, 200, 40, 30);
+        jcbmesInicio.setBounds(330, 200, 50, 30);
+        lbdiaInicio.setBounds(390, 200, 40, 30);
+        jcbdiaInicio.setBounds(430, 200, 50, 30);
+        
+        lbfechaFin.setBounds(50, 250, 100, 30);
+        lbañoFinal.setBounds(170, 250, 40, 30);
+        jcbañoFinal.setBounds(210, 250, 70, 30);
+        lbmesFinal.setBounds(290, 250, 40, 30);
+        jcbmesFinal.setBounds(330, 250, 50, 30);
+        lbdiaFinal.setBounds(390, 250, 40, 30);
+        jcbdiaFinal.setBounds(430, 250, 50, 30);
+        
+        jbcancelar.setBounds(270, 330, 100, 30);
+        jbcrear.setBounds(380, 330, 100, 30);
+        
+    }
+    
+    
+    public void agregarEventos () {
+        
+        jbcancelar.addMouseListener(driverEvent);
+        jbcrear.addMouseListener(driverEvent);
+        
+    }
+    
+    
+    public void setVentanaAdmin (VentanaAdministrador adm) {
+        
+        admin = adm;
+        
+    }
+    
+    
+    private void registrarConvocatoria () {
         
         
     }
@@ -120,9 +272,20 @@ public class VentanaCrearConvocatoria extends JFrame {
         }
 
         @Override
-        public void mouseClicked(MouseEvent e) {
+        public void mouseClicked(MouseEvent me) {
             
+            if (jbcancelar == me.getSource()) {
+                
+                admin.setVisible(true);
+                dispose();
+                
+            }
             
+            else if (jbcrear == me.getSource()) {
+                
+                registrarConvocatoria();
+                
+            }
             
         }
 
