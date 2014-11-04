@@ -34,10 +34,10 @@ public class DaoAspirante {
 
     public void insertApplicant(Aspirante asp) throws SQLException {
 
-        sqlDatos = "INSERT INTO Aspirante values ('" + asp.getIdentificacion() + "', '" + asp.getTipo_id() + "', "
+        sqlDatos = "INSERT INTO Aspirante  values ('" + asp.getIdentificacion() + "', '" + asp.getTipo_id() + "', "
                 + "'" + asp.getP_nombre() + "', '" + asp.getS_nombre() + "', '" + asp.getP_apellido() + "', '" + asp.getS_apellido() + "',"
-                + "'" + asp.getFecha_nacimiento() + "', '" + asp.getLugar_nacimiento() + "', '" + asp.getLugar_nacimiento() + "', "
-                + "'" + asp.getSexo() + "', '" + asp.getLugar_residencia() + "', '" + asp.getTel() + "', '" + asp.getJornada() + "', '" + asp.getMunicipio_trabaja() + "')";
+                + "'" + asp.getMunicipio_trabaja() + "', '" + asp.getSexo() + "', '" + asp.getJornada() + "', "
+                + "'" + asp.getLugar_residencia() + "', '" + asp.getFecha_nacimiento() + "', '" + asp.getLugar_nacimiento() + "', '" + asp.getTel() +"')";
 
 
         try {
@@ -80,11 +80,11 @@ public class DaoAspirante {
             while (registros.next()) {
 
                 identificacion = (String) registros.getString(1);
-                p_nombre = (String) registros.getString(2);
-                s_nombre = (String) registros.getString(3);
-                p_apellido = (String) registros.getString(4);
-                s_apellido = (String) registros.getString(5);
-                tipo_id = (String) registros.getString(6);
+                tipo_id = (String) registros.getString(2);
+                p_nombre = (String) registros.getString(3);
+                s_nombre = (String) registros.getString(4);
+                p_apellido = (String) registros.getString(5);
+                s_apellido = (String) registros.getString(6);
                 municipio_trabaja = (String) registros.getString(7);
                 sexo = (String) registros.getString(8);
                 jornada = (String) registros.getString(9);
