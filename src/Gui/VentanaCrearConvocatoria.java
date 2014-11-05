@@ -390,6 +390,8 @@ public class VentanaCrearConvocatoria extends JFrame {
             else if (jbcrear == me.getSource()) {
                 
                 registrarConvocatoria();
+                admin.setVisible(true);
+                dispose();
                 
             }
             
