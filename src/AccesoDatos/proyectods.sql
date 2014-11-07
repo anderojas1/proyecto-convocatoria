@@ -33,6 +33,7 @@ CREATE TABLE CONVOCATORIA (
 
     codigo varchar(10) NOT NULL PRIMARY KEY,
     nombre varchar(50) NOT NULL,
+    descripcion varchar(1000) NOT NULL,
     fecha_inicio DATE NOT NULL,
     fecha_cierre DATE NOT NULL,
     estado varchar(20) NOT NULL,
