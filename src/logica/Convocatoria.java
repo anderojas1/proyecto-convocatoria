@@ -17,18 +17,21 @@ public class Convocatoria {
     
     private String nombre;
     private final String fechaInicio;
+    private String descripcion;
     private String fechaCierre;
     private String estado;
     private final String codigo;
     
     
-    public Convocatoria (String nombreConvocatoria, String fecha_inicio, String fecha_cierre, String codigo_convocatoria, String estadoCon) {
+    public Convocatoria (String nombreConvocatoria, String fecha_inicio, String fecha_cierre, String codigo_convocatoria, String estadoCon,
+                            String descr) {
         
         nombre = nombreConvocatoria;
         fechaInicio = fecha_inicio;
         fechaCierre = fecha_cierre;
         codigo = codigo_convocatoria;
         estado = estadoCon;
+        descripcion = descr;
         
     }
     
@@ -48,6 +51,13 @@ public class Convocatoria {
     public void extenderFechaCierre (String fecha_cierre) {
         
         fechaCierre = fecha_cierre;
+        
+    }
+    
+    
+    public void cambiarDescripcion (String desc) {
+        
+        descripcion = desc;
         
     }
     
@@ -83,6 +93,13 @@ public class Convocatoria {
     public String getEstado () {
         
         return estado;
+        
+    }
+    
+    
+    public String getDescripcion () {
+        
+        return descripcion;
         
     }
     
