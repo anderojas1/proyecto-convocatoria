@@ -11,6 +11,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import controlador.DriverUsuario;
+import java.sql.SQLException;
 
 
 /**
@@ -171,14 +172,24 @@ public class VentanaLogin extends JFrame {
     
     public void verificarUsuarioAdmin () {
         
-        if (controladorUsuario.consultarUsuarioAdmin() == false) {
+        try {
             
-            JOptionPane.showMessageDialog(null, "Advertencia: No existe administrador de la aplicación", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            if (controladorUsuario.consultarUsuarioAdmin() == false) {
+
+                JOptionPane.showMessageDialog(null, "Advertencia: No existe administrador de la aplicación", "Advertencia", JOptionPane.WARNING_MESSAGE);
+
+                VentanaRegUsuario registrarAdmin = new VentanaRegUsuario(false);
+                registrarAdmin.asignarEventos();
+                
+                dispose();
+                
+            }
             
-            VentanaRegUsuario registrarAdmin = new VentanaRegUsuario(false);
-            registrarAdmin.asignarEventos();
+        } catch (SQLException ex) {
             
+            JOptionPane.showMessageDialog(this, "No se pudo conectar a la base de datos", "Error fatal", JOptionPane.ERROR_MESSAGE);
             dispose();
+            
         }
         
     }

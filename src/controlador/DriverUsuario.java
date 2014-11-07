@@ -44,7 +44,7 @@ public class DriverUsuario {
     }
     
     
-    public boolean consultarUsuarioAdmin () {
+    public boolean consultarUsuarioAdmin () throws SQLException {
         
         return daoUsuario.consultarUsuario();
         

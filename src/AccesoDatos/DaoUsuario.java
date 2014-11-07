@@ -107,7 +107,7 @@ public class DaoUsuario {
     }
     
     
-    public boolean consultarUsuario () {
+    public boolean consultarUsuario () throws SQLException {
         
         boolean flag_register = false;
         
@@ -125,7 +125,7 @@ public class DaoUsuario {
             
         } catch(SQLException ex) { 
             
-            JOptionPane.showMessageDialog(null, "Error en base de datos. No se puede guardar");
+            throw ex;
         
         } catch (NullPointerException ex) {
             
