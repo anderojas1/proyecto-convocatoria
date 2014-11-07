@@ -10,8 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.util.*;
 import javax.swing.*;
 
 /**
@@ -23,6 +22,7 @@ public class VentanaCrearConvocatoria extends JFrame {
     private JLabel lbtitulo;
     private JLabel lbcodigo;
     private JLabel lbnombre;
+    private JLabel lbdescripcion;
     private JLabel lbfechaInicio;
     private JLabel lbfechaFin;
     private JLabel lbañoInicio;
@@ -34,6 +34,10 @@ public class VentanaCrearConvocatoria extends JFrame {
     
     private JTextField jtfcodigo;
     private JTextField jtfnombre;
+    
+    private JTextArea jtadescripcion;
+    
+    private JScrollPane jspdesplazador;
     
     private JComboBox jcbañoInicio;
     private JComboBox jcbmesInicio;
@@ -63,12 +67,11 @@ public class VentanaCrearConvocatoria extends JFrame {
         agregarComponentes();
         acomodarComponentes();
 
-        setSize(530, 450);
+        setSize(530, 670);
         setResizable(false);
         setLocationRelativeTo(null);
 
         setTitle("Sistema Convocatoria Docente");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
         setDefaultCloseOperation(0);
             
@@ -85,6 +88,7 @@ public class VentanaCrearConvocatoria extends JFrame {
         lbtitulo = new JLabel("Sistema de Convocatoria Docente");
         lbcodigo = new JLabel("Código *");
         lbnombre = new JLabel("Nombre *");
+        lbdescripcion = new JLabel("Descripción *");
         lbfechaInicio = new JLabel("Fecha inicio *");
         lbfechaFin = new JLabel("Fecha fin *");
         lbañoInicio = new JLabel("Año:");
@@ -97,6 +101,10 @@ public class VentanaCrearConvocatoria extends JFrame {
         
         jtfcodigo = new JTextField();
         jtfnombre = new JTextField();
+        
+        jtadescripcion = new JTextArea();
+        
+        jspdesplazador = new JScrollPane(jtadescripcion);
 
         jcbañoInicio = new JComboBox();
         jcbmesInicio = new JComboBox();
@@ -106,6 +114,7 @@ public class VentanaCrearConvocatoria extends JFrame {
         jcbdiaFinal = new JComboBox();
         
         agregarFechas();
+        addFeatures();
     
         jbcrear = new JButton("Crear");
         jbcancelar = new JButton("Cancelar");
@@ -169,9 +178,9 @@ public class VentanaCrearConvocatoria extends JFrame {
         panel.add(lbtitulo);
         panel.add(lbnombre);
         panel.add(lbcodigo);
+        panel.add(lbdescripcion);
         panel.add(lbfechaInicio);
         panel.add(lbfechaFin);
-        panel.add(lbtitulo);
         panel.add(lbañoInicio);
         panel.add(lbmesInicio);
         panel.add(lbdiaInicio);
@@ -192,6 +201,8 @@ public class VentanaCrearConvocatoria extends JFrame {
         panel.add(jbcrear);
         panel.add(jbcancelar);
         
+        panel.add(jspdesplazador);
+        
         panel.setLayout(null);
         
     }
@@ -207,24 +218,27 @@ public class VentanaCrearConvocatoria extends JFrame {
         lbnombre.setBounds(50, 150, 100, 30);
         jtfnombre.setBounds(170, 150, 310, 30);
         
-        lbfechaInicio.setBounds(50, 200, 100, 30);
-        lbañoInicio.setBounds(170, 200, 40, 30);
-        jcbañoInicio.setBounds(210, 200, 70, 30);
-        lbmesInicio.setBounds(290, 200, 40, 30);
-        jcbmesInicio.setBounds(330, 200, 50, 30);
-        lbdiaInicio.setBounds(390, 200, 40, 30);
-        jcbdiaInicio.setBounds(430, 200, 50, 30);
+        lbdescripcion.setBounds(50, 200, 100, 30);
+        jspdesplazador.setBounds(170, 200, 310, 200);
         
-        lbfechaFin.setBounds(50, 250, 100, 30);
-        lbañoFinal.setBounds(170, 250, 40, 30);
-        jcbañoFinal.setBounds(210, 250, 70, 30);
-        lbmesFinal.setBounds(290, 250, 40, 30);
-        jcbmesFinal.setBounds(330, 250, 50, 30);
-        lbdiaFinal.setBounds(390, 250, 40, 30);
-        jcbdiaFinal.setBounds(430, 250, 50, 30);
+        lbfechaInicio.setBounds(50, 420, 100, 30);
+        lbañoInicio.setBounds(170, 420, 40, 30);
+        jcbañoInicio.setBounds(210, 420, 70, 30);
+        lbmesInicio.setBounds(290, 420, 40, 30);
+        jcbmesInicio.setBounds(330, 420, 50, 30);
+        lbdiaInicio.setBounds(390, 420, 40, 30);
+        jcbdiaInicio.setBounds(430, 420, 50, 30);
         
-        jbcancelar.setBounds(270, 330, 100, 30);
-        jbcrear.setBounds(380, 330, 100, 30);
+        lbfechaFin.setBounds(50, 470, 100, 30);
+        lbañoFinal.setBounds(170, 470, 40, 30);
+        jcbañoFinal.setBounds(210, 470, 70, 30);
+        lbmesFinal.setBounds(290, 470, 40, 30);
+        jcbmesFinal.setBounds(330, 470, 50, 30);
+        lbdiaFinal.setBounds(390, 470, 40, 30);
+        jcbdiaFinal.setBounds(430, 470, 50, 30);
+        
+        jbcancelar.setBounds(270, 550, 100, 30);
+        jbcrear.setBounds(380, 550, 100, 30);
         
     }
     
@@ -233,6 +247,14 @@ public class VentanaCrearConvocatoria extends JFrame {
         
         jbcancelar.addMouseListener(driverEvent);
         jbcrear.addMouseListener(driverEvent);
+        
+    }
+    
+    
+    public void addFeatures () {
+        
+        jtadescripcion.setLineWrap(true);
+        jtadescripcion.setWrapStyleWord(true);
         
     }
     
@@ -246,42 +268,33 @@ public class VentanaCrearConvocatoria extends JFrame {
     
     private void verificarFechas(int año, int mes, int dia) throws Exception {
 
-        try {
+        if (mes == 4 || mes == 6 || mes == 9 || mes == 11) {
 
-            if (mes == 4 || mes == 6 || mes == 9 || mes == 11) {
+            if (dia > 30) {
 
-                if (dia > 30) {
+                throw new Exception("Fecha inválida");
+
+            }
+
+        } else if (mes == 2) {
+
+            if (año % 4 == 0) {
+
+                if (dia > 29) {
 
                     throw new Exception("Fecha inválida");
 
                 }
 
-            } else if (mes == 2) {
+            } else {
 
-                if (año % 4 == 0) {
+                if (dia > 28) {
 
-                    if (dia > 29) {
-
-                        throw new Exception("Fecha inválida");
-
-                    }
-
-                } else {
-
-                    if (dia > 28) {
-
-                        throw new Exception("Fecha inválida");
-
-                    }
+                    throw new Exception("Fecha inválida");
 
                 }
 
             }
-
-
-        } catch (Exception ex) {
-
-            System.out.print(ex.getMessage());
 
         }
 
@@ -330,8 +343,19 @@ public class VentanaCrearConvocatoria extends JFrame {
 
                     String fechafin = añoFin + "/" + mesFin + "/" + diaFin;
                     String fechaini = añoIni + "/" + mesIni + "/" + diaIni;
+                    
+                    String descripcion = jtadescripcion.getText();
+                    
+                    if (descripcion.length() <= 1000) {
 
-                    controlaConvocatoria.guardarConvocatoria(campos[1], fechaini, fechafin, "abierta", campos[0], admin.getUsuario());
+                        controlaConvocatoria.guardarConvocatoria(campos[1], descripcion, fechaini, fechafin, "abierta", campos[0], admin.getUsuario());
+                        
+                    } else {
+                        
+                        JOptionPane.showMessageDialog(this, "La descripción no debe exceder los 1000 caracteres", "Error", 
+                                JOptionPane.ERROR_MESSAGE);
+                        
+                    }
 
                 } catch (MyException ex) {
 
