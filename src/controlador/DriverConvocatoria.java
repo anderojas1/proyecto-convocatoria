@@ -26,9 +26,10 @@ public class DriverConvocatoria {
     }
     
     
-    public void guardarConvocatoria (String nombre, String fecha_ini, String fecha_fin, String estado, String codigo, String usuario) {
+    public void guardarConvocatoria (String nombre, String descripcion, String fecha_ini, String fecha_fin, String estado, String codigo, 
+                                        String usuario) {
         
-        Convocatoria crearConv = new Convocatoria(nombre, fecha_ini, fecha_fin, codigo, estado);
+        Convocatoria crearConv = new Convocatoria(nombre, fecha_ini, fecha_fin, codigo, estado, descripcion);
         
         try {
             
