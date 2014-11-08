@@ -45,6 +45,7 @@ public class DriverConvocatoria {
         }
     }
     
+    
     public ArrayList<String> listaConvocatorias(){
         ArrayList<String> convocatorias = new ArrayList();
         try{
@@ -55,6 +56,17 @@ public class DriverConvocatoria {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "No hay convocatorias", JOptionPane.ERROR_MESSAGE);
         }
         return convocatorias;
+    }
+    
+    public String estadoConvo(String codigo){
+        String estado="";
+        try {
+        estado=daoConvocatoria.estado(codigo);
+        } catch (SQLException ex) {
+            
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Consulta erronea", JOptionPane.ERROR_MESSAGE);
+        }
+        return estado;
     }
     
 }

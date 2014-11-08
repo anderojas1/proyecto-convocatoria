@@ -34,7 +34,19 @@ public class DriverAspirante {
         
         }catch (SQLException e){
         
-            JOptionPane.showMessageDialog(null, "Error al guardar el usuario. Por favor intente nuevamente");
+            JOptionPane.showMessageDialog(null, "Error al guardar el aspirante. Por favor intente nuevamente");
+            
+        }
+    }
+    
+    public void guardarAspiranteConvocatoria(String identificacionAsp, String nombreConv){
+         try{
+        daoaspirante.AspiranteConvocatoria(identificacionAsp, nombreConv);
+        JOptionPane.showMessageDialog(null, "Se ha guardado el aspirante en la convocatoria", "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
+        
+        }catch (SQLException e){
+        
+            JOptionPane.showMessageDialog(null, "Error al guardar el aspirante en la convocatoria. Por favor intente nuevamente");
             
         }
     }
@@ -60,6 +72,6 @@ public class DriverAspirante {
       
     }
     
-           
+         
     
 }

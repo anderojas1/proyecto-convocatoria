@@ -49,6 +49,7 @@ public class VentanaRegDatoPersona extends JFrame {
     private JButton btCancelar;
     private JButton btSiguient;
     private JButton btconfirmar;
+    private JButton btaceptar;
     //declaracion paneles
     private JPanel panelPrin;
     //declaracion objetos de control
@@ -311,6 +312,8 @@ public class VentanaRegDatoPersona extends JFrame {
         btconfirmar = new JButton("/");
         btSiguient = new JButton("Siguiente");
         btSiguient.setVisible(false);
+        btaceptar = new JButton("Aceptar");
+        btaceptar.setVisible(false);
 
 
         panelPrin = new JPanel();
@@ -358,6 +361,7 @@ public class VentanaRegDatoPersona extends JFrame {
         panelPrin.add(btSiguient);
         panelPrin.add(btCancelar);
         panelPrin.add(btconfirmar);
+        panelPrin.add(btaceptar);
         
 
         panelPrin.setLayout(null);
@@ -413,6 +417,7 @@ public class VentanaRegDatoPersona extends JFrame {
        
         btSiguient.setBounds(555, 350, 110, 30);
         btCancelar.setBounds(700, 350, 110, 30);
+        btaceptar.setBounds(450, 350, 110, 30);
 
 
 
@@ -431,6 +436,7 @@ public class VentanaRegDatoPersona extends JFrame {
         campoNumCel.addMouseListener(manejador);
         btSiguient.addMouseListener(manejador);
         btconfirmar.addMouseListener(manejador);
+        btaceptar.addMouseListener(manejador);
     }
     
     
@@ -495,7 +501,7 @@ public class VentanaRegDatoPersona extends JFrame {
         campoSApelli.setEditable(false);
         
         comboConvocatorias.setVisible(true);
-        btSiguient.setVisible(true);
+        btaceptar.setVisible(true);
         
         btconfirmar.setVisible(false);
         
@@ -527,9 +533,20 @@ public class VentanaRegDatoPersona extends JFrame {
         }
     }
     
+    public void guardarAspConv(){
+        String convocatoria=comboConvocatorias.getSelectedItem()+"";
+        String partes[] = convocatoria.split(",");
+        String idAsp=campoNumIdent.getText();;
+        String codconv=partes[0];
+        
+        contAspirante.guardarAspiranteConvocatoria(idAsp, codconv);
+    }
+    
     public void guardarInfo(){
         String datos[] = new String[13];
         String datosObligatorios[] = new String[4];
+        
+        
                 
                 try{
                     
@@ -567,8 +584,14 @@ public class VentanaRegDatoPersona extends JFrame {
                     validator.validateEmptyFields(datosObligatorios);
                     validator.validateInteger(datos[4]);
                     
-                    contAspirante.guardarAspirante(datos[0], datos[1], datos[2], datos[3], datos[4], datos[9], datos[5], datos[10], datos[6], datos[11], datos[7], datos[12], datos[8]);
+                  
                     
+                    
+                    
+                    contAspirante.guardarAspirante(datos[0], datos[1], datos[2], datos[3], datos[4], datos[9], datos[5], datos[10], datos[6], datos[11], datos[7], datos[12], datos[8]);
+                    guardarAspConv();
+                 
+                
                 }catch(MyException e){
                     
                     JOptionPane.showMessageDialog(this, e.getMessage(), "ERROR CAMPOS", JOptionPane.ERROR_MESSAGE);
@@ -650,6 +673,13 @@ public class VentanaRegDatoPersona extends JFrame {
             else if(me.getSource() == btconfirmar){
                 validarIdentificación();
                 
+            }
+            
+            else if(me.getSource() == btaceptar){
+ 
+                guardarAspConv();
+       
+                //JOptionPane.showMessageDialog(null, "Se registró el aspirante en la convocatoria");
             }
         
         }

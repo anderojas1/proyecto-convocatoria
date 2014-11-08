@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS USUARIO, ACCESO, CONVOCATORIA CASCADE;
+DROP TABLE IF EXISTS USUARIO, ACCESO, CONVOCATORIA, ASPIRANTECONVOCATORIA CASCADE;
 DROP TABLE IF EXISTS Aspirante;
 
 CREATE TABLE USUARIO (
@@ -39,6 +39,7 @@ CREATE TABLE CONVOCATORIA (
     estado varchar(20) NOT NULL,
     creador varchar(20) NOT NULL,
 
+
     CONSTRAINT creador_fk FOREIGN KEY (creador)
     REFERENCES ACCESO (username)
 
@@ -60,7 +61,23 @@ jornada varchar (50) NOT NULL,
 lugar_residencia varchar (50),
 fecha_nacimiento varchar(10) NOT NULL,
 lugar_nacimiento varchar (50) NOT NULL,
-tel varchar (20)
+tel varchar (20),
+estado bool NOT NULL
+);
+
+CREATE TABLE AspiranteConvocatoria(
+	identificacion varchar (20) NOT NULL,
+	codigo varchar (20) NOT NULL,
+	puntajetotal int NOT NULL,
+	calificado bool NOT NULL,
+
+	CONSTRAINT apirante_convocatoria_pk PRIMARY KEY (identificacion, codigo), 
+
+	CONSTRAINT identificacion_fk FOREIGN KEY (identificacion)
+        REFERENCES Aspirante (identificacion),
+
+	CONSTRAINT codigo_fk FOREIGN KEY (codigo)
+        REFERENCES Convocatoria (codigo)
 );
 
 
@@ -78,6 +95,6 @@ INSERT INTO ACCESO VALUES ('kellys', 'kellys', false , '1');
 INSERT INTO ACCESO VALUES ('andre', 'andre', false , '2');
 INSERT INTO ACCESO VALUES ('jhon', 'jhon', false , '3');
 
-INSERT INTO CONVOCATORIA VALUES('convo-1',  'convocatoria-1', 'la convocatoria-1', '2014/11/28', '2015/11/28', 't', 'creador');
+INSERT INTO CONVOCATORIA VALUES('convo-1',  'convocatoria-1', 'la convocatoria-1', '2014/11/28', '2015/11/28', 'abierta', 'kellys');
 
 

@@ -37,7 +37,8 @@ public class DaoAspirante {
         sqlDatos = "INSERT INTO Aspirante  values ('" + asp.getIdentificacion() + "', '" + asp.getTipo_id() + "', "
                 + "'" + asp.getP_nombre() + "', '" + asp.getS_nombre() + "', '" + asp.getP_apellido() + "', '" + asp.getS_apellido() + "',"
                 + "'" + asp.getMunicipio_trabaja() + "', '" + asp.getSexo() + "', '" + asp.getJornada() + "', "
-                + "'" + asp.getLugar_residencia() + "', '" + asp.getFecha_nacimiento() + "', '" + asp.getLugar_nacimiento() + "', '" + asp.getTel() +"')";
+                + "'" + asp.getLugar_residencia() + "', '" + asp.getFecha_nacimiento() + "', '" + asp.getLugar_nacimiento() + "', '" + asp.getTel() +"',"
+                + asp.getEstado() +" );";
 
 
         try {
@@ -115,6 +116,17 @@ public class DaoAspirante {
 
 
 
+    }
+    
+    public void AspiranteConvocatoria(String idAsp, String codConv) throws SQLException{
+        sqlDatos="INSERT INTO AspiranteConvocatoria VALUES ('"+idAsp+"', '"+codConv+"', 0, false);";
+        
+         try {
+            ejecutarSentencia();
+        } catch (SQLException ex) {
+            throw ex;
+        }
+        
     }
 
     public void ejecutarSentencia() throws SQLException {

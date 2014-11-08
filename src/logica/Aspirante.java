@@ -23,6 +23,7 @@ public class Aspirante {
     private String fecha_nacimiento;
     private String lugar_nacimiento;
     private String tel;
+    private boolean estado;
 
     public Aspirante(String p_nombre, String s_nombre, String p_apellido, String s_apellido, 
                       String identificacion, String tipo_id, String municipio_trabaja, 
@@ -42,6 +43,7 @@ public class Aspirante {
         this.fecha_nacimiento = fecha_nacimiento;
         this.lugar_nacimiento = lugar_nacimiento;
         this.tel = tel;
+        this.estado=true;
     }
 
     public String getFecha_nacimiento() {
@@ -126,6 +128,14 @@ public class Aspirante {
 
     public void setTel(String tel) {
         this.tel = tel;
+    }
+
+    public boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
     
     
