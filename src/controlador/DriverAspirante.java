@@ -42,7 +42,7 @@ public class DriverAspirante {
    
     ///
     
-    public void consultarAspirante(String id){
+    public Aspirante consultarAspirante(String id){
         
           Aspirante asp;       
              
@@ -51,10 +51,13 @@ public class DriverAspirante {
            if(asp != null){
             
                 System.out.println("nombre: "+asp.getP_nombre()+"\nid: "+asp.getIdentificacion());
+                return asp;
            }  
-           
+           else{
+               return null;
+           }
             
-    
+      
     }
     
            

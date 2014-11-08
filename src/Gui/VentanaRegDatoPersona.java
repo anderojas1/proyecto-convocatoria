@@ -1,6 +1,7 @@
 package Gui;
 
 import controlador.*;
+import logica.*;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -32,6 +33,7 @@ public class VentanaRegDatoPersona extends JFrame {
     private JTextField campoSApelli;
     private JTextField campoNumIdent;
     private JTextField campoNumCel;
+    private JTextField campoTipoDoc;
     private JComboBox comboMunicipio;
     private JComboBox comboJorTrabajo;
     private JComboBox comboTipoDoc;
@@ -46,6 +48,7 @@ public class VentanaRegDatoPersona extends JFrame {
     
     private JButton btCancelar;
     private JButton btSiguient;
+    private JButton btconfirmar;
     //declaracion paneles
     private JPanel panelPrin;
     //declaracion objetos de control
@@ -98,20 +101,29 @@ public class VentanaRegDatoPersona extends JFrame {
         lbTitulo = new JLabel("INFORMACION PERSONAL");
 
         campoPNombre = new JTextField("Primer Nombre");
+        campoPNombre.setVisible(false);
         campoSNombre = new JTextField("Segundo Nombre");
+        campoSNombre.setVisible(false);
         campoPApelli = new JTextField("Primer Apellido");
+        campoPApelli.setVisible(false);
         campoSApelli = new JTextField("Segundo Apellido");
+        campoSApelli.setVisible(false);
         campoNumIdent = new JTextField("Numero Documento");
         campoNumCel = new JTextField("(+57) 313-444-33-11");
+        campoNumCel.setVisible(false);
+        campoTipoDoc = new JTextField("");
+        campoTipoDoc.setVisible(false);
 
         comboTipoDoc = new JComboBox();
         comboTipoDoc.addItem("Cedula Ciudadania");
         comboTipoDoc.addItem("Cedula Extranjeria");
+        
 
         comboJorTrabajo = new JComboBox();
         comboJorTrabajo.addItem("Mañana");
         comboJorTrabajo.addItem("Tarde");
         comboJorTrabajo.addItem("Ambas");
+        comboJorTrabajo.setVisible(false);
         
         comboLugNaci = new JComboBox();
         comboLugNaci.addItem("Alcalá");
@@ -156,6 +168,7 @@ public class VentanaRegDatoPersona extends JFrame {
         comboLugNaci.addItem("Yotoco");
         comboLugNaci.addItem("Yumbo");
         comboLugNaci.addItem("Zarzal");
+        comboLugNaci.setVisible(false);
         
         
         comboLugResi = new JComboBox();
@@ -201,6 +214,7 @@ public class VentanaRegDatoPersona extends JFrame {
         comboLugResi.addItem("Yotoco");
         comboLugResi.addItem("Yumbo");
         comboLugResi.addItem("Zarzal");
+        comboLugResi.setVisible(false);
         
         
         comboMunicipio = new JComboBox();
@@ -246,11 +260,14 @@ public class VentanaRegDatoPersona extends JFrame {
         comboMunicipio.addItem("Yotoco");
         comboMunicipio.addItem("Yumbo");
         comboMunicipio.addItem("Zarzal");
+        comboMunicipio.setVisible(false);
         
         
         comboSexo =  new JComboBox();
+        comboSexo.setEditable(false);
         comboSexo.addItem("Hombre");
         comboSexo.addItem("Mujer");
+        comboSexo.setVisible(false);
         
         comboDia = new JComboBox();
         
@@ -259,6 +276,7 @@ public class VentanaRegDatoPersona extends JFrame {
             comboDia.addItem(i);
         
         }
+        comboDia.setVisible(false);
         
         comboMes = new JComboBox();
         
@@ -267,6 +285,7 @@ public class VentanaRegDatoPersona extends JFrame {
             comboMes.addItem(i);
         
         }
+        comboMes.setVisible(false);
         
         comboAnio = new JComboBox();
         
@@ -275,6 +294,7 @@ public class VentanaRegDatoPersona extends JFrame {
             comboAnio.addItem("19"+i);
         
         }
+        comboAnio.setVisible(false);
         
         comboConvocatorias = new JComboBox();
         ArrayList<String> nombreC = new ArrayList();
@@ -284,10 +304,13 @@ public class VentanaRegDatoPersona extends JFrame {
             
         comboConvocatorias.addItem(nombreC.get(i));
         }
+        comboConvocatorias.setVisible(false);
 
               
         btCancelar = new JButton("Cancelar");
+        btconfirmar = new JButton("/");
         btSiguient = new JButton("Siguiente");
+        btSiguient.setVisible(false);
 
 
         panelPrin = new JPanel();
@@ -319,6 +342,7 @@ public class VentanaRegDatoPersona extends JFrame {
         panelPrin.add(campoSApelli);
         panelPrin.add(campoNumCel);
         panelPrin.add(campoNumIdent);
+        panelPrin.add(campoTipoDoc);
 
         panelPrin.add(comboJorTrabajo);
         panelPrin.add(comboLugNaci);
@@ -333,6 +357,7 @@ public class VentanaRegDatoPersona extends JFrame {
 
         panelPrin.add(btSiguient);
         panelPrin.add(btCancelar);
+        panelPrin.add(btconfirmar);
         
 
         panelPrin.setLayout(null);
@@ -345,19 +370,21 @@ public class VentanaRegDatoPersona extends JFrame {
         lbTitulo.setBounds(360, 30, 200, 30);
         
         lbTipoDocumen.setBounds(30, 80, 150, 30);
-        comboTipoDoc.setBounds(230, 80, 200, 25);
+        campoTipoDoc.setBounds(180, 80, 200, 25);
+        comboTipoDoc.setBounds(180, 80, 200, 25);
         lbNumeroDoc.setBounds(30, 110, 150, 30);
-        campoNumIdent.setBounds(230, 110, 200, 25);
+        campoNumIdent.setBounds(180, 110, 200, 25);
+        btconfirmar.setBounds(390, 110, 40, 25);
         lbPrimerNom.setBounds(30, 140, 150, 30);
-        campoPNombre.setBounds(230, 140, 200, 25);
+        campoPNombre.setBounds(180, 140, 200, 25);
         lbSegundoNom.setBounds(30, 170, 150, 30);
-        campoSNombre.setBounds(230, 170, 200, 25);
+        campoSNombre.setBounds(180, 170, 200, 25);
         lbPrimerApell.setBounds(30, 200, 150, 30);
-        campoPApelli.setBounds(230, 200, 200, 25);
+        campoPApelli.setBounds(180, 200, 200, 25);
         lbSegundoApell.setBounds(30, 230, 150, 30);
-        campoSApelli.setBounds(230, 230, 200, 25);
+        campoSApelli.setBounds(180, 230, 200, 25);
         lbSexo.setBounds(30, 260, 150, 30);
-        comboSexo.setBounds(230, 260, 200, 25);
+        comboSexo.setBounds(180, 260, 200, 25);
        //lbNumeroDoc.setBounds(30, 200, 150, 30);
         //campoNumIdent.setBounds(230, 200, 200, 25);
         
@@ -403,12 +430,101 @@ public class VentanaRegDatoPersona extends JFrame {
         campoNumIdent.addMouseListener(manejador);
         campoNumCel.addMouseListener(manejador);
         btSiguient.addMouseListener(manejador);
+        btconfirmar.addMouseListener(manejador);
     }
+    
     
     public void configurarVentana (VentanaPrincipalDigitador digitador) {
         
         ventana_digitador = digitador;
         
+    }
+    
+    public void habilitarEdicion1(){
+ 
+        String tipDoc=comboTipoDoc.getSelectedItem()+"";
+        campoTipoDoc.setText(tipDoc);
+        comboTipoDoc.setVisible(false);
+        campoTipoDoc.setVisible(true);
+        campoTipoDoc.setEditable(false);
+        campoNumIdent.setEditable(false);
+        campoPNombre.setVisible(true);
+        campoSNombre.setVisible(true);
+        campoPApelli.setVisible(true);
+        campoSApelli.setVisible(true);
+        campoNumCel.setVisible(true);
+        campoNumCel.setVisible(true);
+        comboJorTrabajo.setVisible(true);
+        comboLugNaci.setVisible(true);
+        comboLugResi.setVisible(true);
+        comboMunicipio.setVisible(true);
+        comboSexo.setVisible(true);
+        comboDia.setVisible(true);
+        comboMes.setVisible(true);
+        comboAnio.setVisible(true);
+        comboConvocatorias.setVisible(true);
+        btSiguient.setVisible(true);
+        btconfirmar.setVisible(false);
+        
+        
+    }
+    
+    public void habilitarEdicion2(Aspirante aspi){
+ 
+        String tipDoc=comboTipoDoc.getSelectedItem()+"";
+        campoTipoDoc.setText(tipDoc);
+        comboTipoDoc.setVisible(false);
+        campoTipoDoc.setVisible(true);
+        campoTipoDoc.setEditable(false);
+        campoNumIdent.setEditable(false);
+        
+        campoPNombre.setVisible(true);
+        campoPNombre.setText(aspi.getP_nombre());
+        campoPNombre.setEditable(false);
+        
+        campoSNombre.setVisible(true);
+        campoSNombre.setText(aspi.getS_nombre());
+        campoSNombre.setEditable(false);
+        
+        campoPApelli.setVisible(true);
+        campoPApelli.setText(aspi.getP_apellido());
+        campoPApelli.setEditable(false);
+        
+        campoSApelli.setVisible(true);
+        campoSApelli.setText(aspi.getS_apellido());
+        campoSApelli.setEditable(false);
+        
+        comboConvocatorias.setVisible(true);
+        btSiguient.setVisible(true);
+        
+        btconfirmar.setVisible(false);
+        
+        lbNumeroCel.setVisible(false);
+        lbFechaNaci.setVisible(false);
+        lbJorTrabajo.setVisible(false);
+        lbMunicipio.setVisible(false);
+        lbSexo.setVisible(false);
+        lbLugarResiden.setVisible(false);
+        lbLugarNacimiento.setVisible(false);
+        
+    }
+    
+    public void validarIdentificación(){
+        try{
+        String[] id = new String[1];
+        
+        
+        id[0]=campoNumIdent.getText();
+        validator.validateInteger(id[0]);
+        Aspirante asp = contAspirante.consultarAspirante(id[0]);
+        if(asp == null){
+        habilitarEdicion1();}
+        else{
+             habilitarEdicion2(asp);
+        }
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "Error en No de identificación: \nIngrese por favor solo numeros \n"+e.getMessage(), "ERROR IDENTIFICACION", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     public void guardarInfo(){
@@ -439,7 +555,7 @@ public class VentanaRegDatoPersona extends JFrame {
                     datos[8] = campoNumCel.getText();
                     datosObligatorios[3] = datos[8];
                     
-                    datos[9] = (String) comboTipoDoc.getSelectedItem();
+                    datos[9] = (String) campoTipoDoc.getText();
                     
                     datos[10] = (String) comboSexo.getSelectedItem();
                     
@@ -529,7 +645,12 @@ public class VentanaRegDatoPersona extends JFrame {
                 ventana_digitador.setVisible(true);
                 dispose();
 
-            } 
+            }
+            
+            else if(me.getSource() == btconfirmar){
+                validarIdentificación();
+                
+            }
         
         }
 
