@@ -7,6 +7,7 @@ package AccesoDatos;
 
 import java.sql.*;
 import logica.Convocatoria;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,6 +17,7 @@ public class DaoConvocatoria {
     
     private final Fachada fachadaConectar;
     private String sqlDatosConvocatoria;
+    private String sqlNombreConvocatoria;
     
     private Connection conectar;
     private Statement sentencia;
@@ -49,5 +51,26 @@ public class DaoConvocatoria {
 
         conectar.close();
         
+    }
+    
+    public ArrayList<String> nombresConvocatorias() throws SQLException{
+        ArrayList<String> nombres = new ArrayList();
+        String sql_select;
+        sql_select = "SELECT codigo, nombre FROM convocatoria;";
+        
+    
+            conectar = fachadaConectar.conectar();
+            sentencia = conectar.createStatement();
+            registros = sentencia.executeQuery(sql_select);
+            
+            while(registros.next()){
+               nombres.add(registros.getString(1)+"-"+registros.getString(2));
+              
+              //System.out.println("ok");
+            }
+            conectar.close();
+            return nombres;
+         
+  
     }
 }

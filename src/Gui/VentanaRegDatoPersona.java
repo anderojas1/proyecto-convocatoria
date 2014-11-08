@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class VentanaRegDatoPersona extends JFrame {
 
@@ -41,6 +42,7 @@ public class VentanaRegDatoPersona extends JFrame {
     private JComboBox comboDia;
     private JComboBox comboMes;
     private JComboBox comboAnio;
+    private JComboBox comboConvocatorias;
     
     private JButton btCancelar;
     private JButton btSiguient;
@@ -49,6 +51,7 @@ public class VentanaRegDatoPersona extends JFrame {
     //declaracion objetos de control
     private ManejaEventos manejador;
     private DriverAspirante contAspirante;
+    private DriverConvocatoria contConvocatoria;
     private ViewValidator validator;
     
     private VentanaPrincipalDigitador ventana_digitador;
@@ -76,6 +79,7 @@ public class VentanaRegDatoPersona extends JFrame {
     public final void iniciarComponentes() {
 
         contAspirante = new DriverAspirante();
+        contConvocatoria = new DriverConvocatoria();
         validator = new ViewValidator();
 
         lbPrimerNom = new JLabel("Primer Nombre *");
@@ -271,6 +275,15 @@ public class VentanaRegDatoPersona extends JFrame {
             comboAnio.addItem("19"+i);
         
         }
+        
+        comboConvocatorias = new JComboBox();
+        ArrayList<String> nombreC = new ArrayList();
+        nombreC=contConvocatoria.listaConvocatorias();
+        int tam=nombreC.size();
+        for(int i = 0; i < tam; i++){
+            
+        comboConvocatorias.addItem(nombreC.get(i));
+        }
 
               
         btCancelar = new JButton("Cancelar");
@@ -316,9 +329,11 @@ public class VentanaRegDatoPersona extends JFrame {
         panelPrin.add(comboDia);
         panelPrin.add(comboMes);
         panelPrin.add(comboAnio);
+        panelPrin.add(comboConvocatorias);
 
         panelPrin.add(btSiguient);
         panelPrin.add(btCancelar);
+        
 
         panelPrin.setLayout(null);
         panelPrin.setBackground(Color.WHITE);
@@ -362,6 +377,7 @@ public class VentanaRegDatoPersona extends JFrame {
         comboLugResi.setBounds(650, 200, 200, 25);
         lbLugarNacimiento.setBounds(470, 230, 150, 30);
         comboLugNaci.setBounds(650, 230, 200, 25);
+        comboConvocatorias.setBounds(30, 350, 300, 30);
        
         btSiguient.setBounds(555, 350, 110, 30);
         btCancelar.setBounds(700, 350, 110, 30);

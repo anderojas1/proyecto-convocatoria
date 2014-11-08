@@ -9,6 +9,7 @@ import AccesoDatos.DaoConvocatoria;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import logica.Convocatoria;
+import java.util.ArrayList;
 
 /**
  *
@@ -42,6 +43,18 @@ public class DriverConvocatoria {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Registro fallido", JOptionPane.ERROR_MESSAGE);
             
         }
+    }
+    
+    public ArrayList<String> listaConvocatorias(){
+        ArrayList<String> convocatorias = new ArrayList();
+        try{
+        
+        convocatorias = daoConvocatoria.nombresConvocatorias();
+        
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "No hay convocatorias", JOptionPane.ERROR_MESSAGE);
+        }
+        return convocatorias;
     }
     
 }
