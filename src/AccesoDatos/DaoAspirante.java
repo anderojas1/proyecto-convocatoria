@@ -50,7 +50,7 @@ public class DaoAspirante {
 
     public Aspirante getApplicant(String id) {
 
-        sentenciaSql = "SELECT * FROM Aspirante WHERE identificacion = " + id + ";";
+        sentenciaSql = "SELECT * FROM Aspirante WHERE identificacion = '" + id + "';";
 
         String identificacion = "";
         String p_nombre = "";
@@ -65,6 +65,7 @@ public class DaoAspirante {
         String fecha_nacimiento = "";
         String lugar_nacimiento = "";
         String tel = "";
+        Aspirante asp = null;
 
 
 
@@ -80,6 +81,7 @@ public class DaoAspirante {
             while (registros.next()) {
 
                 identificacion = (String) registros.getString(1);
+                System.out.print(identificacion);
                 tipo_id = (String) registros.getString(2);
                 p_nombre = (String) registros.getString(3);
                 s_nombre = (String) registros.getString(4);
@@ -92,11 +94,11 @@ public class DaoAspirante {
                 fecha_nacimiento = (String) registros.getString(11);
                 lugar_nacimiento = (String) registros.getString(12);
                 tel = (String) registros.getString(13);
-
-         }
-            Aspirante asp = new Aspirante(p_nombre, s_nombre, p_apellido, s_apellido, identificacion, tipo_id, municipio_trabaja, sexo, jornada, lugar_residencia, fecha_nacimiento, lugar_nacimiento, tel);
-        
+                asp = new Aspirante(p_nombre, s_nombre, p_apellido, s_apellido, identificacion, tipo_id, municipio_trabaja, sexo, jornada, lugar_residencia, fecha_nacimiento, lugar_nacimiento, tel);
+                  
+            }
             return asp;
+           
         
         } catch (SQLException ex) {
 
