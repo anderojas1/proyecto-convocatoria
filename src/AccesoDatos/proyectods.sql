@@ -78,3 +78,6 @@ INSERT INTO ACCESO VALUES ('kellys', 'kellys', false , '1');
 INSERT INTO ACCESO VALUES ('andre', 'andre', false , '2');
 INSERT INTO ACCESO VALUES ('jhon', 'jhon', false , '3');
 
+INSERT INTO CONVOCATORIA VALUES('convo-1',  'convocatoria-1', 'la convocatoria-1', '2014/11/28', '2015/11/28', 't', 'creador');
+
+
