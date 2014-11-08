@@ -63,8 +63,22 @@ lugar_nacimiento varchar (50) NOT NULL,
 tel varchar (20)
 );
 
+CREATE TABLE DocumentosPrePos(
+
+id_aspirante VARCHAR(20) NOT NULL,
+doctor VARCHAR(100) NOT NULL,
+doctorTic VARCHAR(100) NOT NULL,
+maestria VARCHAR(100) NOT NULL,
+maestriaTic VARCHAR(100) NOT NULL,
+especia VARCHAR(100) NOT NULL,
+especiaTic VARCHAR(100) NOT NULL,
+licen VARCHAR(100) NOT NULL,
 
 
+CONSTRAINT id_aspirante_fk FOREIGN KEY (id_aspirante)
+REFERENCENS Aspirante (identificacion)
+
+);
 
 INSERT INTO USUARIO VALUES ('1', 'Cedula Ciudadania', 'kellys', 'andrea', 'santa', 'gutierrez', true, 'Administrador');
 
