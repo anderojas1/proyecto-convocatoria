@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class VentanaInfoPrePos extends JFrame {
 
@@ -20,7 +21,7 @@ public class VentanaInfoPrePos extends JFrame {
     private JLabel lbMaestriaTic;
     private JLabel lbDoctor;
     private JLabel lbDoctorTic;
-
+      
     private JCheckBox CBLicen;
     private JCheckBox CBEspecia;
     private JCheckBox CBEspeciaTic;
@@ -37,6 +38,14 @@ public class VentanaInfoPrePos extends JFrame {
     private JButton btMaestria;
     private JButton btMaestriaTic;
     
+    private String rtDoctor;
+    private String rtDoctorTic;
+    private String rtMaestria;
+    private String rtMaestriaTic;
+    private String rtEspecia;
+    private String rtEspeciaTic;
+    private String rtLicen;
+    
     private JButton btCancelar;
     private JButton btAtras;
     private JButton btSiguient;
@@ -46,12 +55,20 @@ public class VentanaInfoPrePos extends JFrame {
     private ManejaEventos manejador;
     private ViewValidator validator;
     
+    //identificacion del aspirante
+    private String indentificacion;
+    
+    //chooser
+    private JFileChooser fc;
+    
     
     //Constructor de la Clase 
-    public VentanaInfoPrePos() {
+    public VentanaInfoPrePos(String identificacion) {
 
         super("Informacion Pregrado Posgrado");
 
+        identificacion = identificacion;
+        
         iniciarComponentes();
         agregarComponentes();
         acomodarComponentes();
@@ -86,7 +103,7 @@ public class VentanaInfoPrePos extends JFrame {
         CBMaestria  = new JCheckBox();
         CBMaestriaTic = new JCheckBox();
         
-              
+                        
         btDoctor = new JButton("Examinar");
         btDoctorTic = new JButton("Examinar");
         btEspec = new JButton("Examinar");
@@ -95,6 +112,21 @@ public class VentanaInfoPrePos extends JFrame {
         btMaestria = new JButton("Examinar");
         btMaestriaTic = new JButton("Examinar");
         
+        rtDoctor = "N/A";
+        rtDoctorTic = "N/A";
+        rtMaestria = "N/A";
+        rtMaestriaTic = "N/A";
+        rtEspecia = "N/A";
+        rtEspeciaTic = "N/A";
+        rtLicen = "N/A";
+        
+        btDoctor.setEnabled(false);
+        btDoctorTic.setEnabled(false);
+        btMaestria.setEnabled(false);
+        btMaestriaTic.setEnabled(false);
+        btLicen.setEnabled(false);
+        btEspec.setEnabled(false);
+        btEspecTic.setEnabled(false);
         
         
         btCancelar = new JButton("Cancelar");
@@ -178,15 +210,59 @@ public class VentanaInfoPrePos extends JFrame {
 
 
     }
-    
 
     public void asignarEventos() {
-
+                    
+        CBDoctor.addMouseListener(manejador);
+        CBDoctorTic.addMouseListener(manejador);
+        CBMaestria.addMouseListener(manejador);
+        CBMaestriaTic.addMouseListener(manejador);
+        CBEspecia.addMouseListener(manejador);
+        CBEspeciaTic.addMouseListener(manejador);
+        CBLicen.addMouseListener(manejador);
         btCancelar.addMouseListener(manejador);
         btSiguient.addMouseListener(manejador);
     }
     
-      
+    public boolean validarCargaArchivos(){
+    
+        boolean good = true;
+    
+        if((CBDoctor.isSelected() == true && rtDoctor.equals("N/A")) || 
+           (CBDoctorTic.isSelected() == true && rtDoctorTic.equals("N/A")) ||
+           (CBMaestria.isSelected() == true && rtMaestria.equals("N/A")) ||
+           (CBMaestriaTic.isSelected() == true && rtMaestriaTic.equals("N/A")) ||
+           (CBEspecia.isSelected() == true && rtEspecia.equals("N/A")) ||
+           (CBEspeciaTic.isSelected() == true && rtEspeciaTic.equals("N/A")) ||
+           (CBLicen.isSelected() == true && rtLicen.equals("N/A")) ){
+        
+            good = false;
+        }
+    
+        return good;
+    }
+    
+    public String seleccionador(){
+  
+    fc = new JFileChooser();
+  
+    int returnVal = fc.showOpenDialog(this);
+     
+    if (returnVal == JFileChooser.APPROVE_OPTION) {
+    
+        return fc.getSelectedFile().getAbsolutePath();
+  
+    }
+ 
+    else {
+    
+        return null;
+  
+    }
+
+}
+
+
     
     private class ManejaEventos implements MouseListener{
 
@@ -196,18 +272,162 @@ public class VentanaInfoPrePos extends JFrame {
         public void mouseClicked(MouseEvent me) {
             
             if (me.getSource() == btSiguient) {
-
                 
-                JOptionPane.showMessageDialog(null,"Siguiente modulo");
+                if(validarCargaArchivos() == true ){
                 
+                    JOptionPane.showMessageDialog(null, "Siguiente panel");
+                }else{
                 
-
+                    JOptionPane.showMessageDialog(null, "Se deben de cargar los archivos de respalfo \n de las casillas seleccionadas");
+                }
+                                
             } else if (me.getSource() == btCancelar) {
-                
-                
+                                
                 dispose();
 
-            } 
+            } else if (me.getSource() == btDoctor) {
+                
+               rtDoctor = seleccionador();
+                
+                
+            } else if (me.getSource() == btDoctorTic) {
+                
+                rtDoctorTic = seleccionador();
+
+            }else if (me.getSource() == btEspec) {
+                
+                rtEspecia = seleccionador();
+
+            } else if (me.getSource() == btEspecTic) {
+                
+                rtEspeciaTic = seleccionador();
+
+            } else if (me.getSource() == btLicen) {
+                
+                rtLicen = seleccionador();
+
+            } else if (me.getSource() == btMaestria) {
+                
+                rtMaestria = seleccionador();
+
+            } else if (me.getSource() == btMaestriaTic) {
+                
+                rtMaestriaTic = seleccionador();
+
+            } else if (me.getSource() == CBDoctor) {
+                
+                if(CBDoctor.isSelected() == true) {
+                    
+                    btDoctor.setEnabled(true);
+                    btDoctor.addMouseListener(manejador);
+                    
+                }else{
+                
+                    btDoctor.removeMouseListener(manejador);
+                    btDoctor.setEnabled(false);
+                                    
+                }
+
+            }  else if (me.getSource() == CBDoctor) {
+                
+                if(CBDoctor.isSelected() == true) {
+                    
+                    btDoctor.setEnabled(true);
+                    btDoctor.addMouseListener(manejador);
+                    
+                }else{
+                
+                    btDoctor.removeMouseListener(manejador);
+                    btDoctor.setEnabled(false);
+                                    
+                }
+
+            }else if (me.getSource() == CBDoctorTic) {
+                
+                if(CBDoctorTic.isSelected() == true) {
+                    
+                    btDoctorTic.setEnabled(true);
+                    btDoctorTic.addMouseListener(manejador);
+                    
+                }else{
+                
+                    btDoctorTic.removeMouseListener(manejador);
+                    btDoctorTic.setEnabled(false);
+                                    
+                }
+
+            }else if (me.getSource() == CBMaestria) {
+                
+                if(CBMaestria.isSelected() == true) {
+                    
+                    btMaestria.setEnabled(true);
+                    btMaestria.addMouseListener(manejador);
+                    
+                }else{
+                
+                    btMaestria.removeMouseListener(manejador);
+                    btMaestria.setEnabled(false);
+                                    
+                }
+
+            }else if (me.getSource() == CBMaestriaTic) {
+                
+                if(CBMaestriaTic.isSelected() == true) {
+                    
+                    btMaestriaTic.setEnabled(true);
+                    btMaestriaTic.addMouseListener(manejador);
+                    
+                }else{
+                
+                    btMaestriaTic.removeMouseListener(manejador);
+                    btMaestriaTic.setEnabled(false);
+                                    
+                }
+
+            }else if (me.getSource() == CBEspecia) {
+                
+                if(CBEspecia.isSelected() == true) {
+                    
+                    btEspec.setEnabled(true);
+                    btEspec.addMouseListener(manejador);
+                    
+                }else{
+                
+                    btEspec.removeMouseListener(manejador);
+                    btEspec.setEnabled(false);
+                                    
+                }
+
+            }else if (me.getSource() == CBEspeciaTic) {
+                
+                if(CBEspeciaTic.isSelected() == true) {
+                    
+                    btEspecTic.setEnabled(true);
+                    btEspecTic.addMouseListener(manejador);
+                    
+                }else{
+                
+                    btEspecTic.removeMouseListener(manejador);
+                    btEspecTic.setEnabled(false);
+                                    
+                }
+
+            }else if (me.getSource() == CBLicen) {
+                
+                if(CBLicen.isSelected() == true) {
+                    
+                    btLicen.setEnabled(true);
+                    btLicen.addMouseListener(manejador);
+                    
+                }else{
+                
+                    btLicen.removeMouseListener(manejador);
+                    btLicen.setEnabled(false);
+                                    
+                }
+
+            }
+            
         
         }
 
@@ -232,7 +452,7 @@ public class VentanaInfoPrePos extends JFrame {
 
 public static void main(String args[]){
 
-    VentanaInfoPrePos ven =  new VentanaInfoPrePos();
+    VentanaInfoPrePos ven =  new VentanaInfoPrePos("1234");
 
 }    
     
