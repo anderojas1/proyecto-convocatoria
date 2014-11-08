@@ -343,36 +343,41 @@ public class VentanaRegDatoPersona extends JFrame {
     private void acomodarComponentes() {
 
         lbTitulo.setBounds(360, 30, 200, 30);
-
-        lbPrimerNom.setBounds(30, 80, 150, 30);
-        campoPNombre.setBounds(230, 80, 200, 25);
-        lbSegundoNom.setBounds(30, 110, 150, 30);
-        campoSNombre.setBounds(230, 110, 200, 25);
-        lbPrimerApell.setBounds(30, 140, 150, 30);
-        campoPApelli.setBounds(230, 140, 200, 25);
-        lbSegundoApell.setBounds(30, 170, 150, 30);
-        campoSApelli.setBounds(230, 170, 200, 25);
-      
-        lbNumeroDoc.setBounds(30, 200, 150, 30);
-        campoNumIdent.setBounds(230, 200, 200, 25);
-        lbMunicipio.setBounds(30, 230, 150, 30);
-        comboMunicipio.setBounds(230, 230, 200, 25);
-        lbJorTrabajo.setBounds(30, 260, 150, 30);
-        comboJorTrabajo.setBounds(230, 260, 200, 25);
         
-        lbFechaNaci.setBounds(470, 80, 150, 30);
-        comboDia.setBounds(650, 80, 45, 25);
-        comboMes.setBounds(710, 80, 45, 25);
-        comboAnio.setBounds(770, 80, 80, 25);        
+        lbTipoDocumen.setBounds(30, 80, 150, 30);
+        comboTipoDoc.setBounds(230, 80, 200, 25);
+        lbNumeroDoc.setBounds(30, 110, 150, 30);
+        campoNumIdent.setBounds(230, 110, 200, 25);
+        lbPrimerNom.setBounds(30, 140, 150, 30);
+        campoPNombre.setBounds(230, 140, 200, 25);
+        lbSegundoNom.setBounds(30, 170, 150, 30);
+        campoSNombre.setBounds(230, 170, 200, 25);
+        lbPrimerApell.setBounds(30, 200, 150, 30);
+        campoPApelli.setBounds(230, 200, 200, 25);
+        lbSegundoApell.setBounds(30, 230, 150, 30);
+        campoSApelli.setBounds(230, 230, 200, 25);
+        lbSexo.setBounds(30, 260, 150, 30);
+        comboSexo.setBounds(230, 260, 200, 25);
+       //lbNumeroDoc.setBounds(30, 200, 150, 30);
+        //campoNumIdent.setBounds(230, 200, 200, 25);
+        
+        lbMunicipio.setBounds(470, 80, 150, 30);
+        comboMunicipio.setBounds(650, 80, 200, 25);
+        lbJorTrabajo.setBounds(470, 110, 150, 30);
+        comboJorTrabajo.setBounds(650, 110, 200, 25);
+        
+        lbFechaNaci.setBounds(470, 140, 150, 30);
+        comboDia.setBounds(650, 140, 45, 25);
+        comboMes.setBounds(710, 140, 45, 25);
+        comboAnio.setBounds(770, 140, 80, 25);        
         
         
-        lbNumeroCel.setBounds(470, 110, 150, 30);
-        campoNumCel.setBounds(650, 110, 200, 25);
-        lbTipoDocumen.setBounds(470, 140, 150, 30);
-        comboTipoDoc.setBounds(650, 140, 200, 25);
+        lbNumeroCel.setBounds(470, 170, 150, 30);
+        campoNumCel.setBounds(650, 170, 200, 25);
+        //lbTipoDocumen.setBounds(470, 140, 150, 30);
+        //comboTipoDoc.setBounds(650, 140, 200, 25);
         
-        lbSexo.setBounds(470, 170, 150, 30);
-        comboSexo.setBounds(650, 170, 200, 25);
+        
         lbLugarResiden.setBounds(470, 200, 150, 30);
         comboLugResi.setBounds(650, 200, 200, 25);
         lbLugarNacimiento.setBounds(470, 230, 150, 30);
