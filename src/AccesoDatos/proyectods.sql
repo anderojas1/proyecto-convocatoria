@@ -1,5 +1,4 @@
-DROP TABLE IF EXISTS USUARIO, ACCESO, CONVOCATORIA, ASPIRANTECONVOCATORIA CASCADE;
-DROP TABLE IF EXISTS Aspirante;
+DROP TABLE IF EXISTS USUARIO, ACCESO, CONVOCATORIA, ASPIRANTECONVOCATORIA, ASPIRANTE, IDIOMA CASCADE;
 
 CREATE TABLE USUARIO (
 identificacion varchar(20) NOT NULL PRIMARY KEY,
@@ -110,6 +109,73 @@ CREATE TABLE FormacionTic(
 	REFERENCES Aspirante(identificacion)
 	
 );
+
+CREATE TABLE IDIOMA (
+
+    nombre varchar(30) NOT NULL,
+    codigo_idioma char(2) NOT NULL PRIMARY KEY
+
+);
+
+
+CREATE TABLE ASPIRANTE_HABLA (
+    
+    id_aspirante varchar(20) NOT NULL,
+    cod_idioma char(2) NOT NULL,
+    hablar varchar(15) NOT NULL,
+    leer varchar(15) NOT NULL,
+    escribir varchar(15) NOT NULL,
+
+    CONSTRAINT aspirante_habla PRIMARY KEY (id_aspirante, cod_idioma),
+
+    CONSTRAINT id_aspirante_fk FOREIGN KEY (id_aspirante)
+    REFERENCES ASPIRANTE (identificacion),
+
+    CONSTRAINT cod_idioma_fk FOREIGN KEY (cod_idioma)
+    REFERENCES IDIOMA (codigo_idioma)
+
+);
+    
+
+INSERT INTO IDIOMA VALUES ('Afrikaans', 'AF'),
+('Albanés', 'SQ'),
+('Alemán', 'DE'),
+('Árabe', 'AR'),
+('Bosnio', 'BS'),
+('Búlgaro', 'BG'),
+('Catalán','CA'),
+('Checo', 'CS'),
+('Chino', 'ZH'),
+('Coreano', 'KO'),
+('Croata', 'HR'),
+('Danés', 'DA'),
+('Español', 'ES'),
+('Esperanto','EO'),
+('Finlandés', 'FI'),
+('Francés', 'FR'),
+('Griego', 'EL'),
+('Hebreo','HE'),
+('Hindi','HI'),
+('Holandés','NL'),
+('Húngaro','HU'),
+('Indonesio','ID'),
+('Inglés','EN'),
+('Irlandés','GA'),
+('Islandés','IS'),
+('Italiano','IT'),
+('Japonés','JA'),
+('Latín','LA'),
+('Noruego','NO'),
+('Polaco','PL'),
+('Portugués','PT'),
+('Rumano','RO'),
+('Ruso','RU'),
+('Serbio','SR'),
+('Suajili','SW'),
+('Sueco','TL'),
+('Tailandés','TH'),
+('Turco','TR'),
+('Ucraniano','UK');
 
 INSERT INTO USUARIO VALUES ('1', 'Cedula Ciudadania', 'kellys', 'andrea', 'santa', 'gutierrez', true, 'Administrador');
 
