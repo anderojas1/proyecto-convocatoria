@@ -93,8 +93,22 @@ licen VARCHAR(100) NOT NULL,
 
 
 CONSTRAINT id_aspirante_fk FOREIGN KEY (id_aspirante)
-REFERENCENS Aspirante (identificacion)
+REFERENCES Aspirante (identificacion)
 
+);
+
+CREATE TABLE FormacionTic(
+	identificacion VARCHAR(20) NOT NULL,
+	titulo VARCHAR(80) NOT NULL,
+	consecutivo int NOT NULL,
+	soporte VARCHAR(100),
+	puntaje int,
+
+	CONSTRAINT formacionTic_fk PRIMARY KEY(identificacion, titulo, consecutivo),
+
+	CONSTRAINT id_aspirante_fk FOREIGN KEY(identificacion)
+	REFERENCES Aspirante(identificacion)
+	
 );
 
 INSERT INTO USUARIO VALUES ('1', 'Cedula Ciudadania', 'kellys', 'andrea', 'santa', 'gutierrez', true, 'Administrador');

@@ -19,7 +19,7 @@ import java.awt.event.ActionListener;
     private JPanel inicioSupervisor;
     private JLabel encabezado;
     private JButton informe, genero, ciudad, jornada, mejores, consultar, total, salir;
-    final ManejaEvento driverEventos;
+    private ManejaEvento driverEventos;
 
     private String usuario;
     
