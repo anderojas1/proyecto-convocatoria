@@ -11,35 +11,77 @@ package logica;
  */
 public class Idioma {
     
-    private String idioma;
-    private int dominio;
+    private final String nombre;
+    private final String codigo;
+    private String hablar;
+    private String leer;
+    private String escribir;
     
     
-    public Idioma (String languaje, int ability) {
+    public Idioma (String code, String languaje, String cal_hablar, String cal_leer, String cal_escribir) {
         
-        idioma = languaje;
-        dominio = ability;
+        nombre = languaje;
+        codigo = code;
+        hablar = cal_hablar;
+        leer = cal_leer;
+        escribir = cal_escribir;
+        
+    }   
+    
+    
+    public void setEscribir (String calificacion) {
+        
+        escribir = calificacion;
         
     }
     
     
-    public void setDominio (int ability) {
+    public void setLeer (String calificacion) {
         
-        dominio = ability;
-        
-    }
-    
-    
-    public String getIdioma () {
-        
-        return idioma;
+        leer = calificacion;
         
     }
     
     
-    public int getDominio () {
+    public void setHablar (String calificacion) {
         
-        return dominio;
+        hablar = calificacion;
+        
+    }
+    
+    
+    public String getNombre () {
+        
+        return nombre;
+        
+    }
+    
+    
+    public String getEscribir () {
+        
+        return escribir;
+        
+    }
+    
+    
+    public String getLeer () {
+        
+        return leer;
+        
+    }
+    
+    
+    public String getHablar () {
+        
+        return hablar;
+        
+    }
+    
+    
+    public String getCodigo () {
+        
+        return codigo;
+        
     }
     
 }
