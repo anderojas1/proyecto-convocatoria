@@ -1,4 +1,5 @@
-DROP TABLE IF EXISTS USUARIO, ACCESO, CONVOCATORIA, ASPIRANTECONVOCATORIA, ASPIRANTE, IDIOMA CASCADE;
+DROP TABLE IF EXISTS USUARIO, ACCESO, CONVOCATORIA, ASPIRANTECONVOCATORIA, ASPIRANTE, IDIOMA, CONOCIMIENTOS_ESPECIFICOS;
+
 
 CREATE TABLE USUARIO (
 identificacion varchar(20) NOT NULL PRIMARY KEY,
@@ -135,6 +136,27 @@ CREATE TABLE ASPIRANTE_HABLA (
     REFERENCES IDIOMA (codigo_idioma)
 
 );
+
+CREATE TABLE CONOCIMIENTOS_ESPECIFICOS (
+
+	id_aspirante varchar(20) NOT NULL,
+	herram_Ofimatic varchar(10) NOT NULL,
+    	herram_Web2 varchar(10) NOT NULL,
+    	herram_edic_multi varchar(10) NOT NULL,
+    	exp_des_cont_edu_dig varchar(10) NOT NULL,
+    	exp_des_lib_dig varchar(10) NOT NULL,
+    	exp_proc_elearning varchar(10) NOT NULL, 
+    	exp_gest_proy_TIC varchar(10) NOT NULL,
+   	exp_des_elemnts_eval_comp varchar(10) NOT NULL,
+	puntuacion real NOT NULL,
+
+	CONSTRAINT cono_esp_pk PRIMARY KEY (id_aspirante),
+
+	CONSTRAINT con_esp_fk FOREIGN KEY (id_aspirante)
+	REFERENCES ASPIRANTE (identificacion)
+	ON UPDATE CASCADE ON DELETE NO ACTION
+
+);
     
 
 INSERT INTO IDIOMA VALUES ('Afrikaans', 'AF'),
@@ -176,6 +198,8 @@ INSERT INTO IDIOMA VALUES ('Afrikaans', 'AF'),
 ('Tailandés','TH'),
 ('Turco','TR'),
 ('Ucraniano','UK');
+
+
 
 INSERT INTO USUARIO VALUES ('1', 'Cedula Ciudadania', 'kellys', 'andrea', 'santa', 'gutierrez', true, 'Administrador');
 
