@@ -222,22 +222,151 @@ public class VentanaInfoPrePos extends JFrame {
 
     }
     
-    public boolean validarCargaArchivos(){
-    
-        boolean good = true;
-    
-        if((CBDoctor.isSelected() == true && rtDoctor.equals("N/A")) || 
-           (CBDoctorTic.isSelected() == true && rtDoctorTic.equals("N/A")) ||
-           (CBMaestria.isSelected() == true && rtMaestria.equals("N/A")) ||
-           (CBMaestriaTic.isSelected() == true && rtMaestriaTic.equals("N/A")) ||
-           (CBEspecia.isSelected() == true && rtEspecia.equals("N/A")) ||
-           (CBEspeciaTic.isSelected() == true && rtEspeciaTic.equals("N/A")) ||
-           (CBLicen.isSelected() == true && rtLicen.equals("N/A")) ){
+    public boolean validarCargaArchivos(int seleccion)
+    {
+        boolean good = false;
         
-            good = false;
+        switch(seleccion)
+        {
+            case 1:
+            {
+                if((rtDoctor == null) || (rtDoctor.equals("N/A")))
+                {
+                    good = false;
+                }
+                
+                else
+                {
+                    good = true;
+                }
+            };break;
+                
+            case 2:
+            {
+                if((rtDoctorTic == null) || (rtDoctorTic.equals("N/A")))
+                {
+                    good = false;
+                }
+                
+                else
+                {
+                    good = true;
+                }
+            };break;
+                
+            case 3:
+            {
+                if((rtMaestria == null) || (rtMaestria.equals("N/A")))
+                {
+                    good = false;
+                }
+                
+                else
+                {
+                    good = true;
+                }
+            };break;
+                
+            case 4:
+            {
+                if((rtMaestriaTic == null) || (rtMaestriaTic.equals("N/A")))
+                {
+                    good = false;
+                }
+                
+                else
+                {
+                    good = true;
+                }
+            };break;
+                
+            case 5:
+            {
+                if((rtEspecia == null) || (rtEspecia.equals("N/A")))
+                {
+                    good = false;
+                }
+                
+                else
+                {
+                    good = true;
+                }
+                
+            };break;
+                
+            case 6:
+            {
+                if((rtEspeciaTic == null) || (rtEspeciaTic.equals("N/A")))
+                {
+                    good = false;
+                }
+                
+                else
+                {
+                    good = true;
+                }
+            };break;
+                
+            case 7:
+            {
+                if((rtLicen == null) || (rtLicen.equals("N/A")))
+                {
+                    good = false;
+                }
+                
+                else
+                {
+                    good = true;
+                }
+            };break;
+                
+           default:
+           {
+               good = false;
+           };break;
         }
-    
+        
         return good;
+    }
+    
+    public int checkSeleccion()
+    {
+        if (CBDoctor.isSelected() == true) 
+        {
+             return 1;
+        }
+        
+        else if (CBDoctorTic.isSelected() == true) 
+        {
+             return 2;
+        }
+        
+        else if (CBMaestria.isSelected() == true) 
+        {
+             return 3;
+        }
+        
+        else if (CBMaestriaTic.isSelected() == true) 
+        {
+             return 4;
+        }
+        
+        else if (CBEspecia.isSelected() == true) 
+        {
+             return 5;
+        }
+        
+        else if (CBEspeciaTic.isSelected() == true) 
+        {
+             return 6;
+        }
+        
+        else if (CBLicen.isSelected() == true) 
+        {
+             return 7;
+        }
+        
+        return 0;
     }
     
     public String seleccionador(){
@@ -271,9 +400,10 @@ public class VentanaInfoPrePos extends JFrame {
             
             if (me.getSource() == btAceptar) {
                 
-                if(validarCargaArchivos() == true ){
+                if(validarCargaArchivos(checkSeleccion()) == true ){
                 
                     JOptionPane.showMessageDialog(null, "regreso a la gui");
+              
                 }else{
                 
                     JOptionPane.showMessageDialog(null, "Se deben de cargar los archivos de respalfo \n de las casillas seleccionadas");
@@ -285,8 +415,7 @@ public class VentanaInfoPrePos extends JFrame {
 
             } else if (me.getSource() == btDoctor) {
                 
-               rtDoctor = seleccionador();
-                
+               rtDoctor = seleccionador(); 
                 
             } else if (me.getSource() == btDoctorTic) {
                 
