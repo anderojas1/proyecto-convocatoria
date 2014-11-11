@@ -163,6 +163,13 @@ public class VentanaOpcionesModulo extends JFrame{
          idiomas.configurarVentana(this);
          setVisible(false);
      }
+     
+     public void ingresarPrePos(){//Ventana siguiente
+         VentanaInfoPrePos prePos = new VentanaInfoPrePos(tipo, usuario);
+         prePos.asignarEventos();
+         prePos.configurarVentana(this);
+         setVisible(false);
+     }
     
     private class ManejaEventos implements ActionListener{
 
