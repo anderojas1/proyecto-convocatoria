@@ -18,14 +18,15 @@ public class VentanaFormacionTic extends JFrame{
     private JComboBox comboTitulos;
     private JTextField campoRuta;
     private JFileChooser chooserSoporte;
-    private JButton btAgregar, btSiguiente, btExaminar;
+    private JButton btAgregar, btCancelar, btExaminar;
     private ManejaEvento driverEventos;
     private DriverFormacionTic contFormacionTic;
     private String id_aspirante;
+    private VentanaOpcionesModulo ventana_opcionesM;
     
     int item1, item2, item3, item4;
     
-    public VentanaFormacionTic(String identificacion_aspirante){
+    public VentanaFormacionTic(int tipo, String identificacion_aspirante){
          
         super("VENTANA FORMACIÓN EN TIC");
         
@@ -49,7 +50,7 @@ public class VentanaFormacionTic extends JFrame{
         iniciarComponentes();
         agregarComponentes();
         acomodarComponentes();
-        agregarEventos();
+        //agregarEventos();
         
         cont.add(principal);
         setVisible(true);
@@ -73,7 +74,7 @@ public class VentanaFormacionTic extends JFrame{
         chooserSoporte = new JFileChooser();
         btExaminar = new JButton("Examinar");
         btAgregar = new JButton("Agregar");
-        btSiguiente = new JButton("Siguiente");
+        btCancelar = new JButton("Cancelar");
         
     }
     
@@ -86,7 +87,7 @@ public class VentanaFormacionTic extends JFrame{
         
         principal.add(btExaminar);
         principal.add(btAgregar);
-        principal.add(btSiguiente);
+        principal.add(btCancelar);
         principal.add(campoRuta);
         
         principal.setLayout(null);
@@ -102,13 +103,20 @@ public class VentanaFormacionTic extends JFrame{
         campoRuta.setEditable(false);
         btExaminar.setBounds(430, 140, 100, 25);
         btAgregar.setBounds(320, 190, 100, 25);
-        btSiguiente.setBounds(430, 190, 100, 25);
+        btCancelar.setBounds(430, 190, 100, 25);
         
     }
     
     public void agregarEventos(){
         btExaminar.addActionListener(driverEventos);
         btAgregar.addActionListener(driverEventos);
+        btCancelar.addActionListener(driverEventos);
+    }
+    
+    public void configurarVentana (VentanaOpcionesModulo opcionesMod) {//ventana anterior
+        
+        ventana_opcionesM = opcionesMod;
+        
     }
     
     public int puntaje(){
@@ -133,7 +141,9 @@ public class VentanaFormacionTic extends JFrame{
     }
     
     public void guardar(){
+        
         String titulo, ruta;
+        String link_soporte;
         int puntos;
         if(campoRuta.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Debe Seleccionar un archivo de soporte");
@@ -141,9 +151,14 @@ public class VentanaFormacionTic extends JFrame{
             puntos = puntaje();
             titulo = comboTitulos.getSelectedItem().toString();
             ruta = campoRuta.getText();
+            link_soporte = contFormacionTic.consultarSoporte(id_aspirante, titulo);
             
+            if(link_soporte.equals(ruta)){
+                JOptionPane.showMessageDialog(null, "Debe Seleccionar un archivo de soporte diferente");
+            }
+            else{
             contFormacionTic.guardar(id_aspirante, titulo, item1, ruta, puntos);
-            item1++;
+            item1++;}
         }
         
     }
@@ -182,13 +197,17 @@ public class VentanaFormacionTic extends JFrame{
                 guardar();
                 //btSiguiente.setVisible(false);
             }
+            if(ae.getSource() == btCancelar){
+                ventana_opcionesM.setVisible(true);
+                dispose();
+            }
         }
          
      }
     
     public static void main(String args[]){
 
-    VentanaFormacionTic ven =  new VentanaFormacionTic("1234");
+    VentanaFormacionTic ven =  new VentanaFormacionTic(0, "1234");
 
 }  
 }

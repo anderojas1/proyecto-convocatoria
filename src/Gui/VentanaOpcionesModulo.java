@@ -1,0 +1,183 @@
+
+package Gui;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class VentanaOpcionesModulo extends JFrame{
+    
+    private Container cont;
+    private JPanel panelPrin;
+    private JLabel lbEncabezadoAgregar,lbEncabezadoConsultar, lbEncabezadoEditar, lbEncabezadoValidar, lbExpFormador;
+    private JButton btForPre, btFormTic, btCono, btIdiomas, btFormadorEst, btFormadorPro, btFormadorForm, btCancelar;
+    private ManejaEventos manejador;
+    private int tipo;
+    private String usuario;
+    private VentanaRegDatoPersona ventanaDatosPersonales;
+    
+    public VentanaOpcionesModulo(int tipo, String usuario){
+        super("Aspectos hojas de vida");
+        
+        this.tipo = tipo;
+        this.usuario = usuario;
+        
+        iniciarComponentes();
+        agregarComponentes();
+        acomodarComponentes();
+        //asignarEventos();
+        
+
+        getContentPane().add(panelPrin);
+        setSize(new Dimension(400, 500));
+        setResizable(false);
+        setLocationRelativeTo(null);
+        setVisible(true);
+        setDefaultCloseOperation(0);
+    }
+    
+    public void iniciarComponentes(){
+        
+        panelPrin = new JPanel();
+        
+        lbExpFormador = new JLabel("Experiencia como formador en TIC");
+        btForPre = new JButton("Formacion: Pregrado - Postgrado");
+        btFormTic = new JButton ("Formacion en TIC");
+        btCono = new JButton("Conocimiento especifico");
+        btIdiomas = new JButton("Idiomas");
+        btFormadorEst = new JButton("Formador a estudiantes" );
+        btFormadorPro = new JButton("Formador a profesores");
+        btFormadorForm = new JButton("Formador de formadores");
+        btCancelar = new JButton("Cancelar");
+        manejador = new ManejaEventos();
+        
+        panelPrin.setLayout(null);
+        panelPrin.setBackground(Color.WHITE);
+        
+        switch(tipo){
+            case 0:
+                lbEncabezadoAgregar = new JLabel("Agregar Modulos Hoja de Vida");
+               break;
+            case 1:
+                lbEncabezadoConsultar = new JLabel("consultar Modulos Hoja de Vida");
+               break;
+            case 2:
+                lbEncabezadoEditar = new JLabel("Editar Modulos Hoja de Vida");
+               break;
+            case 3:
+                lbEncabezadoValidar = new JLabel("Validar Modulos Hoja de Vida");
+               break;
+        }
+        
+    }
+    
+    public void agregarComponentes(){
+        
+        panelPrin.add(lbExpFormador);
+        panelPrin.add(btForPre);
+        panelPrin.add(btFormTic);
+        panelPrin.add(btCono);
+        panelPrin.add(btIdiomas);
+        panelPrin.add(btFormadorEst);
+        panelPrin.add(btFormadorPro);
+        panelPrin.add(btFormadorForm); 
+        panelPrin.add(btCancelar);
+        
+        switch(tipo){
+            case 0:
+                panelPrin.add(lbEncabezadoAgregar);
+               break;
+            case 1:
+                panelPrin.add(lbEncabezadoConsultar);
+               break;
+            case 2:
+                panelPrin.add(lbEncabezadoEditar);
+                lbEncabezadoEditar = new JLabel("Editar Modulos Hoja de Vida");
+               break;
+            case 3:
+                panelPrin.add(lbEncabezadoValidar);
+                lbEncabezadoValidar = new JLabel("Validar Modulos Hoja de Vida");
+               break;
+        }
+        
+    }
+    
+    public void acomodarComponentes(){
+            
+        btForPre.setBounds(70, 80, 250, 25);
+        btFormTic.setBounds(70, 110, 250, 25);
+        btCono.setBounds(70, 140, 250, 25);
+        btIdiomas.setBounds(70, 170, 250, 25);
+        lbExpFormador.setBounds(70, 220, 250, 20);
+        btFormadorEst.setBounds(70, 250, 250, 25);
+        btFormadorPro.setBounds(70, 280, 250, 25);
+        btFormadorForm.setBounds(70, 310, 250, 25);
+        btCancelar.setBounds(100, 370, 200, 25);
+        
+        switch(tipo){
+            case 0:
+                lbEncabezadoAgregar.setBounds(90, 10, 250, 20);
+               break;
+            case 1:
+                lbEncabezadoConsultar.setBounds(90, 10, 250, 20);
+               break;
+            case 2:
+                lbEncabezadoEditar.setBounds(90, 10, 250, 20);
+               break;
+            case 3:
+                lbEncabezadoValidar.setBounds(90, 10, 250, 20);
+               break;
+        }
+        
+    }
+    
+    
+    public void asignarEventos(){
+        btForPre.addActionListener(manejador);
+        btFormTic.addActionListener(manejador);
+        btCono.addActionListener(manejador);
+        btIdiomas.addActionListener(manejador);
+        btFormadorEst.addActionListener(manejador);
+        btFormadorPro.addActionListener(manejador);
+        btFormadorForm.addActionListener(manejador);
+        btCancelar.addActionListener(manejador);
+    }
+    
+    public void configurarVentana (VentanaRegDatoPersona personal) {//ventana anterior
+        
+        ventanaDatosPersonales = personal;
+        
+    }
+    
+    public void ingresarFormacionTIC(){//Ventana siguiente
+         VentanaFormacionTic formacionTic = new VentanaFormacionTic(tipo, usuario);
+         formacionTic.agregarEventos();
+         formacionTic.configurarVentana(this);
+         setVisible(false);
+     }
+    
+    private class ManejaEventos implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            
+            if(e.getSource() == btCancelar){
+            ventanaDatosPersonales.setVisible(true);
+            ventanaDatosPersonales.validarIdentificación();
+            dispose();
+            }
+            if(e.getSource() == btFormTic){
+                ingresarFormacionTIC();
+            }
+        }
+        
+    }
+    
+       public static void main(String args[]){
+
+        VentanaOpcionesModulo ven =  new VentanaOpcionesModulo(0, "1234");
+
+} 
+            
+}

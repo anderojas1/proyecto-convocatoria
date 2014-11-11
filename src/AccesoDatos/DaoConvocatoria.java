@@ -55,7 +55,7 @@ public class DaoConvocatoria {
     
     public ArrayList<String> nombresConvocatorias() throws SQLException{
         ArrayList<String> nombres = new ArrayList();
-        sqlNombreConvocatoria = "SELECT codigo, nombre FROM convocatoria WHERE estado = 'abierta';";
+        sqlNombreConvocatoria = "SELECT codigo, nombre FROM CONVOCATORIA WHERE estado = 'abierta';";
         
     
             conectar = fachadaConectar.conectar();
@@ -65,7 +65,7 @@ public class DaoConvocatoria {
             while(registros.next()){
                nombres.add(registros.getString(1)+","+registros.getString(2));
               
-              //System.out.println("ok");
+              System.out.println(registros.getString(1));
             }
             conectar.close();
             return nombres;

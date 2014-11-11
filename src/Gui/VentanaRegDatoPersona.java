@@ -27,6 +27,7 @@ public class VentanaRegDatoPersona extends JFrame {
     private JLabel lbLugarResiden;
     private JLabel lbLugarNacimiento;
     private JLabel lbTitulo;
+    private JLabel lbConvocatoria;
     private JTextField campoPNombre;
     private JTextField campoSNombre;
     private JTextField campoPApelli;
@@ -47,7 +48,6 @@ public class VentanaRegDatoPersona extends JFrame {
     private JComboBox comboConvocatorias;
     
     private JButton btCancelar;
-    private JButton btSiguient;
     private JButton btconfirmar;
     private JButton btaceptar;
     //declaracion paneles
@@ -59,12 +59,16 @@ public class VentanaRegDatoPersona extends JFrame {
     private ViewValidator validator;
     
     private VentanaPrincipalDigitador ventana_digitador;
+    
+    private boolean validarAsp= false;
+    private int tipo;
 
     //Constructor de la Clase 
-    public VentanaRegDatoPersona() {
+    public VentanaRegDatoPersona(int tipo) {
 
         super("Registro Nuevo Aspirante");
-
+        
+        this.tipo = tipo;
         iniciarComponentes();
         agregarComponentes();
         acomodarComponentes();
@@ -100,6 +104,7 @@ public class VentanaRegDatoPersona extends JFrame {
         lbLugarResiden = new JLabel("Lugar Residencia*");
         lbLugarNacimiento = new JLabel("Lugar Nacimiento*");
         lbTitulo = new JLabel("INFORMACION PERSONAL");
+        lbConvocatoria = new JLabel("Seleccione la convocatoria");
 
         campoPNombre = new JTextField("Primer Nombre");
         campoPNombre.setVisible(false);
@@ -310,8 +315,6 @@ public class VentanaRegDatoPersona extends JFrame {
               
         btCancelar = new JButton("Cancelar");
         btconfirmar = new JButton("/");
-        btSiguient = new JButton("Siguiente");
-        btSiguient.setVisible(false);
         btaceptar = new JButton("Aceptar");
         btaceptar.setVisible(false);
 
@@ -338,6 +341,7 @@ public class VentanaRegDatoPersona extends JFrame {
         panelPrin.add(lbLugarNacimiento);
         panelPrin.add(lbLugarResiden);
         panelPrin.add(lbTitulo);
+        panelPrin.add(lbConvocatoria);
 
         panelPrin.add(campoPNombre);
         panelPrin.add(campoSNombre);
@@ -358,7 +362,6 @@ public class VentanaRegDatoPersona extends JFrame {
         panelPrin.add(comboAnio);
         panelPrin.add(comboConvocatorias);
 
-        panelPrin.add(btSiguient);
         panelPrin.add(btCancelar);
         panelPrin.add(btconfirmar);
         panelPrin.add(btaceptar);
@@ -413,11 +416,11 @@ public class VentanaRegDatoPersona extends JFrame {
         comboLugResi.setBounds(650, 200, 200, 25);
         lbLugarNacimiento.setBounds(470, 230, 150, 30);
         comboLugNaci.setBounds(650, 230, 200, 25);
+        lbConvocatoria.setBounds(30, 320, 100, 20);
         comboConvocatorias.setBounds(30, 350, 300, 30);
        
-        btSiguient.setBounds(555, 350, 110, 30);
         btCancelar.setBounds(700, 350, 110, 30);
-        btaceptar.setBounds(450, 350, 110, 30);
+        btaceptar.setBounds(580, 350, 110, 30);
 
 
 
@@ -434,17 +437,24 @@ public class VentanaRegDatoPersona extends JFrame {
         campoSApelli.addMouseListener(manejador);
         campoNumIdent.addMouseListener(manejador);
         campoNumCel.addMouseListener(manejador);
-        btSiguient.addMouseListener(manejador);
         btconfirmar.addMouseListener(manejador);
         btaceptar.addMouseListener(manejador);
     }
     
     
-    public void configurarVentana (VentanaPrincipalDigitador digitador) {
+    public void configurarVentana (VentanaPrincipalDigitador digitador) {//ventana anterior
         
         ventana_digitador = digitador;
         
     }
+    
+    public void ingresarModulos(){//Ventana siguiente
+         String idAsp = campoNumIdent.getText();
+         VentanaOpcionesModulo opciones = new VentanaOpcionesModulo(tipo, idAsp);
+         opciones.asignarEventos();
+         opciones.configurarVentana(this);
+         setVisible(false);
+     }
     
     public void habilitarEdicion1(){
  
@@ -469,8 +479,8 @@ public class VentanaRegDatoPersona extends JFrame {
         comboMes.setVisible(true);
         comboAnio.setVisible(true);
         comboConvocatorias.setVisible(true);
-        btSiguient.setVisible(true);
         btconfirmar.setVisible(false);
+        btaceptar.setVisible(true);
         
         
     }
@@ -512,10 +522,21 @@ public class VentanaRegDatoPersona extends JFrame {
         lbSexo.setVisible(false);
         lbLugarResiden.setVisible(false);
         lbLugarNacimiento.setVisible(false);
+       
+        comboMunicipio.setVisible(false);
+        comboJorTrabajo.setVisible(false);
+        comboTipoDoc.setVisible(false);
+        comboSexo.setVisible(false);
+        comboLugResi.setVisible(false);
+        comboLugNaci.setVisible(false);
+        comboDia.setVisible(false);
+        comboMes.setVisible(false);
+        comboAnio.setVisible(false);
         
     }
     
     public void validarIdentificación(){
+        
         try{
         String[] id = new String[1];
         
@@ -524,13 +545,17 @@ public class VentanaRegDatoPersona extends JFrame {
         validator.validateInteger(id[0]);
         Aspirante asp = contAspirante.consultarAspirante(id[0]);
         if(asp == null){
-        habilitarEdicion1();}
+        habilitarEdicion1();
+        validarAsp = false;}
         else{
+             validarAsp = true;
              habilitarEdicion2(asp);
         }
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(this, "Error en No de identificación: \nIngrese por favor solo numeros \n"+e.getMessage(), "ERROR IDENTIFICACION", JOptionPane.ERROR_MESSAGE);
         }
+        
+        
     }
     
     public void guardarAspConv(){
@@ -656,13 +681,6 @@ public class VentanaRegDatoPersona extends JFrame {
                 
                 }
                 
-            }else if (me.getSource() == btSiguient) {
-
-                
-                guardarInfo();
-                
-                
-
             } else if (me.getSource() == btCancelar) {
                 
                 ventana_digitador.setVisible(true);
@@ -676,10 +694,13 @@ public class VentanaRegDatoPersona extends JFrame {
             }
             
             else if(me.getSource() == btaceptar){
- 
-                guardarAspConv();
-       
-                //JOptionPane.showMessageDialog(null, "Se registró el aspirante en la convocatoria");
+                 if(validarAsp){
+                  guardarAspConv();
+                 }else{
+                     guardarInfo();
+                 }
+                 ingresarModulos();
+                
             }
         
         }
@@ -712,4 +733,6 @@ public class VentanaRegDatoPersona extends JFrame {
     }
 
     
+    
 }
+

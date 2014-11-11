@@ -83,7 +83,7 @@ public class VentanaPrincipalDigitador extends JFrame{
      }
      
      public void ingresarAspirante(){
-         VentanaRegDatoPersona registrar = new VentanaRegDatoPersona();
+         VentanaRegDatoPersona registrar = new VentanaRegDatoPersona(0);
          registrar.asignarEventos();
          registrar.configurarVentana(this);
          setVisible(false);

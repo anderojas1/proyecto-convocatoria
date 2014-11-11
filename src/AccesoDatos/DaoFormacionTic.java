@@ -47,4 +47,36 @@ public class DaoFormacionTic {
         }
         
     }
+     
+     public String consultarSoporte(String identificacion, String titulo) throws SQLException{
+         String soporte="";
+         
+         sentenciaSql = "SELECT soporte FROM FormacionTic WHERE identificacion ='"+identificacion+"' AND titulo ='"+
+                        titulo+"';";
+         
+         try{
+            
+            conectar= fachadaConectar.conectar();
+            
+            sentencia = conectar.createStatement();
+
+            registros = sentencia.executeQuery(sentenciaSql);
+            
+            while (registros.next()) {
+            
+                soporte = registros.getString(1);
+                
+            }
+            
+        } catch(SQLException ex) { 
+            
+            JOptionPane.showMessageDialog(null, "Error en base de datos. No se puede guardar");
+        
+        } catch (NullPointerException ex) {
+            
+            JOptionPane.showMessageDialog(null, "Error en base de datos. No se puede conectar");
+            
+        }
+         return soporte;
+     }
 }

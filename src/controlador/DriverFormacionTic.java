@@ -29,4 +29,17 @@ public class DriverFormacionTic {
     }
     
     
+    public String consultarSoporte(String identificacion, String titutlo){
+        String link_soporte="";
+        try{
+            link_soporte = daoFormacionTic.consultarSoporte(identificacion, titutlo);
+            
+            
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al guardar la formacion en Tic. Por favor intente nuevamente");
+        }
+        return link_soporte;
+    }
+    
+    
 }
