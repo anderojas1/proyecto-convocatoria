@@ -5,7 +5,10 @@
  */
 package Gui;
 
+import controlador.DriverIdioma;
 import java.awt.event.*;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.*;
 
 /**
@@ -15,6 +18,8 @@ import javax.swing.*;
 public class VentanaRegistrarIdioma extends JFrame {
 
     private final ControladorEventos driverEventos;
+    
+    private final DriverIdioma controladorIdioma;
 
     private JLabel lbtitulo;
     private JLabel lbidioma;
@@ -38,10 +43,16 @@ public class VentanaRegistrarIdioma extends JFrame {
     private JButton jbregistrar;
 
     private JPanel panel;
+    
+    private String id_aspirante;
 
-    public VentanaRegistrarIdioma() {
+    public VentanaRegistrarIdioma(String id) {
+        
+        id_aspirante = id;
 
         driverEventos = new ControladorEventos();
+        
+        controladorIdioma = new DriverIdioma();
 
         inicializarComponentes();
         agregarComponentes();
@@ -78,12 +89,32 @@ public class VentanaRegistrarIdioma extends JFrame {
         jchbleerMuyBueno = new JCheckBoxMenuItem("Muy bueno");
 
         jcbescogerIdioma = new JComboBox();
+        cargarIdiomas();
 
         jbcancelar = new JButton("Cancelar");
         jbregistrar = new JButton("Guardar");
 
         getContentPane().add(panel);
 
+    }
+    
+    
+    private void cargarIdiomas () {
+        
+        try {
+            
+            ArrayList <String> idiomas = controladorIdioma.consultarIdiomas();
+            
+            for (String nombre : idiomas) {
+                
+                jcbescogerIdioma.addItem(nombre);
+                
+            }
+            
+        } catch (SQLException ex) {
+            
+            
+        }
     }
 
     private void agregarComponentes() {
@@ -332,11 +363,5 @@ public class VentanaRegistrarIdioma extends JFrame {
 
     }
 
-    public static void main(String[] args) {
-
-        VentanaRegistrarIdioma ven = new VentanaRegistrarIdioma();
-        ven.asignarEventos();
-
-    }
 
 }
