@@ -14,8 +14,9 @@ import javax.swing.*;
 public class VentanaInformacionIdiomas extends JFrame {
     
     private JTable jttablaIdiomas;
+    private VentanaOpcionesModulo ventana_opcionesM;
     
-    public VentanaInformacionIdiomas () {
+    public VentanaInformacionIdiomas (int tipo, String id_as) {
         
         iniciarComponentes();
         
@@ -25,6 +26,14 @@ public class VentanaInformacionIdiomas extends JFrame {
     private void iniciarComponentes () {
         
         jttablaIdiomas =  new JTable(5, 4);
+        
+    }
+    
+    public void configurarVentana(VentanaOpcionesModulo opcionesMod){
+        ventana_opcionesM = opcionesMod;
+    }
+    
+    public void agregarEventos(){
         
     }
     

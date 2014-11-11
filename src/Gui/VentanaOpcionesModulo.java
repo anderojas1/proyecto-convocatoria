@@ -93,11 +93,11 @@ public class VentanaOpcionesModulo extends JFrame{
                break;
             case 2:
                 panelPrin.add(lbEncabezadoEditar);
-                lbEncabezadoEditar = new JLabel("Editar Modulos Hoja de Vida");
+             
                break;
             case 3:
                 panelPrin.add(lbEncabezadoValidar);
-                lbEncabezadoValidar = new JLabel("Validar Modulos Hoja de Vida");
+                
                break;
         }
         
@@ -157,6 +157,13 @@ public class VentanaOpcionesModulo extends JFrame{
          setVisible(false);
      }
     
+     public void ingresarIdiomas(){//Ventana siguiente
+         VentanaInformacionIdiomas idiomas = new VentanaInformacionIdiomas(tipo, usuario);
+         idiomas.agregarEventos();
+         idiomas.configurarVentana(this);
+         setVisible(false);
+     }
+    
     private class ManejaEventos implements ActionListener{
 
         @Override
@@ -169,6 +176,9 @@ public class VentanaOpcionesModulo extends JFrame{
             }
             if(e.getSource() == btFormTic){
                 ingresarFormacionTIC();
+            }
+            if(e.getSource() == btIdiomas){
+                ingresarIdiomas();
             }
         }
         
