@@ -13,4 +13,19 @@ import javax.swing.*;
  */
 public class VentanaInformacionIdiomas extends JFrame {
     
+    private JTable jttablaIdiomas;
+    
+    public VentanaInformacionIdiomas () {
+        
+        iniciarComponentes();
+        
+    }
+    
+    
+    private void iniciarComponentes () {
+        
+        jttablaIdiomas =  new JTable(5, 4);
+        
+    }
+    
 }
