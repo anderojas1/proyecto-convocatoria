@@ -187,6 +187,9 @@ public class VentanaOpcionesModulo extends JFrame{
             if(e.getSource() == btIdiomas){
                 ingresarIdiomas();
             }
+            if(e.getSource() == btForPre){
+                ingresarPrePos();
+            }
         }
         
     }
