@@ -47,8 +47,8 @@ public class VentanaInfoPrePos extends JFrame {
     private String rtLicen;
     
     private JButton btCancelar;
-    private JButton btAtras;
-    private JButton btSiguient;
+    private JButton btAceptar;
+
     //declaracion paneles
     private JPanel panelPrin;
     //declaracion objetos de control
@@ -130,8 +130,7 @@ public class VentanaInfoPrePos extends JFrame {
         
         
         btCancelar = new JButton("Cancelar");
-        btSiguient = new JButton("Siguiente");
-        btAtras =  new JButton("Atras");
+        btAceptar =  new JButton("Aceptar");
 
         panelPrin = new JPanel();
 
@@ -167,9 +166,8 @@ public class VentanaInfoPrePos extends JFrame {
         panelPrin.add(btMaestria);
         panelPrin.add(btMaestriaTic);
         
-        panelPrin.add(btSiguient);
         panelPrin.add(btCancelar);
-        panelPrin.add(btAtras);
+        panelPrin.add(btAceptar);
         
         panelPrin.setLayout(null);
         panelPrin.setBackground(Color.WHITE);
@@ -202,8 +200,7 @@ public class VentanaInfoPrePos extends JFrame {
         CBDoctorTic.setBounds(350, 260, 20, 25);
         btDoctorTic.setBounds(390, 260, 110, 25);
         
-        btAtras.setBounds(125, 350, 110, 30);
-        btSiguient.setBounds(255, 350, 110, 30);
+        btAceptar.setBounds(225, 350, 110, 30);
         btCancelar.setBounds(385, 350, 110, 30);
 
 
@@ -221,7 +218,8 @@ public class VentanaInfoPrePos extends JFrame {
         CBEspeciaTic.addMouseListener(manejador);
         CBLicen.addMouseListener(manejador);
         btCancelar.addMouseListener(manejador);
-        btSiguient.addMouseListener(manejador);
+        btAceptar.addMouseListener(manejador);
+
     }
     
     public boolean validarCargaArchivos(){
@@ -271,11 +269,11 @@ public class VentanaInfoPrePos extends JFrame {
         @Override
         public void mouseClicked(MouseEvent me) {
             
-            if (me.getSource() == btSiguient) {
+            if (me.getSource() == btAceptar) {
                 
                 if(validarCargaArchivos() == true ){
                 
-                    JOptionPane.showMessageDialog(null, "Siguiente panel");
+                    JOptionPane.showMessageDialog(null, "regreso a la gui");
                 }else{
                 
                     JOptionPane.showMessageDialog(null, "Se deben de cargar los archivos de respalfo \n de las casillas seleccionadas");
