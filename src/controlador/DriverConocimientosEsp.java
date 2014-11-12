@@ -32,14 +32,40 @@ public class DriverConocimientosEsp {
         try {
             Daoce.InsertConocimientoEspficic(ce);
             System.out.println("se alamacenado con exito los cono_espcific");
+            JOptionPane.showMessageDialog(null, "Se ha guardado los conocimientos especificos del aspirante con exito", "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
         
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Se ha guardado el aspirante con exito", "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
+            
             System.out.println("eerro al guardar conoc_espefici"+ex.getMessage());
             
         }
     
     }
+    
+    
+    public conocimientosEspecificos consultarConocimientoEspecific(String id){
+    
+        return Daoce.selectConocimientoEspecific(id);
+    
+    }
+    
+    public void updateConocimientoEspecific(String id, String JLherram_Ofimatic, String JLherram_Web2, 
+                                                    String JLherram_edic_multi, String JLexp_des_cont_edu_dig, 
+                                                    String JLexp_des_lib_dig, String JLexp_proc_elearning, String JLexp_gest_proy_TIC, 
+                                                    String JLexp_des_elemnts_eval_comp, double puntuacion){
+    
+        conocimientosEspecificos ce = new conocimientosEspecificos(id, JLherram_Ofimatic, JLherram_Web2, JLherram_edic_multi, JLexp_des_cont_edu_dig, JLexp_des_lib_dig, JLexp_proc_elearning, JLexp_gest_proy_TIC, JLexp_des_elemnts_eval_comp, puntuacion);
+        try {
+            Daoce.UpdateConocimentoEspecific(ce);
+            JOptionPane.showMessageDialog(null, "Se ha Actualizado los conocimientos específicos del aspirante con exito", "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
+        } catch (SQLException ex) {
+            
+            System.out.println("error al actualizar conocimiento"+ex.getMessage());
+        }
+    
+    }
+    
+    
     
    
     public double calcularPuntuacionTotal(String [] results){
