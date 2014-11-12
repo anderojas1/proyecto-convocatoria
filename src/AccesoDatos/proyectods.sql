@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS USUARIO, ACCESO, CONVOCATORIA, ASPIRANTECONVOCATORIA, ASPIRANTE, IDIOMA, CONOCIMIENTOS_ESPECIFICOS, DocumentosPrePos, IDIOMA, FormacionTic, CONOCIMIENTOS_ESPECIFICOS, ASPIRANTE_HABLA, EXPERIENCIA_FORMADOR_TIC;
+DROP TABLE IF EXISTS USUARIO, ACCESO, CONVOCATORIA, ASPIRANTECONVOCATORIA, ASPIRANTE, IDIOMA, CONOCIMIENTOS_ESPECIFICOS, DocumentosPrePos, IDIOMA, FormacionTic, CONOCIMIENTOS_ESPECIFICOS, ExpFormadorTic CASCADE;
 
 
 CREATE TABLE USUARIO (
@@ -111,6 +111,27 @@ CREATE TABLE FormacionTic(
 	
 );
 
+CREATE TABLE ExpFormadorTic(
+	identificacion VARCHAR(20) NOT NULL,
+	exp_estudiante VARCHAR(80) NOT NULL,
+        exp_profesor VARCHAR(80) NOT NULL,
+        exp_formador VARCHAR(80) NOT NULL,
+	soporte_estudiante VARCHAR(500),
+        soporte_profesor VARCHAR(500),
+        soporte_formador VARCHAR(500),
+	puntaje_estudiante int,
+        puntaje_profesor int,
+        puntaje_formador int,
+
+	CONSTRAINT ExpformadorTic_pk PRIMARY KEY(identificacion),
+
+	CONSTRAINT id_aspirante_fk FOREIGN KEY(identificacion)
+	REFERENCES Aspirante(identificacion)
+        ON UPDATE CASCADE ON DELETE NO ACTION
+	
+);
+
+
 CREATE TABLE IDIOMA (
 
     nombre varchar(30) NOT NULL,
@@ -118,6 +139,8 @@ CREATE TABLE IDIOMA (
 
 );
 
+
+DROP TABLE IF EXISTS ASPIRANTE_HABLA CASCADE;
 
 CREATE TABLE ASPIRANTE_HABLA (
     
@@ -127,7 +150,7 @@ CREATE TABLE ASPIRANTE_HABLA (
     leer varchar(15) NOT NULL,
     escribir varchar(15) NOT NULL,
 
-    CONSTRAINT aspirante_habla PRIMARY KEY (id_aspirante, cod_idioma),
+    CONSTRAINT aspirante_habla_pk PRIMARY KEY (id_aspirante, cod_idioma),
 
     CONSTRAINT id_aspirante_fk FOREIGN KEY (id_aspirante)
     REFERENCES ASPIRANTE (identificacion),
@@ -158,19 +181,7 @@ CREATE TABLE CONOCIMIENTOS_ESPECIFICOS (
 
 );
 
-CREATE TABLE EXPERIENCIA_FORMADOR_TIC (
 
-	id_aspirante varchar(20) NOT NULL PRIMARY KEY,
-	ExpFormerProf varchar(30) NOT NULL, 
-	ExpFormerEst varchar(30) NOT NULL, 
-	ExpFormertoFormers varchar(30) NOT NULL,
-	puntuacion real,
-
-	CONSTRAINT exp_former_TIC_FK FOREIGN KEY (id_aspirante)
-	REFERENCES ASPIRANTE (identificacion)
-	ON UPDATE CASCADE ON DELETE NO ACTION
-
-);
     
 
 INSERT INTO IDIOMA VALUES ('Afrikaans', 'AF'),
@@ -191,7 +202,7 @@ INSERT INTO IDIOMA VALUES ('Afrikaans', 'AF'),
 ('Francés', 'FR'),
 ('Griego', 'EL'),
 ('Hebreo','HE'),
-('Hindi','HI'),
+('Hindu','HI'),
 ('Holandés','NL'),
 ('Húngaro','HU'),
 ('Indonesio','ID'),

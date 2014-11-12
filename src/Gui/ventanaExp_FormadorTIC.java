@@ -25,6 +25,11 @@ public class ventanaExp_FormadorTIC extends JFrame {
     private EventManager eventmanager;
     private VentanaOpcionesModulo ventana_opcionesM;
     private String id_aspirante;
+    
+    private JFileChooser chooserSoporte;
+    
+    private DriverExperienciaFormadorTIC driveExpFormador;
+    
    //paneles
     JPanel JPititulo, JPopciones,JPbotnes, JPruta;
     
@@ -36,9 +41,9 @@ public class ventanaExp_FormadorTIC extends JFrame {
     //JComboBox
     
     JComboBox JCBformerEstudents, JCBformerProf, JCBformerFormers;
-    String [] optionsFEstudents = {"De 1 a 5 años", "De 2 a 3 años", "De 3 a 5 años", "Más de 5 años", "Sin Experiencia"};
-    String [] optionsFprof = {"De 80 a 200 horas","De 200 a 300 horas", "De 300 a 450 horas", "Más de 450 horas", "Sin Experiencia"};
-    String [] optionsFFormers= {"De 80 a 120 horas","Más de 120 horas", "Sin Experiencia"};
+    String [] optionsFEstudents = {"Sin Experiencia", "De 1 a 5 años", "De 2 a 3 años", "De 3 a 5 años", "Más de 5 años"};
+    String [] optionsFprof = {"Sin Experiencia","De 80 a 200 horas","De 200 a 300 horas", "De 300 a 450 horas", "Más de 450 horas"};
+    String [] optionsFFormers= {"Sin Experiencia","De 80 a 120 horas","Más de 120 horas"};
     
     //botones
     JButton JBcancel, JBsave, JBExaest, JBExapro, JBExafor;
@@ -62,6 +67,11 @@ public class ventanaExp_FormadorTIC extends JFrame {
     private void initComponents() {
         //ActionListener
         eventmanager = new EventManager();
+        //Seleccionadro de archivo
+        chooserSoporte = new JFileChooser();
+        
+        //objeto de DriverExperienciaFormadorTIC
+        driveExpFormador = new DriverExperienciaFormadorTIC();
         
         //paneles
         JPititulo = new JPanel();
@@ -83,8 +93,11 @@ public class ventanaExp_FormadorTIC extends JFrame {
         
         //Texto 
         campoRuta1 = new JTextField("");
+        campoRuta1.setEditable(false);
         campoRuta2 = new JTextField("");
+        campoRuta2.setEditable(false);
         campoRuta3 = new JTextField("");
+        campoRuta3.setEditable(false);
         
         
         //botones
@@ -179,6 +192,115 @@ public class ventanaExp_FormadorTIC extends JFrame {
     }
     
     
+    public String guardar(){
+        String mensaje="";
+        String titulo1, titulo2, titulo3, ruta1, ruta2, ruta3;
+        String link_soporte;
+        int puntos_est, puntos_pro, puntos_for;
+        
+        if(JCBformerEstudents.getSelectedIndex() == 0){
+            puntos_est = JCBformerEstudents.getSelectedIndex();
+            titulo1 = optionsFEstudents[JCBformerEstudents.getSelectedIndex()];
+            ruta1 = campoRuta1.getText();
+            
+            
+        }else{
+           if(campoRuta1.getText().equals("") && (JCBformerEstudents.getSelectedIndex() != 0)){
+            mensaje = "Debe Seleccionar un archivo de soporte para Formador TIC a estudiantes";
+            return mensaje;
+        }        
+        else{
+            puntos_est = JCBformerEstudents.getSelectedIndex()+1;
+            titulo1 = optionsFEstudents[JCBformerEstudents.getSelectedIndex()];
+            ruta1 = campoRuta1.getText();
+            link_soporte = driveExpFormador.consultarSoporte(id_aspirante, titulo1, "soporte_estudiante", "exp_estudiante");
+            
+            if(link_soporte.equals(ruta1)){
+                mensaje = "Debe Seleccionar un archivo de soporte diferente para Formador TIC a estudiantes";
+                return mensaje;
+            }
+           }
+        }
+        
+        if(JCBformerProf.getSelectedIndex() == 0){
+            puntos_pro = JCBformerProf.getSelectedIndex();
+            titulo2 = optionsFprof[JCBformerProf.getSelectedIndex()];
+            ruta2 = campoRuta2.getText();
+            
+            
+        }else{
+           if(campoRuta2.getText().equals("") && (JCBformerProf.getSelectedIndex() != 0)){
+            mensaje = "Debe Seleccionar un archivo de soporte para Formador TIC a profesores";
+            return mensaje;
+        }        
+        else{
+            puntos_pro = JCBformerProf.getSelectedIndex()+1;
+            titulo2 = optionsFprof[JCBformerProf.getSelectedIndex()];
+            ruta2 = campoRuta2.getText();
+            link_soporte = driveExpFormador.consultarSoporte(id_aspirante, titulo2, "soporte_profesor", "exp_profesor");
+            
+            if(link_soporte.equals(ruta2)){
+                mensaje = "Debe Seleccionar un archivo de soporte diferente para Formador TIC a profesores";
+                return mensaje;
+            }
+           }
+        }
+        
+        if(JCBformerFormers.getSelectedIndex() == 0){
+            puntos_for = JCBformerFormers.getSelectedIndex();
+            titulo3 = optionsFFormers[JCBformerFormers.getSelectedIndex()];
+            ruta3 = campoRuta3.getText();
+            
+            
+        }else{
+           if(campoRuta3.getText().equals("") && (JCBformerFormers.getSelectedIndex() != 0)){
+            mensaje = "Debe Seleccionar un archivo de soporte para Formador TIC de formadores";
+            return mensaje;
+        }        
+        else{
+            puntos_for = JCBformerFormers.getSelectedIndex()+1;
+            titulo3 = optionsFFormers[JCBformerFormers.getSelectedIndex()];
+            ruta3 = campoRuta3.getText();
+            link_soporte = driveExpFormador.consultarSoporte(id_aspirante, titulo3, "soporte_formador", "exp_formador");
+            
+            if(link_soporte.equals(ruta3)){
+                mensaje = "Debe Seleccionar un archivo de soporte diferente para Formador TIC de formadores";
+                return mensaje;
+            }
+           }
+        }
+             
+            
+            driveExpFormador.guardarExperiencia(id_aspirante, titulo1, titulo2, titulo3,ruta1, ruta2, ruta3, puntos_est, puntos_pro, puntos_for);
+            
+                          
+             System.out.println(JCBformerEstudents.getSelectedIndex());
+            
+        
+        return mensaje;
+    }
+    
+    
+    
+    
+    public String seleccionador() {
+
+        chooserSoporte = new JFileChooser();
+
+        int returnVal = chooserSoporte.showOpenDialog(this);
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+
+            return chooserSoporte.getSelectedFile().getAbsolutePath();
+
+        } else {
+
+            return null;
+
+        }
+
+    }
+    
     
      
    
@@ -187,7 +309,11 @@ public class ventanaExp_FormadorTIC extends JFrame {
 
         public void actionPerformed(ActionEvent e) {
             
-            
+            if(e.getSource()== JBExaest){
+                String ruta = seleccionador();
+               System.out.println(ruta);
+               campoRuta1.setText(ruta);
+            }
             
             if(e.getSource() == JBcancel){
                 ventana_opcionesM.setVisible(true);
@@ -196,7 +322,15 @@ public class ventanaExp_FormadorTIC extends JFrame {
             }
             
             if(e.getSource() == JBsave){
-             System.out.println("hola soy guardar");
+                
+                if(guardar().equals("")){
+                    JOptionPane.showMessageDialog(null, "Se ha guardado con Exito");
+                    ventana_opcionesM.setVisible(true);
+                    dispose();
+                }else{
+                    JOptionPane.showMessageDialog(null, guardar());
+                }
+                
             }
             
         }

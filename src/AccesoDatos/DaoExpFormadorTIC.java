@@ -8,6 +8,7 @@ package AccesoDatos;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import logica.ExpFormadorTIC;
 
 /**
@@ -18,7 +19,7 @@ public class DaoExpFormadorTIC {
     
     Fachada fachada;
     
-    String sentenciaSQL;
+    String sentenciaSql;
     Connection conectar;
     Statement sentencia;
     ResultSet resultado;
@@ -31,8 +32,10 @@ public class DaoExpFormadorTIC {
     
     public void insertarExperiencia(ExpFormadorTIC efTIC){
     
-        sentenciaSQL = "INSERT INTO EXPERIENCIA_FORMADOR_TIC VALUES('"+efTIC.getId()+"', '"+efTIC.getExpFormerEst()+"', "
-                + "'"+efTIC.getExpFormerProf()+"', '"+efTIC.getExpFormertoFormers()+"',"+efTIC.getPuntuacion()+");";
+        sentenciaSql = "INSERT INTO ExpFormadorTic VALUES('"+efTIC.getId()+"', '"+efTIC.getExpFormerEst()+"', '"+
+                efTIC.getExpFormerProf()+"', '"+efTIC.getExpFormertoFormers()+
+                "', '"+efTIC.getSoporte_est()+"', '"+efTIC.getSoporte_pro()+"', '"+efTIC.getSoporte_for()+
+                "', "+efTIC.getPuntos_est()+", "+efTIC.getPuntos_pro()+", "+efTIC.getPuntos_for()+");";
         try {
             ejecutarSentencia();
         } catch (SQLException ex) {
@@ -49,7 +52,7 @@ public class DaoExpFormadorTIC {
             conectar = fachada.conectar();
             sentencia = conectar.createStatement();
             
-            sentencia.executeUpdate(sentenciaSQL);
+            sentencia.executeUpdate(sentenciaSql);
             
             conectar.close();
             
@@ -58,9 +61,48 @@ public class DaoExpFormadorTIC {
             throw ex;
             
         }
+         catch (NullPointerException ex) {
+            
+            JOptionPane.showMessageDialog(null, "Error en base de datos. No se puede conectar");
+            
+        }
+               
+        
         
     }
     
     
+    
+     public String consultarSoporte(String identificacion, String titulo, String sopor, String tipo_titu) throws SQLException{
+         String soporte="";
+         
+         sentenciaSql = "SELECT "+sopor+" FROM ExpFormadorTic WHERE identificacion ='"+identificacion+"' AND "+tipo_titu+" ='"+
+                        titulo+"';";
+         
+         try{
+            
+            conectar= fachada.conectar();
+            
+            sentencia = conectar.createStatement();
+
+            resultado = sentencia.executeQuery(sentenciaSql);
+            
+            while (resultado.next()) {
+            
+                soporte = resultado.getString(1);
+                
+            }
+            
+        } catch(SQLException ex) { 
+            
+            JOptionPane.showMessageDialog(null, "Error en base de datos. No se puede guardar");
+        
+        } catch (NullPointerException ex) {
+            
+            JOptionPane.showMessageDialog(null, "Error en base de datos. No se puede conectar");
+            
+        }
+         return soporte;
+     }
     
 }

@@ -11,7 +11,7 @@ public class VentanaOpcionesModulo extends JFrame{
     private Container cont;
     private JPanel panelPrin;
     private JLabel lbEncabezadoAgregar,lbEncabezadoConsultar, lbEncabezadoEditar, lbEncabezadoValidar, lbExpFormador;
-    private JButton btForPre, btFormTic, btCono, btIdiomas, btFormadorEst, btFormadorPro, btFormadorForm, btCancelar;
+    private JButton btForPre, btFormTic, btCono, btIdiomas, btExpFormador, btCancelar;
     private ManejaEventos manejador;
     private int tipo;
     private String usuario;
@@ -46,9 +46,7 @@ public class VentanaOpcionesModulo extends JFrame{
         btFormTic = new JButton ("Formacion en TIC");
         btCono = new JButton("Conocimiento especifico");
         btIdiomas = new JButton("Idiomas");
-        btFormadorEst = new JButton("Formador a estudiantes" );
-        btFormadorPro = new JButton("Formador a profesores");
-        btFormadorForm = new JButton("Formador de formadores");
+        btExpFormador = new JButton("Experiencia en Formador" );
         btCancelar = new JButton("Cancelar");
         manejador = new ManejaEventos();
         
@@ -79,9 +77,7 @@ public class VentanaOpcionesModulo extends JFrame{
         panelPrin.add(btFormTic);
         panelPrin.add(btCono);
         panelPrin.add(btIdiomas);
-        panelPrin.add(btFormadorEst);
-        panelPrin.add(btFormadorPro);
-        panelPrin.add(btFormadorForm); 
+        panelPrin.add(btExpFormador);
         panelPrin.add(btCancelar);
         
         switch(tipo){
@@ -110,9 +106,7 @@ public class VentanaOpcionesModulo extends JFrame{
         btCono.setBounds(70, 140, 250, 25);
         btIdiomas.setBounds(70, 170, 250, 25);
         lbExpFormador.setBounds(70, 220, 250, 20);
-        btFormadorEst.setBounds(70, 250, 250, 25);
-        btFormadorPro.setBounds(70, 280, 250, 25);
-        btFormadorForm.setBounds(70, 310, 250, 25);
+        btExpFormador.setBounds(70, 250, 250, 25);
         btCancelar.setBounds(100, 370, 200, 25);
         
         switch(tipo){
@@ -138,9 +132,7 @@ public class VentanaOpcionesModulo extends JFrame{
         btFormTic.addActionListener(manejador);
         btCono.addActionListener(manejador);
         btIdiomas.addActionListener(manejador);
-        btFormadorEst.addActionListener(manejador);
-        btFormadorPro.addActionListener(manejador);
-        btFormadorForm.addActionListener(manejador);
+        btExpFormador.addActionListener(manejador);;
         btCancelar.addActionListener(manejador);
     }
     
@@ -197,7 +189,7 @@ public class VentanaOpcionesModulo extends JFrame{
             if(e.getSource() == btForPre){
                 ingresarPrePos();
             }
-            if(e.getSource() == btFormadorEst){
+            if(e.getSource() == btExpFormador){
                 ingresarExpFormadorTIC();
             }
             
