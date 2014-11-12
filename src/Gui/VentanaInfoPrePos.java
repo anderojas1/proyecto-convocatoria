@@ -61,9 +61,12 @@ public class VentanaInfoPrePos extends JFrame {
     //chooser
     private JFileChooser fc;
     
+    //ventana pciones modulo
+    VentanaOpcionesModulo ventanaOpcModulo;
+    
     
     //Constructor de la Clase 
-    public VentanaInfoPrePos(String identificacion) {
+    public VentanaInfoPrePos(int tipo, String identificacion) {
 
         super("Informacion Pregrado Posgrado");
 
@@ -389,6 +392,11 @@ public class VentanaInfoPrePos extends JFrame {
 
 }
 
+    public void configurarVentana(VentanaOpcionesModulo vent){
+    
+    ventanaOpcModulo = vent;
+    
+    }
 
     
     private class ManejaEventos implements MouseListener{
@@ -410,7 +418,8 @@ public class VentanaInfoPrePos extends JFrame {
                 }
                                 
             } else if (me.getSource() == btCancelar) {
-                                
+                
+                ventanaOpcModulo.setVisible(true);
                 dispose();
 
             } else if (me.getSource() == btDoctor) {
@@ -579,7 +588,7 @@ public class VentanaInfoPrePos extends JFrame {
 
 public static void main(String args[]){
 
-    VentanaInfoPrePos ven =  new VentanaInfoPrePos("1234");
+    VentanaInfoPrePos ven =  new VentanaInfoPrePos(0,"1234");
 
 }    
     
