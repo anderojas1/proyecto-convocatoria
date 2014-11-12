@@ -163,7 +163,7 @@ public class VentanaOpcionesModulo extends JFrame{
          setVisible(false);
      }
      
-<<<<<<< HEAD
+
      public void ingresarExpFormadorTIC(){//Ventana siguiente
          ventanaExp_FormadorTIC formadorTic = new ventanaExp_FormadorTIC(tipo, usuario);
          formadorTic.agregarEventos();
@@ -171,7 +171,7 @@ public class VentanaOpcionesModulo extends JFrame{
          setVisible(false);
      }
      
-=======
+
      public void ingresarConocimientosEspecificos(){
      
          VentanaConociemientosEspec conocEspecific = new VentanaConociemientosEspec(tipo, usuario);
@@ -180,7 +180,7 @@ public class VentanaOpcionesModulo extends JFrame{
          
      }
     
->>>>>>> f9fa1c9705cfcc475a723ea961c625a199853bbe
+
     private class ManejaEventos implements ActionListener{
 
         @Override
@@ -200,19 +200,20 @@ public class VentanaOpcionesModulo extends JFrame{
             if(e.getSource() == btForPre){
                 ingresarPrePos();
             }
-<<<<<<< HEAD
+
             if(e.getSource() == btExpFormador){
                 ingresarExpFormadorTIC();
-=======
+
             
             if (e.getSource() == btCono){
             
                 ingresarConocimientosEspecificos();
->>>>>>> f9fa1c9705cfcc475a723ea961c625a199853bbe
+
             }
             
         }
         
+    }
     }
     
        public static void main(String args[]){
