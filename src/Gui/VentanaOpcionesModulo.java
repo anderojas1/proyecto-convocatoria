@@ -132,7 +132,7 @@ public class VentanaOpcionesModulo extends JFrame{
         btFormTic.addActionListener(manejador);
         btCono.addActionListener(manejador);
         btIdiomas.addActionListener(manejador);
-        btExpFormador.addActionListener(manejador);;
+        btExpFormador.addActionListener(manejador);
         btCancelar.addActionListener(manejador);
     }
     
@@ -204,14 +204,12 @@ public class VentanaOpcionesModulo extends JFrame{
             if(e.getSource() == btExpFormador){
                 ingresarExpFormadorTIC();
 
-            
+        }
             if (e.getSource() == btCono){
-            
+               
                 ingresarConocimientosEspecificos();
 
             }
-            
-        }
         
     }
     }
