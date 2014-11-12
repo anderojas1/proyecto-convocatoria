@@ -32,11 +32,11 @@ public class driverInfoPrePos {
         objPrePos.setIdentificacion(identi);
         objPrePos.setRtDoctor(rtDocTic);
         objPrePos.setRtDoctorTic(rtDocTic);
+        objPrePos.setRtMaestria(rtMaestria);
+        objPrePos.setRtMaestriaTic(rtMaestriaTic);
         objPrePos.setRtEspecia(rtSpecia);
         objPrePos.setRtEspeciaTic(rtSpeciaTic);
         objPrePos.setRtLicenciado(rtLicen);
-        objPrePos.setRtMaestria(rtMaestria);
-        objPrePos.setRtMaestriaTic(rtMaestriaTic);
         
         try{
         

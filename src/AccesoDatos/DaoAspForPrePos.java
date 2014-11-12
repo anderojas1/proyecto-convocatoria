@@ -44,8 +44,13 @@ public class DaoAspForPrePos {
         String licen = obj.getRtLicenciado();
         
         
-        sqlDatos = "INSERT INTO Aspirante  values (" + "'" + iden  + "'" + doc  + "'"+ docTic + "'" + maest  + "'" + maestTic +
-                                                   "'" + espec  + "'" + especTic  + "'" + licen  + "'" + ");";
+        // System.err.println(iden +"\n"+ doc + "\n"+  docTic +"\n"+   maest +"\n"+   maestTic +"\n"+  
+          //                                  espec + "\n"+  especTic +"\n"+   licen);
+         
+        sqlDatos = "INSERT INTO  DocumentosPrePos VALUES (" + "'" + iden  + "', '" + doc  + "', '"+ docTic + "', '" + maest  + "', '" + maestTic +
+                                                   "', '" + espec  + "', '" + especTic  + "', '" + licen  + "'" + ");";
+        
+        //System.err.println(sqlDatos);
 
         try {
             

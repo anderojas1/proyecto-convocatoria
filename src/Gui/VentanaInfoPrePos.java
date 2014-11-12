@@ -64,18 +64,21 @@ public class VentanaInfoPrePos extends JFrame {
     //ventana pciones modulo
     VentanaOpcionesModulo ventanaOpcModulo;
     
+    //controlador
+    driverInfoPrePos driverPrePos;
+    
     
     //Constructor de la Clase 
-    public VentanaInfoPrePos(int tipo, String identificacion) {
+    public VentanaInfoPrePos(int tipo, String iden) {
 
         super("Informacion Pregrado Posgrado");
 
-        identificacion = identificacion;
+        indentificacion = iden;
         
         iniciarComponentes();
         agregarComponentes();
         acomodarComponentes();
-        asignarEventos();
+       // asignarEventos();
         
         getContentPane().add(panelPrin);
         setSize(new Dimension(540, 450));
@@ -138,6 +141,9 @@ public class VentanaInfoPrePos extends JFrame {
         panelPrin = new JPanel();
 
         manejador = new ManejaEventos();
+        
+        driverPrePos =  new driverInfoPrePos();
+                
 
     }
 
@@ -410,8 +416,11 @@ public class VentanaInfoPrePos extends JFrame {
                 
                 if(validarCargaArchivos(checkSeleccion()) == true ){
                 
-                    JOptionPane.showMessageDialog(null, "regreso a la gui");
+                   driverPrePos.guardarInfo(indentificacion ,rtDoctor, rtDoctorTic, rtMaestria, rtMaestriaTic,
+                                            rtEspecia, rtEspeciaTic, rtLicen);
               
+                   // System.err.println(indentificacion + rtDoctor +  rtDoctorTic +  rtMaestria +  rtMaestriaTic + 
+                     //                       rtEspecia +  rtEspeciaTic +  rtLicen);
                 }else{
                 
                     JOptionPane.showMessageDialog(null, "Se deben de cargar los archivos de respalfo \n de las casillas seleccionadas");
