@@ -170,7 +170,14 @@ public class VentanaOpcionesModulo extends JFrame{
          prePos.configurarVentana(this);
          setVisible(false);
      }
-    
+     
+     public void ingresarExpFormadorTIC(){//Ventana siguiente
+         ventanaExp_FormadorTIC formadorTic = new ventanaExp_FormadorTIC(tipo, usuario);
+         formadorTic.agregarEventos();
+         formadorTic.configurarVentana(this);
+         setVisible(false);
+     }
+     
     private class ManejaEventos implements ActionListener{
 
         @Override
@@ -190,6 +197,10 @@ public class VentanaOpcionesModulo extends JFrame{
             if(e.getSource() == btForPre){
                 ingresarPrePos();
             }
+            if(e.getSource() == btFormadorEst){
+                ingresarExpFormadorTIC();
+            }
+            
         }
         
     }

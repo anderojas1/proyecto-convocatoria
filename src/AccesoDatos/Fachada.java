@@ -23,9 +23,9 @@ public class Fachada {
     
     public Fachada () {
         
-        url = "jdbc:postgresql://pgsql:5432/johnfla";
-        user = "johnfla";
-        password = "johnfla";
+        url = "jdbc:postgresql://localhost:5432/georgerr";
+        user = "georgerr";
+        password = "georgerr";
         
     }
     
