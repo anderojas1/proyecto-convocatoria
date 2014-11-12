@@ -4,9 +4,11 @@
  */
 package Gui;
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Container;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
@@ -16,6 +18,7 @@ import javax.swing.*;
 public class ventanaExp_FormadorTIC extends JFrame {
     
     private Container container;
+    private EventManager eventmanager;
     
    //paneles
     JPanel JPititulo, JPopciones,JPbotnes;
@@ -41,7 +44,7 @@ public class ventanaExp_FormadorTIC extends JFrame {
         acommodateComponents();
         
         pack();
-        setSize(400,300);
+        setSize(500,300);
         setDefaultCloseOperation(0);
         setResizable(true);
         setVisible(true);
@@ -69,9 +72,13 @@ public class ventanaExp_FormadorTIC extends JFrame {
         //botones
         
         JBback = new JButton("Atras");
-        JBcancel = new JButton("Cancelar");
-        JBsave = new JButton("Guardar");
+        JBback.addActionListener(eventmanager);
         
+        JBcancel = new JButton("Cancelar");
+        JBcancel.addActionListener(eventmanager);
+        
+        JBsave = new JButton("Guardar");
+        JBsave.addActionListener(eventmanager);
         
     }
 
@@ -119,6 +126,33 @@ public class ventanaExp_FormadorTIC extends JFrame {
         
     }
    
+    
+    public class EventManager implements ActionListener  {
+
+        Component parent;
+        public EventManager(Component parentcomponet) {
+            
+            this.parent = parentcomponet;
+        }
+        
+       
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            
+            if(e.getSource() == JBback){
+            }
+            
+            if(e.getSource() == JBcancel){
+            
+            }
+            
+            if(e.getSource() == JBsave){
+            
+            }
+            
+        }
+    }
     
      public static void main(String args[]){
 
