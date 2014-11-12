@@ -36,8 +36,8 @@ public class DaoIdioma {
         conectar = fachadaConectar.conectar();
         
         sqlSentence = "SELECT nombre FROM IDIOMA;";
-        sentencia = conectar.createStatement();
-        registros = sentencia.executeQuery(sqlSentence);
+        
+        consultar();
         
         while (registros.next()) {
             
@@ -45,12 +45,29 @@ public class DaoIdioma {
             idiomas.add(idioma);
             
         }
-        
-        return idiomas;
-        
+                
     }
     
     
+    public String consultarCodigo (String nombre) throws SQLException {
+		
+		conectar.fachadaConectar();
+		
+		sqlSentence = "SELECT codigo_idioma FROM IDIOMA WHERE nombre = '" + nombre + "';";
+		
+		consultar();
+		
+		return registros.getString(1);
+		
+	}
     
+    
+    private void consultar () throws SQLException {
+		
+		sentencia = conectar.createStatement();
+		
+		registros = sentencia.executeQuery(sqlSentence);
+                
+	}
     
 }

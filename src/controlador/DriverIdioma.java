@@ -32,6 +32,13 @@ public class DriverIdioma {
     }
     
     
+    public String consultarCodigo (String nombre) throws SQLException {
+		
+		return daoIdioma.consultarCodigo(nombre);
+		
+	}
+    
+    
     
     
 }

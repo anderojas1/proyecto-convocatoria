@@ -36,6 +36,10 @@ public class VentanaRegistrarIdioma extends JFrame {
     private JCheckBoxMenuItem jchbleerRegular;
     private JCheckBoxMenuItem jchbleerBueno;
     private JCheckBoxMenuItem jchbleerMuyBueno;
+    
+    private JCheckBoxMenuItem jchbleer;
+    private JCheckBoxMenuItem jchbescribir;
+    private JCheckBoxMenuItem jchbhablar;
 
     private JComboBox jcbescogerIdioma;
 
@@ -98,7 +102,7 @@ public class VentanaRegistrarIdioma extends JFrame {
         jbregistrar = new JButton("Guardar");
 
         getContentPane().add(panel);
-
+        
     }
     
     
@@ -248,12 +252,23 @@ public class VentanaRegistrarIdioma extends JFrame {
         boolean checkHablar = validarChecks("conversacion");
         
         if (checkLeer == true && checkHablar == true && checkEscribir == true) {
+			
+			try {
+				
+				String nombre = jcbescogerIdioma.getSelectedItem().toString();
+				String lee = jchbleer.getText();
+				
+				String codigoIdioma = controladorIdioma.consultarCodigo(nombre);
             
-            JOptionPane.showMessageDialog(this, "Se registró el idioma exitosamente", "Idioma registrado", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Se registró el idioma exitosamente", "Idioma registrado", JOptionPane.INFORMATION_MESSAGE);
             
-            informacionIdiomas.setVisible(true);
+				informacionIdiomas.setVisible(true);
             
-            dispose();
+				dispose();
+				
+			} catch (SQLException ex) {
+				
+			}
             
         }
         
@@ -283,6 +298,8 @@ public class VentanaRegistrarIdioma extends JFrame {
                 
                 jchbhablarBueno.setState(false);
                 jchbhablarMuyBueno.setState(false);
+                jchbhablar = jchbhablarRegular;
+                System.out.println(jchbhablar.getText());
                 
             }
             
@@ -290,6 +307,7 @@ public class VentanaRegistrarIdioma extends JFrame {
                 
                 jchbhablarRegular.setState(false);
                 jchbhablarMuyBueno.setState(false);
+                jchbhablar = jchbhablarBueno;
                 
             }
             
@@ -297,6 +315,7 @@ public class VentanaRegistrarIdioma extends JFrame {
                 
                 jchbhablarBueno.setState(false);
                 jchbhablarRegular.setState(false);
+                jchbhablar = jchbhablarMuyBueno;
                 
             }
             
@@ -304,6 +323,7 @@ public class VentanaRegistrarIdioma extends JFrame {
                 
                 jchbescribirBueno.setState(false);
                 jchbescribirMuyBueno.setState(false);
+                jchbescribir = jchbescribirRegular;
                 
             }
             
@@ -311,6 +331,7 @@ public class VentanaRegistrarIdioma extends JFrame {
                 
                 jchbescribirRegular.setState(false);
                 jchbescribirMuyBueno.setState(false);
+                jchbescribir = jchbescribirBueno;
                 
             }
             
@@ -318,6 +339,7 @@ public class VentanaRegistrarIdioma extends JFrame {
                 
                 jchbescribirBueno.setState(false);
                 jchbescribirRegular.setState(false);
+                jchbescribir = jchbescribirMuyBueno;
                 
             }
             
@@ -325,6 +347,7 @@ public class VentanaRegistrarIdioma extends JFrame {
                 
                 jchbleerBueno.setState(false);
                 jchbleerMuyBueno.setState(false);
+                jchbleer = jchbleerRegular;
                 
             }
             
@@ -332,6 +355,7 @@ public class VentanaRegistrarIdioma extends JFrame {
                 
                 jchbleerRegular.setState(false);
                 jchbleerMuyBueno.setState(false);
+                jchbleer = jchbleerBueno;
                 
             }
             
@@ -339,6 +363,7 @@ public class VentanaRegistrarIdioma extends JFrame {
                 
                 jchbleerBueno.setState(false);
                 jchbleerRegular.setState(false);
+                jchbleer = jchbleerMuyBueno;
                 
             }
 
