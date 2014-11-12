@@ -253,22 +253,27 @@ public class VentanaRegistrarIdioma extends JFrame {
         
         if (checkLeer == true && checkHablar == true && checkEscribir == true) {
 			
-			try {
+            try {
 				
-				String nombre = jcbescogerIdioma.getSelectedItem().toString();
-				String lee = jchbleer.getText();
+		String nombre = jcbescogerIdioma.getSelectedItem().toString();                
+		String lee = jchbleer.getText();
+                String escribe = jchbescribir.getText();
+                String habla = jchbhablar.getText();
 				
-				String codigoIdioma = controladorIdioma.consultarCodigo(nombre);
+		String codigoIdioma = controladorIdioma.consultarCodigo(nombre);
+                
+                controladorIdioma.agregarIdiomaAspirante(id_aspirante, codigoIdioma, habla, lee, escribe);
             
-				JOptionPane.showMessageDialog(this, "Se registró el idioma exitosamente", "Idioma registrado", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(this, "Se registró el idioma exitosamente", "Idioma registrado", JOptionPane.INFORMATION_MESSAGE);
             
-				informacionIdiomas.setVisible(true);
+		informacionIdiomas.setVisible(true);
+                informacionIdiomas.actualizarInformacionIdiomas(nombre, lee, escribe, habla);
             
-				dispose();
+		dispose();
 				
-			} catch (SQLException ex) {
+            } catch (SQLException ex) {
 				
-			}
+            }
             
         }
         
@@ -299,7 +304,6 @@ public class VentanaRegistrarIdioma extends JFrame {
                 jchbhablarBueno.setState(false);
                 jchbhablarMuyBueno.setState(false);
                 jchbhablar = jchbhablarRegular;
-                System.out.println(jchbhablar.getText());
                 
             }
             

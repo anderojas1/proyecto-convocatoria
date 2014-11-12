@@ -21,6 +21,8 @@ public class DaoIdioma {
     private Connection conectar;
     private Statement sentencia;
     private ResultSet registros;
+    
+    private ArrayList <String> consultar;
 
     public DaoIdioma() {
         
@@ -33,11 +35,10 @@ public class DaoIdioma {
         
         ArrayList <String> idiomas = new ArrayList<>();
         
-        conectar = fachadaConectar.conectar();
-        
+        conectar = fachadaConectar.conectar();        
         sqlSentence = "SELECT nombre FROM IDIOMA;";
-        
-        consultar();
+        sentencia = conectar.createStatement();
+        registros = sentencia.executeQuery(sqlSentence);
         
         while (registros.next()) {
             
@@ -45,29 +46,105 @@ public class DaoIdioma {
             idiomas.add(idioma);
             
         }
+        
+        conectar.close();
+        
+        return idiomas;
                 
     }
     
     
     public String consultarCodigo (String nombre) throws SQLException {
+        
+        String codigo = "";
 		
-		conectar.fachadaConectar();
+        conectar = fachadaConectar.conectar();
+
+        sqlSentence = "SELECT codigo_idioma FROM IDIOMA WHERE nombre = '" + nombre + "';";        
+        sentencia = conectar.createStatement();
+        registros = sentencia.executeQuery(sqlSentence);
+        
+        if (registros.next()) {
+            
+            codigo = registros.getString(1);
+            
+        }
+        
+        conectar.close();
+
+        return codigo;
 		
-		sqlSentence = "SELECT codigo_idioma FROM IDIOMA WHERE nombre = '" + nombre + "';";
+    
+    }
+    
+    
+    public ArrayList <String> consultarIdiomasAspirante (String id) throws SQLException {
+        
+        consultar = new ArrayList<>();
+        
+        sqlSentence = "SELECT nombre, leer, escribir, hablar FROM ASPIRANTE_HABLA INNER JOIN IDIOMA ON cod_idioma = codigo_idioma where "
+                + "id_aspirante = '" + id + "';";
 		
-		consultar();
-		
-		return registros.getString(1);
-		
-	}
+        conectar = fachadaConectar.conectar();     
+        sentencia = conectar.createStatement();
+        registros = sentencia.executeQuery(sqlSentence);
+        
+        while (registros.next()) {
+            
+            consultar.add(registros.getString(1));
+            consultar.add(registros.getString(2));
+            consultar.add(registros.getString(3));
+            consultar.add(registros.getString(4));
+            
+        }
+        
+        conectar.close();
+        
+        return consultar;
+    }
     
     
     private void consultar () throws SQLException {
-		
-		sentencia = conectar.createStatement();
-		
-		registros = sentencia.executeQuery(sqlSentence);
+        
+        consultar = new ArrayList<>();
+        
+        conectar = fachadaConectar.conectar();		
+	sentencia = conectar.createStatement();
+        registros = sentencia.executeQuery(sqlSentence);
+        
+        while (registros.next()) {
+            
+            consultar.add(registros.getString(1));
+            consultar.add(registros.getString(2));
+            consultar.add(registros.getString(3));
+            consultar.add(registros.getString(4));
+            
+            System.out.println(registros.getString(1));
+            
+        }
+        
+        conectar.close();
                 
-	}
+    }
     
+    
+    public void agregarIdiomaAspirante (String id, String cod, String hablar, String leer, String esc) throws SQLException {
+        
+        sqlSentence = "INSERT INTO ASPIRANTE_HABLA VALUES ('" + id + "','" + cod + "','" + hablar + "','" + leer + "','"
+                + esc + "');";
+        
+        ejecutarSentencia();
+    }
+    
+    
+    public void ejecutarSentencia () throws SQLException {
+        
+        conectar = fachadaConectar.conectar();
+
+        sentencia = conectar.createStatement();
+        sentencia.executeUpdate(sqlSentence);
+
+        conectar.close();
+        
+    }
 }

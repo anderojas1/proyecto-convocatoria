@@ -127,7 +127,7 @@ CREATE TABLE ASPIRANTE_HABLA (
     leer varchar(15) NOT NULL,
     escribir varchar(15) NOT NULL,
 
-    CONSTRAINT aspirante_habla PRIMARY KEY (id_aspirante, cod_idioma),
+    CONSTRAINT aspirante_habla_pk PRIMARY KEY (id_aspirante, cod_idioma),
 
     CONSTRAINT id_aspirante_fk FOREIGN KEY (id_aspirante)
     REFERENCES ASPIRANTE (identificacion),

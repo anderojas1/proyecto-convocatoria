@@ -5,8 +5,11 @@
  */
 package Gui;
 
+import controlador.DriverIdioma;
 import java.awt.Color;
 import java.awt.event.*;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -31,10 +34,14 @@ public class VentanaInformacionIdiomas extends JFrame {
     
     private String id_aspirante;
     
+    private final DriverIdioma driver;
+    
     
     public VentanaInformacionIdiomas (int tipo, String id_as) {
         
         driverEventos = new ManejarEventos();
+        
+        driver = new DriverIdioma();
         
         id_aspirante = id_as;
         
@@ -57,13 +64,15 @@ public class VentanaInformacionIdiomas extends JFrame {
         String [] titulos = new String [] {"Idioma", "Lee", "Escribe", "Habla"};
         
         modelo = new DefaultTableModel(0, 4);
-        modelo.addRow(titulos);
+        
         
         jttablaIdiomas =  new JTable(modelo);
         
         jttablaIdiomas.setAutoscrolls(true);
         jttablaIdiomas.setEnabled(false);
-               
+        agregarIdiomas(titulos);
+        consultarInformacionIdiomas();
+        
         jbcerrar = new JButton ("Cerrar");
         jbregistrar = new JButton("Agregar");
         
@@ -74,6 +83,7 @@ public class VentanaInformacionIdiomas extends JFrame {
     
     public void agregarIdiomas (String [] informacion) {
         
+        //jttablaIdiomas.setEnabled(true);
         modelo.addRow(informacion);
         
     }
@@ -91,6 +101,36 @@ public class VentanaInformacionIdiomas extends JFrame {
     public void configurarVentana(VentanaOpcionesModulo opcionesMod){
         
         ventana_opcionesM = opcionesMod;
+        
+    }
+    
+    
+    public void actualizarInformacionIdiomas (String nombre, String lee, String escribe, String habla) {
+        
+        String [] info = new String [] {nombre, lee, escribe, habla};
+        agregarIdiomas(info);
+        
+    }
+    
+    
+    public void consultarInformacionIdiomas () {
+        
+        try {
+            
+            ArrayList <String> idiomas = driver.consultarIdiomasAspirante(id_aspirante);
+            
+            for (int i = 0; i < idiomas.size(); i++) {
+                
+                String [] info = new String [] {idiomas.get(i++), idiomas.get(i++), idiomas.get(i++), idiomas.get(i)};
+                
+                agregarIdiomas(info);
+                
+            }
+            
+        } catch (SQLException ex) {
+            
+            System.out.println(ex.getMessage());
+        }
         
     }
     
