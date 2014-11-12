@@ -15,9 +15,9 @@ public class DriverFormacionTic {
         daoFormacionTic = new DaoFormacionTic();
     }
     
-    public void guardar(String identificacion, String titulo, int consecutivo, String soporte, int puntaje){
+    public void guardar(String identificacion, String titulo, int consecutivo, String soporte){
         
-        formacionTic formacion = new formacionTic(identificacion, titulo, consecutivo, soporte,puntaje);
+        formacionTic formacion = new formacionTic(identificacion, titulo, consecutivo, soporte);
         
         try{
             daoFormacionTic.crearFormacionTic(formacion);
