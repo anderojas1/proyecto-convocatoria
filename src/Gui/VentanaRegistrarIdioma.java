@@ -44,7 +44,10 @@ public class VentanaRegistrarIdioma extends JFrame {
 
     private JPanel panel;
     
-    private String id_aspirante;
+    private final String id_aspirante;
+    
+    private VentanaInformacionIdiomas informacionIdiomas;
+    
 
     public VentanaRegistrarIdioma(String id) {
         
@@ -115,7 +118,9 @@ public class VentanaRegistrarIdioma extends JFrame {
             
             
         }
+        
     }
+    
 
     private void agregarComponentes() {
 
@@ -168,10 +173,11 @@ public class VentanaRegistrarIdioma extends JFrame {
         
         jbcancelar.setBounds(300, 320, 110, 30);
         jbregistrar.setBounds(420, 320, 110, 30);
+        
     }
     
     
-    private void asignarEventos () {
+    public void asignarEventos () {
         
         jchbhablarRegular.addMouseListener(driverEventos);
         jchbhablarBueno.addMouseListener(driverEventos);
@@ -187,6 +193,13 @@ public class VentanaRegistrarIdioma extends JFrame {
         
         jbcancelar.addMouseListener(driverEventos);
         jbregistrar.addMouseListener(driverEventos);
+        
+    }
+    
+    
+    public void configurarVentana (VentanaInformacionIdiomas ventana) {
+        
+        informacionIdiomas = ventana;
         
     }
     
@@ -238,6 +251,10 @@ public class VentanaRegistrarIdioma extends JFrame {
             
             JOptionPane.showMessageDialog(this, "Se registró el idioma exitosamente", "Idioma registrado", JOptionPane.INFORMATION_MESSAGE);
             
+            informacionIdiomas.setVisible(true);
+            
+            dispose();
+            
         }
         
         else JOptionPane.showMessageDialog(this, "Debe seleccionar su nivel de manejo del idioma en todos los componentes", 
@@ -251,6 +268,7 @@ public class VentanaRegistrarIdioma extends JFrame {
             
             if (me.getSource() == jbcancelar) {
                 
+                informacionIdiomas.setVisible(true);
                 dispose();
                 
             }

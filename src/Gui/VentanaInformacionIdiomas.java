@@ -5,8 +5,10 @@
  */
 package Gui;
 
+import java.awt.Color;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,11 +17,13 @@ import javax.swing.*;
 public class VentanaInformacionIdiomas extends JFrame {
     
     private JTable jttablaIdiomas;
+    private DefaultTableModel modelo;
     private JPanel panel;
     
     private JLabel lbtitulo;
     
     private JButton jbcerrar;
+    private JButton jbregistrar;
     
     private VentanaOpcionesModulo ventana_opcionesM;
     
@@ -38,18 +42,49 @@ public class VentanaInformacionIdiomas extends JFrame {
         agregarComponentes();
         acomodarComponentes();
         
+        setSize(500, 550);
+        setResizable(false);
+        setLocationRelativeTo(null);
+        setVisible(true);
+        
     }
     
     
     private void iniciarComponentes (int tipo) {
         
-        jttablaIdiomas =  new JTable(5, 4);
-        
         panel = new JPanel(null);
         
+        String [] titulos = new String [] {"Idioma", "Lee", "Escribe", "Habla"};
+        
+        modelo = new DefaultTableModel(0, 4);
+        modelo.addRow(titulos);
+        
+        jttablaIdiomas =  new JTable(modelo);
+        
+        jttablaIdiomas.setAutoscrolls(true);
+        jttablaIdiomas.setEnabled(false);
+               
         jbcerrar = new JButton ("Cerrar");
+        jbregistrar = new JButton("Agregar");
         
         lbtitulo = new JLabel("Modulo de Idiomas");
+        
+    }
+    
+    
+    public void agregarIdiomas (String [] informacion) {
+        
+        modelo.addRow(informacion);
+        
+    }
+    
+    
+    public void abrirInterfazRegistro() {
+        
+        VentanaRegistrarIdioma registrar = new VentanaRegistrarIdioma(id_aspirante);
+        registrar.configurarVentana(this);
+        registrar.asignarEventos();
+        setVisible(false);
         
     }
     
@@ -63,6 +98,8 @@ public class VentanaInformacionIdiomas extends JFrame {
     private void agregarComponentes () {
         
         panel.add(jttablaIdiomas);
+        panel.add(jbcerrar);
+        panel.add(jbregistrar);
         
         getContentPane().add(panel);
         
@@ -71,10 +108,17 @@ public class VentanaInformacionIdiomas extends JFrame {
     
     private void acomodarComponentes () {
         
+        jttablaIdiomas.setBounds(50, 100, 400, 300);
         
+        jbregistrar.setBounds(220, 450, 100, 30);
+        jbcerrar.setBounds(350, 450, 100, 30);
+                
     }
     
-    public void agregarEventos(){
+    public void agregarEventos() {
+        
+        jbcerrar.addMouseListener(driverEventos);
+        jbregistrar.addMouseListener(driverEventos);
         
     }
     
@@ -82,49 +126,60 @@ public class VentanaInformacionIdiomas extends JFrame {
     private class ManejarEventos implements MouseListener, KeyListener {
 
         @Override
-        public void mouseClicked(MouseEvent e) {
+        public void mouseClicked(MouseEvent me) {
+            
+            if (me.getSource() == jbcerrar) {
+                
+                ventana_opcionesM.setVisible(true);
+                dispose();
+                
+            }
+            
+            else if (me.getSource() == jbregistrar) {
+                
+                abrirInterfazRegistro();
+                
+            }
+        }
+
+        @Override
+        public void mousePressed(MouseEvent me) {
             
             
         }
 
         @Override
-        public void mousePressed(MouseEvent e) {
+        public void mouseReleased(MouseEvent me) {
             
             
         }
 
         @Override
-        public void mouseReleased(MouseEvent e) {
+        public void mouseEntered(MouseEvent me) {
             
             
         }
 
         @Override
-        public void mouseEntered(MouseEvent e) {
+        public void mouseExited(MouseEvent me) {
             
             
         }
 
         @Override
-        public void mouseExited(MouseEvent e) {
+        public void keyTyped(KeyEvent me) {
             
             
         }
 
         @Override
-        public void keyTyped(KeyEvent e) {
+        public void keyPressed(KeyEvent me) {
             
             
         }
 
         @Override
-        public void keyPressed(KeyEvent e) {
-            
-            
-        }
-
-        @Override
-        public void keyReleased(KeyEvent e) {
+        public void keyReleased(KeyEvent me) {
             
             
         }
