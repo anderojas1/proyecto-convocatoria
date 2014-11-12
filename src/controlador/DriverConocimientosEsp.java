@@ -35,7 +35,7 @@ public class DriverConocimientosEsp {
         
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Se ha guardado el aspirante con exito", "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
-            System.out.println("eerro al guardar conoc_espefici");
+            System.out.println("eerro al guardar conoc_espefici"+ex.getMessage());
             
         }
     

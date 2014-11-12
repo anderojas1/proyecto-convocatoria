@@ -63,14 +63,19 @@ public class VentanaConociemientosEspec extends JFrame {
     
     private EventManager eventmanager;
     private DriverConocimientosEsp control;
+    private VentanaOpcionesModulo ParentWindow;
+    private String identificacionAspirante;
     
     
     
     
     
-    public VentanaConociemientosEspec(){
+    public VentanaConociemientosEspec( int tipo, String idenficacion){
         
         super ("Conociminetos Específicos");
+        this.identificacionAspirante = idenficacion;
+        
+        
         InitComponents();
         AcommodateCOmponents();
         
@@ -81,6 +86,12 @@ public class VentanaConociemientosEspec extends JFrame {
         setResizable(true);
         setVisible(true);
         
+    }
+    
+    public void configurarVentana(VentanaOpcionesModulo parentWindow){
+    
+        this.ParentWindow = parentWindow;
+    
     }
 
     private void InitComponents() {
@@ -119,8 +130,13 @@ public class VentanaConociemientosEspec extends JFrame {
         //botones
         
         JBback = new JButton("Atras");
+        
+        
         JBcanelar = new JButton("Cancelar");
-        JBnext = new JButton("Siquiente");
+        JBcanelar.addActionListener(eventmanager);
+        
+        JBnext = new JButton("Guardar");
+        JBnext.addActionListener(eventmanager);
         
         
         
@@ -178,13 +194,14 @@ public class VentanaConociemientosEspec extends JFrame {
         
         //botnoes
         
-        JPbotones.setLayout(new GridLayout(1, 3, 8, 8));
+        JPbotones.setLayout(new GridLayout(1, 2, 8, 8));
         
         JPbotones.add(JBcanelar);
-        JPbotones.add(JBback);
+        //JPbotones.add(JBback);
         JPbotones.add(JBnext);
         
         container.add(JPbotones, BorderLayout.SOUTH);
+        container.setBackground(Color.white);
         
     }
     
@@ -201,14 +218,12 @@ public class VentanaConociemientosEspec extends JFrame {
         public void actionPerformed(ActionEvent e) {
            
             
-            if (e.getSource() == JBback){
-                
-                parentComponent.setVisible(false);
-                
             
-            }
             
             if (e.getSource() == JBcanelar){
+                
+                dispose();
+                ParentWindow.setVisible(true);
             }
             
             if (e.getSource() == JBnext){
@@ -221,8 +236,10 @@ public class VentanaConociemientosEspec extends JFrame {
                     
                 }
                 
-                control.guaradarConociemientoEspecifico(null, resultados[0], resultados[1], resultados[2], resultados[3], resultados[4], resultados[5], resultados[6], resultados[7], control.calcularPuntuacionTotal(resultados));
+                control.guaradarConociemientoEspecifico(identificacionAspirante, resultados[0], resultados[1], resultados[2], resultados[3], resultados[4], resultados[5], resultados[6], resultados[7], control.calcularPuntuacionTotal(resultados));
                 
+                dispose();
+                ParentWindow.setVisible(true);
             }
             
             
@@ -232,10 +249,10 @@ public class VentanaConociemientosEspec extends JFrame {
         
     }
     
-    public static void main(String args[]){
+    /*public static void main(String args[]){
 
     VentanaConociemientosEspec ven =  new VentanaConociemientosEspec();
 
-}  
+}  */
    
 }

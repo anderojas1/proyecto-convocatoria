@@ -34,7 +34,7 @@ public class DaoconociminetoEspecific {
     
     public void InsertConocimientoEspficic (conocimientosEspecificos ce) throws SQLException{
     
-        sentenciaSql = "INSERT INTO CONOCIMIENTOS_ESPECIFICOS ('"+ce.getID()+"', '"+ce.getJLherram_Ofimatic()+"', "
+        sentenciaSql = "INSERT INTO CONOCIMIENTOS_ESPECIFICOS VALUES ('"+ce.getID()+"', '"+ce.getJLherram_Ofimatic()+"', "
                 + "'"+ce.getJLherram_Web2()+"', '"+ce.getJLherram_edic_multi()+"', '"+ce.getJLexp_des_cont_edu_dig()+"', "
                 + "'"+ce.getJLexp_des_lib_dig()+"', '"+ce.getJLexp_proc_elearning()+"', '"+ce.getJLexp_gest_proy_TIC()+"', "
                 + "'"+ce.getJLexp_des_elemnts_eval_comp()+"', "+ce.getPuntuacion()+");";

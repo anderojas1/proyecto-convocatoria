@@ -170,6 +170,14 @@ public class VentanaOpcionesModulo extends JFrame{
          prePos.configurarVentana(this);
          setVisible(false);
      }
+     
+     public void ingresarConocimientosEspecificos(){
+     
+         VentanaConociemientosEspec conocEspecific = new VentanaConociemientosEspec(tipo, usuario);
+         conocEspecific.configurarVentana(this);
+         setVisible(false);
+         
+     }
     
     private class ManejaEventos implements ActionListener{
 
@@ -190,6 +198,12 @@ public class VentanaOpcionesModulo extends JFrame{
             if(e.getSource() == btForPre){
                 ingresarPrePos();
             }
+            
+            if (e.getSource() == btCono){
+            
+                ingresarConocimientosEspecificos();
+            }
+            
         }
         
     }
