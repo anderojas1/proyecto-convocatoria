@@ -23,14 +23,14 @@ public class Fachada {
     
     public Fachada () {
         
-        url = "jdbc:postgresql://localhost:5432/georgerr";
-        user = "georgerr";
-        password = "georgerr";
+        url = "jdbc:postgresql://localhost:5432/pruebas";
+        user = "anderojas";
+        password = "univalle";
         
     }
     
     
-    public Connection conectar () {
+    public Connection conectar () throws SQLException {
         
         try {
             
@@ -42,15 +42,12 @@ public class Fachada {
             
         } catch (SQLException ex) {
             
-            JOptionPane.showMessageDialog(null, "No se pudo abrir la base de datos");
-            
-            return null;
+            throw ex;
             
         } catch (ClassNotFoundException ex) {
             
-            JOptionPane.showMessageDialog(null, "Imposible cargar el driver");
-            
             return null;
+            
         }
         
     }

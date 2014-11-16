@@ -185,7 +185,7 @@ public class VentanaLogin extends JFrame {
                 
             }
             
-        } catch (SQLException ex) {
+        } catch (SQLException | NullPointerException ex) {
             
             JOptionPane.showMessageDialog(this, "No se pudo conectar a la base de datos", "Error fatal", JOptionPane.ERROR_MESSAGE);
             dispose();

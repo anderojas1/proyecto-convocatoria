@@ -46,7 +46,7 @@ public class DaoUsuario {
     }
     
     
-    public void ejecutarSentencia () throws SQLException {
+    public void ejecutarSentencia () throws SQLException, NullPointerException {
         
         try{
             
@@ -64,7 +64,7 @@ public class DaoUsuario {
         
         } catch (NullPointerException ex) {
             
-            JOptionPane.showMessageDialog(null, "Error en base de datos. No se puede conectar");
+            throw ex;
             
         }
         
