@@ -76,6 +76,10 @@ public class VentanaRegistrarIdioma extends JFrame {
     private void inicializarComponentes() {
 
         panel = new JPanel(null);
+        
+        jchbescribir = new JCheckBoxMenuItem();
+        jchbhablar = new JCheckBoxMenuItem();
+        jchbleer = new JCheckBoxMenuItem();
 
         lbtitulo = new JLabel("Registrar Idioma");
         lbidioma = new JLabel("Seleccione el idioma");
@@ -262,7 +266,35 @@ public class VentanaRegistrarIdioma extends JFrame {
 				
 		String codigoIdioma = controladorIdioma.consultarCodigo(nombre);
                 
-                controladorIdioma.agregarIdiomaAspirante(id_aspirante, codigoIdioma, habla, lee, escribe);
+                double pun = 0.0;
+                double nuevo = 0.0;
+                boolean es = false;
+                boolean cambia = false;
+                
+                try {
+                    
+                    pun = controladorIdioma.consultarPuntajeMaximo();
+                    
+                    nuevo = calcularPuntaje(habla, lee, escribe);
+                    
+                    if (pun == 0.0) {
+                        
+                        es = true;
+                    }
+                    
+                    if (nuevo > pun) {
+                        
+                        es = true;
+                        cambia = true;
+                        
+                    }                    
+                    
+                    
+                } catch (SQLException ex) {
+                    
+                }
+                
+                controladorIdioma.agregarIdiomaAspirante(id_aspirante, codigoIdioma, habla, lee, escribe, nuevo, es, cambia);
             
 		JOptionPane.showMessageDialog(this, "Se registró el idioma exitosamente", "Idioma registrado", JOptionPane.INFORMATION_MESSAGE);
             
@@ -279,6 +311,44 @@ public class VentanaRegistrarIdioma extends JFrame {
         
         else JOptionPane.showMessageDialog(this, "Debe seleccionar su nivel de manejo del idioma en todos los componentes", 
                                                     "Error campos sin marcar", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    public double calcularPuntaje (String hablar, String leer, String escribir) {
+                
+        double puntaje = 0.0;
+        
+        puntaje += comparar(true, hablar);
+        puntaje += comparar(false, escribir);
+        puntaje += comparar(false, leer);
+        
+        System.out.println("puntaje: " + puntaje);
+        
+        return puntaje;
+        
+    }
+    
+    
+    public double comparar (boolean opera, String manejo) {
+        
+        if (opera == true) {
+            
+            if (manejo.equals("Muy bueno")) return 4.0;
+            
+            else if (manejo.equals("Bueno")) return 2.0;
+            
+            else return 1.0;
+            
+        }
+        
+        else {
+            
+            if (manejo.equals("Muy bueno")) return 3.0;
+            
+            else if (manejo.equals("Bueno")) return 1.5;
+            
+            else return 0.8;
+            
+        }
     }
 
     private class ControladorEventos implements MouseListener, KeyListener {

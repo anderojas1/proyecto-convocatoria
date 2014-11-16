@@ -85,7 +85,7 @@ public class DaoIdioma {
         sqlSentence = "SELECT nombre, leer, escribir, hablar FROM ASPIRANTE_HABLA INNER JOIN IDIOMA ON cod_idioma = codigo_idioma where "
                 + "id_aspirante = '" + id + "';";
 		
-        conectar = fachadaConectar.conectar();     
+        conectar = fachadaConectar.conectar();
         sentencia = conectar.createStatement();
         registros = sentencia.executeQuery(sqlSentence);
         
@@ -128,10 +128,11 @@ public class DaoIdioma {
     }
     
     
-    public void agregarIdiomaAspirante (String id, String cod, String hablar, String leer, String esc) throws SQLException {
+    public void agregarIdiomaAspirante (String id, String cod, String hablar, String leer, String esc, 
+                                            double puntaje, boolean escoger) throws SQLException {
         
         sqlSentence = "INSERT INTO ASPIRANTE_HABLA VALUES ('" + id + "','" + cod + "','" + hablar + "','" + leer + "','"
-                + esc + "');";
+                + esc + "'," + puntaje + "," + escoger + ");";
         
         ejecutarSentencia();
     }
@@ -145,6 +146,41 @@ public class DaoIdioma {
         sentencia.executeUpdate(sqlSentence);
 
         conectar.close();
+        
+    }
+    
+    
+    public void cambiarIdiomaEscogido () throws SQLException {
+        
+        sqlSentence = "UPDATE ASPIRANTE_HABLA SET escoger = false WHERE escoger = TRUE;";
+        
+        ejecutarSentencia();
+        
+    }
+    
+    
+    public void ejecutarConsulta () throws SQLException {
+        
+        conectar = fachadaConectar.conectar();		
+	sentencia = conectar.createStatement();
+        registros = sentencia.executeQuery(sqlSentence);
+        
+        conectar.close();
+        
+    }
+    
+    
+    public double consultarPuntaje () throws SQLException {
+        
+        sqlSentence = "SELECT puntaje FROM ASPIRANTE_HABLA WHERE escoger = TRUE;";
+        
+        ejecutarConsulta();
+        
+        double puntaje = 0.0;
+        
+        if (registros.next()) puntaje = registros.getDouble(1);
+        
+        return puntaje;
         
     }
 }

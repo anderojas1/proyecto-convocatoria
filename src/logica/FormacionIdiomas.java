@@ -40,51 +40,7 @@ public class FormacionIdiomas {
     }
     
     
-    public void calcularPuntaje () {
-        
-        /*Idioma compara = idiomas.get(idiomas.size()-1);
-        
-        String hablar = compara.getHablar();
-        String leer = compara.getLeer();
-        String escribir = compara.getEscribir();
-        
-        double puntaje = 0.0;
-        
-        puntaje += comparar(true, hablar);
-        puntaje += comparar(false, escribir);
-        puntaje += comparar(false, leer);
-        
-        if (puntaje > puntajeModulo) {
-            
-            setPuntaje(puntaje);
-            
-        }*/
-        
-    }
     
-    
-    public double comparar (boolean opera, String manejo) {
-        
-        if (opera == true) {
-            
-            if (manejo.equals("Muy bueno")) return 4.0;
-            
-            else if (manejo.equals("Bueno")) return 2.0;
-            
-            else return 1.0;
-            
-        }
-        
-        else {
-            
-            if (manejo.equals("Muy bueno")) return 3.0;
-            
-            else if (manejo.equals("Bueno")) return 1.5;
-            
-            else return 0.8;
-            
-        }
-    }
     
     
 }

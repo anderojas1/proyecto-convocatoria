@@ -47,9 +47,22 @@ public class DriverIdioma {
     
     
     public void agregarIdiomaAspirante (String id_aspi, String cod_idioma, String hablar, String leer, 
-                                            String escribir) throws SQLException {
+                                            String escribir, double puntu, boolean escoger, boolean cambia) throws SQLException {
         
-        daoIdioma.agregarIdiomaAspirante(id_aspi, cod_idioma, hablar, leer, escribir);
+        if (cambia == true) {
+            
+            daoIdioma.cambiarIdiomaEscogido();
+            
+        }
+        
+        daoIdioma.agregarIdiomaAspirante(id_aspi, cod_idioma, hablar, leer, escribir, puntu, escoger);
+        
+    }
+    
+    
+    public double consultarPuntajeMaximo () throws SQLException {
+        
+        return daoIdioma.consultarPuntaje();
         
     }
     

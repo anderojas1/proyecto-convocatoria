@@ -6,7 +6,6 @@
 package Gui;
 
 import controlador.DriverIdioma;
-import java.awt.Color;
 import java.awt.event.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
