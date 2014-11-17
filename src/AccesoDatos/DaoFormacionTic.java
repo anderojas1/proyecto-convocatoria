@@ -79,4 +79,39 @@ public class DaoFormacionTic {
         }
          return soporte;
      }
+     
+     public int maximoPuntaje(String identificacion_aspirante){
+         sentenciaSql="SELECT MAX(puntaje) FROM formaciontic WHERE identificacion = '"+identificacion_aspirante+"';";
+         int puntaje=0;
+         
+         try{
+            
+            conectar= fachadaConectar.conectar();
+            
+            sentencia = conectar.createStatement();
+
+            registros = sentencia.executeQuery(sentenciaSql);
+            
+            while (registros.next()) {
+            
+                puntaje = registros.getInt(1);
+                
+            }
+            
+        } catch(SQLException ex) { 
+            
+            JOptionPane.showMessageDialog(null, "Error en base de datos. No se puede guardar");
+        
+        } catch (NullPointerException ex) {
+            
+            JOptionPane.showMessageDialog(null, "Error en base de datos. No se puede conectar");
+            
+        }
+         
+         return puntaje;
+     }
+     
+     public void asignarPuntajeInscripcion(String identificacion, String codigo, int puntaje){
+         sentenciaSql="INSERT INTO AspiranteConvocatoria VALUES ('"+identificacion+"', '"+codigo+"', "+puntaje+", false);";
+     }
 }
