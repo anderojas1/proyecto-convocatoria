@@ -58,5 +58,18 @@ public class DriverUsuario {
     }
     
     
+    public boolean consultarUsuario (String id) throws SQLException {
+        
+        return daoUsuario.consultarUsuario(id);
+        
+    }
+    
+    
+    public void cambiarContraseña (String id, String pass) throws SQLException {
+        
+        daoUsuario.cambiarContraseña(id, pass);
+        
+    }
+    
     
 }

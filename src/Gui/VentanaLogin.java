@@ -222,7 +222,9 @@ public class VentanaLogin extends JFrame {
     
     public void recuperarPassword () {
         
-        JOptionPane.showMessageDialog(this, "Pronto recuperaremos tu contraseña", "Modulo en construcción", JOptionPane.INFORMATION_MESSAGE);
+        VentanaRestorePassword restaurar = new VentanaRestorePassword();
+        
+        dispose();
         
     }
     

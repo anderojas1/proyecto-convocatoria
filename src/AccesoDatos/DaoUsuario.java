@@ -32,6 +32,25 @@ public class DaoUsuario {
     }
     
     
+    public void ejecutarUpdate () throws SQLException {
+        
+        conectar = fachadaConectar.conectar();
+
+        sentencia = conectar.createStatement();
+        sentencia.executeUpdate(sentenciaSql);
+
+        conectar.close();
+        
+    }
+    
+    
+    public void cambiarContraseña (String id, String pass) throws SQLException {
+        
+        sentenciaSql = "UPDATE ACCESO SET password = '" + pass + "' WHERE identificacion = '" + id + "';";
+        ejecutarUpdate();
+    }
+    
+    
     public void crearUsuario (Usuario user) throws SQLException {
         
         sqlDatos ="INSERT INTO Usuario VALUES ('" + user.getIdentificacion() + "', '" + user.getTipoIdentificacion()+ "', '"
@@ -67,6 +86,28 @@ public class DaoUsuario {
             throw ex;
             
         }
+        
+    }
+    
+    
+    public void ejecutarConsulta () throws SQLException {
+        
+        conectar= fachadaConectar.conectar();
+            
+        sentencia = conectar.createStatement();
+
+        registros = sentencia.executeQuery(sentenciaSql);
+            
+    }
+    
+    
+    public boolean consultarUsuario (String id) throws SQLException {
+        
+        sentenciaSql = "SELECT * FROM ACCESO WHERE identificacion = '" + id + "';";
+        
+        ejecutarConsulta();
+        
+        return registros.next();
         
     }
     
