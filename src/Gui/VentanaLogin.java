@@ -11,6 +11,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import controlador.DriverUsuario;
+import java.io.File;
 import java.sql.SQLException;
 
 
@@ -45,18 +46,20 @@ public class VentanaLogin extends JFrame {
         
         controladorUsuario = new DriverUsuario();
         
-        lbtitulo = new JLabel("Sistema de Convocatoria Docente");
-        lbusername = new JLabel("Usuario *");
-        lbpassword = new JLabel("Contraseña *");
+        lbtitulo = new JLabel(new ImageIcon("src/iconos/convocatoria.jpg"));
+        lbusername = new JLabel(new ImageIcon("src/iconos/user-login.png"));
+        lbpassword = new JLabel(new ImageIcon("src/iconos/password.png"));
         lbolvidar = new JLabel("¿Olvidó sus datos de acceso?");
         
         jpfpassword = new JPasswordField();
         
         jtfusername = new JTextField();
         
-        jbiniciar = new JButton("Ingresar");
+        jbiniciar = new JButton(new ImageIcon("src/iconos/iniciar-sesion.jpg"));
+        jbiniciar.setBorder(null);
         
         panel = new JPanel();
+        panel.setBackground(Color.WHITE);
         getContentPane().add(panel);
         
         driverEventos = new ManejaEventos();
@@ -65,7 +68,7 @@ public class VentanaLogin extends JFrame {
         acomodarComponentes();
         addFeatures(); 
         
-        setSize(500, 350);
+        setSize(500, 400);
         setResizable(false);
         setLocationRelativeTo(null);
         
@@ -105,15 +108,15 @@ public class VentanaLogin extends JFrame {
     
     private void acomodarComponentes () {
         
-        lbtitulo.setBounds(100, 20, 300, 30);
-        lbusername.setBounds(80, 100, 120, 30);
-        jtfusername.setBounds(220, 100, 200, 30);
-        lbpassword.setBounds(80, 150, 120, 30);
-        jpfpassword.setBounds(220, 150, 200, 30);
+        lbtitulo.setBounds(0, 0, 500, 80);
+        lbusername.setBounds(80, 150, 30, 30);
+        jtfusername.setBounds(120, 150, 300, 30);
+        lbpassword.setBounds(80, 190, 30, 30);
+        jpfpassword.setBounds(120, 190, 300, 30);
         
-        lbolvidar.setBounds(220, 190, 140, 10);
+        lbolvidar.setBounds(120, 230, 140, 10);
         
-        jbiniciar.setBounds(300, 240, 120, 30);
+        jbiniciar.setBounds(110, 270, 100, 53);
         
     }
     
@@ -217,6 +220,13 @@ public class VentanaLogin extends JFrame {
     }
     
     
+    public void recuperarPassword () {
+        
+        JOptionPane.showMessageDialog(this, "Pronto recuperaremos tu contraseña", "Modulo en construcción", JOptionPane.INFORMATION_MESSAGE);
+        
+    }
+    
+    
     private class ManejaEventos implements MouseListener, KeyListener {
         
         
@@ -231,7 +241,7 @@ public class VentanaLogin extends JFrame {
             
             else if (me.getSource() == lbolvidar) {
                 
-                System.out.println("olvidar\n");
+                recuperarPassword();
                 
             }
             
@@ -253,8 +263,14 @@ public class VentanaLogin extends JFrame {
             if (me.getSource() == lbolvidar) {
                 
                 lbolvidar.setCursor(new Cursor(Cursor.HAND_CURSOR));
-                lbolvidar.setSize(200, 10);
+                lbolvidar.setSize(170, 10);
                 lbolvidar.setFont(new Font("Arial", 1, 10));
+                
+            }
+            
+            if (me.getSource() == jbiniciar) {
+                
+                jbiniciar.setCursor(new Cursor(Cursor.HAND_CURSOR));
                 
             }
             
