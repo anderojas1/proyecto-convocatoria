@@ -15,13 +15,15 @@ public class VentanaOpcionesModulo extends JFrame{
     private ManejaEventos manejador;
     private int tipo;
     private String usuario;
+    private String[] datos_convocatoria;
     private VentanaRegDatoPersona ventanaDatosPersonales;
     
-    public VentanaOpcionesModulo(int tipo, String usuario){
+    public VentanaOpcionesModulo(int tipo, String usuario, String[] datos_convocatoria){
         super("Aspectos hojas de vida");
         
         this.tipo = tipo;
         this.usuario = usuario;
+        this.datos_convocatoria = datos_convocatoria;
         
         iniciarComponentes();
         agregarComponentes();
@@ -143,7 +145,7 @@ public class VentanaOpcionesModulo extends JFrame{
     }
     
     public void ingresarFormacionTIC(){//Ventana siguiente
-         VentanaFormacionTic formacionTic = new VentanaFormacionTic(tipo, usuario);
+         VentanaFormacionTic formacionTic = new VentanaFormacionTic(tipo, usuario, datos_convocatoria);
          formacionTic.agregarEventos();
          formacionTic.configurarVentana(this);
          setVisible(false);
@@ -216,7 +218,7 @@ public class VentanaOpcionesModulo extends JFrame{
     
        public static void main(String args[]){
 
-        VentanaOpcionesModulo ven =  new VentanaOpcionesModulo(0, "1234");
+        //VentanaOpcionesModulo ven =  new VentanaOpcionesModulo(0, "1234");
 
 } 
             

@@ -19,8 +19,8 @@ public class DaoFormacionTic {
     }
     
     public void crearFormacionTic(formacionTic forT) throws SQLException{
-        sentenciaSql="INSERT INTO FormacionTic VALUES ('"+forT.getIdentificacion()+"', '"+forT.getTitulo()+
-                       "', "+forT.getConsecutivo()+", '"+forT.getSoporte()+"', "+forT.getPuntaje()+");";
+        sentenciaSql="INSERT INTO FormacionTic VALUES ('"+forT.getIdentificacion()+"', '"+forT.getConvocatoria()+"', '"+forT.getTitulo()+
+                       "', "+forT.getConsecutivo()+", '"+forT.getSoporte()+"', "+forT.getPuntaje()+", false);";
         
         ejecutarSentencia();
     }
@@ -80,8 +80,8 @@ public class DaoFormacionTic {
          return soporte;
      }
      
-     public int maximoPuntaje(String identificacion_aspirante){
-         sentenciaSql="SELECT MAX(puntaje) FROM formaciontic WHERE identificacion = '"+identificacion_aspirante+"';";
+     public int maximoPuntajeInscripcion(String identificacion_aspirante, String codigo_convocatoria) throws SQLException{
+         sentenciaSql="SELECT MAX(puntaje) FROM formaciontic WHERE identificacion = '"+identificacion_aspirante+"' AND codigo_convocatoria = '"+codigo_convocatoria+"';";
          int puntaje=0;
          
          try{
@@ -111,7 +111,13 @@ public class DaoFormacionTic {
          return puntaje;
      }
      
-     public void asignarPuntajeInscripcion(String identificacion, String codigo, int puntaje){
-         sentenciaSql="INSERT INTO AspiranteConvocatoria VALUES ('"+identificacion+"', '"+codigo+"', "+puntaje+", false);";
+     public void asignarPuntajeInscripcion(String identificacion, String codigo_convocatoria, int nuevo_puntaje, int maximo_puntaje)throws SQLException{
+ 
+         
+         if(maximo_puntaje < nuevo_puntaje){
+         int diferencia = nuevo_puntaje - maximo_puntaje;
+         sentenciaSql="UPDATE AspiranteConvocatoria SET puntajetotal = puntajetotal + "+diferencia+" WHERE identificacion = '"+identificacion+"' AND codigo = '"+codigo_convocatoria+"';";
+         ejecutarSentencia();
+         }
      }
 }

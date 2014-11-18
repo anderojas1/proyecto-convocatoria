@@ -10,14 +10,16 @@ public class formacionTic {
     private String titulo;
     private String soporte;
     private int puntaje;
+    private String convocatoria;
     
-    public formacionTic(String identificacion, String titulo, int consecutivo, String soporte, int puntaje){
+    public formacionTic(String identificacion, String titulo, int consecutivo, String soporte, int puntaje, String convocatoria){
         
         this.identificacion = identificacion;
         this.titulo = titulo;
         this.consecutivo = consecutivo;
         this.soporte = soporte;
         this.puntaje = puntaje;
+        this.convocatoria = convocatoria;
     }
 
     public int getConsecutivo() {
@@ -59,6 +61,15 @@ public class formacionTic {
     public void setPuntaje(int puntaje) {
         this.puntaje = puntaje;
     }
+
+    public String getConvocatoria() {
+        return convocatoria;
+    }
+
+    public void setConvocatoria(String convocatoria) {
+        this.convocatoria = convocatoria;
+    }
+    
     
     
 }

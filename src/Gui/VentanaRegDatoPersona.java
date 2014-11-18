@@ -62,6 +62,7 @@ public class VentanaRegDatoPersona extends JFrame {
     
     private boolean validarAsp= false;
     private int tipo;
+    private String[] datos_convocatoria;
 
     //Constructor de la Clase 
     public VentanaRegDatoPersona(int tipo) {
@@ -322,6 +323,8 @@ public class VentanaRegDatoPersona extends JFrame {
         panelPrin = new JPanel();
 
         manejador = new ManejaEventos();
+        
+        datos_convocatoria = new String[2];
 
     }
 
@@ -450,7 +453,7 @@ public class VentanaRegDatoPersona extends JFrame {
     
     public void ingresarModulos(){//Ventana siguiente
          String idAsp = campoNumIdent.getText();
-         VentanaOpcionesModulo opciones = new VentanaOpcionesModulo(tipo, idAsp);
+         VentanaOpcionesModulo opciones = new VentanaOpcionesModulo(tipo, idAsp, datos_convocatoria);
          opciones.asignarEventos();
          opciones.configurarVentana(this);
          setVisible(false);
@@ -563,6 +566,7 @@ public class VentanaRegDatoPersona extends JFrame {
         String partes[] = convocatoria.split(",");
         String idAsp=campoNumIdent.getText();;
         String codconv=partes[0];
+        datos_convocatoria=partes;
         
         contAspirante.guardarAspiranteConvocatoria(idAsp, codconv);
     }

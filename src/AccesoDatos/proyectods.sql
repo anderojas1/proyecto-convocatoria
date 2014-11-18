@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS USUARIO, ACCESO, CONVOCATORIA, ASPIRANTECONVOCATORIA, ASPIRANTE, ASPIRANTE_HABLA, IDIOMA, CONOCIMIENTOS_ESPECIFICOS, DocumentosPrePos, IDIOMA, FormacionTic, CONOCIMIENTOS_ESPECIFICOS, ExpFormadorTic CASCADE;
+﻿DROP TABLE IF EXISTS USUARIO, ACCESO, CONVOCATORIA, ASPIRANTECONVOCATORIA, ASPIRANTE, ASPIRANTE_HABLA, IDIOMA, CONOCIMIENTOS_ESPECIFICOS, DocumentosPrePos, IDIOMA, FormacionTic, CONOCIMIENTOS_ESPECIFICOS, ExpFormadorTic CASCADE;
 
 
 CREATE TABLE USUARIO (
@@ -99,15 +99,20 @@ REFERENCES Aspirante (identificacion)
 
 CREATE TABLE FormacionTic(
 	identificacion VARCHAR(20) NOT NULL,
+	codigo_convocatoria varchar(10) NOT NULL,
 	titulo VARCHAR(80) NOT NULL,
 	consecutivo int NOT NULL,
 	soporte VARCHAR(100),
 	puntaje int,
+	calificado bool NOT NULL,
 
-	CONSTRAINT formacionTic_fk PRIMARY KEY(identificacion, titulo, consecutivo),
+	CONSTRAINT formacionTic_fk PRIMARY KEY(identificacion, codigo_convocatoria, titulo, consecutivo),
 
 	CONSTRAINT id_aspirante_fk FOREIGN KEY(identificacion)
-	REFERENCES Aspirante(identificacion)
+	REFERENCES Aspirante(identificacion),
+
+	CONSTRAINT convocatoria_fk FOREIGN KEY(codigo_convocatoria)
+	REFERENCES Convocatoria(codigo)
 	
 );
 

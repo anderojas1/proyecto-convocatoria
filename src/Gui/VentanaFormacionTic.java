@@ -22,15 +22,17 @@ public class VentanaFormacionTic extends JFrame{
     private ManejaEvento driverEventos;
     private DriverFormacionTic contFormacionTic;
     private String id_aspirante;
+    private String[] datos_convocatoria;
     private VentanaOpcionesModulo ventana_opcionesM;
     
     int item1, item2, item3, item4;
     
-    public VentanaFormacionTic(int tipo, String identificacion_aspirante){
+    public VentanaFormacionTic(int tipo, String identificacion_aspirante, String[] datos_convocatoria){
          
         super("VENTANA FORMACIÓN EN TIC");
         
         id_aspirante = identificacion_aspirante;
+        this.datos_convocatoria = datos_convocatoria;
         contFormacionTic = new DriverFormacionTic();
         item1 = 0;
         item2 = 0;
@@ -62,7 +64,7 @@ public class VentanaFormacionTic extends JFrame{
     public void iniciarComponentes(){
         
         principal = new JPanel();
-        lbEncabezado = new JLabel("Formacion en Tic");
+        lbEncabezado = new JLabel("Formacion en Tic - "+datos_convocatoria[1]);
         lbCurso = new JLabel("Curso:");
         lbSoporte = new JLabel("Soporte:");
         comboTitulos = new JComboBox();
@@ -157,7 +159,11 @@ public class VentanaFormacionTic extends JFrame{
                 JOptionPane.showMessageDialog(null, "Debe Seleccionar un archivo de soporte diferente");
             }
             else{
-            contFormacionTic.guardar(id_aspirante, titulo, item1, ruta, puntos);
+            int puntaje_maximo = contFormacionTic.puntajeMaximo(id_aspirante, datos_convocatoria[0]);
+            System.out.print("Puntaje maximo "+puntaje_maximo);
+            contFormacionTic.guardar(id_aspirante, titulo, item1, ruta, puntos, datos_convocatoria[0]);
+            
+            contFormacionTic.asignarPuntajeInscripcion(id_aspirante, datos_convocatoria[0], puntos, puntaje_maximo);
             item1++;}
         }
         
@@ -207,7 +213,7 @@ public class VentanaFormacionTic extends JFrame{
     
     public static void main(String args[]){
 
-    VentanaFormacionTic ven =  new VentanaFormacionTic(0, "1234");
+    //VentanaFormacionTic ven =  new VentanaFormacionTic(0, "1234", );
 
 }  
 }
