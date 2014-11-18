@@ -67,8 +67,8 @@ estado bool NOT NULL
 
 CREATE TABLE AspiranteConvocatoria(
 	identificacion varchar (20) NOT NULL,
-	codigo varchar (20) NOT NULL,
-	puntajetotal int NOT NULL,
+	codigo varchar (10) NOT NULL,
+	puntajetotal double precision NOT NULL,
 	calificado bool NOT NULL,
 
 	CONSTRAINT apirante_convocatoria_pk PRIMARY KEY (identificacion, codigo), 

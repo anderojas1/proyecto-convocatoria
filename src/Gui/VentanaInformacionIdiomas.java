@@ -60,6 +60,8 @@ public class VentanaInformacionIdiomas extends JFrame {
         
         panel = new JPanel(null);
         
+        lbtitulo = new JLabel(new ImageIcon("src/iconos/convocatoria.jpg"));
+        
         String [] titulos = new String [] {"Idioma", "Lee", "Escribe", "Habla"};
         
         modelo = new DefaultTableModel(0, 4);
@@ -74,8 +76,6 @@ public class VentanaInformacionIdiomas extends JFrame {
         
         jbcerrar = new JButton ("Cerrar");
         jbregistrar = new JButton("Agregar");
-        
-        lbtitulo = new JLabel("Modulo de Idiomas");
         
     }
     
@@ -140,12 +140,16 @@ public class VentanaInformacionIdiomas extends JFrame {
         panel.add(jbcerrar);
         panel.add(jbregistrar);
         
+        panel.add(lbtitulo);
+        
         getContentPane().add(panel);
         
     }
     
     
     private void acomodarComponentes () {
+        
+        lbtitulo.setBounds(0, 0, 500, 80);
         
         jttablaIdiomas.setBounds(50, 100, 400, 300);
         
@@ -224,6 +228,12 @@ public class VentanaInformacionIdiomas extends JFrame {
         }
         
         
+    }
+    
+    public static void main(String[] args) {
+        
+        VentanaInformacionIdiomas info = new VentanaInformacionIdiomas(0, "hola");
+        info.agregarEventos();
     }
     
 }

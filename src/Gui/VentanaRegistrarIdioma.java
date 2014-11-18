@@ -68,7 +68,7 @@ public class VentanaRegistrarIdioma extends JFrame {
         setSize(600, 450);
         setResizable(false);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(0);
         setVisible(true);
 
     }
@@ -268,6 +268,7 @@ public class VentanaRegistrarIdioma extends JFrame {
                 
                 double pun = 0.0;
                 double nuevo = 0.0;
+                double puntajeSumar = 0.0;
                 boolean es = false;
                 boolean cambia = false;
                 
@@ -280,15 +281,16 @@ public class VentanaRegistrarIdioma extends JFrame {
                     if (pun == 0.0) {
                         
                         es = true;
+                        puntajeSumar = nuevo;
                     }
                     
-                    if (nuevo > pun) {
+                    else if (nuevo > pun) {
                         
                         es = true;
                         cambia = true;
+                        puntajeSumar = nuevo - pun;
                         
-                    }                    
-                    
+                    }
                     
                 } catch (SQLException ex) {
                     

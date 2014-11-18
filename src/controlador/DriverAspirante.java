@@ -72,6 +72,18 @@ public class DriverAspirante {
       
     }
     
+    public void updatePuntajeUsuario (String id, String convo, double puntaje) throws SQLException {
+        
+        daoaspirante.updatePuntajeUsuario(id, convo, puntaje);
+        
+    }
+    
+    
+    public double consultarPuntaje (String id, String con) throws SQLException {
+        
+        return daoaspirante.consultarPuntajeUsuario(id, con);
+        
+    }
          
     
 }

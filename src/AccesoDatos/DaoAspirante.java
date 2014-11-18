@@ -119,7 +119,7 @@ public class DaoAspirante {
     }
     
     public void AspiranteConvocatoria(String idAsp, String codConv) throws SQLException{
-        sqlDatos="INSERT INTO AspiranteConvocatoria VALUES ('"+idAsp+"', '"+codConv+"', 0, false);";
+        sqlDatos="INSERT INTO AspiranteConvocatoria VALUES ('"+idAsp+"', '"+codConv+"', 0.0, false);";
         
          try {
             ejecutarSentencia();
@@ -131,25 +131,47 @@ public class DaoAspirante {
 
     public void ejecutarSentencia() throws SQLException {
 
-        try {
+        conectar = fachada.conectar();
 
-            conectar = fachada.conectar();
+        sentencia = conectar.createStatement();
+        sentencia.executeUpdate(sqlDatos);
 
-            sentencia = conectar.createStatement();
-            sentencia.executeUpdate(sqlDatos);
+        conectar.close();       
 
-
-            conectar.close();
-
-        } catch (SQLException ex) {
-
-            throw ex;
-
-        } catch (NullPointerException ex) {
-
-            JOptionPane.showMessageDialog(null, "Error en base de datos. No se puede conectar");
-
-        }
-
+    }
+    
+    
+    public void updatePuntajeUsuario (String id, String convo, double puntaje) throws SQLException {
+        
+        sentenciaSql = "UPDATE AspiranteConvocatoria SET puntajetotal = " + puntaje + " WHERE identificacion = '" + id +"' AND "
+                + "codigo = '" + convo + "';";
+        
+        ejecutarSentencia();
+        
+    }
+    
+    
+    public double consultarPuntajeUsuario (String id, String convoca) throws SQLException {
+        
+        double puntaje = 0.0;
+        
+        sentenciaSql = "SELECT puntajetotal FROM AspiranteConvocatoria WHERE identificacion = '" + id + "' AND codigo = '" + convoca + "';";
+        ejecutarConsulta();
+        
+        if (registros.next()) puntaje = registros.getDouble(1);
+        
+        return puntaje;
+        
+    }
+    
+    
+    public void ejecutarConsulta () throws SQLException {
+        
+        conectar = fachada.conectar();		
+	sentencia = conectar.createStatement();
+        registros = sentencia.executeQuery(sentenciaSql);
+        
+        conectar.close();
+        
     }
 }
