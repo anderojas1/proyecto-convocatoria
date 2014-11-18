@@ -5,6 +5,7 @@
  */
 package Gui;
 
+import controlador.DriverAspirante;
 import controlador.DriverIdioma;
 import java.awt.event.*;
 import java.sql.SQLException;
@@ -297,6 +298,14 @@ public class VentanaRegistrarIdioma extends JFrame {
                 }
                 
                 controladorIdioma.agregarIdiomaAspirante(id_aspirante, codigoIdioma, habla, lee, escribe, nuevo, es, cambia);
+                System.out.println("flag 1");
+                DriverAspirante asp = new DriverAspirante();
+                
+                double puntajeTotalActual = asp.consultarPuntaje(id_aspirante, "1");
+                System.out.println("flag 2");
+                puntajeTotalActual += puntajeSumar;
+                
+                asp.updatePuntajeUsuario(id_aspirante, "1", puntajeTotalActual);
             
 		JOptionPane.showMessageDialog(this, "Se registró el idioma exitosamente", "Idioma registrado", JOptionPane.INFORMATION_MESSAGE);
             

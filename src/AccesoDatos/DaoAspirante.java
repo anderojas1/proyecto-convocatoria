@@ -20,7 +20,7 @@ import logica.*;
 public class DaoAspirante {
 
     private Fachada fachada;
-    private String sqlDatos;
+    //private String sqlDatos;
     private String sentenciaSql;
     private Connection conectar;
     private Statement sentencia;
@@ -34,7 +34,7 @@ public class DaoAspirante {
 
     public void insertApplicant(Aspirante asp) throws SQLException {
 
-        sqlDatos = "INSERT INTO Aspirante  values ('" + asp.getIdentificacion() + "', '" + asp.getTipo_id() + "', "
+        sentenciaSql = "INSERT INTO Aspirante  values ('" + asp.getIdentificacion() + "', '" + asp.getTipo_id() + "', "
                 + "'" + asp.getP_nombre() + "', '" + asp.getS_nombre() + "', '" + asp.getP_apellido() + "', '" + asp.getS_apellido() + "',"
                 + "'" + asp.getMunicipio_trabaja() + "', '" + asp.getSexo() + "', '" + asp.getJornada() + "', "
                 + "'" + asp.getLugar_residencia() + "', '" + asp.getFecha_nacimiento() + "', '" + asp.getLugar_nacimiento() + "', '" + asp.getTel() +"',"
@@ -119,7 +119,7 @@ public class DaoAspirante {
     }
     
     public void AspiranteConvocatoria(String idAsp, String codConv) throws SQLException{
-        sqlDatos="INSERT INTO AspiranteConvocatoria VALUES ('"+idAsp+"', '"+codConv+"', 0.0, false);";
+        sentenciaSql="INSERT INTO AspiranteConvocatoria VALUES ('"+idAsp+"', '"+codConv+"', 0.0, false);";
         
          try {
             ejecutarSentencia();
@@ -134,7 +134,7 @@ public class DaoAspirante {
         conectar = fachada.conectar();
 
         sentencia = conectar.createStatement();
-        sentencia.executeUpdate(sqlDatos);
+        sentencia.executeUpdate(sentenciaSql);
 
         conectar.close();       
 
