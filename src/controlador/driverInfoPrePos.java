@@ -6,6 +6,7 @@
 package controlador;
 
 import AccesoDatos.DaoAspForPrePos;
+import AccesoDatos.DaoAspirante;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import logica.InfoPrePos;
@@ -17,18 +18,134 @@ import logica.InfoPrePos;
 public class driverInfoPrePos {
     
     private DaoAspForPrePos daoprepos;
+    private DaoAspirante daoAspirante;
+    private InfoPrePos objPrePos ;
     
     public driverInfoPrePos(){
     
+        daoAspirante = new DaoAspirante();
         daoprepos = new DaoAspForPrePos();
+        objPrePos = new InfoPrePos();
         
+    }
+    
+      
+    public int calificador(String rtDoc, String rtDocTic, String rtMaestria, String rtMaestriaTic,
+                            String rtSpecia, String rtSpeciaTic, String rtLicen){
+    
+        int calificacion = 0;
+           
+        if(!rtDocTic.equals("N/A")){
+        
+            calificacion = 30;
+            return calificacion;
+        
+        }else if(!rtDoc.equals("N/A")){
+        
+            calificacion = 28;
+            return calificacion;
+        
+        }else if(!rtMaestriaTic.equals("N/A")){
+            
+            calificacion = 26;
+            return calificacion;
+        
+        }else if(!rtMaestria.equals("N/A")){
+        
+            calificacion = 24;
+            return calificacion;
+                   
+        }else if(!rtSpeciaTic.equals("N/A")){
+        
+            calificacion = 20;
+            return calificacion;
+            
+        }else if(!rtSpecia.equals("N/A")){
+        
+            calificacion = 15;
+            return calificacion;
+        
+        }else if (!rtLicen.equals("N/A")){
+        
+            calificacion = 10;
+            return calificacion;
+        }
+        
+        
+        return calificacion;
+    }
+    
+    
+    public int calcularPuntaje(String ident, int nPuntaje){
+        
+        int aPuntaje = 0;
+        
+        int puntaje = 0;
+        
+        aPuntaje = daoprepos.getApplicant(ident).getPuntModulo();
+                         
+        puntaje = nPuntaje - aPuntaje;
+        
+        return puntaje;
+        
+    }
+    
+    
+    public void recalificar(String id, String convoca){
+    
+        double puntajeTotal = 0;
+        double puntajeNuevo = 0;
+        
+        try{         
+        
+            puntajeTotal = daoAspirante.consultarPuntajeUsuario(id, convoca);
+        
+          }catch(SQLException ex){
+            
+                System.err.println("Error al consultar la base de datos");
+         
+          }
+        
+        
+        puntajeNuevo = calcularPuntaje(objPrePos.getIdentificacion(), objPrePos.getPuntModulo()) + puntajeTotal;
+        
+        try{
+            
+            daoAspirante.updatePuntajeUsuario(id, convoca, puntajeNuevo);       
+        
+        }catch(SQLException ex){
+        
+            System.err.println("Error al consultar la base de datos");
+        }
+    }
+    
+    public void totalizarPuntaje(int puntajeAnte, String id, String convo){
+    
+        int puntajeMod = 0;
+        int puntTotal = 0;
+        
+        puntajeMod = objPrePos.getPuntModulo();
+        
+        puntTotal = puntajeMod + puntajeAnte;
+        
+        try {
+            
+            daoAspirante.updatePuntajeUsuario(id, convo, puntTotal);
+        
+        }catch(SQLException ex){
+        
+            System.out.println("error al consultar la base de datos");
+        
+        }
+        
+              
+    
     }
     
     public void guardarInfo(String identi, String rtDoc, String rtDocTic, String rtMaestria, String rtMaestriaTic,
                             String rtSpecia, String rtSpeciaTic, String rtLicen){
 
-        InfoPrePos objPrePos = new InfoPrePos();
-
+        
         objPrePos.setIdentificacion(identi);
         objPrePos.setRtDoctor(rtDocTic);
         objPrePos.setRtDoctorTic(rtDocTic);
@@ -37,6 +154,7 @@ public class driverInfoPrePos {
         objPrePos.setRtEspecia(rtSpecia);
         objPrePos.setRtEspeciaTic(rtSpeciaTic);
         objPrePos.setRtLicenciado(rtLicen);
+        objPrePos.setPuntModulo(calificador(rtDoc, rtDocTic, rtMaestria, rtMaestriaTic, rtSpecia, rtSpeciaTic, rtLicen));
         
         try{
         

@@ -90,6 +90,10 @@ maestriaTic VARCHAR(100) NOT NULL,
 especia VARCHAR(100) NOT NULL,
 especiaTic VARCHAR(100) NOT NULL,
 licen VARCHAR(100) NOT NULL,
+puntaje DOUBLE PRECISION NOT NULL,
+
+
+CONSTRAINT id_aspirante_pk FOREIGN KEY (id_aspirante), 
 
 
 CONSTRAINT id_aspirante_fk FOREIGN KEY (id_aspirante)

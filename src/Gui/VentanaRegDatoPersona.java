@@ -315,7 +315,7 @@ public class VentanaRegDatoPersona extends JFrame {
 
               
         btCancelar = new JButton("Cancelar");
-        btconfirmar = new JButton("/");
+        btconfirmar = new JButton(new ImageIcon("src/iconos/lupa.jpg"));
         btaceptar = new JButton("Aceptar");
         btaceptar.setVisible(false);
 
@@ -384,7 +384,7 @@ public class VentanaRegDatoPersona extends JFrame {
         comboTipoDoc.setBounds(180, 80, 200, 25);
         lbNumeroDoc.setBounds(30, 110, 150, 30);
         campoNumIdent.setBounds(180, 110, 200, 25);
-        btconfirmar.setBounds(390, 110, 40, 25);
+        btconfirmar.setBounds(390, 110, 30, 30);
         lbPrimerNom.setBounds(30, 140, 150, 30);
         campoPNombre.setBounds(180, 140, 200, 25);
         lbSegundoNom.setBounds(30, 170, 150, 30);

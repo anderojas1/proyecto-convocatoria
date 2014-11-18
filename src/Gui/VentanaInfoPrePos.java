@@ -46,6 +46,7 @@ public class VentanaInfoPrePos extends JFrame {
     private String rtEspeciaTic;
     private String rtLicen;
     
+      
     private JButton btCancelar;
     private JButton btAceptar;
 
@@ -78,7 +79,7 @@ public class VentanaInfoPrePos extends JFrame {
         iniciarComponentes();
         agregarComponentes();
         acomodarComponentes();
-       // asignarEventos();
+        //asignarEventos();
         
         getContentPane().add(panelPrin);
         setSize(new Dimension(540, 450));
@@ -91,7 +92,7 @@ public class VentanaInfoPrePos extends JFrame {
 
     public final void iniciarComponentes() {
 
-        lbTitulo = new JLabel("INFORMACION PERSONAL");
+        lbTitulo = new JLabel(new ImageIcon("src/iconos/convocatoria.jpg"));
 
         lbDoctor = new JLabel("Doctorado");
         lbDoctorTic = new JLabel("Doctorado en areas afines TIC");
@@ -109,7 +110,7 @@ public class VentanaInfoPrePos extends JFrame {
         CBMaestria  = new JCheckBox();
         CBMaestriaTic = new JCheckBox();
         
-                        
+                                
         btDoctor = new JButton("Examinar");
         btDoctorTic = new JButton("Examinar");
         btEspec = new JButton("Examinar");
@@ -185,29 +186,28 @@ public class VentanaInfoPrePos extends JFrame {
 
     private void acomodarComponentes() {
 
-        lbTitulo.setBounds(160, 30, 200, 30);
-
-        lbLicenciado.setBounds(30, 80, 280, 30);
-        CBLicen.setBounds(350, 80, 20, 25);
-        btLicen.setBounds(390, 80, 110, 25);
-        lbEspecia.setBounds(30, 110, 250, 30);
-        CBEspecia.setBounds(350, 110, 20, 25);
-        btEspec.setBounds(390, 110, 110, 25);
-        lbEspeciaTic.setBounds(30, 140, 280, 30);
-        CBEspeciaTic.setBounds(350, 140, 20, 25);
-        btEspecTic.setBounds(390, 140, 110, 25);
-        lbMaestria.setBounds(30, 170, 250, 30);
-        CBMaestria.setBounds(350, 170, 20, 25);
-        btMaestria.setBounds(390, 170, 110, 25);
-        lbMaestriaTic.setBounds(30, 200, 250, 30);
-        CBMaestriaTic.setBounds(350, 200, 20, 25);
-        btMaestriaTic.setBounds(390, 200, 110, 25);
-        lbDoctor.setBounds(30, 230, 250, 30);
-        CBDoctor.setBounds(350, 230, 20, 25);
-        btDoctor.setBounds(390, 230, 110, 25);
-        lbDoctorTic.setBounds(30, 260, 250, 30);
-        CBDoctorTic.setBounds(350, 260, 20, 25);
-        btDoctorTic.setBounds(390, 260, 110, 25);
+        lbTitulo.setBounds(60, 20, 430, 70);
+        lbLicenciado.setBounds(30, 100, 280, 30);
+        CBLicen.setBounds(350, 100, 20, 25);
+        btLicen.setBounds(390, 100, 110, 25);
+        lbEspecia.setBounds(30, 130, 250, 30);
+        CBEspecia.setBounds(350, 130, 20, 25);
+        btEspec.setBounds(390, 130, 110, 25);
+        lbEspeciaTic.setBounds(30, 160, 280, 30);
+        CBEspeciaTic.setBounds(350, 160, 20, 25);
+        btEspecTic.setBounds(390, 160, 110, 25);
+        lbMaestria.setBounds(30, 190, 250, 30);
+        CBMaestria.setBounds(350, 190, 20, 25);
+        btMaestria.setBounds(390, 190, 110, 25);
+        lbMaestriaTic.setBounds(30, 220, 250, 30);
+        CBMaestriaTic.setBounds(350, 220, 20, 25);
+        btMaestriaTic.setBounds(390, 220, 110, 25);
+        lbDoctor.setBounds(30, 250, 250, 30);
+        CBDoctor.setBounds(350, 250, 20, 25);
+        btDoctor.setBounds(390, 250, 110, 25);
+        lbDoctorTic.setBounds(30, 280, 250, 30);
+        CBDoctorTic.setBounds(350, 280, 20, 25);
+        btDoctorTic.setBounds(390, 280, 110, 25);
         
         btAceptar.setBounds(225, 350, 110, 30);
         btCancelar.setBounds(385, 350, 110, 30);
@@ -340,7 +340,7 @@ public class VentanaInfoPrePos extends JFrame {
     
     public int checkSeleccion()
     {
-        if (CBDoctor.isSelected() == true) 
+        if (CBDoctor.isSelected() == true ) 
         {
              return 1;
         }
@@ -350,27 +350,27 @@ public class VentanaInfoPrePos extends JFrame {
              return 2;
         }
         
-        else if (CBMaestria.isSelected() == true) 
+        else if (CBMaestria.isSelected() == true ) 
         {
              return 3;
         }
         
-        else if (CBMaestriaTic.isSelected() == true) 
+        else if (CBMaestriaTic.isSelected() == true ) 
         {
              return 4;
         }
         
-        else if (CBEspecia.isSelected() == true) 
+        else if (CBEspecia.isSelected() == true ) 
         {
              return 5;
         }
         
-        else if (CBEspeciaTic.isSelected() == true) 
+        else if (CBEspeciaTic.isSelected() == true ) 
         {
              return 6;
         }
         
-        else if (CBLicen.isSelected() == true) 
+        else if (CBLicen.isSelected() == true ) 
         {
              return 7;
         }
@@ -403,7 +403,7 @@ public class VentanaInfoPrePos extends JFrame {
     ventanaOpcModulo = vent;
     
     }
-
+  
     
     private class ManejaEventos implements MouseListener{
 
@@ -419,10 +419,11 @@ public class VentanaInfoPrePos extends JFrame {
                    driverPrePos.guardarInfo(indentificacion ,rtDoctor, rtDoctorTic, rtMaestria, rtMaestriaTic,
                                             rtEspecia, rtEspeciaTic, rtLicen);
               
-                   // System.err.println(indentificacion + rtDoctor +  rtDoctorTic +  rtMaestria +  rtMaestriaTic + 
-                     //                       rtEspecia +  rtEspeciaTic +  rtLicen);
+                    System.err.println(indentificacion + rtDoctor +  rtDoctorTic +  rtMaestria +  rtMaestriaTic + 
+                                            rtEspecia +  rtEspeciaTic +  rtLicen);
                 }else{
                 
+                    
                     JOptionPane.showMessageDialog(null, "Se deben de cargar los archivos de respalfo \n de las casillas seleccionadas");
                 }
                                 
@@ -468,20 +469,7 @@ public class VentanaInfoPrePos extends JFrame {
                     
                 }else{
                 
-                    btDoctor.removeMouseListener(manejador);
-                    btDoctor.setEnabled(false);
-                                    
-                }
-
-            }  else if (me.getSource() == CBDoctor) {
-                
-                if(CBDoctor.isSelected() == true) {
-                    
-                    btDoctor.setEnabled(true);
-                    btDoctor.addMouseListener(manejador);
-                    
-                }else{
-                
+                    rtDoctor = "N/A";
                     btDoctor.removeMouseListener(manejador);
                     btDoctor.setEnabled(false);
                                     
@@ -496,6 +484,7 @@ public class VentanaInfoPrePos extends JFrame {
                     
                 }else{
                 
+                    rtDoctorTic = "N/A";
                     btDoctorTic.removeMouseListener(manejador);
                     btDoctorTic.setEnabled(false);
                                     
@@ -509,7 +498,8 @@ public class VentanaInfoPrePos extends JFrame {
                     btMaestria.addMouseListener(manejador);
                     
                 }else{
-                
+                    
+                    rtMaestria = "N/A";
                     btMaestria.removeMouseListener(manejador);
                     btMaestria.setEnabled(false);
                                     
@@ -518,12 +508,13 @@ public class VentanaInfoPrePos extends JFrame {
             }else if (me.getSource() == CBMaestriaTic) {
                 
                 if(CBMaestriaTic.isSelected() == true) {
-                    
+                            
                     btMaestriaTic.setEnabled(true);
                     btMaestriaTic.addMouseListener(manejador);
                     
                 }else{
                 
+                    rtMaestriaTic = "N/A";
                     btMaestriaTic.removeMouseListener(manejador);
                     btMaestriaTic.setEnabled(false);
                                     
@@ -532,12 +523,13 @@ public class VentanaInfoPrePos extends JFrame {
             }else if (me.getSource() == CBEspecia) {
                 
                 if(CBEspecia.isSelected() == true) {
-                    
+                                     
                     btEspec.setEnabled(true);
                     btEspec.addMouseListener(manejador);
                     
                 }else{
                 
+                    rtEspecia = "N/A";
                     btEspec.removeMouseListener(manejador);
                     btEspec.setEnabled(false);
                                     
@@ -552,6 +544,7 @@ public class VentanaInfoPrePos extends JFrame {
                     
                 }else{
                 
+                    rtEspeciaTic = "N/A";
                     btEspecTic.removeMouseListener(manejador);
                     btEspecTic.setEnabled(false);
                                     
@@ -566,6 +559,7 @@ public class VentanaInfoPrePos extends JFrame {
                     
                 }else{
                 
+                    rtLicen = "N/A";
                     btLicen.removeMouseListener(manejador);
                     btLicen.setEnabled(false);
                                     
@@ -597,7 +591,7 @@ public class VentanaInfoPrePos extends JFrame {
 
 public static void main(String args[]){
 
-    VentanaInfoPrePos ven =  new VentanaInfoPrePos(0,"1234");
+    VentanaInfoPrePos ven =  new VentanaInfoPrePos(0,"5863");
 
 }    
     

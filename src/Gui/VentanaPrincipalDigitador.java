@@ -16,6 +16,7 @@ public class VentanaPrincipalDigitador extends JFrame{
 
     
     private JLabel titulo;
+    private JLabel icono;
     private JButton ingresar;
     private JButton editar;
     private JButton consultar;
@@ -28,21 +29,30 @@ public class VentanaPrincipalDigitador extends JFrame{
     
     public  VentanaPrincipalDigitador(String username){
         
+        super("Bienvenido @ "+ username);
         //user = username;
         cont = getContentPane(); 
         inicioDigitador = new JPanel();        
         titulo = new JLabel("Sistema de Seleccion de Docentes TIC");
         ingresar = new JButton("Ingresar Aspirante");
-        editar = new JButton("Editar ASpirante");
+        editar = new JButton("Editar Aspirante");
         consultar = new JButton("Consultar Aspirante");
-        cerrar = new JButton("Cerrar Sesion");  
+        
+        cerrar = new JButton("Cerrar Sesion",new ImageIcon("src/iconos/block.png"));  
+        cerrar.setBackground(Color.WHITE);
+        cerrar.setBorder(null);
+        
+        icono = new JLabel(new ImageIcon("src/iconos/graduado.jpg"));
+        
         driverEventos = new ManejaEvento(); 
        
         
-        Dimension di = new Dimension(800, 500);
-        setSize(650,350);
-        setMaximumSize(di);    
+        setLocationRelativeTo(null);
+        Dimension di = new Dimension(550, 350);
+        setSize(550,350);
         setResizable(false);
+        setLocationRelativeTo(null);
+        setMaximumSize(di);    
         setDefaultCloseOperation(0);
         
         initComponents();
@@ -56,13 +66,14 @@ public class VentanaPrincipalDigitador extends JFrame{
     
     public void initComponents(){
         
-        
+        inicioDigitador.setBackground(Color.white);
         inicioDigitador.setLayout(null);    
         inicioDigitador.add (titulo);
         inicioDigitador.add (ingresar);
         inicioDigitador.add (editar);
         inicioDigitador.add (consultar);
-        inicioDigitador.add (cerrar);     
+        inicioDigitador.add (cerrar);    
+        inicioDigitador.add (icono);
         
         
     }
@@ -71,10 +82,14 @@ public class VentanaPrincipalDigitador extends JFrame{
          
         titulo.setBounds(new Rectangle(55, 0, 440, 80));
         titulo.setFont(new Font("Verdana", 0, 22));
-        ingresar.setBounds(new Rectangle(20, 100, 150, 50));
-        editar.setBounds(new Rectangle(200,100 ,150 ,50 ));
-        consultar.setBounds(new Rectangle(380,100 ,150 ,50 ));
-        cerrar.setBounds(new Rectangle(340,250 ,150 ,50 ));
+        
+        ingresar.setBounds(new Rectangle(85, 100, 200, 30));
+        editar.setBounds(new Rectangle(85,150 ,200 ,30 ));
+        consultar.setBounds(new Rectangle(85,200 ,200 ,30 ));
+        
+        cerrar.setBounds(new Rectangle(320,260 ,190 ,30 ));
+        
+        icono.setBounds(340, 75, 150, 200);
      }
      
      public void ListenerEvent(){
