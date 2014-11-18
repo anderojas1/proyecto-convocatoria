@@ -150,21 +150,21 @@ public class VentanaOpcionesModulo extends JFrame {
     }
 
     public void ingresarIdiomas() {//Ventana siguiente
-        VentanaInformacionIdiomas idiomas = new VentanaInformacionIdiomas(tipo, usuario);
+        VentanaInformacionIdiomas idiomas = new VentanaInformacionIdiomas(tipo, usuario, datos_convocatoria);
         idiomas.agregarEventos();
         idiomas.configurarVentana(this);
         setVisible(false);
     }
 
     public void ingresarPrePos() {//Ventana siguiente
-        VentanaInfoPrePos prePos = new VentanaInfoPrePos(tipo, usuario);
+        VentanaInfoPrePos prePos = new VentanaInfoPrePos(tipo, usuario, datos_convocatoria);
         prePos.asignarEventos();
         prePos.configurarVentana(this);
         setVisible(false);
     }
 
     public void ingresarExpFormadorTIC() {//Ventana siguiente
-        ventanaExp_FormadorTIC formadorTic = new ventanaExp_FormadorTIC(tipo, usuario);
+        ventanaExp_FormadorTIC formadorTic = new ventanaExp_FormadorTIC(tipo, usuario, datos_convocatoria);
         formadorTic.agregarEventos();
         formadorTic.configurarVentana(this);
         setVisible(false);
@@ -172,7 +172,7 @@ public class VentanaOpcionesModulo extends JFrame {
 
     public void ingresarConocimientosEspecificos() {
 
-        VentanaConociemientosEspec conocEspecific = new VentanaConociemientosEspec(tipo, usuario);
+        VentanaConociemientosEspec conocEspecific = new VentanaConociemientosEspec(tipo, usuario, datos_convocatoria);
         conocEspecific.configurarVentana(this);
         setVisible(false);
 
