@@ -13,6 +13,8 @@ import java.util.ArrayList;
 public class VentanaRegDatoPersona extends JFrame {
 
     //declaracion de los atributos de la clase
+    private JLabel lbEncabezado;
+    private JLabel lbFinal;
     private JLabel lbPrimerNom;
     private JLabel lbSegundoNom;
     private JLabel lbPrimerApell;
@@ -77,7 +79,7 @@ public class VentanaRegDatoPersona extends JFrame {
         
 
         getContentPane().add(panelPrin);
-        setSize(new Dimension(900, 450));
+        setSize(new Dimension(900, 650));
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -90,7 +92,9 @@ public class VentanaRegDatoPersona extends JFrame {
         contAspirante = new DriverAspirante();
         contConvocatoria = new DriverConvocatoria();
         validator = new ViewValidator();
-
+        
+        lbEncabezado = new JLabel(new ImageIcon ("src/iconos/encabezado.png"));
+        lbFinal = new JLabel(new ImageIcon ("src/iconos/piePagina.png"));
         lbPrimerNom = new JLabel("Primer Nombre *");
         lbSegundoNom = new JLabel("Segundo Nombre");
         lbPrimerApell = new JLabel("Primer Apellido *");
@@ -106,6 +110,7 @@ public class VentanaRegDatoPersona extends JFrame {
         lbLugarNacimiento = new JLabel("Lugar Nacimiento*");
         lbTitulo = new JLabel("INFORMACION PERSONAL");
         lbConvocatoria = new JLabel("Seleccione la convocatoria");
+        lbConvocatoria.setVisible(false);
 
         campoPNombre = new JTextField("Primer Nombre");
         campoPNombre.setVisible(false);
@@ -329,7 +334,9 @@ public class VentanaRegDatoPersona extends JFrame {
     }
 
     public final void agregarComponentes() {
-
+        
+        panelPrin.add(lbEncabezado);
+        panelPrin.add(lbFinal);
         panelPrin.add(lbPrimerNom);
         panelPrin.add(lbSegundoNom);
         panelPrin.add(lbPrimerApell);
@@ -377,53 +384,54 @@ public class VentanaRegDatoPersona extends JFrame {
 
     private void acomodarComponentes() {
 
-        lbTitulo.setBounds(360, 30, 200, 30);
-        
-        lbTipoDocumen.setBounds(30, 80, 150, 30);
-        campoTipoDoc.setBounds(180, 80, 200, 25);
-        comboTipoDoc.setBounds(180, 80, 200, 25);
-        lbNumeroDoc.setBounds(30, 110, 150, 30);
-        campoNumIdent.setBounds(180, 110, 200, 25);
-        btconfirmar.setBounds(390, 110, 30, 30);
-        lbPrimerNom.setBounds(30, 140, 150, 30);
-        campoPNombre.setBounds(180, 140, 200, 25);
-        lbSegundoNom.setBounds(30, 170, 150, 30);
-        campoSNombre.setBounds(180, 170, 200, 25);
-        lbPrimerApell.setBounds(30, 200, 150, 30);
-        campoPApelli.setBounds(180, 200, 200, 25);
-        lbSegundoApell.setBounds(30, 230, 150, 30);
-        campoSApelli.setBounds(180, 230, 200, 25);
-        lbSexo.setBounds(30, 260, 150, 30);
-        comboSexo.setBounds(180, 260, 200, 25);
+        lbEncabezado.setBounds(0,0,900,80);
+        lbTitulo.setBounds(360, 110, 200, 30);
+        lbFinal.setBounds(0, 570, 900, 80);
+        lbTipoDocumen.setBounds(30, 160, 150, 30);
+        campoTipoDoc.setBounds(180, 160, 200, 25);
+        comboTipoDoc.setBounds(180, 160, 200, 25);
+        lbNumeroDoc.setBounds(30, 190, 150, 30);
+        campoNumIdent.setBounds(180, 190, 200, 25);
+        btconfirmar.setBounds(390, 190, 30, 30);
+        lbPrimerNom.setBounds(30, 220, 150, 30);
+        campoPNombre.setBounds(180, 220, 200, 25);
+        lbSegundoNom.setBounds(30, 250, 150, 30);
+        campoSNombre.setBounds(180, 250, 200, 25);
+        lbPrimerApell.setBounds(30, 280, 150, 30);
+        campoPApelli.setBounds(180, 280, 200, 25);
+        lbSegundoApell.setBounds(30, 310, 150, 30);
+        campoSApelli.setBounds(180, 310, 200, 25);
+        lbSexo.setBounds(30, 340, 150, 30);
+        comboSexo.setBounds(180, 340, 200, 25);
        //lbNumeroDoc.setBounds(30, 200, 150, 30);
         //campoNumIdent.setBounds(230, 200, 200, 25);
         
-        lbMunicipio.setBounds(470, 80, 150, 30);
-        comboMunicipio.setBounds(650, 80, 200, 25);
-        lbJorTrabajo.setBounds(470, 110, 150, 30);
-        comboJorTrabajo.setBounds(650, 110, 200, 25);
+        lbMunicipio.setBounds(470, 160, 150, 30);
+        comboMunicipio.setBounds(650, 160, 200, 25);
+        lbJorTrabajo.setBounds(470, 190, 150, 30);
+        comboJorTrabajo.setBounds(650, 190, 200, 25);
         
-        lbFechaNaci.setBounds(470, 140, 150, 30);
-        comboDia.setBounds(650, 140, 45, 25);
-        comboMes.setBounds(710, 140, 45, 25);
-        comboAnio.setBounds(770, 140, 80, 25);        
+        lbFechaNaci.setBounds(470, 220, 150, 30);
+        comboDia.setBounds(650, 220, 45, 25);
+        comboMes.setBounds(710, 220, 45, 25);
+        comboAnio.setBounds(770, 220, 80, 25);        
         
         
-        lbNumeroCel.setBounds(470, 170, 150, 30);
-        campoNumCel.setBounds(650, 170, 200, 25);
+        lbNumeroCel.setBounds(470, 250, 150, 30);
+        campoNumCel.setBounds(650, 250, 200, 25);
         //lbTipoDocumen.setBounds(470, 140, 150, 30);
         //comboTipoDoc.setBounds(650, 140, 200, 25);
         
         
-        lbLugarResiden.setBounds(470, 200, 150, 30);
-        comboLugResi.setBounds(650, 200, 200, 25);
-        lbLugarNacimiento.setBounds(470, 230, 150, 30);
-        comboLugNaci.setBounds(650, 230, 200, 25);
-        lbConvocatoria.setBounds(30, 320, 100, 20);
-        comboConvocatorias.setBounds(30, 350, 300, 30);
+        lbLugarResiden.setBounds(470, 280, 150, 30);
+        comboLugResi.setBounds(650, 280, 200, 25);
+        lbLugarNacimiento.setBounds(470, 310, 150, 30);
+        comboLugNaci.setBounds(650, 310, 200, 25);
+        lbConvocatoria.setBounds(30, 400, 180, 20);
+        comboConvocatorias.setBounds(30, 430, 300, 30);
        
-        btCancelar.setBounds(700, 350, 110, 30);
-        btaceptar.setBounds(580, 350, 110, 30);
+        btCancelar.setBounds(700, 430, 110, 30);
+        btaceptar.setBounds(580, 430, 110, 30);
 
 
 
@@ -481,6 +489,7 @@ public class VentanaRegDatoPersona extends JFrame {
         comboDia.setVisible(true);
         comboMes.setVisible(true);
         comboAnio.setVisible(true);
+        lbConvocatoria.setVisible(true);
         comboConvocatorias.setVisible(true);
         btconfirmar.setVisible(false);
         btaceptar.setVisible(true);
@@ -513,6 +522,7 @@ public class VentanaRegDatoPersona extends JFrame {
         campoSApelli.setText(aspi.getS_apellido());
         campoSApelli.setEditable(false);
         
+        lbConvocatoria.setVisible(true);
         comboConvocatorias.setVisible(true);
         btaceptar.setVisible(true);
         

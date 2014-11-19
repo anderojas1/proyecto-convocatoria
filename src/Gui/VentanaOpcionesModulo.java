@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class VentanaOpcionesModulo extends JFrame {
+    
 
     private Container cont;
     private JPanel panelPrin;
@@ -16,6 +17,8 @@ public class VentanaOpcionesModulo extends JFrame {
     private String usuario;
     private String[] datos_convocatoria;
     private VentanaRegDatoPersona ventanaDatosPersonales;
+    private JLabel lbEncabezado;
+    private JLabel lbFinal;
 
     public VentanaOpcionesModulo(int tipo, String usuario, String[] datos_convocatoria) {
         super("Aspectos hojas de vida");
@@ -31,7 +34,7 @@ public class VentanaOpcionesModulo extends JFrame {
 
 
         getContentPane().add(panelPrin);
-        setSize(new Dimension(400, 500));
+        setSize(new Dimension(900, 650));
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -42,6 +45,8 @@ public class VentanaOpcionesModulo extends JFrame {
 
         panelPrin = new JPanel();
 
+        lbEncabezado = new JLabel(new ImageIcon ("src/iconos/encabezado.png"));
+        lbFinal = new JLabel(new ImageIcon ("src/iconos/piePagina.png"));
         lbExpFormador = new JLabel("Experiencia como formador en TIC");
         btForPre = new JButton("Formacion: Pregrado - Postgrado");
         btFormTic = new JButton("Formacion en TIC");
@@ -73,6 +78,8 @@ public class VentanaOpcionesModulo extends JFrame {
 
     public void agregarComponentes() {
 
+        panelPrin.add(lbEncabezado);
+        panelPrin.add(lbFinal);
         panelPrin.add(lbExpFormador);
         panelPrin.add(btForPre);
         panelPrin.add(btFormTic);
@@ -102,26 +109,28 @@ public class VentanaOpcionesModulo extends JFrame {
 
     public void acomodarComponentes() {
 
-        btForPre.setBounds(70, 80, 250, 25);
-        btFormTic.setBounds(70, 110, 250, 25);
-        btCono.setBounds(70, 140, 250, 25);
-        btIdiomas.setBounds(70, 170, 250, 25);
-        lbExpFormador.setBounds(70, 220, 250, 20);
-        btExpFormador.setBounds(70, 250, 250, 25);
-        btCancelar.setBounds(100, 370, 200, 25);
+        lbEncabezado.setBounds(0,0,900,80);
+        lbFinal.setBounds(0, 570, 900, 80);
+        btForPre.setBounds(320, 160, 250, 25);
+        btFormTic.setBounds(320, 190, 250, 25);
+        btCono.setBounds(320, 220, 250, 25);
+        btIdiomas.setBounds(320, 250, 250, 25);
+        lbExpFormador.setBounds(345, 300, 250, 20);
+        btExpFormador.setBounds(320, 330, 250, 25);
+        btCancelar.setBounds(345, 450, 200, 25);
 
         switch (tipo) {
             case 0:
-                lbEncabezadoAgregar.setBounds(90, 10, 250, 20);
+                lbEncabezadoAgregar.setBounds(355, 90, 250, 20);
                 break;
             case 1:
-                lbEncabezadoConsultar.setBounds(90, 10, 250, 20);
+                lbEncabezadoConsultar.setBounds(360, 90, 250, 20);
                 break;
             case 2:
-                lbEncabezadoEditar.setBounds(90, 10, 250, 20);
+                lbEncabezadoEditar.setBounds(360, 90, 250, 20);
                 break;
             case 3:
-                lbEncabezadoValidar.setBounds(90, 10, 250, 20);
+                lbEncabezadoValidar.setBounds(360, 90, 250, 20);
                 break;
         }
 
@@ -150,10 +159,10 @@ public class VentanaOpcionesModulo extends JFrame {
     }
 
     public void ingresarIdiomas() {//Ventana siguiente
-       // VentanaInformacionIdiomas idiomas = new VentanaInformacionIdiomas(tipo, usuario, datos_convocatoria);
-       // idiomas.agregarEventos();
-        //idiomas.configurarVentana(this);
-        //setVisible(false);
+        VentanaInformacionIdiomas idiomas = new VentanaInformacionIdiomas(tipo, usuario, datos_convocatoria);
+        idiomas.agregarEventos();
+        idiomas.configurarVentana(this);
+        setVisible(false);
     }
 
     public void ingresarPrePos() {//Ventana siguiente
@@ -164,15 +173,15 @@ public class VentanaOpcionesModulo extends JFrame {
     }
 
     public void ingresarExpFormadorTIC() {//Ventana siguiente
-      //  ventanaExp_FormadorTIC formadorTic = new ventanaExp_FormadorTIC(tipo, usuario, datos_convocatoria);
-        //formadorTic.agregarEventos();
-        //formadorTic.configurarVentana(this);
-        //setVisible(false);
+        ventanaExp_FormadorTIC formadorTic = new ventanaExp_FormadorTIC(tipo, usuario, datos_convocatoria);
+        formadorTic.agregarEventos();
+        formadorTic.configurarVentana(this);
+        setVisible(false);
     }
 
     public void ingresarConocimientosEspecificos() {
 
-        VentanaConociemientosEspec conocEspecific = new VentanaConociemientosEspec(tipo, usuario);
+        VentanaConociemientosEspec conocEspecific = new VentanaConociemientosEspec(tipo, usuario, datos_convocatoria);
         conocEspecific.configurarVentana(this);
         setVisible(false);
 
