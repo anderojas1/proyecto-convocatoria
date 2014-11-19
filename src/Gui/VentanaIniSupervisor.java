@@ -86,7 +86,7 @@ import java.awt.event.ActionListener;
     }
     
     public void agregarEventos () {
-        
+        informe.addActionListener(driverEventos);
         salir.addActionListener(driverEventos);
         
     }
@@ -95,6 +95,15 @@ import java.awt.event.ActionListener;
 
         @Override
         public void actionPerformed(ActionEvent ae) {
+            
+            if(ae.getSource() == informe){
+                VentanaListadoInscritos ventanaInscritos = new VentanaListadoInscritos(usuario);
+                ventanaInscritos.agregarEventos();
+                ventanaInscritos.setVisible(true);
+                dispose();
+                System.err.println("se presiono el bton informe");
+            }
+            
             if(ae.getSource() == salir){
                 VentanaLogin nuevoLogin = new VentanaLogin();
                 nuevoLogin.addEvents();
