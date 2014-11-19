@@ -36,18 +36,9 @@ public class VentanaConociemientosEspec extends JFrame {
     private JLabel JLexp_gest_proy_TIC;
     private JLabel JLexp_des_elemnts_eval_comp;
     //combox
-    /*
-     private JComboBox JCBherram_Ofimatic;
-     private JComboBox JCBherram_Web2;
-     private JComboBox JCBherram_edic_multi;
-     private JComboBox JCBexp_des_cont_edu_dig;
-     private JComboBox JCBexp_des_lib_dig;
-     private JComboBox JCBexp_proc_elearning;
-     private JComboBox JCBexp_gest_proy_TIC;
-     private JComboBox JCBexp_des_elemnts_eval_comp;
-     */
+    
     private JComboBox[] niveles;
-    private String[] items = {"Regular", "Bueno", "Muy Bueno"};
+    private String[] items = {"Nulo","Regular", "Bueno", "Muy Bueno"};
     //botnoes
     private JButton JBcanelar, JBback, JBnext;
     //otros
@@ -55,12 +46,13 @@ public class VentanaConociemientosEspec extends JFrame {
     private DriverConocimientosEsp control;
     private VentanaOpcionesModulo ParentWindow;
     private String identificacionAspirante;
+    private String [] datosConvocatoria;
 
-    public VentanaConociemientosEspec(int tipo, String idenficacion) {
+    public VentanaConociemientosEspec(int tipo, String idenficacion, String [] datosConvocatoria) {
 
         super("Conociminetos Específicos");
         this.identificacionAspirante = idenficacion;
-
+        this.datosConvocatoria = datosConvocatoria;
 
         InitComponents();
         AcommodateCOmponents();
@@ -153,6 +145,8 @@ public class VentanaConociemientosEspec extends JFrame {
         JPtitulo.setLayout(new BorderLayout());
         JLtitulo.setHorizontalAlignment(SwingConstants.CENTER);
         JPtitulo.add(JLtitulo, BorderLayout.CENTER);
+        
+        JPtitulo.add(new JLabel(datosConvocatoria[1]), BorderLayout.NORTH);
 
         container.add(JPtitulo, BorderLayout.NORTH);
 
@@ -239,9 +233,12 @@ public class VentanaConociemientosEspec extends JFrame {
                 }
 
                 if (control.consultarConocimientoEspecific(identificacionAspirante) == null) {
+                    control.updatePuntuacionTotal(identificacionAspirante, datosConvocatoria[0],control.calcularPuntuacionTotal(resultados) , true);
                     control.guaradarConociemientoEspecifico(identificacionAspirante, resultados[0], resultados[1], resultados[2], resultados[3], resultados[4], resultados[5], resultados[6], resultados[7], control.calcularPuntuacionTotal(resultados));
                 } else {
+                    control.updatePuntuacionTotal(identificacionAspirante, datosConvocatoria[0],control.calcularPuntuacionTotal(resultados) , false);
                     control.updateConocimientoEspecific(identificacionAspirante, resultados[0], resultados[1], resultados[2], resultados[3], resultados[4], resultados[5], resultados[6], resultados[7], control.calcularPuntuacionTotal(resultados));
+                    
                 }
                 dispose();
                 ParentWindow.setVisible(true);

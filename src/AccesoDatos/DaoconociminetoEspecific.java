@@ -116,4 +116,45 @@ public class DaoconociminetoEspecific {
         }
         
     }
+    
+    
+    public void updatePuntuacionTotal (String identificacion, String cod_convocatoria, double newPuntuacion) throws SQLException {
+    
+        sentenciaSql="UPDATE AspiranteConvocatoria SET puntajetotal = "+newPuntuacion+" WHERE identificacion = '"+identificacion+"' AND codigo = '"+cod_convocatoria+"';";
+        try {
+            ejecutarSentencia();
+        } catch (SQLException ex) {
+            throw ex;
+        }
+    
+    }
+    
+     public double selectPuntuacionTotal(String identificacion, String cod_convocatoria) {
+     
+         double puntuacion = 0;
+         
+         sentenciaSql = "SELECT puntajetotal FROM AspiranteConvocatoria WHERE identificacion = '"+identificacion+"' AND codigo = '"+cod_convocatoria+"';";
+        try {
+            conectar = fachadaConectar.conectar();
+             sentencia = conectar.createStatement();
+            registros = sentencia.executeQuery(sentenciaSql);
+            
+            while(registros.next()){
+            
+                puntuacion = registros.getDouble(1);
+            }
+            
+            return puntuacion;
+        } catch (SQLException ex) {
+            
+            System.out.println("error al obtener el puntaje total");
+            return puntuacion;
+            
+        }
+           
+         
+         
+     
+     }
+    
 }

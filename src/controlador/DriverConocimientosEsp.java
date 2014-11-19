@@ -5,6 +5,8 @@
 package controlador;
 import AccesoDatos.*;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import logica.conocimientosEspecificos;
 
@@ -90,8 +92,38 @@ public class DriverConocimientosEsp {
             case "Muy Bueno" : return 2.5;    
             default: return 0;
         }
+     
+    }
+    
+    public void updatePuntuacionTotal(String identificacion, String cod_convocatoria, double newPuntaje, boolean flag){
+    
         
-       
+        double pviejoTotal = Daoce.selectPuntuacionTotal(identificacion, cod_convocatoria);
+        
+        if(flag){
+            try {
+                Daoce.updatePuntuacionTotal(identificacion, cod_convocatoria, newPuntaje + pviejoTotal);
+            } catch (SQLException ex) {
+                System.out.println("error al actulizar la puntuacion total1"+ex.getMessage());
+            }
+        
+        }else{
+             try {
+            double pViejomodulo = consultarConocimientoEspecific(identificacion).getPuntuacion();
+            double temp = pviejoTotal - pViejomodulo;
+            
+            System.out.println("puntaje vitejo total "+pviejoTotal);
+            System.out.println("puntaje viejo modulo "+pViejomodulo);
+            System.out.println("puntaje nuevo "+ (newPuntaje+temp));
+            
+           
+                Daoce.updatePuntuacionTotal(identificacion, cod_convocatoria, newPuntaje+temp);
+            } catch (SQLException ex) {
+                System.out.println("error al actulizar la puntuacion total2"+ex.getMessage());
+            }
+        
+        }
     
     }
+    
 }
