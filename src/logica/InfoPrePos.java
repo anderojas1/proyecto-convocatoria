@@ -19,6 +19,7 @@ public class InfoPrePos {
     private String RtMaestriaTic;
     private String RtDoctor;
     private String RtDoctorTic;
+    private String cod_convo;
     private int puntModulo;
     
     public InfoPrePos(){
@@ -31,6 +32,7 @@ public class InfoPrePos {
         RtEspecia = "N/A";
         RtEspeciaTic = "N/A";
         RtLicenciado = "N/A";
+        cod_convo = "";
         puntModulo = 0;
             
     }
@@ -105,6 +107,14 @@ public class InfoPrePos {
 
     public void setPuntModulo(int puntModulo) {
         this.puntModulo = puntModulo;
+    }
+
+    public String getCod_convo() {
+        return cod_convo;
+    }
+
+    public void setCod_convo(String cod_convo) {
+        this.cod_convo = cod_convo;
     }
     
     

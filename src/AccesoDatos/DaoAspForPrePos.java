@@ -43,13 +43,14 @@ public class DaoAspForPrePos {
         String especTic = obj.getRtEspeciaTic();
         String licen = obj.getRtLicenciado();
         int puntaje = obj.getPuntModulo();
+        String cod_convo = obj.getCod_convo();
         
         
         // System.err.println(iden +"\n"+ doc + "\n"+  docTic +"\n"+   maest +"\n"+   maestTic +"\n"+  
           //                                  espec + "\n"+  especTic +"\n"+   licen);
          
         sqlDatos = "INSERT INTO  DocumentosPrePos VALUES (" + "'" + iden  + "', '" + doc  + "', '"+ docTic + "', '" + maest  + "', '" + maestTic +
-                                       "', '" + espec  + "', '" + especTic  + "', '" + licen  + "'," + "'"+ puntaje+"'"+");";
+                                       "', '" + espec  + "', '" + especTic  + "', '" + licen  + "'," + "'"+ puntaje+"', '"+cod_convo+"'"+");";
         
         //System.err.println(sqlDatos);
 

@@ -13,6 +13,7 @@ public class VentanaInfoPrePos extends JFrame {
 
     //declaracion de los atributos de la clase
     private JLabel lbTitulo;
+    private JLabel lbSubTitulo;
     
     private JLabel lbLicenciado;
     private JLabel lbEspecia;
@@ -46,6 +47,7 @@ public class VentanaInfoPrePos extends JFrame {
     private String rtEspeciaTic;
     private String rtLicen;
     
+    private String[] datos_convocatoria;
       
     private JButton btCancelar;
     private JButton btAceptar;
@@ -70,13 +72,15 @@ public class VentanaInfoPrePos extends JFrame {
     
     
     //Constructor de la Clase 
-    public VentanaInfoPrePos(int tipo, String iden) {
+    public VentanaInfoPrePos(int tipo, String iden, String [] datos_convocatoria) {
 
         super("Informacion Pregrado Posgrado");
 
         indentificacion = iden;
         
-        iniciarComponentes();
+        this.datos_convocatoria = datos_convocatoria;
+        
+        iniciarComponentes( (String)datos_convocatoria[1]);
         agregarComponentes();
         acomodarComponentes();
         //asignarEventos();
@@ -90,9 +94,10 @@ public class VentanaInfoPrePos extends JFrame {
 
     }
 
-    public final void iniciarComponentes() {
+    public final void iniciarComponentes(String nomConv) {
 
         lbTitulo = new JLabel(new ImageIcon("src/iconos/convocatoria.jpg"));
+        lbSubTitulo = new JLabel("CONVOCATORIA :    " + nomConv );
 
         lbDoctor = new JLabel("Doctorado");
         lbDoctorTic = new JLabel("Doctorado en areas afines TIC");
@@ -151,6 +156,7 @@ public class VentanaInfoPrePos extends JFrame {
     public final void agregarComponentes() {
 
         panelPrin.add(lbTitulo);
+        panelPrin.add(lbSubTitulo);
         panelPrin.add(lbDoctor);
         panelPrin.add(lbDoctorTic);
         panelPrin.add(lbEspecia);
@@ -187,30 +193,32 @@ public class VentanaInfoPrePos extends JFrame {
     private void acomodarComponentes() {
 
         lbTitulo.setBounds(60, 20, 430, 70);
-        lbLicenciado.setBounds(30, 100, 280, 30);
-        CBLicen.setBounds(350, 100, 20, 25);
-        btLicen.setBounds(390, 100, 110, 25);
-        lbEspecia.setBounds(30, 130, 250, 30);
-        CBEspecia.setBounds(350, 130, 20, 25);
-        btEspec.setBounds(390, 130, 110, 25);
-        lbEspeciaTic.setBounds(30, 160, 280, 30);
-        CBEspeciaTic.setBounds(350, 160, 20, 25);
-        btEspecTic.setBounds(390, 160, 110, 25);
-        lbMaestria.setBounds(30, 190, 250, 30);
-        CBMaestria.setBounds(350, 190, 20, 25);
-        btMaestria.setBounds(390, 190, 110, 25);
-        lbMaestriaTic.setBounds(30, 220, 250, 30);
-        CBMaestriaTic.setBounds(350, 220, 20, 25);
-        btMaestriaTic.setBounds(390, 220, 110, 25);
-        lbDoctor.setBounds(30, 250, 250, 30);
-        CBDoctor.setBounds(350, 250, 20, 25);
-        btDoctor.setBounds(390, 250, 110, 25);
-        lbDoctorTic.setBounds(30, 280, 250, 30);
-        CBDoctorTic.setBounds(350, 280, 20, 25);
-        btDoctorTic.setBounds(390, 280, 110, 25);
+        lbSubTitulo.setBounds(30, 100, 350, 30);
         
-        btAceptar.setBounds(225, 350, 110, 30);
-        btCancelar.setBounds(385, 350, 110, 30);
+        lbLicenciado.setBounds(30, 130, 280, 30);
+        CBLicen.setBounds(350, 130, 20, 25);
+        btLicen.setBounds(390, 130, 110, 25);
+        lbEspecia.setBounds(30, 160, 250, 30);
+        CBEspecia.setBounds(350, 160, 20, 25);
+        btEspec.setBounds(390, 160, 110, 25);
+        lbEspeciaTic.setBounds(30, 190, 280, 30);
+        CBEspeciaTic.setBounds(350, 190, 20, 25);
+        btEspecTic.setBounds(390, 190, 110, 25);
+        lbMaestria.setBounds(30, 220, 250, 30);
+        CBMaestria.setBounds(350, 220, 20, 25);
+        btMaestria.setBounds(390, 220, 110, 25);
+        lbMaestriaTic.setBounds(30, 250, 250, 30);
+        CBMaestriaTic.setBounds(350, 250, 20, 25);
+        btMaestriaTic.setBounds(390, 250, 110, 25);
+        lbDoctor.setBounds(30, 280, 250, 30);
+        CBDoctor.setBounds(350, 280, 20, 25);
+        btDoctor.setBounds(390, 280, 110, 25);
+        lbDoctorTic.setBounds(30, 310, 250, 30);
+        CBDoctorTic.setBounds(350, 310, 20, 25);
+        btDoctorTic.setBounds(390, 310, 110, 25);
+        
+        btAceptar.setBounds(225, 380, 110, 30);
+        btCancelar.setBounds(385, 380, 110, 30);
 
 
 
@@ -231,8 +239,8 @@ public class VentanaInfoPrePos extends JFrame {
 
     }
     
-    public boolean validarCargaArchivos(int seleccion)
-    {
+    public boolean validarCargaArchivos(int seleccion) {
+        
         boolean good = false;
         
         switch(seleccion)
@@ -338,8 +346,8 @@ public class VentanaInfoPrePos extends JFrame {
         return good;
     }
     
-    public int checkSeleccion()
-    {
+    public int checkSeleccion() {
+      
         if (CBDoctor.isSelected() == true ) 
         {
              return 1;
@@ -404,8 +412,7 @@ public class VentanaInfoPrePos extends JFrame {
     
     }
   
-    
-    private class ManejaEventos implements MouseListener{
+     private class ManejaEventos implements MouseListener{
 
        
 
@@ -417,10 +424,10 @@ public class VentanaInfoPrePos extends JFrame {
                 if(validarCargaArchivos(checkSeleccion()) == true ){
                 
                    driverPrePos.guardarInfo(indentificacion ,rtDoctor, rtDoctorTic, rtMaestria, rtMaestriaTic,
-                                            rtEspecia, rtEspeciaTic, rtLicen);
+                                            rtEspecia, rtEspeciaTic, rtLicen, (String)datos_convocatoria[0]);
               
-                    System.err.println(indentificacion + rtDoctor +  rtDoctorTic +  rtMaestria +  rtMaestriaTic + 
-                                            rtEspecia +  rtEspeciaTic +  rtLicen);
+                  //  System.err.println(indentificacion + rtDoctor +  rtDoctorTic +  rtMaestria +  rtMaestriaTic + 
+                    //                        rtEspecia +  rtEspeciaTic +  rtLicen);
                 }else{
                 
                     
@@ -591,7 +598,9 @@ public class VentanaInfoPrePos extends JFrame {
 
 public static void main(String args[]){
 
-    VentanaInfoPrePos ven =  new VentanaInfoPrePos(0,"5863");
+    String[] conv = {"julian", "miconvocatoria"};
+    //conv[0]="julian";
+    VentanaInfoPrePos ven =  new VentanaInfoPrePos(0,"5863", conv);
 
 }    
     

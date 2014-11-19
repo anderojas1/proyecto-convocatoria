@@ -119,31 +119,35 @@ public class driverInfoPrePos {
         }
     }
     
-    public void totalizarPuntaje(int puntajeAnte, String id, String convo){
-    
-        int puntajeMod = 0;
-        int puntTotal = 0;
+    public void SumarPuntaje(){
+     
+        double puntajeTotal = 0;
+        double puntajeAsp = 0;
         
-        puntajeMod = objPrePos.getPuntModulo();
+        try{
         
-        puntTotal = puntajeMod + puntajeAnte;
+            puntajeAsp = daoAspirante.consultarPuntajeUsuario(objPrePos.getIdentificacion(), objPrePos.getCod_convo());
         
-        try {
-            
-            daoAspirante.updatePuntajeUsuario(id, convo, puntTotal);
+        }catch(SQLException es){
         
-        }catch(SQLException ex){
-        
-            System.out.println("error al consultar la base de datos");
-        
+            System.err.println("Error al consultar la base de datos");
         }
         
-              
-    
+        puntajeTotal = puntajeAsp + objPrePos.getPuntModulo();
+        
+        try{
+        
+            daoAspirante.updatePuntajeUsuario(objPrePos.getIdentificacion(), objPrePos.getCod_convo(), puntajeTotal);
+        
+        }catch(SQLException es){
+        
+            System.err.println("Error al consultar la base de datos");
+        }
+            
     }
     
     public void guardarInfo(String identi, String rtDoc, String rtDocTic, String rtMaestria, String rtMaestriaTic,
-                            String rtSpecia, String rtSpeciaTic, String rtLicen){
+                            String rtSpecia, String rtSpeciaTic, String rtLicen, String cod_convo){
 
         
         objPrePos.setIdentificacion(identi);
@@ -154,6 +158,7 @@ public class driverInfoPrePos {
         objPrePos.setRtEspecia(rtSpecia);
         objPrePos.setRtEspeciaTic(rtSpeciaTic);
         objPrePos.setRtLicenciado(rtLicen);
+        objPrePos.setCod_convo(cod_convo);
         objPrePos.setPuntModulo(calificador(rtDoc, rtDocTic, rtMaestria, rtMaestriaTic, rtSpecia, rtSpeciaTic, rtLicen));
         
         try{
@@ -167,6 +172,8 @@ public class driverInfoPrePos {
             JOptionPane.showMessageDialog(null, "Error al guardar el usuario. Por favor intente nuevamente");
             
         }
+        
+        SumarPuntaje();
     
     
     }

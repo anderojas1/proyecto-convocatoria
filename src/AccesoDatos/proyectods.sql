@@ -77,7 +77,7 @@ CREATE TABLE AspiranteConvocatoria(
         REFERENCES Aspirante (identificacion),
 
 	CONSTRAINT codigo_fk FOREIGN KEY (codigo)
-        REFERENCES Convocatoria (codigo)
+        REFERENCES CONVOCATORIA (codigo)
 );
 
 CREATE TABLE DocumentosPrePos(
@@ -91,13 +91,16 @@ especia VARCHAR(100) NOT NULL,
 especiaTic VARCHAR(100) NOT NULL,
 licen VARCHAR(100) NOT NULL,
 puntaje DOUBLE PRECISION NOT NULL,
+cod_convocatoria VARCHAR(15) NOT NULL,
 
 
-CONSTRAINT id_aspirante_pk FOREIGN KEY (id_aspirante), 
-
+CONSTRAINT documentosPrePos_pk PRIMARY KEY (id_aspirante, cod_convocatoria), 
 
 CONSTRAINT id_aspirante_fk FOREIGN KEY (id_aspirante)
-REFERENCES Aspirante (identificacion)
+REFERENCES Aspirante (identificacion),
+
+CONSTRAINT cod_convocatoria_fk FOREIGN KEY (cod_convocatoria)
+REFERENCES CONVOCATORIA (codigo)
 
 );
 
@@ -110,7 +113,7 @@ CREATE TABLE FormacionTic(
 	puntaje int,
 	calificado bool NOT NULL,
 
-	CONSTRAINT formacionTic_fk PRIMARY KEY(identificacion, codigo_convocatoria, titulo, consecutivo),
+	CONSTRAINT formacionTic_pk PRIMARY KEY(identificacion, codigo_convocatoria, titulo, consecutivo),
 
 	CONSTRAINT id_aspirante_fk FOREIGN KEY(identificacion)
 	REFERENCES Aspirante(identificacion),
