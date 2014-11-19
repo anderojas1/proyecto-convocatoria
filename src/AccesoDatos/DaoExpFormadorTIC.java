@@ -35,7 +35,7 @@ public class DaoExpFormadorTIC {
         sentenciaSql = "INSERT INTO ExpFormadorTic VALUES('"+efTIC.getId()+"', '"+efTIC.getExpFormerEst()+"', '"+
                 efTIC.getExpFormerProf()+"', '"+efTIC.getExpFormertoFormers()+
                 "', '"+efTIC.getSoporte_est()+"', '"+efTIC.getSoporte_pro()+"', '"+efTIC.getSoporte_for()+
-                "', "+efTIC.getPuntos_est()+", "+efTIC.getPuntos_pro()+", "+efTIC.getPuntos_for()+");";
+                "', "+efTIC.getPuntos_est()+", "+efTIC.getPuntos_pro()+", "+efTIC.getPuntos_for()+", "+efTIC.getPuntos_total()+", '"+efTIC.getConvocatoria()+"');";
         try {
             ejecutarSentencia();
         } catch (SQLException ex) {
@@ -73,11 +73,11 @@ public class DaoExpFormadorTIC {
     
     
     
-     public String consultarSoporte(String identificacion, String titulo, String sopor, String tipo_titu) throws SQLException{
+     public String consultarSoporte(String identificacion, String titulo, String sopor, String tipo_titu, String convocatoria) throws SQLException{
          String soporte="";
          
-         sentenciaSql = "SELECT "+sopor+" FROM ExpFormadorTic WHERE identificacion ='"+identificacion+"' AND "+tipo_titu+" ='"+
-                        titulo+"';";
+         sentenciaSql = "SELECT "+sopor+" FROM EXPFORMADORTIC WHERE identificacion ='"+identificacion+"' AND "+tipo_titu+" ='"+
+                        titulo+"' AND cod_convocatoria ='"+convocatoria+"';";
          
          try{
             
@@ -104,5 +104,8 @@ public class DaoExpFormadorTIC {
         }
          return soporte;
      }
-    
+    public void asignarPuntajeAspirante(String identificacion, String convocatoria, int puntaje) throws SQLException{
+         sentenciaSql="UPDATE AspiranteConvocatoria SET puntajetotal = puntajetotal + "+puntaje+" WHERE identificacion = '"+identificacion+"' AND codigo = '"+convocatoria+"';";
+         ejecutarSentencia();
+    }
 }
