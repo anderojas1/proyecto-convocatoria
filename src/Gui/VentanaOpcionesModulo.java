@@ -172,7 +172,7 @@ public class VentanaOpcionesModulo extends JFrame {
 
     public void ingresarConocimientosEspecificos() {
 
-        VentanaConociemientosEspec conocEspecific = new VentanaConociemientosEspec(tipo, usuario, datos_convocatoria);
+        VentanaConociemientosEspec conocEspecific = new VentanaConociemientosEspec(tipo, usuario);
         conocEspecific.configurarVentana(this);
         setVisible(false);
 
