@@ -36,7 +36,7 @@ public class VentanaInformacionIdiomas extends JFrame {
     private final DriverIdioma driver;
     
     
-    public VentanaInformacionIdiomas (int tipo, String id_as) {
+    public VentanaInformacionIdiomas (int tipo, String id_as, String [] datosConvocatoria) {
         
         driverEventos = new ManejarEventos();
         
@@ -228,12 +228,6 @@ public class VentanaInformacionIdiomas extends JFrame {
         }
         
         
-    }
-    
-    public static void main(String[] args) {
-        
-        VentanaInformacionIdiomas info = new VentanaInformacionIdiomas(0, "hola");
-        info.agregarEventos();
     }
     
 }
