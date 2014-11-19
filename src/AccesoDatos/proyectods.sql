@@ -1,4 +1,4 @@
-﻿DROP TABLE IF EXISTS USUARIO, ACCESO, CONVOCATORIA, ASPIRANTECONVOCATORIA, ASPIRANTE, ASPIRANTE_HABLA, IDIOMA, CONOCIMIENTOS_ESPECIFICOS, DocumentosPrePos, IDIOMA, FormacionTic, CONOCIMIENTOS_ESPECIFICOS, ExpFormadorTic CASCADE;
+DROP TABLE IF EXISTS USUARIO, ACCESO, CONVOCATORIA, ASPIRANTECONVOCATORIA, ASPIRANTE, ASPIRANTE_HABLA, IDIOMA, CONOCIMIENTOS_ESPECIFICOS, DocumentosPrePos, IDIOMA, FormacionTic, CONOCIMIENTOS_ESPECIFICOS, EXPFORMADORTIC CASCADE;
 
 
 CREATE TABLE USUARIO (
@@ -20,8 +20,8 @@ CREATE TABLE ACCESO (
     estado bool NOT NULL,
     identificacion varchar(20) NOT NULL,
 
-    CONSTRAINT identificacion_fk FOREIGN KEY (identificacion)
-    REFERENCES USUARIO(identificacion)
+    CONSTRAINT usuario_fk FOREIGN KEY (identificacion)
+    REFERENCES USUARIO (identificacion)
 
 );
 
@@ -96,7 +96,7 @@ cod_convocatoria VARCHAR(15) NOT NULL,
 
 CONSTRAINT documentosPrePos_pk PRIMARY KEY (id_aspirante, cod_convocatoria), 
 
-CONSTRAINT id_aspirante_fk FOREIGN KEY (id_aspirante)
+CONSTRAINT aspirante_fk FOREIGN KEY (id_aspirante)
 REFERENCES Aspirante (identificacion),
 
 CONSTRAINT cod_convocatoria_fk FOREIGN KEY (cod_convocatoria)
@@ -115,7 +115,7 @@ CREATE TABLE FormacionTic(
 
 	CONSTRAINT formacionTic_pk PRIMARY KEY(identificacion, codigo_convocatoria, titulo, consecutivo),
 
-	CONSTRAINT id_aspirante_fk FOREIGN KEY(identificacion)
+	CONSTRAINT aspirante_fk FOREIGN KEY(identificacion)
 	REFERENCES Aspirante(identificacion),
 
 	CONSTRAINT convocatoria_fk FOREIGN KEY(codigo_convocatoria)
@@ -123,7 +123,7 @@ CREATE TABLE FormacionTic(
 	
 );
 
-CREATE TABLE ExpFormadorTic(
+CREATE TABLE EXPFORMADORTIC(
 	identificacion VARCHAR(20) NOT NULL,
 	exp_estudiante VARCHAR(80) NOT NULL,
         exp_profesor VARCHAR(80) NOT NULL,
@@ -131,13 +131,18 @@ CREATE TABLE ExpFormadorTic(
 	soporte_estudiante VARCHAR(500),
         soporte_profesor VARCHAR(500),
         soporte_formador VARCHAR(500),
-	puntaje_estudiante int,
-        puntaje_profesor int,
-        puntaje_formador int,
+	puntaje_estudiante INTEGER NOT NULL,
+        puntaje_profesor INTEGER NOT NULL,
+        puntaje_formador INTEGER NOT NULL,
+        puntaje_total INTEGER NOT NULL,
+        cod_convocatoria VARCHAR (10) NOT NULL,
 
-	CONSTRAINT ExpformadorTic_pk PRIMARY KEY(identificacion),
+	CONSTRAINT expformadortic_pk PRIMARY KEY(identificacion, cod_convocatoria),
 
-	CONSTRAINT id_aspirante_fk FOREIGN KEY(identificacion)
+        CONSTRAINT convocatoria_fk FOREIGN KEY(cod_convocatoria)
+	REFERENCES Convocatoria(codigo),
+
+	CONSTRAINT aspirante_fk FOREIGN KEY(identificacion)
 	REFERENCES Aspirante(identificacion)
         ON UPDATE CASCADE ON DELETE NO ACTION
 	
@@ -164,7 +169,7 @@ CREATE TABLE ASPIRANTE_HABLA (
 
     CONSTRAINT aspirante_habla_pk PRIMARY KEY (id_aspirante, cod_idioma),
 
-    CONSTRAINT id_aspirante_fk FOREIGN KEY (id_aspirante)
+    CONSTRAINT aspirante_fk FOREIGN KEY (id_aspirante)
     REFERENCES ASPIRANTE (identificacion),
 
     CONSTRAINT cod_idioma_fk FOREIGN KEY (cod_idioma)
@@ -187,7 +192,7 @@ CREATE TABLE CONOCIMIENTOS_ESPECIFICOS (
 
 	CONSTRAINT cono_esp_pk PRIMARY KEY (id_aspirante),
 
-	CONSTRAINT con_esp_fk FOREIGN KEY (id_aspirante)
+	CONSTRAINT aspirante_fk FOREIGN KEY (id_aspirante)
 	REFERENCES ASPIRANTE (identificacion)
 	ON UPDATE CASCADE ON DELETE NO ACTION
 
