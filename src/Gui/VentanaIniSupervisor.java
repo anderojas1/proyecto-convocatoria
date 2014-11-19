@@ -39,7 +39,7 @@ import java.awt.event.ActionListener;
         consultar = new JButton("Consultar Aspirante");
         total = new JButton("Ver total Seleccionados");
         salir = new JButton("Cerrar Sesión");
-        driverEventos = new ManejaEvento();
+        driverEventos = new ManejaEvento(this);
         
         Dimension di = new Dimension(800, 500);
         setSize(650,350);
@@ -86,28 +86,35 @@ import java.awt.event.ActionListener;
     }
     
     public void agregarEventos () {
-        informe.addActionListener(driverEventos);
+        
         salir.addActionListener(driverEventos);
+        informe.addActionListener(driverEventos);
         
     }
 
      private class ManejaEvento implements ActionListener{
 
+         Component  parentComponent;
+         
+        public ManejaEvento(Component parent) {
+            parentComponent = parent;
+        }
+
+         
         @Override
         public void actionPerformed(ActionEvent ae) {
-            
-            if(ae.getSource() == informe){
-                VentanaListadoInscritos ventanaInscritos = new VentanaListadoInscritos(usuario);
-                ventanaInscritos.agregarEventos();
-                ventanaInscritos.setVisible(true);
-                dispose();
-                System.err.println("se presiono el bton informe");
-            }
-            
             if(ae.getSource() == salir){
                 VentanaLogin nuevoLogin = new VentanaLogin();
                 nuevoLogin.addEvents();
                 dispose();
+            }
+            
+            if(ae.getSource() == informe){
+            
+                setVisible(false);
+                VentanaListadoInscritos VL = new VentanaListadoInscritos(parentComponent);
+                
+            
             }
         }
          

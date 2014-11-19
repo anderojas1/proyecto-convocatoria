@@ -20,7 +20,7 @@ public class DriverSupervisor {
     }
     
     
-    public ArrayList<Object> getListaAspirantes(String cod_convocatoria){
+    public ArrayList<Object[]> getListaAspirantes(String cod_convocatoria){
     
         return daoA.getListApirantes(cod_convocatoria);
     
