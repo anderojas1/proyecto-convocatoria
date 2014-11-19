@@ -9,12 +9,16 @@ package logica;
  * @author jhonkrave
  */
 public class ExpFormadorTIC {
-    private String id, ExpFormerProf, ExpFormerEst, ExpFormertoFormers, soporte_est, soporte_pro, soporte_for;
+    private String id, ExpFormerProf, ExpFormerEst, ExpFormertoFormers, soporte_est, soporte_pro, soporte_for,convocatoria;
+
+    
      
-    int puntos_est, puntos_pro, puntos_for;
+    int puntos_est, puntos_pro, puntos_for, puntos_total;
+
+    
     
 
-    public ExpFormadorTIC(String id, String ExpFormerEst, String ExpFormerProf, String ExpFormertoFormers, String soporte_est, String soporte_pro, String soporte_for, int puntos_est, int puntos_pro, int puntos_for) {
+    public ExpFormadorTIC(String id, String ExpFormerEst, String ExpFormerProf, String ExpFormertoFormers, String soporte_est, String soporte_pro, String soporte_for, int puntos_est, int puntos_pro, int puntos_for, int puntos_total, String convocatoria) {
         this.id = id;
         this.ExpFormerProf = ExpFormerProf;
         this.ExpFormerEst = ExpFormerEst;
@@ -25,6 +29,8 @@ public class ExpFormadorTIC {
         this.puntos_est = puntos_est;
         this.puntos_pro = puntos_pro;
         this.puntos_for = puntos_for;
+        this.puntos_total = puntos_total;
+        this.convocatoria = convocatoria;
     }
 
     public String getExpFormerProf() {
@@ -105,5 +111,19 @@ public class ExpFormadorTIC {
         this.soporte_pro = soporte_pro;
     }
     
+    public String getConvocatoria() {
+        return convocatoria;
+    }
+
+    public void setConvocatoria(String convocatoria) {
+        this.convocatoria = convocatoria;
+    }
     
+    public int getPuntos_total() {
+        return puntos_total;
+    }
+
+    public void setPuntos_total(int puntos_total) {
+        this.puntos_total = puntos_total;
+    }
 }
