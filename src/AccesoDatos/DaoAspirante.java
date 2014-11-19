@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -173,5 +174,38 @@ public class DaoAspirante {
         
         conectar.close();
         
+    }
+    
+    public ArrayList<Object> getListApirantes(String cod_convocatoria){
+    
+       ArrayList<Object> lista = new ArrayList<>();
+       
+       sentenciaSql = "SELECT identificacion,p_nombre,s_nombre,p_apellido,s_apellido,municipio_trabaja FROM"
+               + " Aspirante WHERE identificacion IN (SELECT identificacion FROM AspiranteConvocatoria WHERE codigo = '"+cod_convocatoria+"');";    
+        try {
+            ejecutarConsulta();
+            
+            while (registros.next()){
+            
+                String [] temp =  new String[4];
+            
+                temp[0] = registros.getString(1);
+                temp[1] = registros.getString(2)+" "+registros.getString(3);
+                temp[2] =  registros.getString(4)+" "+registros.getString(5);
+                temp[3] = registros.getString(6);
+                
+                lista.add(temp);
+            
+            }
+            
+            return lista;
+            
+        } catch (SQLException ex) {
+            System.out.println("error al consultar lista de aspirantes daoaspirante"+ex.getMessage());
+            return lista;
+        }
+       
+       
+    
     }
 }
