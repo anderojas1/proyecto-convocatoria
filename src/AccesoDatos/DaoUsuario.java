@@ -178,4 +178,24 @@ public class DaoUsuario {
         
     }
     
+    public void estadoSesion (String user, boolean est) throws SQLException {
+        
+        sentenciaSql = "UPDATE ACCESO SET estado = " + est + " WHERE username = '" + user + "';";
+        ejecutarUpdate();
+        
+    }
+    
+    
+    public boolean consultarEstadoSesion (String user) throws SQLException {
+        
+        boolean estado = false;
+        
+        sentenciaSql = "SELECT estado FROM ACCESO WHERE username = '" + user + "';";
+        ejecutarConsulta();
+        
+        if (registros.next() == true) estado = registros.getBoolean(1);
+        
+        return estado;
+    }
+    
 }

@@ -51,7 +51,7 @@ public class DriverUsuario {
     }
     
     
-    public String tipoUsuario (String username, String password) {
+    public String tipoUsuario (String username, String password) throws SQLException {
         
         return daoUsuario.identificarTipo (username, password);
         
@@ -68,6 +68,20 @@ public class DriverUsuario {
     public void cambiarContraseña (String id, String pass) throws SQLException {
         
         daoUsuario.cambiarContraseña(id, pass);
+        
+    }
+    
+    
+    public void estadoSesion (String user, boolean estado) throws SQLException {
+        
+        daoUsuario.estadoSesion(user, estado);
+        
+    }
+    
+    
+    public boolean verificarSesion (String user) throws SQLException {
+        
+        return daoUsuario.consultarEstadoSesion(user);
         
     }
     
