@@ -505,13 +505,6 @@ public class VentanaEditarConvocatoria extends JFrame {
 
         }
 
-    }
-
-    public static void main(String[] args) {
-
-        VentanaEditarConvocatoria ei = new VentanaEditarConvocatoria();
-        ei.consultarConvocatoriasVigentes();
-
-    }
+    }   
 
 }

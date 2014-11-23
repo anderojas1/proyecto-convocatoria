@@ -140,42 +140,51 @@ public class VentanaLogin extends JFrame {
         
             String tipo = controladorUsuario.tipoUsuario(user, pass);
             
-            if (controladorUsuario.verificarSesion(user) == false) {
+            if (!tipo.equals("")) {
+            
+                if (controladorUsuario.verificarSesion(user) == false) {
+
+                controladorUsuario.estadoSesion(user, true);
                 
-                //controladorUsuario.estadoSesion(user, true);
+                    switch (tipo) {
 
-                switch (tipo) {
+                        case "Administrador": {
 
-                    case "Administrador": {
-                        
-                        VentanaAdministrador admin = new VentanaAdministrador(user);
-                        this.dispose();
+                            VentanaAdministrador admin = new VentanaAdministrador(user);
+                            this.dispose();
+
+                        }
+                        break;
+
+                        case "Supervisor": {
+
+                            VentanaIniSupervisor sprv = new VentanaIniSupervisor(user);
+                            this.dispose();
+
+                        }
+                        break;
+
+                        case "Digitador": {
+
+                            VentanaPrincipalDigitador dig = new VentanaPrincipalDigitador(user);
+                            this.dispose();
+
+                        }
+                        break;
 
                     }
-                    break;
 
-                    case "Supervisor": {
+                } else {
 
-                        VentanaIniSupervisor sprv = new VentanaIniSupervisor(user);
-                        this.dispose();
+                    JOptionPane.showMessageDialog(this, "El usuario " + user + " ya ha iniciado sesión", "Múltiple inicio de sesión",
+                            JOptionPane.ERROR_MESSAGE);
 
-                    }
-                    break;
-
-                    case "Digitador": {
-
-                        VentanaPrincipalDigitador dig = new VentanaPrincipalDigitador(user);
-                        this.dispose();
-
-                    }
-                    break;
-                        
                 }
-                    
+                
             } else {
                 
-                JOptionPane.showMessageDialog(this, "El usuario " + user + " ya ha iniciado sesión", "Múltiple inicio de sesión", 
-                                            JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Usuario o contraseña inválidos", "Inicio de sesión fallido",
+                            JOptionPane.ERROR_MESSAGE);
                 
             }
             

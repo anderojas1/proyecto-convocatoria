@@ -28,12 +28,6 @@ public class VentanaCrearConvocatoria extends JFrame {
     private JLabel lbdescripcion;
     private JLabel lbfechaInicio;
     private JLabel lbfechaFin;
-    private JLabel lbañoInicio;
-    private JLabel lbmesInicio;
-    private JLabel lbdiaInicio;
-    private JLabel lbañoFinal;
-    private JLabel lbmesFinal;
-    private JLabel lbdiaFinal;
     
     private JDateChooser escogerFechaInicio;
     private JDateChooser escogerFechaFin;
@@ -44,13 +38,6 @@ public class VentanaCrearConvocatoria extends JFrame {
     private JTextArea jtadescripcion;
     
     private JScrollPane jspdesplazador;
-    
-    private JComboBox jcbañoInicio;
-    private JComboBox jcbmesInicio;
-    private JComboBox jcbdiaInicio;
-    private JComboBox jcbañoFinal;
-    private JComboBox jcbmesFinal;
-    private JComboBox jcbdiaFinal;
     
     private JButton jbcrear;
     private JButton jbcancelar;
@@ -99,14 +86,7 @@ public class VentanaCrearConvocatoria extends JFrame {
         lbnombre = new JLabel("Nombre *");
         lbdescripcion = new JLabel("Descripción *");
         lbfechaInicio = new JLabel("Fecha inicio *");
-        lbfechaFin = new JLabel("Fecha fin *");
-        lbañoInicio = new JLabel("Año:");
-        lbmesInicio = new JLabel("Mes:");
-        lbdiaInicio = new JLabel("Día:");
-        
-        lbañoFinal = new JLabel("Año:");
-        lbmesFinal = new JLabel("Mes:");
-        lbdiaFinal = new JLabel("Día:");
+        lbfechaFin = new JLabel("Fecha fin *");        
         
         jtfcodigo = new JTextField();
         jtfnombre = new JTextField();
@@ -114,13 +94,6 @@ public class VentanaCrearConvocatoria extends JFrame {
         jtadescripcion = new JTextArea();
         
         jspdesplazador = new JScrollPane(jtadescripcion);
-
-        jcbañoInicio = new JComboBox();
-        jcbmesInicio = new JComboBox();
-        jcbdiaInicio = new JComboBox();
-        jcbañoFinal = new JComboBox();
-        jcbmesFinal = new JComboBox();
-        jcbdiaFinal = new JComboBox();
         
         addFeatures();
     
@@ -143,22 +116,9 @@ public class VentanaCrearConvocatoria extends JFrame {
         panel.add(lbdescripcion);
         panel.add(lbfechaInicio);
         panel.add(lbfechaFin);
-        panel.add(lbañoInicio);
-        panel.add(lbmesInicio);
-        panel.add(lbdiaInicio);
-        panel.add(lbañoFinal);
-        panel.add(lbmesFinal);
-        panel.add(lbdiaFinal);
         
         panel.add(jtfcodigo);
-        panel.add(jtfnombre);
-        
-        panel.add(jcbañoInicio);
-        panel.add(jcbmesInicio);
-        panel.add(jcbdiaInicio);
-        panel.add(jcbañoFinal);
-        panel.add(jcbmesFinal);
-        panel.add(jcbdiaFinal);
+        panel.add(jtfnombre);        
         
         panel.add(jbcrear);
         panel.add(jbcancelar);
@@ -183,11 +143,8 @@ public class VentanaCrearConvocatoria extends JFrame {
         lbdescripcion.setBounds(50, 200, 100, 30);
         jspdesplazador.setBounds(170, 200, 310, 200);
         
-        lbfechaInicio.setBounds(50, 420, 100, 30);
-        escogerFechaInicio.setBounds(170, 420, 310, 30);
-        
-        lbfechaFin.setBounds(50, 470, 100, 30);
-        escogerFechaFin.setBounds(170, 470, 310, 30);
+        lbfechaFin.setBounds(50, 420, 100, 30);
+        escogerFechaFin.setBounds(170, 420, 310, 30);
         
         jbcancelar.setBounds(270, 550, 100, 30);
         jbcrear.setBounds(380, 550, 100, 30);
@@ -224,7 +181,7 @@ public class VentanaCrearConvocatoria extends JFrame {
         campos[0] = jtfcodigo.getText();
         campos[1] = jtfnombre.getText();
                
-        if (!escogerFechaFin.getCalendar().after(escogerFechaInicio.getCalendar())) {
+        if (!escogerFechaFin.getCalendar().after(Calendar.getInstance())) {
             
             JOptionPane.showMessageDialog(this, "La fecha de finalización debe ser posterior a la fecha de inicio", 
                     "Error", JOptionPane.ERROR_MESSAGE);
@@ -233,56 +190,46 @@ public class VentanaCrearConvocatoria extends JFrame {
         
         else {
             
-            if (escogerFechaInicio.getCalendar().after(Calendar.getInstance()))
-            
-                try {
+            try {
 
-                    validar.validateEmptyFields(campos);
-                    
-                    String fechafin = new SimpleDateFormat("yyyy-MM-dd").format(escogerFechaFin.getDate());
-                    String fechaini = new SimpleDateFormat("yyyy-MM-dd").format(escogerFechaInicio.getDate());
-                    
-                    String descripcion = jtadescripcion.getText();
-                    
-                    if (descripcion.length() <= 1000) {
+                validar.validateEmptyFields(campos);
 
-                        controlaConvocatoria.guardarConvocatoria(campos[1], descripcion, fechaini, fechafin, "abierta", campos[0], 
-                                admin.getUsuario());
-                        
-                        JOptionPane.showMessageDialog(this, "Se ha creado la convocatoria con exito", "Registro exitoso", 
-                                JOptionPane.INFORMATION_MESSAGE);
-                        
-                        admin.setVisible(true);
-                        dispose();
-                        
-                    } else {
-                        
-                        JOptionPane.showMessageDialog(this, "La descripción no debe exceder los 1000 caracteres", "Error", 
-                                JOptionPane.ERROR_MESSAGE);
-                        
-                    }
+                String fechafin = new SimpleDateFormat("yyyy-MM-dd").format(escogerFechaFin.getDate());
+                String fechaini = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+                String descripcion = jtadescripcion.getText();
 
-                } catch (MyException ex) {
+                if (descripcion.length() <= 1000) {
 
-                    JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+                    controlaConvocatoria.guardarConvocatoria(campos[1], descripcion, fechaini, fechafin, "abierta", campos[0],
+                            admin.getUsuario());
 
-                } catch (SQLException ex) {
-                    
-                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Registro falló", JOptionPane.ERROR_MESSAGE);
-                    
-                    
-                } catch (Exception ex) {
-                    
-                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                    
-                } 
-            
-            else {
-                
-                JOptionPane.showMessageDialog(this, "La fecha de inicio no debe ser anterior a la fecha actual", "Error", JOptionPane.ERROR_MESSAGE);
-                
+                    JOptionPane.showMessageDialog(this, "Se ha creado la convocatoria con exito", "Registro exitoso",
+                            JOptionPane.INFORMATION_MESSAGE);
+
+                    admin.setVisible(true);
+                    dispose();
+
+                } else {
+
+                    JOptionPane.showMessageDialog(this, "La descripción no debe exceder los 1000 caracteres", "Error",
+                            JOptionPane.ERROR_MESSAGE);
+
+                }
+
+            } catch (MyException ex) {
+
+                JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+
+            } catch (SQLException ex) {
+
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Registro falló", JOptionPane.ERROR_MESSAGE);
+
+            } catch (Exception ex) {
+
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
             }
-            
+
         }
         
     }
