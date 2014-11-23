@@ -142,7 +142,7 @@ public class VentanaLogin extends JFrame {
             
             if (controladorUsuario.verificarSesion(user) == false) {
                 
-                controladorUsuario.estadoSesion(user, true);
+                //controladorUsuario.estadoSesion(user, true);
 
                 switch (tipo) {
 
