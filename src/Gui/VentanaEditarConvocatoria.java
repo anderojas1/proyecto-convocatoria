@@ -40,6 +40,7 @@ public class VentanaEditarConvocatoria extends JFrame {
     private JCheckBoxMenuItem jchbCerrada;
     private JCheckBoxMenuItem jchbFinalizada;
     private JCheckBoxMenuItem jchbSuspendida;
+    private JCheckBoxMenuItem jchSeleccionado;
 
     private JDateChooser escogerFechaFin;
 
@@ -55,7 +56,7 @@ public class VentanaEditarConvocatoria extends JFrame {
     private final DriverConvocatoria controlador;
     private final ManejadorEventos driver;
     private VentanaAdministrador admin;
-    
+
     private GregorianCalendar fechaFinal;
 
     public VentanaEditarConvocatoria() {
@@ -105,13 +106,16 @@ public class VentanaEditarConvocatoria extends JFrame {
 
         jlNuevaDescripcion = new JLabel("Descripción");
         jtaDescripcion = new JTextArea();
+        jtaDescripcion.setLineWrap(true);
+        jtaDescripcion.setWrapStyleWord(true);
         desplazador = new JScrollPane(jtaDescripcion);
 
         jlEstado = new JLabel("Estado de convocatoria");
-        jchbAbierta = new JCheckBoxMenuItem("Convocatoria abierta");
-        jchbCerrada = new JCheckBoxMenuItem("Convocatoria cerrada");
-        jchbFinalizada = new JCheckBoxMenuItem("Convocatoria finalizada");
-        jchbSuspendida = new JCheckBoxMenuItem("Convocatoria suspendida");
+        jchbAbierta = new JCheckBoxMenuItem("abierta");
+        jchbCerrada = new JCheckBoxMenuItem("cerrada");
+        jchbFinalizada = new JCheckBoxMenuItem("finalizada");
+        jchbSuspendida = new JCheckBoxMenuItem("suspendida");
+        jchSeleccionado = new JCheckBoxMenuItem();
 
         jlFechaCrecion = new JLabel("Fecha creación");
         jlFechaCrecion.setFont(new Font("Arial", 1, 11));
@@ -197,51 +201,65 @@ public class VentanaEditarConvocatoria extends JFrame {
 
         jbCancelar.setBounds(250, 470, 110, 30);
         jbActualizar.setBounds(370, 470, 110, 30);
-        jbActualizar.setEnabled(false);
 
     }
 
     public void asignarEventos() {
 
-        jbEditar.addMouseListener(driver);
         jbCancelar.addMouseListener(driver);
 
     }
 
     public void habilitarEdicion(boolean editar) {
-        
+
         if (editar == true) {
-        
-            jbEditar.removeMouseListener(driver);
-            jbEditar.setEnabled(false);
-            jbActualizar.setEnabled(true);
-            jbActualizar.addMouseListener(driver);
-            
+
+            if (jbEditar.isEnabled() == true) {
+
+                jbEditar.removeMouseListener(driver);
+                jbEditar.setEnabled(false);
+
+            }
+
+            if (jbActualizar.isEnabled() == false) {
+
+                jbActualizar.setEnabled(true);
+                jbActualizar.addMouseListener(driver);
+
+            }
+
             jchbAbierta.addMouseListener(driver);
             jchbCerrada.addMouseListener(driver);
             jchbFinalizada.addMouseListener(driver);
             jchbSuspendida.addMouseListener(driver);
-            
-        }
-        
-        else {
-            
-            jbEditar.setEnabled(true);
-            jbEditar.addMouseListener(driver);
-            jbActualizar.removeMouseListener(driver);
-            jbActualizar.setEnabled(false);
-            
+
+        } else {
+
+            if (jbEditar.isEnabled() == false) {
+
+                jbEditar.setEnabled(true);
+                jbEditar.addMouseListener(driver);
+
+            }
+
+            if (jbActualizar.isEnabled() == true) {
+
+                jbActualizar.removeMouseListener(driver);
+                jbActualizar.setEnabled(false);
+
+            }
+
             jchbAbierta.removeMouseListener(driver);
             jchbCerrada.removeMouseListener(driver);
             jchbFinalizada.removeMouseListener(driver);
-            jchbSuspendida.removeMouseListener(driver); 
-            
+            jchbSuspendida.removeMouseListener(driver);
+
         }
-        
+
         jtfNombre.setEnabled(editar);
         escogerFechaFin.setEnabled(editar);
         jtaDescripcion.setEnabled(editar);
-        
+
         jchbAbierta.setEnabled(editar);
         jchbCerrada.setEnabled(editar);
         jchbFinalizada.setEnabled(editar);
@@ -270,42 +288,140 @@ public class VentanaEditarConvocatoria extends JFrame {
 
     }
 
+    private void seleccionarEstado() {
+
+        jchbAbierta.setSelected(false);
+        jchbCerrada.setSelected(false);
+        jchbFinalizada.setSelected(false);
+        jchbSuspendida.setSelected(false);
+    }
+
     public void llenarCampos() {
 
+        habilitarEdicion(false);
+
+        seleccionarEstado();
         String nombreConvocatoria = convocatorias.getSelectedItem().toString();
 
         try {
-            
+
             String datos[] = controlador.consultaDatosConvocatoria(nombreConvocatoria);
-            
+
             jtfCodigo.setText(datos[0]);
             jtfNombre.setText(datos[1]);
             jtaDescripcion.setText(datos[2]);
             jtfFechaCreacion.setText(datos[3]);
             escogerFechaFin.setDateFormatString("yyyy-MM-dd");
             String fechafin = datos[4];
-            
+
             StringTokenizer partirFecha = new StringTokenizer(fechafin, "-");
-            
+
             int año = Integer.parseInt(partirFecha.nextToken());
             int mes = Integer.parseInt(partirFecha.nextToken());
             int dia = Integer.parseInt(partirFecha.nextToken());
-            
-            fechaFinal = new GregorianCalendar(año, mes, dia);
+
+            fechaFinal = new GregorianCalendar(año, mes - 1, dia);
             escogerFechaFin.setCalendar(fechaFinal);
-            
+
             String estado = datos[5];
-            
-            if (estado.equals("abierta")) jchbAbierta.setSelected(true);
-            else if (estado.equals("cerrada")) jchbCerrada.setSelected(true);
-            else if (estado.equals("finalizada")) jchbFinalizada.setSelected(true);
-            else jchbSuspendida.setSelected(true);
-            
+
+            if (estado.equals("abierta")) {
+
+                jchbAbierta.setSelected(true);
+
+                if (jbEditar.isEnabled() == false) {
+
+                    jbEditar.setEnabled(true);
+                    jbEditar.removeMouseListener(driver);
+
+                }
+
+            } else if (estado.equals("cerrada")) {
+
+                jchbCerrada.setSelected(true);
+
+                if (jbEditar.isEnabled() == true) {
+
+                    jbEditar.removeMouseListener(driver);
+                    jbEditar.setEnabled(false);
+
+                }
+
+            } else if (estado.equals("finalizada")) {
+
+                jchbFinalizada.setSelected(true);
+
+                if (jbEditar.isEnabled() == true) {
+
+                    jbEditar.removeMouseListener(driver);
+                    jbEditar.setEnabled(false);
+
+                }
+
+            } else {
+
+                jchbSuspendida.setSelected(true);
+
+                if (jbEditar.isEnabled() == false) {
+
+                    jbEditar.setEnabled(true);
+                    jbEditar.removeMouseListener(driver);
+
+                }
+
+            }
+
+            jchSeleccionado.setText(estado);
+
         } catch (SQLException ex) {
-            
-            JOptionPane.showMessageDialog(this, "Error consultando los detalles de la convocatoria", 
+
+            JOptionPane.showMessageDialog(this, "Error consultando los detalles de la convocatoria",
                     "Error en la consulta", JOptionPane.ERROR_MESSAGE);
-            
+
+        }
+
+    }
+
+    public void actualizarDatos() {
+
+        try {
+
+            if (!escogerFechaFin.getCalendar().before(fechaFinal)) {
+
+                String campos[] = new String[2];
+
+                campos[0] = jtfNombre.getText();
+                campos[1] = jtaDescripcion.getText();
+
+                String estado = jchSeleccionado.getText();
+
+                validador.validateEmptyFields(campos);
+
+                String fechafin = new SimpleDateFormat("yyyy-MM-dd").format(escogerFechaFin.getDate());
+
+                controlador.actualizarConvocatoria(campos[0], campos[1], estado, fechafin,
+                        convocatorias.getSelectedItem().toString());
+
+                JOptionPane.showMessageDialog(this, "Los datos han sido actualizados exitosamente", "Actualización exitosa",
+                        JOptionPane.INFORMATION_MESSAGE);
+
+                habilitarEdicion(false);
+
+            } else {
+
+                JOptionPane.showMessageDialog(this,
+                        "La nueva fecha de finalización debe ser igual o posterior a la fecha de cierre fijada inicialmente",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+
+            }
+
+        } catch (MyException ex) {
+
+            JOptionPane.showMessageDialog(this, "Hay campos vacíos", "Campos vacíos", JOptionPane.ERROR_MESSAGE);
+
+        } catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(this, "Error actualizando los datos", "Error al actualizar", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -323,29 +439,37 @@ public class VentanaEditarConvocatoria extends JFrame {
                 habilitarEdicion(true);
 
             } else if (e.getSource() == jchbAbierta) {
-                
+
                 jchbCerrada.setSelected(false);
                 jchbFinalizada.setSelected(false);
                 jchbSuspendida.setSelected(false);
-                
+                jchSeleccionado = jchbAbierta;
+
             } else if (e.getSource() == jchbCerrada) {
-                
+
                 jchbAbierta.setSelected(false);
                 jchbFinalizada.setSelected(false);
                 jchbSuspendida.setSelected(false);
-                
+                jchSeleccionado = jchbCerrada;
+
             } else if (e.getSource() == jchbFinalizada) {
-                
+
                 jchbAbierta.setSelected(false);
                 jchbCerrada.setSelected(false);
                 jchbSuspendida.setSelected(false);
-                
+                jchSeleccionado = jchbFinalizada;
+
             } else if (e.getSource() == jchbSuspendida) {
-                
+
                 jchbAbierta.setSelected(false);
                 jchbFinalizada.setSelected(false);
                 jchbCerrada.setSelected(false);
-                
+                jchSeleccionado = jchbSuspendida;
+
+            } else if (e.getSource() == jbActualizar) {
+
+                actualizarDatos();
+
             }
 
         }

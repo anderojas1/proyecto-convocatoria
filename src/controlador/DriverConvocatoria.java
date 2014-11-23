@@ -81,4 +81,12 @@ public class DriverConvocatoria {
         
     }
     
+    
+    public void actualizarConvocatoria (String nombre, String descrip, String estado, String fecha, String convoca) 
+                        throws SQLException {
+        
+        daoConvocatoria.actualizarDetallesConvocatoria(nombre, descrip, estado, fecha, convoca);
+        
+    }
+    
 }

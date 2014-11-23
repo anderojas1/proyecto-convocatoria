@@ -100,7 +100,7 @@ public class DaoConvocatoria {
 
         ArrayList<String> convocatorias = new ArrayList<>();
 
-        consultaSql = "SELECT nombre FROM CONVOCATORIA where estado = 'abierta';";
+        consultaSql = "SELECT nombre FROM CONVOCATORIA;";
         ejecutarConsulta();
 
         while (registros.next()) {
@@ -136,6 +136,17 @@ public class DaoConvocatoria {
         }
         
         return datos;
+        
+    }
+    
+    
+    public void actualizarDetallesConvocatoria (String nombre, String descripcion, String estado, String fechaFin,
+                                String convocatoria) throws SQLException {
+        
+        sqlDatosConvocatoria = "UPDATE CONVOCATORIA SET nombre = '" + nombre + "',descripcion = '" + descripcion + "',"
+                + "fecha_cierre = '" + fechaFin + "', estado = '" + estado + "' WHERE nombre = '" + convocatoria + "';";
+        
+        ejecutarSentencia();
         
     }
 }

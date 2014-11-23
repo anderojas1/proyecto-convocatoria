@@ -226,7 +226,8 @@ public class VentanaCrearConvocatoria extends JFrame {
                
         if (!escogerFechaFin.getCalendar().after(escogerFechaInicio.getCalendar())) {
             
-            JOptionPane.showMessageDialog(this, "La fecha de finalización debe ser posterior a la fecha de inicio", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "La fecha de finalización debe ser posterior a la fecha de inicio", 
+                    "Error", JOptionPane.ERROR_MESSAGE);
             
         }
         
