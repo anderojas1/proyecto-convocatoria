@@ -41,6 +41,7 @@ public class DriverConvocatoria {
             throw ex;
             
         }
+        
     }
     
     
@@ -65,6 +66,12 @@ public class DriverConvocatoria {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Consulta erronea", JOptionPane.ERROR_MESSAGE);
         }
         return estado;
+    }
+    
+    public ArrayList<String> consultarConvocatorias () throws SQLException {
+        
+        return daoConvocatoria.consultarConvocatoriasVigentes();
+        
     }
     
 }
