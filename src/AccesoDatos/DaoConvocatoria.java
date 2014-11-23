@@ -116,4 +116,26 @@ public class DaoConvocatoria {
         return convocatorias;
 
     }
+    
+    public String[] consultarDetallesConvocatoria (String nombre) throws SQLException {
+        
+        String datos [] = new String[6];
+        
+        consultaSql = "SELECT * FROM CONVOCATORIA WHERE nombre = '" + nombre + "';";
+        ejecutarConsulta();
+        
+        if (registros.next() == true) {
+            
+            datos[0] = registros.getString(1);
+            datos[1] = registros.getString(2);
+            datos[2] = registros.getString(3);
+            datos[3] = registros.getString(4);
+            datos[4] = registros.getString(5);
+            datos[5] = registros.getString(6);
+            
+        }
+        
+        return datos;
+        
+    }
 }

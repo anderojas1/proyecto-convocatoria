@@ -74,4 +74,11 @@ public class DriverConvocatoria {
         
     }
     
+    
+    public String [] consultaDatosConvocatoria (String nombre) throws SQLException {
+        
+        return daoConvocatoria.consultarDetallesConvocatoria(nombre);
+        
+    }
+    
 }
