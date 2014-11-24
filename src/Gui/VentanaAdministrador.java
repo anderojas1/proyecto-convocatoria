@@ -4,11 +4,14 @@
  */
 package Gui;
 
-import javax.swing.*;
+import controlador.DriverUsuario;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.text.StyledEditorKit;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.*;
 
 /**
  *
@@ -30,6 +33,7 @@ public class VentanaAdministrador extends JFrame {
     private Container container;
     
     private String user;
+    private DriverUsuario control;
 
     // End of variables declaration
     public VentanaAdministrador(String usuario) {
@@ -48,8 +52,9 @@ public class VentanaAdministrador extends JFrame {
     }
 
     private void initComponents() {
-        //incializar manejador de eventos
+        //incializar controles
         eventmanager = new EventManager(this);
+        control =  new DriverUsuario();
 
         //paneles
 
@@ -140,6 +145,15 @@ public class VentanaAdministrador extends JFrame {
         setVisible(false);
         
     }
+    
+    public void modificarConvocatoria(){
+    
+        VentanaEditarConvocatoria modif =new VentanaEditarConvocatoria();
+        modif.consultarConvocatoriasVigentes();
+        modif.setVentanaAdmin(this);
+        
+    
+    }
 
     public class EventManager implements ActionListener {
 
@@ -168,15 +182,23 @@ public class VentanaAdministrador extends JFrame {
 
             if (e.getSource() == JBModifConv) {
 
-                JOptionPane.showMessageDialog(null, "Lo sentimos estamos en desarrollo", "Error", JOptionPane.ERROR_MESSAGE);
+                modificarConvocatoria();
+                componentepadre.setVisible(false);
             }
 
             if (e.getSource() == JBCerrarSesion) {
 
+                
                 VentanaLogin nuevoLogin = new VentanaLogin();
                 nuevoLogin.addEvents();
+                try {
+                    control.estadoSesion(user, false);
+                    dispose();
+                } catch (SQLException ex) {
+                    System.out.println("error al cerrar sesion");
+                }
                 
-                dispose();
+                
 
             }
         }

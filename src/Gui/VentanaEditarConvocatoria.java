@@ -267,7 +267,7 @@ public class VentanaEditarConvocatoria extends JFrame {
 
     }
 
-    private void consultarConvocatoriasVigentes() {
+    public void consultarConvocatoriasVigentes() {
 
         try {
 
@@ -431,8 +431,9 @@ public class VentanaEditarConvocatoria extends JFrame {
         public void mouseClicked(MouseEvent e) {
 
             if (e.getSource() == jbCancelar) {
-
                 dispose();
+                admin.setVisible(true);
+                
 
             } else if (e.getSource() == jbEditar) {
 
