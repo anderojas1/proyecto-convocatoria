@@ -301,7 +301,7 @@ public class VentanaRegistrarIdioma extends JFrame {
 		String lee = jchbleer.getText();
                 String escribe = jchbescribir.getText();
                 String habla = jchbhablar.getText();
-				
+                				
 		String codigoIdioma = controladorIdioma.consultarCodigo(nombre);
                 
                 double pun = 0.0;
