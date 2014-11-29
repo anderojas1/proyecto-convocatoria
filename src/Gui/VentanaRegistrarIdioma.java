@@ -7,6 +7,7 @@ package Gui;
 
 import controlador.DriverAspirante;
 import controlador.DriverIdioma;
+import java.awt.*;
 import java.awt.event.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -48,6 +49,8 @@ public class VentanaRegistrarIdioma extends JFrame {
     private JButton jbregistrar;
 
     private JPanel panel;
+    private JPanel panelLogo;
+    private JPanel panelVentana;
     
     private final String id_aspirante;
     
@@ -55,6 +58,8 @@ public class VentanaRegistrarIdioma extends JFrame {
     
 
     public VentanaRegistrarIdioma(String id) {
+        
+        super("Módulo Registrar Idioma");
         
         id_aspirante = id;
 
@@ -65,8 +70,8 @@ public class VentanaRegistrarIdioma extends JFrame {
         inicializarComponentes();
         agregarComponentes();
         acomodarComponentes();
-
-        setSize(600, 450);
+        
+        setSize(600, 540);
         setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(0);
@@ -75,14 +80,22 @@ public class VentanaRegistrarIdioma extends JFrame {
     }
 
     private void inicializarComponentes() {
+        
+        panelVentana = new JPanel(null);
+        panelVentana.setBackground(Color.WHITE);
 
         panel = new JPanel(null);
+        panel.setBackground(Color.WHITE);
+        panel.setBorder(BorderFactory.createTitledBorder("Registrar Idioma"));
+        
+        panelLogo = new JPanel(null);
+        panelLogo.setBackground(Color.WHITE);
         
         jchbescribir = new JCheckBoxMenuItem();
         jchbhablar = new JCheckBoxMenuItem();
         jchbleer = new JCheckBoxMenuItem();
 
-        lbtitulo = new JLabel("Registrar Idioma");
+        lbtitulo = new JLabel(new ImageIcon("src/iconos/idioma.jpg"));
         lbidioma = new JLabel("Seleccione el idioma");
         lbhablar = new JLabel("Conversación");
         lbescribir = new JLabel("Escritura");
@@ -105,8 +118,10 @@ public class VentanaRegistrarIdioma extends JFrame {
 
         jbcancelar = new JButton("Cancelar");
         jbregistrar = new JButton("Guardar");
+        
+        fondoCheckBox();
 
-        getContentPane().add(panel);
+        getContentPane().add(panelVentana);
         
     }
     
@@ -132,8 +147,11 @@ public class VentanaRegistrarIdioma extends JFrame {
     
 
     private void agregarComponentes() {
+        
+        panelVentana.add(panelLogo);
+        panelVentana.add(panel);
 
-        panel.add(lbtitulo);
+        panelLogo.add(lbtitulo);
 
         panel.add(lbidioma);
         panel.add(jcbescogerIdioma);
@@ -159,29 +177,48 @@ public class VentanaRegistrarIdioma extends JFrame {
     }
 
     private void acomodarComponentes() {
+        
+        panel.setBounds(5, 130, 585, 370);
+        panelLogo.setBounds(0, 0, 600, 100);
 
-        lbtitulo.setBounds(240, 20, 220, 30);
+        lbtitulo.setBounds(0, 0, 600, 100);
 
-        lbidioma.setBounds(50, 80, 150, 30);
-        jcbescogerIdioma.setBounds(220, 80, 310, 30);
+        lbidioma.setBounds(50, 30, 150, 30);
+        jcbescogerIdioma.setBounds(220, 30, 310, 30);
         
-        lbhablar.setBounds(50, 140, 160, 30);
-        jchbhablarRegular.setBounds(50, 180, 150, 30);
-        jchbhablarBueno.setBounds(50, 210, 150, 30);
-        jchbhablarMuyBueno.setBounds(50, 240, 150, 30);
+        lbhablar.setBounds(50, 110, 160, 30);
+        jchbhablarRegular.setBounds(50, 150, 150, 30);
+        jchbhablarBueno.setBounds(50, 180, 150, 30);
+        jchbhablarMuyBueno.setBounds(50, 210, 150, 30);
         
-        lbescribir.setBounds(240, 140, 160, 30);
-        jchbescribirRegular.setBounds(240, 180, 150, 30);
-        jchbescribirBueno.setBounds(240, 210, 150, 30);
-        jchbescribirMuyBueno.setBounds(240, 240, 150, 30);
+        lbescribir.setBounds(240, 110, 160, 30);
+        jchbescribirRegular.setBounds(240, 150, 150, 30);
+        jchbescribirBueno.setBounds(240, 180, 150, 30);
+        jchbescribirMuyBueno.setBounds(240, 210, 150, 30);
         
-        lbleer.setBounds(430, 140, 160, 30);
-        jchbleerRegular.setBounds(430, 180, 150, 30);
-        jchbleerBueno.setBounds(430, 210, 150, 30);
-        jchbleerMuyBueno.setBounds(430, 240, 150, 30);
+        lbleer.setBounds(430, 110, 160, 30);
+        jchbleerRegular.setBounds(430, 150, 150, 30);
+        jchbleerBueno.setBounds(430, 180, 150, 30);
+        jchbleerMuyBueno.setBounds(430, 210, 150, 30);
         
-        jbcancelar.setBounds(300, 320, 110, 30);
-        jbregistrar.setBounds(420, 320, 110, 30);
+        jbcancelar.setBounds(300, 290, 110, 30);
+        jbregistrar.setBounds(420, 290, 110, 30);
+        
+    }
+    
+    private void fondoCheckBox () {
+        
+        jchbescribirBueno.setBackground(Color.WHITE);
+        jchbescribirRegular.setBackground(Color.WHITE);
+        jchbescribirMuyBueno.setBackground(Color.WHITE);
+        
+        jchbhablarBueno.setBackground(Color.WHITE);
+        jchbhablarMuyBueno.setBackground(Color.WHITE);
+        jchbhablarRegular.setBackground(Color.WHITE);
+        
+        jchbleerBueno.setBackground(Color.WHITE);
+        jchbleerMuyBueno.setBackground(Color.WHITE);
+        jchbleerRegular.setBackground(Color.WHITE);
         
     }
     
@@ -331,8 +368,6 @@ public class VentanaRegistrarIdioma extends JFrame {
         puntaje += comparar(true, hablar);
         puntaje += comparar(false, escribir);
         puntaje += comparar(false, leer);
-        
-        System.out.println("puntaje: " + puntaje);
         
         return puntaje;
         
@@ -489,7 +524,7 @@ public class VentanaRegistrarIdioma extends JFrame {
 
         }
 
-    }
-
-
+    }    
+    
+    
 }
