@@ -7,6 +7,7 @@ package Gui;
 
 import com.toedter.calendar.*;
 import controlador.DriverConvocatoria;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.*;
 import java.sql.SQLException;
@@ -72,6 +73,7 @@ public class VentanaEditarConvocatoria extends JFrame {
         acomodarComponentes();
         asignarEventos();
         habilitarEdicion(false);
+        colorCheckBox();
 
         setSize(1010, 600);
         setResizable(false);
@@ -90,6 +92,7 @@ public class VentanaEditarConvocatoria extends JFrame {
     private void inicializarComponentes() {
 
         panel = new JPanel(null);
+        panel.setBackground(Color.WHITE);
 
         jlTitulo = new JLabel("Editar Convocatoria");
 
@@ -207,7 +210,18 @@ public class VentanaEditarConvocatoria extends JFrame {
     public void asignarEventos() {
 
         jbCancelar.addMouseListener(driver);
+        jbEditar.addMouseListener(driver);
 
+    }
+    
+    
+    private void colorCheckBox () {
+        
+        jchbAbierta.setBackground(Color.WHITE);
+        jchbCerrada.setBackground(Color.WHITE);
+        jchbFinalizada.setBackground(Color.WHITE);
+        jchbSuspendida.setBackground(Color.WHITE);
+        
     }
 
     public void habilitarEdicion(boolean editar) {
