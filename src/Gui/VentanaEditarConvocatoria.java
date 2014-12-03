@@ -7,6 +7,7 @@ package Gui;
 
 import com.toedter.calendar.*;
 import controlador.DriverConvocatoria;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.*;
 import java.sql.SQLException;
@@ -90,13 +91,14 @@ public class VentanaEditarConvocatoria extends JFrame {
     private void inicializarComponentes() {
 
         panel = new JPanel(null);
+        panel.setBackground(Color.WHITE);
 
-        jlTitulo = new JLabel("Editar Convocatoria");
+        jlTitulo = new JLabel(new ImageIcon("src/iconos/encabezado.png"));
 
         jlConvocatoria = new JLabel("Convocatoria");
         convocatorias = new JComboBox<>();
 
-        jbEditar = new JButton("Editar convocatoria");
+        jbEditar = new JButton(new ImageIcon("src/iconos/block.png"));
 
         jlNuevoNombre = new JLabel("Nombre");
         jtfNombre = new JTextField();
@@ -168,13 +170,15 @@ public class VentanaEditarConvocatoria extends JFrame {
 
     private void acomodarComponentes() {
 
-        jlTitulo.setBounds(200, 20, 280, 30);
+        jlTitulo.setBounds(0, 0, 1010, 90);
 
-        jlConvocatoria.setBounds(50, 70, 100, 30);
-        convocatorias.setBounds(160, 70, 320, 30);
+        jlConvocatoria.setBounds(50, 100, 100, 30);
+        convocatorias.setBounds(160, 100, 320, 30);
         convocatorias.addItemListener(driver);
 
-        jbEditar.setBounds(650, 70, 200, 30);
+        jbEditar.setBounds(920, 100, 40, 30);
+        jbEditar.setBorder(null);
+        jbEditar.setBackground(Color.WHITE);
 
         jlNuevoNombre.setBounds(50, 150, 100, 30);
         jtfNombre.setBounds(160, 150, 320, 30);
