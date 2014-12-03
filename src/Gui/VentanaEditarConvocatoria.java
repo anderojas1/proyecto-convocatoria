@@ -207,6 +207,7 @@ public class VentanaEditarConvocatoria extends JFrame {
     public void asignarEventos() {
 
         jbCancelar.addMouseListener(driver);
+        jbEditar.addMouseListener(driver);
 
     }
 
