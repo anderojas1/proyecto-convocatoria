@@ -73,6 +73,7 @@ public class VentanaEditarConvocatoria extends JFrame {
         acomodarComponentes();
         asignarEventos();
         habilitarEdicion(false);
+        colorCheckBox();
 
         setSize(1010, 600);
         setResizable(false);
@@ -213,6 +214,16 @@ public class VentanaEditarConvocatoria extends JFrame {
         jbCancelar.addMouseListener(driver);
         jbEditar.addMouseListener(driver);
 
+    }
+    
+    
+    private void colorCheckBox () {
+        
+        jchbAbierta.setBackground(Color.WHITE);
+        jchbCerrada.setBackground(Color.WHITE);
+        jchbFinalizada.setBackground(Color.WHITE);
+        jchbSuspendida.setBackground(Color.WHITE);
+        
     }
 
     public void habilitarEdicion(boolean editar) {
