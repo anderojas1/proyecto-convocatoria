@@ -104,7 +104,7 @@ public class Graficos extends JFrame{
         municipios.add("Yumbo");
         municipios.add("Zarzal");
         
-        init();
+        //init();
         
     }
  
@@ -180,6 +180,21 @@ public class Graficos extends JFrame{
             
             }
 
+        }
+        
+    }
+    
+    
+    public void recibirParametrosGrafica (String titulo, Object [][] datos) {
+        
+        for (int i = 0; i < datos.length; i++) {
+            
+            for (int j = 0; j < datos[i].length; j++) {
+                
+                System.out.println(datos[i][j]);
+                
+            }
+            
         }
         
     }

@@ -147,7 +147,13 @@ public class VentanaGenerarReportes extends JFrame {
             int sexoMasculino = driverAspirante.consultarNumeros("Genero", "Hombre");
             int sexoFemenino = driverAspirante.consultarNumeros("Genero", "Mujer");
             
-            System.out.println(sexoMasculino + " - " + sexoFemenino);
+            Object [][] datos = {{"Hombres", sexoMasculino},{"Mujeres", sexoFemenino}};            
+            
+            //System.out.println(sexoMasculino + " - " + sexoFemenino);
+            
+            Graficos reportes = new Graficos();
+            
+            reportes.recibirParametrosGrafica("Género", datos);
             
             JOptionPane.showMessageDialog(this, "Estamos en desarrollo", "Módulo en desarrollo", JOptionPane.INFORMATION_MESSAGE);
             
