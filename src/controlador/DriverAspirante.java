@@ -86,9 +86,18 @@ public class DriverAspirante {
     }
     
     
-    public int consultarJornada (String jornada) throws SQLException {
+    public int consultarNumeros (String item, String parametro) throws SQLException {
         
-        return daoaspirante.consultarJornadaLaboral(jornada);
+        int total = 0;
+        
+        switch (item) {
+            
+            case "Jornada": total = daoaspirante.consultarJornadaLaboral(parametro); break;
+            case "Genero": total = daoaspirante.consultarGeneroAspirante(parametro); break;
+                            
+        }
+        
+        return total;
         
     }
          

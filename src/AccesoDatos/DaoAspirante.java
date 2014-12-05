@@ -176,6 +176,18 @@ public class DaoAspirante {
         
     }
     
+    public int consultarGeneroAspirante (String sexo) throws SQLException {
+        
+        int total = 0;
+        
+        sentenciaSql = "SELECT count(sexo) FROM ASPIRANTE WHERE sexo = '" + sexo + "';";
+        ejecutarConsulta();
+        
+        if (registros.next() == true) total = registros.getInt(1);
+        
+        return total;
+        
+    }
     
     public void ejecutarConsulta () throws SQLException {
         

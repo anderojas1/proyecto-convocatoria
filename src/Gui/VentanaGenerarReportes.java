@@ -77,10 +77,27 @@ public class VentanaGenerarReportes extends JFrame {
         
         try {
         
-            int jornadaMañana = driverAspirante.consultarJornada("Mañana");
-            int jornadaTarde = driverAspirante.consultarJornada("Tarde");
-            int jornadaAmbas = driverAspirante.consultarJornada("Ambas");
+            int jornadaMañana = driverAspirante.consultarNumeros("Jornada", "Mañana");
+            int jornadaTarde = driverAspirante.consultarNumeros("Jornada", "Tarde");
+            int jornadaAmbas = driverAspirante.consultarNumeros("Jornada", "Ambas");
             System.out.println(jornadaMañana + " - " + jornadaTarde + " - " + jornadaAmbas);
+            
+        } catch (SQLException ex) {
+            
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Consulta fallida", JOptionPane.ERROR_MESSAGE);
+            
+        }
+        
+    }
+    
+    public void generarReporteGenero () {
+        
+        try {
+            
+            int sexoMasculino = driverAspirante.consultarNumeros("Genero", "Hombre");
+            int sexoFemenino = driverAspirante.consultarNumeros("Genero", "Mujer");
+            
+            System.out.println(sexoMasculino + " - " + sexoFemenino);
             
         } catch (SQLException ex) {
             
@@ -110,6 +127,7 @@ public class VentanaGenerarReportes extends JFrame {
         VentanaGenerarReportes rp = new VentanaGenerarReportes();
         rp.asignarEventos();
         rp.generarReporteJornadas();
+        rp.generarReporteGenero();
         
     }
     
