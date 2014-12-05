@@ -9,9 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import logica.*;
 
 /**
@@ -162,6 +159,20 @@ public class DaoAspirante {
         if (registros.next()) puntaje = registros.getDouble(1);
         
         return puntaje;
+        
+    }
+    
+    
+    public int consultarJornadaLaboral (String jornada) throws SQLException {
+        
+        int total = 0;
+        
+        sentenciaSql = "SELECT count(jornada) FROM ASPIRANTE WHERE jornada = '" + jornada + "';";
+        ejecutarConsulta();
+        
+        if (registros.next() == true) total = registros.getInt(1);
+        
+        return total;
         
     }
     

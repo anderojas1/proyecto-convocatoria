@@ -84,6 +84,13 @@ public class DriverAspirante {
         return daoaspirante.consultarPuntajeUsuario(id, con);
         
     }
+    
+    
+    public int consultarJornada (String jornada) throws SQLException {
+        
+        return daoaspirante.consultarJornadaLaboral(jornada);
+        
+    }
          
     
 }
