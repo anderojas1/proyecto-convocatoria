@@ -86,4 +86,11 @@ public class DriverUsuario {
     }
     
     
+    public void habilitarUsuario (boolean estado, String identificacion) throws SQLException {
+        
+        daoUsuario.habilitarUsuario(estado, identificacion);
+        
+    }
+    
+    
 }

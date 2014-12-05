@@ -154,6 +154,20 @@ public class VentanaAdministrador extends JFrame {
         
     
     }
+    
+    
+    public void habilitarUsuario (boolean estado, String usuario) {
+        
+        try {
+            
+            control.habilitarUsuario(estado, usuario);
+            
+        } catch (SQLException ex) {
+            
+            JOptionPane.showMessageDialog(this, "Error ejecutando actualización", "Error", JOptionPane.ERROR_MESSAGE);
+            
+        }
+    }
 
     public class EventManager implements ActionListener {
 
@@ -230,7 +244,7 @@ super.paintComponent(grafico);
 }
 }
     
-    
+
  
     
     

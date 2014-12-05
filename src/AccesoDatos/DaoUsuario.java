@@ -198,4 +198,12 @@ public class DaoUsuario {
         return estado;
     }
     
+    
+    public void habilitarUsuario (boolean estado, String identificacion) throws SQLException {
+        
+        sentenciaSql = "UPDATE USUARIO SET empleo = " + estado + " WHERE identificacion = '" + identificacion + "';";
+        ejecutarUpdate();
+        
+    }
+    
 }
