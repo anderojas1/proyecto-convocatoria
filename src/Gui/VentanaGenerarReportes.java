@@ -14,7 +14,7 @@ import javax.swing.*;
  *
  * @author anderojas
  */
-public class VentanaReporteJornadaLaboral extends JFrame {
+public class VentanaGenerarReportes extends JFrame {
     
     private JPanel panel;
     
@@ -24,7 +24,7 @@ public class VentanaReporteJornadaLaboral extends JFrame {
     
     private DriverAspirante driverAspirante;
     
-    public VentanaReporteJornadaLaboral () {
+    public VentanaGenerarReportes () {
         
         super("Reporte Jornadas Laborales");
         
@@ -73,7 +73,7 @@ public class VentanaReporteJornadaLaboral extends JFrame {
         
     }
     
-    public void generarReporte () {
+    public void generarReporteJornadas () {
         
         try {
         
@@ -107,9 +107,9 @@ public class VentanaReporteJornadaLaboral extends JFrame {
     
     public static void main(String[] args) {
         
-        VentanaReporteJornadaLaboral rp = new VentanaReporteJornadaLaboral();
+        VentanaGenerarReportes rp = new VentanaGenerarReportes();
         rp.asignarEventos();
-        rp.generarReporte();
+        rp.generarReporteJornadas();
         
     }
     
