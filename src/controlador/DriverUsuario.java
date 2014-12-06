@@ -6,6 +6,7 @@ package controlador;
 
 import AccesoDatos.DaoUsuario;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import logica.Usuario;
 
@@ -89,6 +90,13 @@ public class DriverUsuario {
     public void habilitarUsuario (boolean estado, String identificacion) throws SQLException {
         
         daoUsuario.habilitarUsuario(estado, identificacion);
+        
+    }
+    
+    
+    public ArrayList <String> consultarUsuarios (boolean estado) throws SQLException {
+        
+        return daoUsuario.consultarUsuarios(estado);
         
     }
     
