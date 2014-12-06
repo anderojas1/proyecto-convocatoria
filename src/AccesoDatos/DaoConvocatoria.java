@@ -96,7 +96,7 @@ public class DaoConvocatoria {
 
     }
 
-    public ArrayList<String> consultarConvocatoriasVigentes() throws SQLException {
+    public ArrayList<String> consultarConvocatorias() throws SQLException {
 
         ArrayList<String> convocatorias = new ArrayList<>();
 

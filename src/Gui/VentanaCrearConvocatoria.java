@@ -28,6 +28,9 @@ public class VentanaCrearConvocatoria extends JFrame {
     private JLabel lbdescripcion;
     private JLabel lbfechaInicio;
     private JLabel lbfechaFin;
+    private JLabel lbEstadoConvocatoria;
+    
+    private JComboBox <String> jcbEstados;
     
     private JDateChooser escogerFechaInicio;
     private JDateChooser escogerFechaFin;
@@ -86,7 +89,12 @@ public class VentanaCrearConvocatoria extends JFrame {
         lbnombre = new JLabel("Nombre *");
         lbdescripcion = new JLabel("Descripción *");
         lbfechaInicio = new JLabel("Fecha inicio *");
-        lbfechaFin = new JLabel("Fecha fin *");        
+        lbfechaFin = new JLabel("Fecha fin *");
+        lbEstadoConvocatoria = new JLabel("Definir estado");
+        
+        String [] items = {"abierta", "en espera"};
+        
+        jcbEstados = new JComboBox<>(items);
         
         jtfcodigo = new JTextField();
         jtfnombre = new JTextField();
@@ -118,7 +126,10 @@ public class VentanaCrearConvocatoria extends JFrame {
         panel.add(lbfechaFin);
         
         panel.add(jtfcodigo);
-        panel.add(jtfnombre);        
+        panel.add(jtfnombre); 
+        
+        panel.add(lbEstadoConvocatoria);
+        panel.add(jcbEstados);
         
         panel.add(jbcrear);
         panel.add(jbcancelar);
@@ -145,6 +156,9 @@ public class VentanaCrearConvocatoria extends JFrame {
         
         lbfechaFin.setBounds(50, 420, 100, 30);
         escogerFechaFin.setBounds(170, 420, 310, 30);
+        
+        lbEstadoConvocatoria.setBounds(50, 460, 100, 30);
+        jcbEstados.setBounds(170, 460, 310, 30);
         
         jbcancelar.setBounds(270, 550, 100, 30);
         jbcrear.setBounds(380, 550, 100, 30);
@@ -183,7 +197,7 @@ public class VentanaCrearConvocatoria extends JFrame {
                
         if (!escogerFechaFin.getCalendar().after(Calendar.getInstance())) {
             
-            JOptionPane.showMessageDialog(this, "La fecha de finalización debe ser posterior a la fecha de inicio", 
+            JOptionPane.showMessageDialog(this, "La fecha de finalización debe ser posterior a la fecha actual", 
                     "Error", JOptionPane.ERROR_MESSAGE);
             
         }
@@ -196,11 +210,12 @@ public class VentanaCrearConvocatoria extends JFrame {
 
                 String fechafin = new SimpleDateFormat("yyyy-MM-dd").format(escogerFechaFin.getDate());
                 String fechaini = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+                String estado = jcbEstados.getSelectedItem().toString();
                 String descripcion = jtadescripcion.getText();
 
                 if (descripcion.length() <= 1000) {
 
-                    controlaConvocatoria.guardarConvocatoria(campos[1], descripcion, fechaini, fechafin, "abierta", campos[0],
+                    controlaConvocatoria.guardarConvocatoria(campos[1], descripcion, fechaini, fechafin, estado, campos[0],
                             admin.getUsuario());
 
                     JOptionPane.showMessageDialog(this, "Se ha creado la convocatoria con exito", "Registro exitoso",
@@ -304,6 +319,13 @@ public class VentanaCrearConvocatoria extends JFrame {
                     
         }
         
+    }
+    
+    
+    public static void main(String[] args) {
+        
+        VentanaCrearConvocatoria ven = new VentanaCrearConvocatoria();
+        ven.agregarEventos();
     }
     
 }

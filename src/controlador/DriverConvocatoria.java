@@ -70,7 +70,7 @@ public class DriverConvocatoria {
     
     public ArrayList<String> consultarConvocatorias () throws SQLException {
         
-        return daoConvocatoria.consultarConvocatoriasVigentes();
+        return daoConvocatoria.consultarConvocatorias();
         
     }
     
