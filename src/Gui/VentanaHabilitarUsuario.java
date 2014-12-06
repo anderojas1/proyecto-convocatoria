@@ -2,6 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+
+
+/*
+ * Se hace la conexión con esta ventana así:
+ * 
+ * 1) hace el llamado a la ventana cuando el usuario da clic en administración de usuarios
+ * 2) llama al método conexionAdministrador
+ * 3) llama al método consultarUsuarios
+ * 4) la ventana de administrador queda invisible
+ */
 package Gui;
 
 import controlador.DriverUsuario;
@@ -32,6 +42,8 @@ public class VentanaHabilitarUsuario extends JFrame {
     private DriverUsuario controlaUsuario;
     
     private ControladorEventos controlador;
+    
+    private VentanaAdministrador adm;
     
     
     public VentanaHabilitarUsuario () {
@@ -180,6 +192,12 @@ public class VentanaHabilitarUsuario extends JFrame {
         
     }
     
+    public void conexionAdministrador (VentanaAdministrador admin) {
+        
+        adm = admin;
+        
+    }
+    
     
     private class ControladorEventos implements ActionListener {
 
@@ -188,6 +206,7 @@ public class VentanaHabilitarUsuario extends JFrame {
             
             if (e.getSource() == jbCerrar) {
                 
+                adm.setVisible(true);
                 dispose();
                 
             } else if (e.getSource() == jbActivar) {
