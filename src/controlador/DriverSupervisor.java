@@ -26,7 +26,11 @@ public class DriverSupervisor {
     
     }
     
+    public ArrayList<Object[]>listMunicipios (String codcon){
     
+        return daoA.getInfoMunicipios(codcon);
+    
+    }
     
     
     
