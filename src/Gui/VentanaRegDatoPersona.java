@@ -65,6 +65,7 @@ public class VentanaRegDatoPersona extends JFrame {
     private boolean validarAsp= false;
     private int tipo;
     private String[] datos_convocatoria;
+    boolean guardar=false;
 
     //Constructor de la Clase 
     public VentanaRegDatoPersona(int tipo) {
@@ -112,16 +113,16 @@ public class VentanaRegDatoPersona extends JFrame {
         lbConvocatoria = new JLabel("Seleccione la convocatoria");
         lbConvocatoria.setVisible(false);
 
-        campoPNombre = new JTextField("Primer Nombre");
+        campoPNombre = new JTextField("");
         campoPNombre.setVisible(false);
-        campoSNombre = new JTextField("Segundo Nombre");
+        campoSNombre = new JTextField("");
         campoSNombre.setVisible(false);
-        campoPApelli = new JTextField("Primer Apellido");
+        campoPApelli = new JTextField("");
         campoPApelli.setVisible(false);
-        campoSApelli = new JTextField("Segundo Apellido");
+        campoSApelli = new JTextField("");
         campoSApelli.setVisible(false);
-        campoNumIdent = new JTextField("Numero Documento");
-        campoNumCel = new JTextField("(+57) 313-444-33-11");
+        campoNumIdent = new JTextField("");
+        campoNumCel = new JTextField("");
         campoNumCel.setVisible(false);
         campoTipoDoc = new JTextField("");
         campoTipoDoc.setVisible(false);
@@ -309,19 +310,12 @@ public class VentanaRegDatoPersona extends JFrame {
         comboAnio.setVisible(false);
         
         comboConvocatorias = new JComboBox();
-        ArrayList<String> nombreC = new ArrayList();
-        nombreC=contConvocatoria.listaConvocatorias();
-        int tam=nombreC.size();
-        for(int i = 0; i < tam; i++){
-            
-        comboConvocatorias.addItem(nombreC.get(i));
-        }
         comboConvocatorias.setVisible(false);
 
               
         btCancelar = new JButton("Cancelar");
         btconfirmar = new JButton(new ImageIcon("src/iconos/lupa.jpg"));
-        btaceptar = new JButton("Aceptar");
+        btaceptar = new JButton("Inscribir");
         btaceptar.setVisible(false);
 
 
@@ -459,13 +453,29 @@ public class VentanaRegDatoPersona extends JFrame {
         
     }
     
-    public void ingresarModulos(){//Ventana siguiente
+    public void ingresarModulo1(){//Ventana siguiente
          String idAsp = campoNumIdent.getText();
-         VentanaOpcionesModulo opciones = new VentanaOpcionesModulo(tipo, idAsp, datos_convocatoria);
-         opciones.asignarEventos();
-         opciones.configurarVentana(this);
+         VentanaInfoPrePos modulo1 = new VentanaInfoPrePos(tipo, idAsp, datos_convocatoria);
+         modulo1.asignarEventos();
+         //modulo1.configurarVentana(this);
          setVisible(false);
      }
+    
+    public void comboConvocatorias (String identificacion){
+        
+        ArrayList<String> nombreC = new ArrayList();
+        nombreC=contConvocatoria.listaConvocatorias(identificacion);
+        int tam=nombreC.size();
+        for(int i = 0; i < tam; i++){
+            
+        comboConvocatorias.addItem(nombreC.get(i));
+        }
+        
+        if (tam == 0){
+            comboConvocatorias.addItem("No hay convocatorias por mostrar");
+            btaceptar.setVisible(false);
+        }
+    }
     
     public void habilitarEdicion1(){
  
@@ -559,10 +569,14 @@ public class VentanaRegDatoPersona extends JFrame {
         Aspirante asp = contAspirante.consultarAspirante(id[0]);
         if(asp == null){
         habilitarEdicion1();
-        validarAsp = false;}
+        comboConvocatorias(id[0]);
+        validarAsp = false;
+            }
         else{
              validarAsp = true;
-             habilitarEdicion2(asp);
+             guardar = true;
+             habilitarEdicion2(asp);  
+             comboConvocatorias(id[0]);
         }
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(this, "Error en No de identificación: \nIngrese por favor solo numeros \n"+e.getMessage(), "ERROR IDENTIFICACION", JOptionPane.ERROR_MESSAGE);
@@ -583,9 +597,7 @@ public class VentanaRegDatoPersona extends JFrame {
     
     public void guardarInfo(){
         String datos[] = new String[13];
-        String datosObligatorios[] = new String[4];
-        
-        
+        String datosObligatorios[] = new String[4];    
                 
                 try{
                     
@@ -622,11 +634,7 @@ public class VentanaRegDatoPersona extends JFrame {
                     
                     validator.validateEmptyFields(datosObligatorios);
                     validator.validateInteger(datos[4]);
-                    
-                  
-                    
-                    
-                    
+                    guardar=true;
                     contAspirante.guardarAspirante(datos[0], datos[1], datos[2], datos[3], datos[4], datos[9], datos[5], datos[10], datos[6], datos[11], datos[7], datos[12], datos[8]);
                     guardarAspConv();
                  
@@ -634,6 +642,7 @@ public class VentanaRegDatoPersona extends JFrame {
                 }catch(MyException e){
                     
                     JOptionPane.showMessageDialog(this, e.getMessage(), "ERROR CAMPOS", JOptionPane.ERROR_MESSAGE);
+                    
                 }     
                 catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(this, "Error en No de identificación: "+e.getMessage(), "ERROR IDENTIFICACION", JOptionPane.ERROR_MESSAGE);
@@ -712,9 +721,10 @@ public class VentanaRegDatoPersona extends JFrame {
                   guardarAspConv();
                  }else{
                      guardarInfo();
+                 }        
+                 if(guardar){
+                 ingresarModulo1();
                  }
-                 ingresarModulos();
-                
             }
         
         }

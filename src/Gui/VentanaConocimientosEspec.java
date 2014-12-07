@@ -15,7 +15,7 @@ import logica.conocimientosEspecificos;
  *
  * @author jhonkrave
  */
-public class VentanaConociemientosEspec extends JFrame {
+public class VentanaConocimientosEspec extends JFrame {
 
     //container
     private Container container;
@@ -48,7 +48,7 @@ public class VentanaConociemientosEspec extends JFrame {
     private String identificacionAspirante;
     private String [] datosConvocatoria;
 
-    public VentanaConociemientosEspec(int tipo, String idenficacion, String [] datosConvocatoria) {
+    public VentanaConocimientosEspec(int tipo, String idenficacion, String [] datosConvocatoria) {
 
         super("Conociminetos Específicos");
         this.identificacionAspirante = idenficacion;
@@ -72,7 +72,7 @@ public class VentanaConociemientosEspec extends JFrame {
 
     }
 
-    private void InitComponents() {
+    public void InitComponents() {
 
         //otros
 
@@ -125,16 +125,17 @@ public class VentanaConociemientosEspec extends JFrame {
 
 
         JBcanelar = new JButton("Cancelar");
-        JBcanelar.addActionListener(eventmanager);
+        
 
         JBnext = new JButton("Guardar");
-        JBnext.addActionListener(eventmanager);
+        
 
 
 
     }
+ 
 
-    private void AcommodateCOmponents() {
+    public void AcommodateCOmponents() {
 
         container = this.getContentPane();
         container.setLayout(new BorderLayout());
@@ -197,6 +198,11 @@ public class VentanaConociemientosEspec extends JFrame {
         container.add(JPbotones, BorderLayout.SOUTH);
         container.setBackground(Color.white);
 
+    }
+    
+    public void agregarEventos(){
+        JBnext.addActionListener(eventmanager);
+        JBcanelar.addActionListener(eventmanager);
     }
 
     public class EventManager implements ActionListener {

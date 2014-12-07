@@ -18,19 +18,19 @@ public class VentanaFormacionTic extends JFrame{
     private JComboBox comboTitulos;
     private JTextField campoRuta;
     private JFileChooser chooserSoporte;
-    private JButton btAgregar, btCancelar, btExaminar;
+    private JButton btAgregar, btAgregar2, btCancelar, btExaminar, btOmitir, btSiguiente;
     private ManejaEvento driverEventos;
     private DriverFormacionTic contFormacionTic;
     private String id_aspirante;
     private String[] datos_convocatoria;
     private VentanaOpcionesModulo ventana_opcionesM;
     
-    int item1, item2, item3, item4;
+    int item1, item2, item3, item4, tipo;
     
     public VentanaFormacionTic(int tipo, String identificacion_aspirante, String[] datos_convocatoria){
          
         super("VENTANA FORMACIÓN EN TIC");
-        
+        this.tipo = tipo;
         id_aspirante = identificacion_aspirante;
         this.datos_convocatoria = datos_convocatoria;
         contFormacionTic = new DriverFormacionTic();
@@ -76,11 +76,14 @@ public class VentanaFormacionTic extends JFrame{
         chooserSoporte = new JFileChooser();
         btExaminar = new JButton("Examinar");
         btAgregar = new JButton("Agregar");
+        btAgregar2 = new JButton("Agregar 2");
         btCancelar = new JButton("Cancelar");
+        btSiguiente = new JButton("Siguiente");
+        btOmitir = new JButton("Omitir");
         
     }
     
-    public void agregarComponentes(){
+    public void agregarComponentes(){  
         principal.add(lbEncabezado);
         principal.add(lbCurso);
         principal.add(lbSoporte);
@@ -89,7 +92,10 @@ public class VentanaFormacionTic extends JFrame{
         
         principal.add(btExaminar);
         principal.add(btAgregar);
+        principal.add(btAgregar2);
         principal.add(btCancelar);
+        principal.add(btSiguiente);
+        principal.add(btOmitir);
         principal.add(campoRuta);
         
         principal.setLayout(null);
@@ -97,6 +103,7 @@ public class VentanaFormacionTic extends JFrame{
     }
     
     public void acomodarComponentes(){
+
         lbEncabezado.setBounds(200, 10, 300, 20);
         lbCurso.setBounds(30, 70, 50, 10);
         comboTitulos.setBounds(80, 70, 438, 25);
@@ -105,14 +112,36 @@ public class VentanaFormacionTic extends JFrame{
         campoRuta.setEditable(false);
         btExaminar.setBounds(430, 140, 100, 25);
         btAgregar.setBounds(320, 190, 100, 25);
+        btAgregar2.setBounds(320, 190, 100, 25);
         btCancelar.setBounds(430, 190, 100, 25);
+        btOmitir.setBounds(430, 190, 100, 25);
+        btSiguiente.setBounds(430, 190, 100, 25);
         
+        switch (tipo){
+            case 0:
+                        lbEncabezado.setVisible(true);
+                        lbCurso.setVisible(false);
+                        comboTitulos.setVisible(false);
+                        lbSoporte.setVisible(false);
+                        campoRuta.setVisible(false);
+                        btExaminar.setVisible(false);
+                        btAgregar.setVisible(true);
+                        btAgregar2.setVisible(false);
+                        btCancelar.setVisible(false);
+                        btOmitir.setVisible(true);
+                        btSiguiente.setVisible(false);
+            break;
+                
+        }
     }
     
     public void agregarEventos(){
         btExaminar.addActionListener(driverEventos);
         btAgregar.addActionListener(driverEventos);
         btCancelar.addActionListener(driverEventos);
+        btAgregar2.addActionListener(driverEventos);
+        btOmitir.addActionListener(driverEventos);
+        btSiguiente.addActionListener(driverEventos);
     }
     
     public void configurarVentana (VentanaOpcionesModulo opcionesMod) {//ventana anterior
@@ -120,6 +149,26 @@ public class VentanaFormacionTic extends JFrame{
         ventana_opcionesM = opcionesMod;
         
     }
+    
+    public void funcionAgregar(){
+        lbEncabezado.setVisible(true);
+        lbCurso.setVisible(true);
+        comboTitulos.setVisible(true);
+        lbSoporte.setVisible(true);
+        campoRuta.setVisible(true);
+        btExaminar.setVisible(true);
+        btAgregar.setVisible(false);
+        btAgregar2.setVisible(true);
+        btCancelar.setVisible(false);
+        btOmitir.setVisible(false);
+        btSiguiente.setVisible(true);
+    }
+    
+    public void ingresarModulo3(){//Ventana siguiente
+         VentanaConocimientosEspec modulo3 = new VentanaConocimientosEspec(tipo, id_aspirante, datos_convocatoria);
+         modulo3.agregarEventos();
+         setVisible(false);
+     }
     
     public int puntaje(){
         int punt=0;
@@ -200,12 +249,24 @@ public class VentanaFormacionTic extends JFrame{
             }
             
             if(ae.getSource() == btAgregar){
-                guardar();
+                funcionAgregar();
                 //btSiguiente.setVisible(false);
             }
             if(ae.getSource() == btCancelar){
                 ventana_opcionesM.setVisible(true);
                 dispose();
+            }
+            
+            if(ae.getSource() == btAgregar2){
+                guardar();
+            }
+            
+            if(ae.getSource() == btOmitir){
+                ingresarModulo3();
+            }
+            
+            if(ae.getSource() == btSiguiente){
+                ingresarModulo3();
             }
         }
          

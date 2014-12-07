@@ -51,9 +51,10 @@ public class DaoConvocatoria {
 
     }
 
-    public ArrayList<String> nombresConvocatorias() throws SQLException {
+    public ArrayList<String> nombresConvocatorias(String identificacion) throws SQLException {
         ArrayList<String> nombres = new ArrayList();
-        sqlNombreConvocatoria = "SELECT codigo, nombre FROM CONVOCATORIA WHERE estado = 'abierta';";
+        sqlNombreConvocatoria = "SELECT codigo, nombre FROM CONVOCATORIA WHERE estado = 'abierta' EXCEPT \n" +
+                                "SELECT C.codigo, C.nombre FROM CONVOCATORIA C JOIN ASPIRANTECONVOCATORIA AC ON C.codigo = AC.codigo WHERE AC.identificacion = '"+identificacion+"' ;";
 
         conectar = fachadaConectar.conectar();
         sentencia = conectar.createStatement();

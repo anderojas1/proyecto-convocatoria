@@ -48,9 +48,12 @@ public class VentanaInfoPrePos extends JFrame {
     private String rtLicen;
     
     private String[] datos_convocatoria;
+    private int tipo;
+    private String iden;
       
     private JButton btCancelar;
     private JButton btAceptar;
+    private JButton btOmitir;
 
     //declaracion paneles
     private JPanel panelPrin;
@@ -78,6 +81,8 @@ public class VentanaInfoPrePos extends JFrame {
 
         indentificacion = iden;
         
+        this.tipo = tipo;
+        this.iden = iden;
         this.datos_convocatoria = datos_convocatoria;
         
         iniciarComponentes( (String)datos_convocatoria[1]);
@@ -142,7 +147,8 @@ public class VentanaInfoPrePos extends JFrame {
         
         
         btCancelar = new JButton("Cancelar");
-        btAceptar =  new JButton("Aceptar");
+        btAceptar =  new JButton("Agregar");
+        btOmitir = new JButton("Omitir");
 
         panelPrin = new JPanel();
 
@@ -182,8 +188,9 @@ public class VentanaInfoPrePos extends JFrame {
         panelPrin.add(btMaestria);
         panelPrin.add(btMaestriaTic);
         
-        panelPrin.add(btCancelar);
+        //panelPrin.add(btCancelar);
         panelPrin.add(btAceptar);
+        panelPrin.add(btOmitir);
         
         panelPrin.setLayout(null);
         panelPrin.setBackground(Color.WHITE);
@@ -218,7 +225,8 @@ public class VentanaInfoPrePos extends JFrame {
         btDoctorTic.setBounds(390, 310, 110, 25);
         
         btAceptar.setBounds(225, 380, 110, 30);
-        btCancelar.setBounds(385, 380, 110, 30);
+       // btCancelar.setBounds(385, 380, 110, 30);
+        btOmitir.setBounds(385, 380, 110, 30);
 
 
 
@@ -236,6 +244,7 @@ public class VentanaInfoPrePos extends JFrame {
         CBLicen.addMouseListener(manejador);
         btCancelar.addMouseListener(manejador);
         btAceptar.addMouseListener(manejador);
+        btOmitir.addMouseListener(manejador);
 
     }
     
@@ -411,6 +420,13 @@ public class VentanaInfoPrePos extends JFrame {
     ventanaOpcModulo = vent;
     
     }
+    
+    
+    public void ingresarModulo2(){//Ventana siguiente
+         VentanaFormacionTic modulo2 = new VentanaFormacionTic(tipo, iden, datos_convocatoria);
+         modulo2.agregarEventos();
+         setVisible(false);
+     }
   
      private class ManejaEventos implements MouseListener{
 
@@ -418,6 +434,10 @@ public class VentanaInfoPrePos extends JFrame {
 
         @Override
         public void mouseClicked(MouseEvent me) {
+            
+            if(me.getSource() == btOmitir){
+                ingresarModulo2();
+            }
             
             if (me.getSource() == btAceptar) {
                 
@@ -428,6 +448,8 @@ public class VentanaInfoPrePos extends JFrame {
               
                   //  System.err.println(indentificacion + rtDoctor +  rtDoctorTic +  rtMaestria +  rtMaestriaTic + 
                     //                        rtEspecia +  rtEspeciaTic +  rtLicen);
+                   
+                   ingresarModulo2();
                 }else{
                 
                     

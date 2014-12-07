@@ -45,11 +45,11 @@ public class DriverConvocatoria {
     }
     
     
-    public ArrayList<String> listaConvocatorias(){
+    public ArrayList<String> listaConvocatorias(String identificacion){
         ArrayList<String> convocatorias = new ArrayList();
         try{
         
-        convocatorias = daoConvocatoria.nombresConvocatorias();
+        convocatorias = daoConvocatoria.nombresConvocatorias(identificacion);
         
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, ex.getMessage(), "No hay convocatorias", JOptionPane.ERROR_MESSAGE);
