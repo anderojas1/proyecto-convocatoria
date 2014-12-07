@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import logica.*;
 
 /**
@@ -214,7 +216,7 @@ public class DaoAspirante {
             
                 temp[0] = registros.getString(1);
                 temp[1] = registros.getString(2)+" "+registros.getString(3);
-                temp[2] =  registros.getString(4)+" "+registros.getString(5);
+                temp[2] = registros.getString(4)+" "+registros.getString(5);
                 temp[3] = registros.getString(6);
                 
                 lista.add(temp);
@@ -231,4 +233,40 @@ public class DaoAspirante {
        
     
     }
+    
+    public ArrayList<Object[]> getInfoMunicipios(String cod_convocatoria){
+    
+        ArrayList<Object[]> list = new ArrayList<>();
+        
+        sentenciaSql = "SELECT municipio_trabaja, count(*) FROM ASPIRANTE WHERE identificacion IN "
+                                                                                     + "(SELECT identificacion FROM ASPIRANTECONVOCATORIA"
+                                                                                                        + "WHERE codigo = '"+cod_convocatoria+"') "
+                        + "GROUP BY  municipio_trabaja ORDER BY municipio_trabaja;";
+        try {
+            ejecutarConsulta();
+            
+            while (registros.next()){
+            
+                String municipio = (String)registros.getNString(1);
+                int cantidad = (Integer) registros.getInt(2);
+                
+                Object [] info =  new Object[2];
+                
+                info[0] = municipio;
+                info[1] = cantidad;
+                
+                list.add(info);
+                
+            
+            }
+            return list;
+        } catch (SQLException ex) {
+            System.out.println("error al consultar informacion de los municipios");
+            return null;
+        }
+    
+    }
+    
+    
+    
 }
