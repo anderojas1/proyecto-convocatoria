@@ -4,6 +4,7 @@ package controlador;
 
 import AccesoDatos.DaoFormacionTic;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import logica.formacionTic;
 
@@ -29,16 +30,27 @@ public class DriverFormacionTic {
     }
     
     
-    public String consultarSoporte(String identificacion, String titutlo){
+    public String consultarSoporte(String identificacion, String titutlo, String codigo){
         String link_soporte="";
         try{
-            link_soporte = daoFormacionTic.consultarSoporte(identificacion, titutlo);
+            link_soporte = daoFormacionTic.consultarSoporte(identificacion, titutlo, codigo);
             
             
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Error al guardar la formacion en Tic. Por favor intente nuevamente");
         }
         return link_soporte;
+    }
+    
+    public ArrayList<formacionTic> consultarFTICAspirante(String identificacion, String codigo){
+       ArrayList<formacionTic> form = new ArrayList();
+       
+       try{
+           form = daoFormacionTic.consultarAspiranteFormacionTic(identificacion, codigo);
+       }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al extraer información. Por favor intente nuevamente");
+       }
+       return form;
     }
     
     public int puntajeMaximo(String identificacion, String codigo){
@@ -60,6 +72,8 @@ public class DriverFormacionTic {
             JOptionPane.showMessageDialog(null, "Error al insertar el puntaje del aspirante en la convocatoria. Por favor intente nuevamente");
         }
     }
+    
+    
     
     
 }

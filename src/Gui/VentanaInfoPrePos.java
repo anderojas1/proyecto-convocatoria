@@ -72,6 +72,8 @@ public class VentanaInfoPrePos extends JFrame {
     
     //controlador
     driverInfoPrePos driverPrePos;
+    private VentanaPrincipalDigitador ventana_digitador;
+    
     
     
     //Constructor de la Clase 
@@ -84,6 +86,31 @@ public class VentanaInfoPrePos extends JFrame {
         this.tipo = tipo;
         this.iden = iden;
         this.datos_convocatoria = datos_convocatoria;
+        
+        iniciarComponentes( (String)datos_convocatoria[1]);
+        agregarComponentes();
+        acomodarComponentes();
+        //asignarEventos();
+        
+        getContentPane().add(panelPrin);
+        setSize(new Dimension(540, 450));
+        setResizable(false);
+        setLocationRelativeTo(null);
+        setVisible(true);
+        setDefaultCloseOperation(0);
+
+    }
+    
+        public VentanaInfoPrePos(int tipo, String iden, String [] datos_convocatoria, VentanaPrincipalDigitador ventana_digitador) {
+
+        super("Informacion Pregrado Posgrado");
+
+        indentificacion = iden;
+        
+        this.tipo = tipo;
+        this.iden = iden;
+        this.datos_convocatoria = datos_convocatoria;
+        this.ventana_digitador = ventana_digitador;
         
         iniciarComponentes( (String)datos_convocatoria[1]);
         agregarComponentes();
@@ -423,9 +450,9 @@ public class VentanaInfoPrePos extends JFrame {
     
     
     public void ingresarModulo2(){//Ventana siguiente
-         VentanaFormacionTic modulo2 = new VentanaFormacionTic(tipo, iden, datos_convocatoria);
+         VentanaFormacionTic modulo2 = new VentanaFormacionTic(tipo, iden, datos_convocatoria, ventana_digitador);
          modulo2.agregarEventos();
-         setVisible(false);
+         dispose();
      }
   
      private class ManejaEventos implements MouseListener{
@@ -618,12 +645,12 @@ public class VentanaInfoPrePos extends JFrame {
         
     }
 
-public static void main(String args[]){
+/*public static void main(String args[]){
 
     String[] conv = {"julian", "miconvocatoria"};
     //conv[0]="julian";
     VentanaInfoPrePos ven =  new VentanaInfoPrePos(0,"5863", conv);
 
-}    
+}    */
     
 }

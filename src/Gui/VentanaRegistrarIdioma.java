@@ -47,6 +47,7 @@ public class VentanaRegistrarIdioma extends JFrame {
 
     private JButton jbcancelar;
     private JButton jbregistrar;
+    private JButton jbsiguiente;
 
     private JPanel panel;
     private JPanel panelLogo;
@@ -54,14 +55,20 @@ public class VentanaRegistrarIdioma extends JFrame {
     
     private final String id_aspirante;
     
+    private int tipo;
+    private String[] datosConvocatoria;
+    
     private VentanaInformacionIdiomas informacionIdiomas;
+    private VentanaPrincipalDigitador ventana_digitador;
     
 
-    public VentanaRegistrarIdioma(String id) {
+    public VentanaRegistrarIdioma(int tipo, String id, String [] datosConvocatoria) {
         
         super("Módulo Registrar Idioma");
         
+        this.tipo = tipo;
         id_aspirante = id;
+        this.datosConvocatoria = datosConvocatoria;
 
         driverEventos = new ControladorEventos();
         
@@ -79,6 +86,30 @@ public class VentanaRegistrarIdioma extends JFrame {
 
     }
 
+        public VentanaRegistrarIdioma(int tipo, String id, String [] datosConvocatoria, VentanaPrincipalDigitador ventana_digitador) {
+        
+        super("Módulo Registrar Idioma");
+        
+        this.tipo = tipo;
+        id_aspirante = id;
+        this.datosConvocatoria = datosConvocatoria;
+        this.ventana_digitador = ventana_digitador;
+
+        driverEventos = new ControladorEventos();
+        
+        controladorIdioma = new DriverIdioma();
+
+        inicializarComponentes();
+        agregarComponentes();
+        acomodarComponentes();
+        
+        setSize(600, 540);
+        setResizable(false);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(0);
+        setVisible(true);
+
+    }
     private void inicializarComponentes() {
         
         panelVentana = new JPanel(null);
@@ -118,6 +149,7 @@ public class VentanaRegistrarIdioma extends JFrame {
 
         jbcancelar = new JButton("Cancelar");
         jbregistrar = new JButton("Guardar");
+        jbsiguiente = new JButton("Siguiente");
         
         fondoCheckBox();
 
@@ -173,6 +205,7 @@ public class VentanaRegistrarIdioma extends JFrame {
 
         panel.add(jbcancelar);
         panel.add(jbregistrar);
+        panel.add(jbsiguiente);
 
     }
 
@@ -203,6 +236,7 @@ public class VentanaRegistrarIdioma extends JFrame {
         
         jbcancelar.setBounds(300, 290, 110, 30);
         jbregistrar.setBounds(420, 290, 110, 30);
+        jbsiguiente.setBounds(420, 320, 110, 30);
         
     }
     
@@ -239,6 +273,7 @@ public class VentanaRegistrarIdioma extends JFrame {
         
         jbcancelar.addMouseListener(driverEventos);
         jbregistrar.addMouseListener(driverEventos);
+        jbsiguiente.addMouseListener(driverEventos);
         
     }
     
@@ -249,6 +284,11 @@ public class VentanaRegistrarIdioma extends JFrame {
         
     }
     
+    public void ingresarModulo5(){//Ventana siguiente
+         ventanaExp_FormadorTIC modulo5 = new ventanaExp_FormadorTIC(tipo, id_aspirante, datosConvocatoria, ventana_digitador);
+         modulo5.agregarEventos();
+         dispose();
+     }
     
     private boolean validarChecks (String moduloIdioma) {
                 
@@ -401,6 +441,10 @@ public class VentanaRegistrarIdioma extends JFrame {
 
         @Override
         public void mouseClicked(MouseEvent me) {
+            
+            if(me.getSource() == jbsiguiente){
+                ingresarModulo5();
+            }
             
             if (me.getSource() == jbcancelar) {
                 

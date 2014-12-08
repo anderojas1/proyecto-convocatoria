@@ -40,19 +40,43 @@ public class VentanaConocimientosEspec extends JFrame {
     private JComboBox[] niveles;
     private String[] items = {"Nulo","Regular", "Bueno", "Muy Bueno"};
     //botnoes
-    private JButton JBcanelar, JBback, JBnext;
+    private JButton JBcanelar, JBback, JBnext, JBomitir;
     //otros
     private EventManager eventmanager;
     private DriverConocimientosEsp control;
     private VentanaOpcionesModulo ParentWindow;
     private String identificacionAspirante;
     private String [] datosConvocatoria;
+    private int tipo;
+    
+    private VentanaPrincipalDigitador ventana_digitador;
 
     public VentanaConocimientosEspec(int tipo, String idenficacion, String [] datosConvocatoria) {
 
         super("Conociminetos Específicos");
+        this.tipo = tipo;
         this.identificacionAspirante = idenficacion;
         this.datosConvocatoria = datosConvocatoria;
+
+        InitComponents();
+        AcommodateCOmponents();
+
+        pack();
+
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setSize(1100, 400);
+        setResizable(true);
+        setVisible(true);
+
+    }
+    
+     public VentanaConocimientosEspec(int tipo, String idenficacion, String [] datosConvocatoria, VentanaPrincipalDigitador ventana_digitador) {
+
+        super("Conociminetos Específicos");
+        this.tipo = tipo;
+        this.identificacionAspirante = idenficacion;
+        this.datosConvocatoria = datosConvocatoria;
+        this.ventana_digitador = ventana_digitador;
 
         InitComponents();
         AcommodateCOmponents();
@@ -129,7 +153,7 @@ public class VentanaConocimientosEspec extends JFrame {
 
         JBnext = new JButton("Guardar");
         
-
+        JBomitir = new JButton("Omitir");
 
 
     }
@@ -193,6 +217,7 @@ public class VentanaConocimientosEspec extends JFrame {
 
         JPbotones.add(JBcanelar);
         //JPbotones.add(JBback);
+        JPbotones.add(JBomitir);
         JPbotones.add(JBnext);
 
         container.add(JPbotones, BorderLayout.SOUTH);
@@ -203,7 +228,14 @@ public class VentanaConocimientosEspec extends JFrame {
     public void agregarEventos(){
         JBnext.addActionListener(eventmanager);
         JBcanelar.addActionListener(eventmanager);
+        JBomitir.addActionListener(eventmanager);
     }
+    
+      public void ingresarModulo4(){//Ventana siguiente
+         VentanaInformacionIdiomas modulo4 = new VentanaInformacionIdiomas(tipo, identificacionAspirante, datosConvocatoria, ventana_digitador);
+         modulo4.agregarEventos();
+         dispose();
+     }
 
     public class EventManager implements ActionListener {
 
@@ -247,7 +279,12 @@ public class VentanaConocimientosEspec extends JFrame {
                     
                 }
                 dispose();
-                ParentWindow.setVisible(true);
+                //ParentWindow.setVisible(true);
+                ingresarModulo4();
+            }
+            
+            if(e.getSource() == JBomitir){
+                ingresarModulo4();
             }
 
 

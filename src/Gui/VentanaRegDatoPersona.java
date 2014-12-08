@@ -455,10 +455,10 @@ public class VentanaRegDatoPersona extends JFrame {
     
     public void ingresarModulo1(){//Ventana siguiente
          String idAsp = campoNumIdent.getText();
-         VentanaInfoPrePos modulo1 = new VentanaInfoPrePos(tipo, idAsp, datos_convocatoria);
+         VentanaInfoPrePos modulo1 = new VentanaInfoPrePos(tipo, idAsp, datos_convocatoria, ventana_digitador);
          modulo1.asignarEventos();
          //modulo1.configurarVentana(this);
-         setVisible(false);
+         dispose();
      }
     
     public void comboConvocatorias (String identificacion){

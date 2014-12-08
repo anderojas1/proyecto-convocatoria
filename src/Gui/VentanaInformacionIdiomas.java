@@ -26,6 +26,7 @@ public class VentanaInformacionIdiomas extends JFrame {
     
     private JButton jbcerrar;
     private JButton jbregistrar;
+    private JButton jbomitir;
     
     private VentanaOpcionesModulo ventana_opcionesM;
     
@@ -35,8 +36,41 @@ public class VentanaInformacionIdiomas extends JFrame {
     
     private final DriverIdioma driver;
     
+    private int tipo;
+    private String id_as;
+    private String[] datosConvocatoria;
+    private VentanaPrincipalDigitador ventana_digitador;
+    
     
     public VentanaInformacionIdiomas (int tipo, String id_as, String [] datosConvocatoria) {
+        
+        this.tipo = tipo;
+        this.id_as = id_as;
+        this.datosConvocatoria = datosConvocatoria;
+        
+        driverEventos = new ManejarEventos();
+        
+        driver = new DriverIdioma();
+        
+        id_aspirante = id_as;
+        
+        iniciarComponentes(tipo);
+        agregarComponentes();
+        acomodarComponentes();
+        
+        setSize(500, 550);
+        setResizable(false);
+        setLocationRelativeTo(null);
+        setVisible(true);
+        
+    }
+    
+     public VentanaInformacionIdiomas (int tipo, String id_as, String [] datosConvocatoria, VentanaPrincipalDigitador ventana_digitador) {
+        
+        this.tipo = tipo;
+        this.id_as = id_as;
+        this.datosConvocatoria = datosConvocatoria;
+        this.ventana_digitador = ventana_digitador;
         
         driverEventos = new ManejarEventos();
         
@@ -76,6 +110,7 @@ public class VentanaInformacionIdiomas extends JFrame {
         
         jbcerrar = new JButton ("Cerrar");
         jbregistrar = new JButton("Agregar");
+        jbomitir = new JButton("Omitir");
         
     }
     
@@ -89,8 +124,12 @@ public class VentanaInformacionIdiomas extends JFrame {
     
     
     public void abrirInterfazRegistro() {
-        
-        VentanaRegistrarIdioma registrar = new VentanaRegistrarIdioma(id_aspirante);
+        VentanaRegistrarIdioma registrar;
+        if(tipo == 0){
+        registrar = new VentanaRegistrarIdioma(tipo, id_as, datosConvocatoria, ventana_digitador);
+        }else{
+        registrar = new VentanaRegistrarIdioma(tipo, id_as, datosConvocatoria);
+        }
         registrar.configurarVentana(this);
         registrar.asignarEventos();
         setVisible(false);
@@ -103,6 +142,11 @@ public class VentanaInformacionIdiomas extends JFrame {
         
     }
     
+    public void ingresarModulo5(){//Ventana siguiente
+         ventanaExp_FormadorTIC modulo5 = new ventanaExp_FormadorTIC(tipo, id_as, datosConvocatoria, ventana_digitador);
+         modulo5.agregarEventos();
+         dispose();
+     }
     
     public void actualizarInformacionIdiomas (String nombre, String lee, String escribe, String habla) {
         
@@ -139,6 +183,7 @@ public class VentanaInformacionIdiomas extends JFrame {
         panel.add(jttablaIdiomas);
         panel.add(jbcerrar);
         panel.add(jbregistrar);
+        panel.add(jbomitir);
         
         panel.add(lbtitulo);
         
@@ -155,6 +200,7 @@ public class VentanaInformacionIdiomas extends JFrame {
         
         jbregistrar.setBounds(220, 450, 100, 30);
         jbcerrar.setBounds(350, 450, 100, 30);
+        jbomitir.setBounds(350, 480, 100, 30);
                 
     }
     
@@ -162,6 +208,7 @@ public class VentanaInformacionIdiomas extends JFrame {
         
         jbcerrar.addMouseListener(driverEventos);
         jbregistrar.addMouseListener(driverEventos);
+        jbomitir.addMouseListener(driverEventos);
         
     }
     
@@ -170,6 +217,10 @@ public class VentanaInformacionIdiomas extends JFrame {
 
         @Override
         public void mouseClicked(MouseEvent me) {
+            
+            if(me.getSource() == jbomitir){
+                ingresarModulo5();
+            }
             
             if (me.getSource() == jbcerrar) {
                 

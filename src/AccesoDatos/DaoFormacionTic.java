@@ -3,6 +3,7 @@
 package AccesoDatos;
 
 import java.sql.*;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import logica.formacionTic;
 
@@ -10,6 +11,7 @@ public class DaoFormacionTic {
     
     private final Fachada fachadaConectar;
     private String sentenciaSql;
+    
     private Connection conectar;
     private Statement sentencia;
     private ResultSet registros;
@@ -18,12 +20,7 @@ public class DaoFormacionTic {
         fachadaConectar = new Fachada();
     }
     
-    public void crearFormacionTic(formacionTic forT) throws SQLException{
-        sentenciaSql="INSERT INTO FormacionTic VALUES ('"+forT.getIdentificacion()+"', '"+forT.getConvocatoria()+"', '"+forT.getTitulo()+
-                       "', "+forT.getConsecutivo()+", '"+forT.getSoporte()+"', "+forT.getPuntaje()+", false);";
-        
-        ejecutarSentencia();
-    }
+
     
      public void ejecutarSentencia () throws SQLException {
         
@@ -48,26 +45,16 @@ public class DaoFormacionTic {
         
     }
      
-     public String consultarSoporte(String identificacion, String titulo) throws SQLException{
-         String soporte="";
-         
-         sentenciaSql = "SELECT soporte FROM FormacionTic WHERE identificacion ='"+identificacion+"' AND titulo ='"+
-                        titulo+"';";
-         
-         try{
-            
-            conectar= fachadaConectar.conectar();
-            
-            sentencia = conectar.createStatement();
+     
+   private void ejecutarConsulta() throws SQLException {
+       
+       try{
 
-            registros = sentencia.executeQuery(sentenciaSql);
-            
-            while (registros.next()) {
-            
-                soporte = registros.getString(1);
-                
-            }
-            
+        conectar = fachadaConectar.conectar();
+        sentencia = conectar.createStatement();
+        registros = sentencia.executeQuery(sentenciaSql);
+        conectar.close();
+        
         } catch(SQLException ex) { 
             
             JOptionPane.showMessageDialog(null, "Error en base de datos. No se puede guardar");
@@ -77,7 +64,58 @@ public class DaoFormacionTic {
             JOptionPane.showMessageDialog(null, "Error en base de datos. No se puede conectar");
             
         }
+
+    }
+   
+       public void crearFormacionTic(formacionTic forT) throws SQLException{
+        sentenciaSql="INSERT INTO FormacionTic VALUES ('"+forT.getIdentificacion()+"', '"+forT.getConvocatoria()+"', '"+forT.getTitulo()+
+                       "', "+forT.getConsecutivo()+", '"+forT.getSoporte()+"', "+forT.getPuntaje()+", false);";
+        
+        ejecutarSentencia();
+    }
+   
+     public String consultarSoporte(String identificacion, String titulo, String codigo) throws SQLException{//falta convocatoria
+         String soporte="";
+         
+         sentenciaSql = "SELECT soporte FROM FormacionTic WHERE identificacion ='"+identificacion+"' AND titulo ='"+
+                        titulo+"' AND codigo = '"+codigo+"' ;";
+         
+         ejecutarConsulta();
+         
+            
+            while (registros.next()) {
+            
+                soporte = registros.getString(1);
+                
+            }
+            
          return soporte;
+     }
+     
+     
+     public ArrayList<formacionTic> consultarAspiranteFormacionTic(String identificacion, String codigo) throws SQLException{
+         
+         ArrayList <formacionTic> formacion= new ArrayList();
+         formacionTic formT = new formacionTic();
+         
+         sentenciaSql = "SELECT * FROM FormacionTic WHERE identificacion ='"+identificacion+"' AND codigo_convocatoria ='"+
+                        codigo+"';";
+         
+         ejecutarConsulta();
+         
+         while (registros.next()) {
+            
+                formT.setIdentificacion(registros.getString(1));
+                formT.setConvocatoria(registros.getString(2));
+                formT.setTitulo(registros.getString(3));
+                formT.setConsecutivo(registros.getInt(4));
+                formT.setSoporte(registros.getString(5));
+                formT.setPuntaje(registros.getInt(6));
+                
+                formacion.add(formT);
+            }
+         
+         return formacion;
      }
      
      public int maximoPuntajeInscripcion(String identificacion_aspirante, String codigo_convocatoria) throws SQLException{
