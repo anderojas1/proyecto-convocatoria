@@ -153,7 +153,7 @@ public class VentanaGenerarReportes extends JFrame {
             
             Graficos reportes = new Graficos();
             
-            reportes.recibirParametrosGrafica("Género", datos);
+            reportes.recibirParametrosGrafica("Género","titulox","tituloy", datos);
             
             JOptionPane.showMessageDialog(this, "Estamos en desarrollo", "Módulo en desarrollo", JOptionPane.INFORMATION_MESSAGE);
             

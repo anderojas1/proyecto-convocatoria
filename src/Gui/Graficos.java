@@ -17,6 +17,8 @@ import java.awt.FlowLayout;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -44,9 +46,12 @@ public class Graficos extends JFrame{
     
     ManejaEventos manejador;
     JButton btAceptar;
+    DefaultCategoryDataset dataset;
     
     public Graficos(){
     
+        manejador = new ManejaEventos();
+        
         int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
         int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
 
@@ -64,78 +69,23 @@ public class Graficos extends JFrame{
         municipios.add("Alcalá");
         municipios.add("Andalucía");
         municipios.add("Ansermanuevo");
-        municipios.add("Argelia");
-        municipios.add("Bolívar");
-        municipios.add("Buenaventura");
-        municipios.add("Buga");
-        municipios.add("Bugalagrande");
-        municipios.add("Caicedonia");
-        municipios.add("Cali");
-        municipios.add("Candelaria");
-        municipios.add("Cartago");
-        municipios.add("Dagua");
-        municipios.add("Calima-El Darién");
-        municipios.add("El Águila");
-        municipios.add("El Cairo");
-        municipios.add("El Cerrito");
-        municipios.add("El Dovio");
-        municipios.add("Florida");
-        municipios.add("Ginebra");
-        municipios.add("Guacarí");
-        municipios.add("Jamundí");
-        municipios.add("La Cumbre");
-        municipios.add("La Unión");
-        municipios.add("La Victoria");
-        municipios.add("Obando");
-        municipios.add("Palmira");
-        municipios.add("Pradera");
-        municipios.add("Restrepo");
-        municipios.add("Riofrío");
-        municipios.add("Roldanillo");
-        municipios.add("San Pedro");
-        municipios.add("Sevilla");
-        municipios.add("Toro");
-        municipios.add("Trujillo");
-        municipios.add("Tuluá");
-        municipios.add("Ulloa");
-        municipios.add("Versalles");
-        municipios.add("Vijes");
-        municipios.add("Yotoco");
-        municipios.add("Yumbo");
-        municipios.add("Zarzal");
         
-        //init();
-        
+        asignarEventos();
+                    
     }
  
-    private void init() {
+    private void init(String titulo, String tituloX, String tituloY) {
         
         panel = new JPanel();
         panel.setBackground(Color.WHITE);
-        
-        
-        
+                
         getContentPane().add(panel);
-        
-// Fuente de Datos
-
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        
-        for (int i = 0; i < municipios.size(); i++) {
-                    
-        Random r = new Random();
-             
-        String d1 = municipios.get(i);
-                
-        dataset.setValue(r.nextInt(100)+1, d1, d1);
-                
-        }                
 
 // Creando el Grafico
 
         JFreeChart chart = ChartFactory.createBarChart3D       
-         ("Participacion por Municipios","Municipios", "Porcentaje",
-          dataset, PlotOrientation.VERTICAL, true,true, false);
+        (titulo,tituloX, tituloY,
+        dataset, PlotOrientation.VERTICAL, true,true, false);
        
         chart.setBackgroundPaint(new Color(225,255,228));
         chart.getTitle().setPaint(Color.black);
@@ -145,7 +95,6 @@ public class Graficos extends JFrame{
 // Mostrar Grafico
 
         ChartPanel chartPanel = new ChartPanel(chart);
-      
         panel.add(chartPanel);
         
 // panel.setLayout(new VerticalLayout());
@@ -162,48 +111,71 @@ public class Graficos extends JFrame{
     
     public void asignarEventos(){
     
-        btAceptar.addActionListener(manejador);
+        btAceptar.addMouseListener(manejador);
     
     }
     
     
-    public class ManejaEventos implements ActionListener {
+    public class ManejaEventos implements MouseListener {
 
         @Override
-        public void actionPerformed(ActionEvent e) {
-            
-            if(e.getSource() == btAceptar){
-            
-                System.out.println("Hice clic");
-                dispose();
-                
-            
-            }
+        public void mouseClicked(MouseEvent me) {
 
-        }
-        
-    }
-    
-    
-    public void recibirParametrosGrafica (String titulo, Object [][] datos) {
-        
-        for (int i = 0; i < datos.length; i++) {
+            if(me.getSource() == btAceptar)
+            {
             
-            for (int j = 0; j < datos[i].length; j++) {
-                
-                System.out.println(datos[i][j]);
-                
+                dispose();
+            
             }
-            
         }
+
+        @Override
+        public void mousePressed(MouseEvent me) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent me) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent me) {
+        }
+
+        @Override
+        public void mouseExited(MouseEvent me) {
+        }
+
         
     }
     
+    
+    public void recibirParametrosGrafica (String titulo, String tituloX, String tituloY, Object [][] datos) {
+       
+       dataset = new DefaultCategoryDataset();
+       String tag = "";
+              
+        for (int i = 0; i < datos.length; i++) {
+              
+                String nom = (String)datos[i][0];
+                int num = Integer.parseInt((String)datos[i][1]);
+                
+                System.out.println("###" + nom + "###" + num + "###");
+                dataset.setValue(num, nom, nom);
+
+            
+        }
+        
+        init(titulo, tituloX, tituloY);
+        
+    }
+   
     public static void main(String args[]){
         
+        Object matriz [][] = {{"Perro","9"},{"Gato","2"},{"Pajaros","6"},{"conejo","11"}};
+        
         Graficos vent = new Graficos();
-        vent.asignarEventos();
-        vent.setVisible(true);
+       // vent.setVisible(true);
+        vent.recibirParametrosGrafica("ejemplo animales", "Lateral X","Lateral Y", matriz);
     
     }
 }
