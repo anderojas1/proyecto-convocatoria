@@ -68,14 +68,14 @@ public class VentanaListadoInscritos extends JFrame {
 
         JCBlistConv = new JComboBox();
 
-        ArrayList<String> ALlistConvo = controlConv.listaConvocatorias();
+      /**  ArrayList<String> ALlistConvo = controlConv.listaConvocatorias();
 
 
         for (int i = 0; i < ALlistConvo.size(); i++) {
 
             JCBlistConv.addItem(ALlistConvo.get(i));
 
-        }
+        }**/
 
 
 

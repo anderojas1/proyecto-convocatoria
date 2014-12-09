@@ -26,7 +26,7 @@ public class VentanaInformacionIdiomas extends JFrame {
     
     private JButton jbcerrar;
     private JButton jbregistrar;
-    private JButton jbomitir;
+    //private JButton jbomitir;
     
     private VentanaOpcionesModulo ventana_opcionesM;
     
@@ -108,9 +108,9 @@ public class VentanaInformacionIdiomas extends JFrame {
         agregarIdiomas(titulos);
         consultarInformacionIdiomas();
         
-        jbcerrar = new JButton ("Cerrar");
+        jbcerrar = new JButton ("Siguiente");
         jbregistrar = new JButton("Agregar");
-        jbomitir = new JButton("Omitir");
+        //jbomitir = new JButton("Omitir");
         
     }
     
@@ -183,7 +183,7 @@ public class VentanaInformacionIdiomas extends JFrame {
         panel.add(jttablaIdiomas);
         panel.add(jbcerrar);
         panel.add(jbregistrar);
-        panel.add(jbomitir);
+        //panel.add(jbomitir);
         
         panel.add(lbtitulo);
         
@@ -200,7 +200,7 @@ public class VentanaInformacionIdiomas extends JFrame {
         
         jbregistrar.setBounds(220, 450, 100, 30);
         jbcerrar.setBounds(350, 450, 100, 30);
-        jbomitir.setBounds(350, 480, 100, 30);
+        //jbomitir.setBounds(350, 480, 100, 30);
                 
     }
     
@@ -208,7 +208,7 @@ public class VentanaInformacionIdiomas extends JFrame {
         
         jbcerrar.addMouseListener(driverEventos);
         jbregistrar.addMouseListener(driverEventos);
-        jbomitir.addMouseListener(driverEventos);
+        //jbomitir.addMouseListener(driverEventos);
         
     }
     
@@ -218,14 +218,13 @@ public class VentanaInformacionIdiomas extends JFrame {
         @Override
         public void mouseClicked(MouseEvent me) {
             
-            if(me.getSource() == jbomitir){
+            /*if(me.getSource() == jbomitir){
                 ingresarModulo5();
-            }
+            }*/
             
             if (me.getSource() == jbcerrar) {
                 
-                ventana_opcionesM.setVisible(true);
-                dispose();
+                ingresarModulo5();
                 
             }
             
@@ -279,6 +278,12 @@ public class VentanaInformacionIdiomas extends JFrame {
         }
         
         
+    }
+    
+    public static void main(String[] args) {
+        
+        VentanaInformacionIdiomas ii = new VentanaInformacionIdiomas(WIDTH, null, args);
+        ii.agregarEventos();
     }
     
 }
