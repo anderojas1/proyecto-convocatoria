@@ -205,7 +205,7 @@ public class VentanaRegistrarIdioma extends JFrame {
 
         panel.add(jbcancelar);
         panel.add(jbregistrar);
-        panel.add(jbsiguiente);
+        //panel.add(jbsiguiente);
 
     }
 
@@ -236,7 +236,7 @@ public class VentanaRegistrarIdioma extends JFrame {
         
         jbcancelar.setBounds(300, 290, 110, 30);
         jbregistrar.setBounds(420, 290, 110, 30);
-        jbsiguiente.setBounds(420, 320, 110, 30);
+        //jbsiguiente.setBounds(420, 320, 110, 30);
         
     }
     
@@ -273,7 +273,7 @@ public class VentanaRegistrarIdioma extends JFrame {
         
         jbcancelar.addMouseListener(driverEventos);
         jbregistrar.addMouseListener(driverEventos);
-        jbsiguiente.addMouseListener(driverEventos);
+        //jbsiguiente.addMouseListener(driverEventos);
         
     }
     
@@ -450,9 +450,9 @@ public class VentanaRegistrarIdioma extends JFrame {
         @Override
         public void mouseClicked(MouseEvent me) {
             
-            if(me.getSource() == jbsiguiente){
+            /*if(me.getSource() == jbsiguiente){
                 ingresarModulo5();
-            }
+            }*/
             
             if (me.getSource() == jbcancelar) {
                 
