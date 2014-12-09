@@ -11,6 +11,15 @@ public class formacionTic {
     private String soporte;
     private int puntaje;
     private String convocatoria;
+   
+    public  formacionTic(){
+        
+    }
+    
+        
+    public formacionTic(){
+        
+    }
     
     public formacionTic(String identificacion, String titulo, int consecutivo, String soporte, int puntaje, String convocatoria){
         
