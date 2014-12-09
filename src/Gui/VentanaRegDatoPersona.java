@@ -315,6 +315,7 @@ public class VentanaRegDatoPersona extends JFrame {
               
         btCancelar = new JButton("Cancelar");
         btconfirmar = new JButton(new ImageIcon("src/iconos/lupa.jpg"));
+        btconfirmar.setBorder(null);
         btaceptar = new JButton("Inscribir");
         btaceptar.setVisible(false);
 
