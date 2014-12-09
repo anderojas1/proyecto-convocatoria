@@ -7,10 +7,17 @@
 package Gui;
 
 
-import javax.swing.*;
-import java.awt.*;
+import controlador.DriverUsuario;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 
  public class VentanaIniSupervisor extends JFrame{
@@ -22,11 +29,13 @@ import java.awt.event.ActionListener;
     private ManejaEvento driverEventos;
 
     private String usuario;
+    private DriverUsuario control;
     
     
     public VentanaIniSupervisor(String user){
         
         usuario = user;
+        control = new DriverUsuario();
         
         cont = getContentPane(); 
         inicioSupervisor = new JPanel();
@@ -104,9 +113,14 @@ import java.awt.event.ActionListener;
         @Override
         public void actionPerformed(ActionEvent ae) {
             if(ae.getSource() == salir){
-                VentanaLogin nuevoLogin = new VentanaLogin();
+                 VentanaLogin nuevoLogin = new VentanaLogin();
                 nuevoLogin.addEvents();
-                dispose();
+                try {
+                    control.estadoSesion(usuario, false);
+                    dispose();
+                } catch (SQLException ex) {
+                    System.out.println("error al cerrar sesion");
+                }
             }
             
             if(ae.getSource() == informe){
