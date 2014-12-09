@@ -425,7 +425,9 @@ public class VentanaInfoPrePos extends JFrame {
     public String seleccionador(){
   
     fc = new JFileChooser();
-  
+    FileNameExtensionFilter filtroPDF = new FileNameExtensionFilter("PDF","pdf");
+    fc.setFileFilter(filtroPDF);
+    
     int returnVal = fc.showOpenDialog(this);
      
     if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -439,9 +441,8 @@ public class VentanaInfoPrePos extends JFrame {
         return null;
   
     }
-
-}
-
+}  
+  
     public void configurarVentana(VentanaOpcionesModulo vent){
     
     ventanaOpcModulo = vent;
@@ -645,12 +646,13 @@ public class VentanaInfoPrePos extends JFrame {
         
     }
 
-/*public static void main(String args[]){
+public static void main(String args[]){
 
     String[] conv = {"julian", "miconvocatoria"};
     //conv[0]="julian";
     VentanaInfoPrePos ven =  new VentanaInfoPrePos(0,"5863", conv);
 
-}    */
+    ven.asignarEventos();
+}    
     
 }
