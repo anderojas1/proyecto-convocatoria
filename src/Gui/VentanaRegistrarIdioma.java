@@ -334,65 +334,73 @@ public class VentanaRegistrarIdioma extends JFrame {
         boolean checkHablar = validarChecks("conversacion");
         
         if (checkLeer == true && checkHablar == true && checkEscribir == true) {
+            
+            String nombre = jcbescogerIdioma.getSelectedItem().toString();
+            String lee = jchbleer.getText();
+            String escribe = jchbescribir.getText();
+            String habla = jchbhablar.getText();
+            
+            if (lee.equals("") || escribe.equals("") || habla.equals("")) {
+                
+                JOptionPane.showMessageDialog(this, "Error al guardar la selección", "Idioma no "
+                        + "registrado", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            else {
 			
-            try {
-				
-		String nombre = jcbescogerIdioma.getSelectedItem().toString();                
-		String lee = jchbleer.getText();
-                String escribe = jchbescribir.getText();
-                String habla = jchbhablar.getText();
-                				
-		String codigoIdioma = controladorIdioma.consultarCodigo(nombre);
-                
-                double pun = 0.0;
-                double nuevo = 0.0;
-                double puntajeSumar = 0.0;
-                boolean es = false;
-                boolean cambia = false;
-                
                 try {
-                    
-                    pun = controladorIdioma.consultarPuntajeMaximo();
-                    
-                    nuevo = calcularPuntaje(habla, lee, escribe);
-                    
-                    if (pun == 0.0) {
-                        
-                        es = true;
-                        puntajeSumar = nuevo;
+
+                    String codigoIdioma = controladorIdioma.consultarCodigo(nombre);
+
+                    double pun = 0.0;
+                    double nuevo = 0.0;
+                    double puntajeSumar = 0.0;
+                    boolean es = false;
+                    boolean cambia = false;
+
+                    try {
+
+                        pun = controladorIdioma.consultarPuntajeMaximo(id_aspirante);
+
+                        nuevo = calcularPuntaje(habla, lee, escribe);
+
+                        if (pun == 0.0) {
+
+                            es = true;
+                            puntajeSumar = nuevo;
+                        } else if (nuevo > pun) {
+
+                            es = true;
+                            cambia = true;
+                            puntajeSumar = nuevo - pun;
+
+                        }
+
+                    } catch (SQLException ex) {
+
                     }
-                    
-                    else if (nuevo > pun) {
-                        
-                        es = true;
-                        cambia = true;
-                        puntajeSumar = nuevo - pun;
-                        
-                    }
-                    
+
+                    controladorIdioma.agregarIdiomaAspirante(id_aspirante, codigoIdioma, habla, lee, escribe, nuevo, es, cambia);
+                    System.out.println("flag 1");
+                    DriverAspirante asp = new DriverAspirante();
+
+                    double puntajeTotalActual = asp.consultarPuntaje(id_aspirante, "1");
+                    System.out.println("flag 2");
+                    puntajeTotalActual += puntajeSumar;
+
+                    asp.updatePuntajeUsuario(id_aspirante, "1", puntajeTotalActual);
+
+                    JOptionPane.showMessageDialog(this, "Se registró el idioma exitosamente", "Idioma registrado", JOptionPane.INFORMATION_MESSAGE);
+
+                    informacionIdiomas.setVisible(true);
+                    informacionIdiomas.actualizarInformacionIdiomas(nombre, lee, escribe, habla);
+
+                    dispose();
+
                 } catch (SQLException ex) {
-                    
+
                 }
-                
-                controladorIdioma.agregarIdiomaAspirante(id_aspirante, codigoIdioma, habla, lee, escribe, nuevo, es, cambia);
-                System.out.println("flag 1");
-                DriverAspirante asp = new DriverAspirante();
-                
-                double puntajeTotalActual = asp.consultarPuntaje(id_aspirante, "1");
-                System.out.println("flag 2");
-                puntajeTotalActual += puntajeSumar;
-                
-                asp.updatePuntajeUsuario(id_aspirante, "1", puntajeTotalActual);
             
-		JOptionPane.showMessageDialog(this, "Se registró el idioma exitosamente", "Idioma registrado", JOptionPane.INFORMATION_MESSAGE);
-            
-		informacionIdiomas.setVisible(true);
-                informacionIdiomas.actualizarInformacionIdiomas(nombre, lee, escribe, habla);
-            
-		dispose();
-				
-            } catch (SQLException ex) {
-				
             }
             
         }

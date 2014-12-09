@@ -281,4 +281,10 @@ public class VentanaInformacionIdiomas extends JFrame {
         
     }
     
+    public static void main(String[] args) {
+        
+        VentanaInformacionIdiomas ii = new VentanaInformacionIdiomas(WIDTH, null, args);
+        ii.agregarEventos();
+    }
+    
 }

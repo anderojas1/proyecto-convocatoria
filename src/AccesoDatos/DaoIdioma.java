@@ -170,9 +170,9 @@ public class DaoIdioma {
     }
     
     
-    public double consultarPuntaje () throws SQLException {
+    public double consultarPuntaje (String id) throws SQLException {
         
-        sqlSentence = "SELECT puntaje FROM ASPIRANTE_HABLA WHERE escoger = TRUE;";
+        sqlSentence = "SELECT puntaje FROM ASPIRANTE_HABLA WHERE id_aspirante = '" + id +"' and escoger = TRUE;";
         
         ejecutarConsulta();
         
