@@ -99,8 +99,10 @@ public class VentanaPrincipalDigitador extends JFrame{
      }
      
      public void ListenerEvent(){
-         cerrar.addActionListener(driverEventos);
+        cerrar.addActionListener(driverEventos);
         ingresar.addActionListener(driverEventos); 
+        editar.addActionListener(driverEventos);
+        consultar.addActionListener(driverEventos);
      }
      
      public void ingresarAspirante(){
@@ -126,11 +128,18 @@ public class VentanaPrincipalDigitador extends JFrame{
                     System.out.println("error al cerrar la sesion");
                 }
                 dispose();
-            }
-            
-            if(ae.getSource() == ingresar){
+            }else if(ae.getSource() == ingresar){
+                
                 ingresarAspirante();
                 
+            }else if (ae.getSource() == editar){
+                
+                JOptionPane.showMessageDialog(rootPane, "En construccion");
+            
+            }else if(ae.getSource() == consultar){
+                
+                   JOptionPane.showMessageDialog(rootPane, "En construccion");          
+            
             }
         }
          
