@@ -402,7 +402,7 @@ public class VentanaRegistrarIdioma extends JFrame {
 
                     try {
 
-                        pun = controladorIdioma.consultarPuntajeMaximo(id_aspirante);
+                        pun = controladorIdioma.consultarPuntajeMaximo(id_aspirante, datosConvocatoria[0]);
 
                         nuevo = calcularPuntaje(habla, lee, escribe);
 
@@ -435,6 +435,8 @@ public class VentanaRegistrarIdioma extends JFrame {
 
                     JOptionPane.showMessageDialog(this, "Se registró el idioma exitosamente", "Idioma registrado", 
                             JOptionPane.INFORMATION_MESSAGE);
+                    
+                    actualizarIdiomasAspirante();
 
 
                 } catch (SQLException ex) {

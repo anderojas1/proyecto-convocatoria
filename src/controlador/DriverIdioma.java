@@ -60,9 +60,9 @@ public class DriverIdioma {
     }
     
     
-    public double consultarPuntajeMaximo (String id) throws SQLException {
+    public double consultarPuntajeMaximo (String id, String convo) throws SQLException {
         
-        return daoIdioma.consultarPuntaje(id);
+        return daoIdioma.consultarPuntaje(id, convo);
         
     }
     
