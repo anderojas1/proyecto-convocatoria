@@ -397,17 +397,19 @@ public class VentanaRegistrarIdioma extends JFrame {
 
                     }
 
-                    controladorIdioma.agregarIdiomaAspirante(id_aspirante, codigoIdioma, habla, lee, escribe, nuevo, es, cambia);
-                    System.out.println("flag 1");
+                    controladorIdioma.agregarIdiomaAspirante(datosConvocatoria[0], id_aspirante, codigoIdioma, 
+                                                                habla, lee, escribe, nuevo, es, cambia);
+                    
                     DriverAspirante asp = new DriverAspirante();
 
-                    double puntajeTotalActual = asp.consultarPuntaje(id_aspirante, "1");
-                    System.out.println("flag 2");
+                    double puntajeTotalActual = asp.consultarPuntaje(id_aspirante, datosConvocatoria[0]);
+                    
                     puntajeTotalActual += puntajeSumar;
 
-                    asp.updatePuntajeUsuario(id_aspirante, "1", puntajeTotalActual);
+                    asp.updatePuntajeUsuario(id_aspirante, datosConvocatoria[0], puntajeTotalActual);
 
-                    JOptionPane.showMessageDialog(this, "Se registró el idioma exitosamente", "Idioma registrado", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Se registró el idioma exitosamente", "Idioma registrado", 
+                            JOptionPane.INFORMATION_MESSAGE);
 
 
                 } catch (SQLException ex) {
