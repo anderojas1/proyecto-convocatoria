@@ -47,7 +47,8 @@ public class VentanaConocimientosEspec extends JFrame {
     private VentanaOpcionesModulo ParentWindow;
     private String identificacionAspirante;
     private String [] datosConvocatoria;
-    private int tipo;
+    private JPanel JPprincipal;
+    private final int tipo;
     
     private VentanaPrincipalDigitador ventana_digitador;
 
@@ -59,18 +60,17 @@ public class VentanaConocimientosEspec extends JFrame {
         this.datosConvocatoria = datosConvocatoria;
 
         InitComponents();
-        AcommodateCOmponents();
+        AcommodateCOmponents(tipo);
 
-        pack();
-
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(1100, 400);
-        setResizable(true);
+         setSize(new Dimension(900, 650));
+        setResizable(false);
+        setLocationRelativeTo(null);
         setVisible(true);
+        setDefaultCloseOperation(0);
 
     }
     
-     public VentanaConocimientosEspec(int tipo, String idenficacion, String [] datosConvocatoria, VentanaPrincipalDigitador ventana_digitador) {
+     public VentanaConocimientosEspec(int tipo, String idenficacion, String [] datosConvocatoria, VentanaPrincipalDigitador ventana_digitador) {//agragar
 
         super("Conociminetos Específicos");
         this.tipo = tipo;
@@ -79,14 +79,13 @@ public class VentanaConocimientosEspec extends JFrame {
         this.ventana_digitador = ventana_digitador;
 
         InitComponents();
-        AcommodateCOmponents();
+        AcommodateCOmponents(tipo);
 
-        pack();
-
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(1100, 400);
-        setResizable(true);
+        setSize(new Dimension(900, 650));
+        setResizable(false);
+        setLocationRelativeTo(null);
         setVisible(true);
+        setDefaultCloseOperation(0);
 
     }
 
@@ -96,7 +95,7 @@ public class VentanaConocimientosEspec extends JFrame {
 
     }
 
-    public void InitComponents() {
+    public final void InitComponents() {
 
         //otros
 
@@ -107,13 +106,14 @@ public class VentanaConocimientosEspec extends JFrame {
         JPtitulo = new JPanel();
         JPconocimientos = new JPanel();
         JPbotones = new JPanel();
+        JPprincipal = new JPanel();
 
         //etiquetas
-        JLtitulo = new JLabel("Conocimientos Específicos");
+        JLtitulo = new JLabel(new ImageIcon("src/iconos/encabezado.png"));
         JLsubtitulo = new JLabel("Conocimiento");
         JLsubtitulonivel = new JLabel("Nivel");
         JLexp_des_cont_edu_dig = new JLabel("Experiencia en desarrollo de contenidos educativos digitales");
-        JLexp_des_elemnts_eval_comp = new JLabel("Experiencia en desarrollo de elementos de evaluación de competencias");
+        JLexp_des_elemnts_eval_comp = new JLabel("Experiencia en desarrollo de elementos de evaluación\n de competencias");
         JLexp_des_lib_dig = new JLabel("Experiencia en desarrollo de libros de texto digital");
         JLexp_gest_proy_TIC = new JLabel("Experiencia en gestión de proyectos educativos TIC");
         JLexp_proc_elearning = new JLabel("Experiencia en procesos de e-­‐learning");
@@ -159,69 +159,91 @@ public class VentanaConocimientosEspec extends JFrame {
     }
  
 
-    public void AcommodateCOmponents() {
+    public final void AcommodateCOmponents(int tipo) {
 
-        container = this.getContentPane();
-        container.setLayout(new BorderLayout());
+        
+        JPprincipal.setLayout(null);
 
 
         //titulo
 
-        JPtitulo.setLayout(new BorderLayout());
-        JLtitulo.setHorizontalAlignment(SwingConstants.CENTER);
-        JPtitulo.add(JLtitulo, BorderLayout.CENTER);
         
-        JPtitulo.add(new JLabel(datosConvocatoria[1]), BorderLayout.NORTH);
-
-        container.add(JPtitulo, BorderLayout.NORTH);
+        JPprincipal.add(JLtitulo);
+        JLtitulo.setBounds(0, 0, 900, 80);
+        
+       
+        
+        JLabel JLnombreC = new JLabel("CONVOCATORIA: "+datosConvocatoria[1]);
+        JPprincipal.add(JLnombreC);
+        JLnombreC.setBounds(0, 90, 100, 10);
+        
+        
 
         //conocimientos
 
-        JPconocimientos.setLayout(new GridLayout(9, 2, 5, 5));
+        
 
         JLsubtitulo.setHorizontalAlignment(SwingConstants.CENTER);
-        JPconocimientos.add(JLsubtitulo);
+        JPprincipal.add(JLsubtitulo);
+        JLsubtitulo.setBounds(600, 110, 300, 30);
 
 //        JLsubtitulonivel.setHorizontalAlignment(SwingConstants.EAST);
-        JPconocimientos.add(JLsubtitulonivel);
+        JPprincipal.add(JLsubtitulonivel);
+        JLsubtitulonivel.setBounds(450, 110, 300, 30);
 
-        JPconocimientos.add(JLherram_Ofimatic);
-        JPconocimientos.add(niveles[0]);
+        JPprincipal.add(JLherram_Ofimatic);
+        JLherram_Ofimatic.setBounds(150, 150, 400, 30);
+        JPprincipal.add(niveles[0]);
+        niveles[0].setBounds(700, 150, 100, 30);
+        
 
-        JPconocimientos.add(JLherram_Web2);
-        JPconocimientos.add(niveles[1]);
+        JPprincipal.add(JLherram_Web2);
+        JLherram_Web2.setBounds(150, 190, 500, 30);
+        JPprincipal.add(niveles[1]);
+        niveles[1].setBounds(700, 190, 100, 30);
+        
 
-        JPconocimientos.add(JLherram_edic_multi);
-        JPconocimientos.add(niveles[2]);
+        JPprincipal.add(JLherram_edic_multi);
+        JLherram_edic_multi.setBounds(150, 230, 500, 30);
+        JPprincipal.add(niveles[2]);
+        niveles[2].setBounds(700, 230, 100, 30);
 
-        JPconocimientos.add(JLexp_des_cont_edu_dig);
-        JPconocimientos.add(niveles[3]);
+        JPprincipal.add(JLexp_des_cont_edu_dig);
+        JLexp_des_cont_edu_dig.setBounds(150, 270, 500, 30);
+        JPprincipal.add(niveles[3]);
+        niveles[3].setBounds(700, 270, 100, 30);
 
-        JPconocimientos.add(JLexp_des_lib_dig);
-        JPconocimientos.add(niveles[4]);
+        JPprincipal.add(JLexp_des_lib_dig);
+        JLexp_des_lib_dig.setBounds(150, 310, 500, 30);
+        JPprincipal.add(niveles[4]);
+        niveles[4].setBounds(700, 310, 100, 30);
 
-        JPconocimientos.add(JLexp_proc_elearning);
-        JPconocimientos.add(niveles[5]);
+        JPprincipal.add(JLexp_proc_elearning);
+        JLexp_proc_elearning.setBounds(150, 350, 500, 30);
+        JPprincipal.add(niveles[5]);
+        niveles[5].setBounds(700, 350, 100, 30);
 
-        JPconocimientos.add(JLexp_gest_proy_TIC);
-        JPconocimientos.add(niveles[6]);
+        JPprincipal.add(JLexp_gest_proy_TIC);
+        JLexp_gest_proy_TIC.setBounds(150, 390, 500, 30);
+        JPprincipal.add(niveles[6]);
+        niveles[6].setBounds(700, 390, 100, 30);
 
-        JPconocimientos.add(JLexp_des_elemnts_eval_comp);
-        JPconocimientos.add(niveles[7]);
+        JPprincipal.add(JLexp_des_elemnts_eval_comp);
+        JLexp_des_elemnts_eval_comp.setBounds(150, 430, 550, 30);
+        JPprincipal.add(niveles[7]);
+        niveles[7].setBounds(700, 430, 100, 30);
 
-        container.add(JPconocimientos, BorderLayout.CENTER);
+       
 
         //botnoes
 
-        JPbotones.setLayout(new GridLayout(1, 2, 8, 8));
 
-        JPbotones.add(JBcanelar);
-        //JPbotones.add(JBback);
-        JPbotones.add(JBomitir);
-        JPbotones.add(JBnext);
+        validarTipo(tipo);
 
-        container.add(JPbotones, BorderLayout.SOUTH);
-        container.setBackground(Color.white);
+        JPprincipal.setBackground(Color.WHITE);
+        
+        getContentPane().add(JPprincipal);
+        
 
     }
     
@@ -236,6 +258,55 @@ public class VentanaConocimientosEspec extends JFrame {
          modulo4.asignarEventos();
          dispose();
      }
+      
+      public void validarTipo (int tipo){
+      
+          switch (tipo){
+          
+              
+              case 1: editar();
+                      break;
+                      
+              case 2: consultar();
+                      break;
+              
+              case 0: agregar();     
+              
+          
+          }
+      
+      }
+      
+      public void consultar(){
+      
+          for (int i = 0; i < niveles.length; i++) {
+              niveles[i].setEnabled(false);
+              
+          }
+          
+          
+          JPprincipal.add(JBcanelar);
+          JBcanelar.setBounds(395, 550, 110, 25);
+          
+          
+      
+      }
+
+    private void editar() {
+        
+        JPprincipal.add(JBnext);
+        JBnext.setBounds(455, 550, 110, 25);
+        JPprincipal.add(JBcanelar);
+        JBcanelar.setBounds(335, 550, 110, 25);
+        
+    }
+
+    private void agregar() {
+        JPprincipal.add(JBnext);
+        JBnext.setBounds(455, 550, 110, 25);
+        JPprincipal.add(JBomitir);
+        JBomitir.setBounds(335, 550, 110, 25);
+    }
 
     public class EventManager implements ActionListener {
 
@@ -279,8 +350,14 @@ public class VentanaConocimientosEspec extends JFrame {
                     
                 }
                 dispose();
-                //ParentWindow.setVisible(true);
+                
+                if(tipo ==0){
                 ingresarModulo4();
+                }else{
+                
+                    ParentWindow.setVisible(true);
+                    
+                }
             }
             
             if(e.getSource() == JBomitir){
@@ -290,9 +367,10 @@ public class VentanaConocimientosEspec extends JFrame {
 
         }
     }
-    /*public static void main(String args[]){
+    public static void main(String args[]){
 
-     VentanaConociemientosEspec ven =  new VentanaConociemientosEspec();
+        String[] conv = {"julian", "miconvocatoria"};
+     VentanaConocimientosEspec ven =  new VentanaConocimientosEspec(2, "3523", conv);
 
-     }  */
+     }  
 }
