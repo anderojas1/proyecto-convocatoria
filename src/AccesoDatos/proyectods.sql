@@ -174,8 +174,10 @@ CREATE TABLE ASPIRANTE_HABLA (
     REFERENCES ASPIRANTE (identificacion),
 
     CONSTRAINT cod_idioma_fk FOREIGN KEY (cod_idioma)
-    REFERENCES IDIOMA (codigo_idioma)
+    REFERENCES IDIOMA (codigo_idioma),
 
+    CONSTRAINT cod_convocatoria varchar(10) not null
+    REFERENCES CONVOCATORIA (codigo)
 );
 
 CREATE TABLE CONOCIMIENTOS_ESPECIFICOS (
