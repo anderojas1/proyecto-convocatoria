@@ -695,7 +695,7 @@ public class VentanaFormacionTic extends JFrame{
      dato[0] = "convo-1";
      dato[1] = "convocatoria-1";
      //VentanaPrincipalDigitador ventana_digitador= new VentanaPrincipalDigitador("andre");
-    VentanaFormacionTic ven =  new VentanaFormacionTic(2, "1234", dato);
+    VentanaFormacionTic ven =  new VentanaFormacionTic(1, "1234", dato);
 
 }  
 }
