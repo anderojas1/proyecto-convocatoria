@@ -122,27 +122,57 @@ public class ventanaExp_FormadorTIC extends JFrame {
         
         //botones
         
-        JBExaest = new JButton("Subir Archivo");
+        switch(tipo){
+            case 0:
+                JBExaest = new JButton("Subir Archivo");
         
         
-        JBExapro = new JButton("Subir Archivo");
+                JBExapro = new JButton("Subir Archivo");
         
         
-        JBExafor = new JButton("Subir Archivo");
+                JBExafor = new JButton("Subir Archivo");
         
                
-        JBcancel = new JButton("Cancelar");
+                JBcancel = new JButton("Cancelar");
         
         
-        JBsave = new JButton("Guardar");
+                JBsave = new JButton("Guardar");
         
-        JBFinalizar = new JButton("Omitir");
+                JBFinalizar = new JButton("Omitir");
+                break;
+            
+            case 1:
+                JBExaest = new JButton("Editar Archivo");
+        
+        
+                JBExapro = new JButton("Editar Archivo");
+        
+        
+                JBExafor = new JButton("Editar Archivo");
+        
+               
+                JBcancel = new JButton("Cancelar");
+        
+        
+                JBsave = new JButton("Guardar");
+                
+                break;
+        }
+        
+        
     }
 
     private void acommodateComponents() {
         
-        container = getContentPane();
+        JLabel etiqueta = new JLabel();
+        JLabel JLexperiencia = new JLabel();
+        
+         container = getContentPane();
         container.setLayout(new BorderLayout());
+        
+        switch(tipo){
+            case 0:
+               
         
         JPititulo.setLayout(new BorderLayout());
         JLtitulo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -150,8 +180,57 @@ public class ventanaExp_FormadorTIC extends JFrame {
         
         container.add(JPititulo, BorderLayout.NORTH);
         
-        JLabel etiqueta = new JLabel();
-        JLabel JLexperiencia = new JLabel("Experiencia");
+        JLexperiencia.setText("Experiencia");
+        JPopciones.setLayout(new GridLayout(7, 2, 0, 5));
+        
+        JPopciones.add(etiqueta);
+        JLexperiencia.setHorizontalAlignment(SwingConstants.CENTER);
+        JPopciones.add(JLexperiencia);
+        
+        JPopciones.add(JLformerTICestuciantes);
+        JPopciones.add(JCBformerEstudents);
+        
+        JPopciones.add(campoRuta1);
+        JPopciones.add(JBExaest);
+                
+        JPopciones.add(JLformerTICprof);
+        JPopciones.add(JCBformerProf);
+        
+        JPopciones.add(campoRuta2);
+        JPopciones.add(JBExapro);
+        
+        JPopciones.add(JLformerFormers);
+        JPopciones.add(JCBformerFormers);
+        
+        JPopciones.add(campoRuta3);
+        JPopciones.add(JBExafor);
+        
+        container.add(JPopciones, BorderLayout.CENTER);
+        
+        
+        
+        
+        
+        JPbotnes.setLayout(new GridLayout(1, 3, 5, 1));
+        
+        
+        JPbotnes.add(JBsave);
+        JPbotnes.add(JBFinalizar);
+        
+        container.add(JPbotnes, BorderLayout.SOUTH);
+                
+                break;
+                
+            case 1:
+                
+        
+        JPititulo.setLayout(new BorderLayout());
+        JLtitulo.setHorizontalAlignment(SwingConstants.CENTER);
+        JPititulo.add(JLtitulo, BorderLayout.CENTER);
+        
+        container.add(JPititulo, BorderLayout.NORTH);
+        
+        JLexperiencia.setText("Editar Experiencia");
         JPopciones.setLayout(new GridLayout(7, 2, 0, 5));
         
         JPopciones.add(etiqueta);
@@ -186,9 +265,13 @@ public class ventanaExp_FormadorTIC extends JFrame {
         
         JPbotnes.add(JBcancel);
         JPbotnes.add(JBsave);
-        JPbotnes.add(JBFinalizar);
         
         container.add(JPbotnes, BorderLayout.SOUTH);
+                
+                break;
+        }
+        
+        
         
         
         
@@ -198,12 +281,19 @@ public class ventanaExp_FormadorTIC extends JFrame {
     
     
     public void agregarEventos(){
+        if(tipo == 0){
+            JBExaest.addActionListener(eventmanager);
+        JBExapro.addActionListener(eventmanager);
+        JBExafor.addActionListener(eventmanager);
+        JBsave.addActionListener(eventmanager);
+        JBFinalizar.addActionListener(eventmanager);
+        }else{
         JBExaest.addActionListener(eventmanager);
         JBExapro.addActionListener(eventmanager);
         JBExafor.addActionListener(eventmanager);
         JBcancel.addActionListener(eventmanager);
         JBsave.addActionListener(eventmanager);
-        JBFinalizar.addActionListener(eventmanager);
+        }
     }
     
     
@@ -223,9 +313,10 @@ public class ventanaExp_FormadorTIC extends JFrame {
         String mensaje="";
         String titulo1, titulo2, titulo3, ruta1, ruta2, ruta3;
         String link_soporte;
-        int puntos_est, puntos_pro, puntos_for;
-        
-        if(JCBformerEstudents.getSelectedIndex() == 0){
+        int puntos_est, puntos_pro, puntos_for, puntaje;
+        switch(tipo){
+            case 0:
+                if(JCBformerEstudents.getSelectedIndex() == 0){
             puntos_est = JCBformerEstudents.getSelectedIndex();
             titulo1 = optionsFEstudents[JCBformerEstudents.getSelectedIndex()];
             ruta1 = campoRuta1.getText();
@@ -315,9 +406,113 @@ public class ventanaExp_FormadorTIC extends JFrame {
            }
         }
              
-            int puntaje = puntos_est + puntos_pro + puntos_for;
+            puntaje = puntos_est + puntos_pro + puntos_for;
             driveExpFormador.guardarExperiencia(id_aspirante, titulo1, titulo2, titulo3,ruta1, ruta2, ruta3, puntos_est, puntos_pro, puntos_for, puntaje, datos_convocatoria[0]);
             driveExpFormador.asignarPuntajeAspirante(id_aspirante, datos_convocatoria[0], puntaje);
+                
+                
+                break;
+            case 1:
+                
+                if(JCBformerEstudents.getSelectedIndex() == 0){
+            puntos_est = JCBformerEstudents.getSelectedIndex();
+            titulo1 = optionsFEstudents[JCBformerEstudents.getSelectedIndex()];
+            ruta1 = campoRuta1.getText();
+            
+            
+        }else{
+           if(campoRuta1.getText().equals("") && (JCBformerEstudents.getSelectedIndex() != 0)){
+            mensaje = "Debe Seleccionar un archivo de soporte para Formador TIC a estudiantes";
+            return mensaje;
+        }        
+        else{
+            puntos_est = JCBformerEstudents.getSelectedIndex()+1;
+            titulo1 = optionsFEstudents[JCBformerEstudents.getSelectedIndex()];
+            ruta1 = campoRuta1.getText();
+            link_soporte = driveExpFormador.consultarSoporte(id_aspirante, titulo1, "soporte_estudiante", "exp_estudiante", datos_convocatoria[0]);
+            
+            if(link_soporte.equals(ruta1)){
+                mensaje = "Debe Seleccionar un archivo de soporte diferente para Formador TIC a estudiantes";
+                return mensaje;
+            }
+           }
+        }
+        
+        if(JCBformerProf.getSelectedIndex() == 0){
+            puntos_pro = JCBformerProf.getSelectedIndex();
+            titulo2 = optionsFprof[JCBformerProf.getSelectedIndex()];
+            ruta2 = campoRuta2.getText();
+            
+            
+        }else{
+           if(campoRuta2.getText().equals("") && (JCBformerProf.getSelectedIndex() != 0)){
+            mensaje = "Debe Seleccionar un archivo de soporte para Formador TIC a profesores";
+            return mensaje;
+        }        
+        else{
+               if(JCBformerProf.getSelectedIndex() == 1){
+                   puntos_pro = 5;
+               }else{
+                   if(JCBformerProf.getSelectedIndex() == 2){
+                       puntos_pro = 10;
+                   }else{
+                       if(JCBformerProf.getSelectedIndex() == 3){
+                           puntos_pro = 15;
+                       }else{
+                           puntos_pro = 20;
+                       }
+                   }
+               }
+            
+            titulo2 = optionsFprof[JCBformerProf.getSelectedIndex()];
+            ruta2 = campoRuta2.getText();
+            link_soporte = driveExpFormador.consultarSoporte(id_aspirante, titulo2, "soporte_profesor", "exp_profesor",datos_convocatoria[0]);
+            
+            if(link_soporte.equals(ruta2)){
+                mensaje = "Debe Seleccionar un archivo de soporte diferente para Formador TIC a profesores";
+                return mensaje;
+            }
+           }
+        }
+        
+        if(JCBformerFormers.getSelectedIndex() == 0){
+            puntos_for = JCBformerFormers.getSelectedIndex();
+            titulo3 = optionsFFormers[JCBformerFormers.getSelectedIndex()];
+            ruta3 = campoRuta3.getText();
+            
+            
+        }else{
+           if(campoRuta3.getText().equals("") && (JCBformerFormers.getSelectedIndex() != 0)){
+            mensaje = "Debe Seleccionar un archivo de soporte para Formador TIC de formadores";
+            return mensaje;
+        }        
+        else{
+            if (JCBformerFormers.getSelectedIndex() == 1){
+            puntos_for = JCBformerFormers.getSelectedIndex()+2;
+            }
+            else{
+                puntos_for = JCBformerFormers.getSelectedIndex()+3;
+            }
+            titulo3 = optionsFFormers[JCBformerFormers.getSelectedIndex()];
+            ruta3 = campoRuta3.getText();
+            link_soporte = driveExpFormador.consultarSoporte(id_aspirante, titulo3, "soporte_formador", "exp_formador", datos_convocatoria[0]);
+            
+            if(link_soporte.equals(ruta3)){
+                mensaje = "Debe Seleccionar un archivo de soporte diferente para Formador TIC de formadores";
+                return mensaje;
+            }
+           }
+        }
+        
+        puntaje = puntos_est + puntos_pro + puntos_for;
+        driveExpFormador.asignarPuntajeAspirante(id_aspirante, datos_convocatoria[0], puntaje);
+        driveExpFormador.editarExperiencia(id_aspirante, titulo1, titulo2, titulo3,ruta1, ruta2, ruta3, puntos_est, puntos_pro, puntos_for, puntaje, datos_convocatoria[0]);
+        
+                
+                break;
+                
+        }
+        
                           
              System.out.println(JCBformerEstudents.getSelectedIndex());
             
@@ -372,25 +567,40 @@ public class ventanaExp_FormadorTIC extends JFrame {
                campoRuta3.setText(ruta);
             }
             
+            
+            
             if(e.getSource() == JBcancel){
+                
                 ventana_opcionesM.setVisible(true);
                 dispose();
+                
+                System.out.println("hola soy cancelar");
             }
             
             if(e.getSource() == JBsave){
                 
-                if(guardar().equals("")){
+                if(tipo == 0){
+                       if(guardar().equals("")){
                     JOptionPane.showMessageDialog(null, "Se ha guardado con Exito");
-                    
-                    if(tipo == 0){
                         ingresarDatoPersona();
-                    }else{
-                    ventana_opcionesM.setVisible(true);
-                    dispose();}
-                    
-                }else{
+                        }else{
                     JOptionPane.showMessageDialog(null, guardar());
                 }
+                    }else{
+                         if(guardar().equals("")){
+                    JOptionPane.showMessageDialog(null, "Se ha guardado con Exito");
+                        ventana_opcionesM.setVisible(true);
+                    dispose();
+                        }else{
+                    JOptionPane.showMessageDialog(null, guardar());
+                }
+                    
+                
+                }   
+                    
+                    
+                    
+                
                 
             }
             
