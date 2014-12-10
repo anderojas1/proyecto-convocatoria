@@ -184,4 +184,14 @@ public class DaoIdioma {
         return puntaje;
         
     }
+    
+    
+    public void deleteIdioma (String id, String convocatoria, String cod_idioma) throws SQLException {
+        
+        sqlSentence = "DELETE FROM ASPIRANTE_HABLA WHERE id_aspirante = '" + id + "' AND cod_convocatoria = "
+                + "'" + convocatoria + "' and cod_idioma = '" + cod_idioma + "';";
+        
+        ejecutarSentencia();
+        
+    }
 }

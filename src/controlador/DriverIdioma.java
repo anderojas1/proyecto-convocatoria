@@ -66,4 +66,11 @@ public class DriverIdioma {
         
     }
     
+    
+    public void borrarIdioma (String id, String cod_con, String cod_idioma) throws SQLException {
+        
+        daoIdioma.deleteIdioma(id, cod_con, cod_idioma);
+        
+    }
+    
 }
