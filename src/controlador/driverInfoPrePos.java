@@ -76,48 +76,7 @@ public class driverInfoPrePos {
     }
     
     
-    public int calcularPuntaje(String ident, int nPuntaje){
-        
-        int aPuntaje = 0;
-        
-        int puntaje = 0;
-        
-        aPuntaje = daoprepos.getApplicant(ident).getPuntModulo();
-                         
-        puntaje = nPuntaje - aPuntaje;
-        
-        return puntaje;
-        
-    }
-    
-    
-    public void recalificar(String id, String convoca){
-    
-        double puntajeTotal = 0;
-        double puntajeNuevo = 0;
-        
-        try{         
-        
-            puntajeTotal = daoAspirante.consultarPuntajeUsuario(id, convoca);
-        
-          }catch(SQLException ex){
-            
-                System.err.println("Error al consultar la base de datos");
-         
-          }
-        
-        
-        puntajeNuevo = calcularPuntaje(objPrePos.getIdentificacion(), objPrePos.getPuntModulo()) + puntajeTotal;
-        
-        try{
-            
-            daoAspirante.updatePuntajeUsuario(id, convoca, puntajeNuevo);       
-        
-        }catch(SQLException ex){
-        
-            System.err.println("Error al consultar la base de datos");
-        }
-    }
+   
     
     public void SumarPuntaje(){
      

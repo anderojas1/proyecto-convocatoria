@@ -17,9 +17,6 @@ public class formacionTic {
     }
     
         
-    public formacionTic(){
-        
-    }
     
     public formacionTic(String identificacion, String titulo, int consecutivo, String soporte, int puntaje, String convocatoria){
         

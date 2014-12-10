@@ -120,14 +120,22 @@ public class VentanaPrincipalDigitador extends JFrame{
         @Override
         public void actionPerformed(ActionEvent ae) {
             if(ae.getSource() == cerrar){
+                
                 VentanaLogin nuevoLogin = new VentanaLogin();
+                
                 nuevoLogin.addEvents();
+                
                 try {
+                    
                     control.estadoSesion(user, false);
+                
                 } catch (SQLException ex) {
+                
                     System.out.println("error al cerrar la sesion");
                 }
+                
                 dispose();
+            
             }else if(ae.getSource() == ingresar){
                 
                 ingresarAspirante();
