@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+import logica.Usuario;
 
 /**
  *
@@ -21,13 +23,12 @@ public class VentanaAdministrador extends JFrame {
     private JButton JBCerrarSesion;
     private JButton JBCreateUser;
     private JButton JBModifConv;
-    private JPanel JPTitulo;
-    private JPanel JPbotones;
-    private JPanel JPCerrarSesion;
     private JLabel JLTitulo;
     private JLabel JLadduser;
     private JLabel JLcrearConv;
     private JLabel JLediatrconv;
+    private JLabel JLbienvenido;
+    private JLabel JLbienvenido2;
  
     private JPanel JPpanelPrincipal;
     private EventManager eventmanager;
@@ -39,10 +40,9 @@ public class VentanaAdministrador extends JFrame {
     // End of variables declaration
     public VentanaAdministrador(String usuario) {
         
+        user = usuario;
         initComponents();
         AcommodateComponents();
-        
-        user = usuario;
         
         setSize(new Dimension(700, 500));
         setResizable(false);
@@ -55,13 +55,16 @@ public class VentanaAdministrador extends JFrame {
         //incializar controles
         eventmanager = new EventManager(this);
         control =  new DriverUsuario();
-
-        //paneles
-
-        JPTitulo = new JPanel();
-        JPbotones = new JPanel();
-        JPCerrarSesion = new JPanel();
         
+        
+        Usuario u =  control.selectUser(user);
+        
+        JLbienvenido2 = new JLabel("Bienvenid@ ");
+        JLbienvenido = new JLabel(u.getNombreUno().toUpperCase()+" "+u.getApellidoUno().toUpperCase()+".");
+        JLbienvenido.setFont(new java.awt.Font ( "Arial" , Font.BOLD, 20 ) );
+        
+        
+      
         JPpanelPrincipal = new JPanel();
 
         //etiqueta
@@ -76,7 +79,7 @@ public class VentanaAdministrador extends JFrame {
         JBAbrirConv = new JButton("Abrir Convocatoria");
         JBAbrirConv.addActionListener(eventmanager);
 
-        JBCerrarSesion = new JButton("Cerrar Sesion");
+        JBCerrarSesion = new JButton(new ImageIcon("src/iconos/sign_out.png"));
         JBCerrarSesion.addActionListener(eventmanager);
 
         JBCreateUser = new JButton("Crear Usuario");
@@ -105,36 +108,39 @@ public class VentanaAdministrador extends JFrame {
         JLTitulo.setBounds(0, 0, 700, 80);
         
         
+        JPpanelPrincipal.add(JLbienvenido2);
+        JLbienvenido2.setBounds(10, 120, 140, 50);
+        
+        JPpanelPrincipal.add(JLbienvenido);
+        JLbienvenido.setBounds(100, 120, 400, 50);
+        
+        //cerrar sesion
+        
+       JPpanelPrincipal.add(JBCerrarSesion);
+       JBCerrarSesion.setBounds(652, 100, 40, 40);
         
 
         //panel botones
 
         
+       
 
         JPpanelPrincipal.add(JLadduser);
-        JLadduser.setBounds(50, 100, 180, 100);
+        JLadduser.setBounds(50, 200, 180, 100);
         JPpanelPrincipal.add(JBCreateUser);
-        JBCreateUser.setBounds(50, 200, 180, 50);
+        JBCreateUser.setBounds(50, 310, 180, 50);
         
         JPpanelPrincipal.add(JLcrearConv);
-        JLcrearConv.setBounds(250, 100, 180, 100);
+        JLcrearConv.setBounds(250, 200, 180, 100);
         JPpanelPrincipal.add(JBAbrirConv);
-        JBAbrirConv.setBounds(250, 200, 180, 50);
+        JBAbrirConv.setBounds(250, 310, 180, 50);
         
         
         JPpanelPrincipal.add(JLediatrconv);
-        JLediatrconv.setBounds(450, 100, 180, 100);
+        JLediatrconv.setBounds(450, 200, 180, 100);
         JPpanelPrincipal.add(JBModifConv);
-        JBModifConv.setBounds(450, 200, 180, 50);
+        JBModifConv.setBounds(450, 310, 180, 50);
         
-        
-        
-        
-        //cerrar sesion
-        
-       JPpanelPrincipal.add(JBCerrarSesion);
-       JBCerrarSesion.setBounds(235, 400, 180, 50);
-       
        
 
        JPpanelPrincipal.setBackground(Color.WHITE);
@@ -239,7 +245,7 @@ public class VentanaAdministrador extends JFrame {
     
    public static void main(String args[]){
 
-        VentanaAdministrador vad = new VentanaAdministrador("1");
+        VentanaAdministrador vad = new VentanaAdministrador("kellys");
 
      }
  
