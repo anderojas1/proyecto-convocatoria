@@ -128,11 +128,11 @@ public class DaoIdioma {
     }
     
     
-    public void agregarIdiomaAspirante (String id, String cod, String hablar, String leer, String esc, 
+    public void agregarIdiomaAspirante (String id_con, String id, String cod, String hablar, String leer, String esc, 
                                             double puntaje, boolean escoger) throws SQLException {
         
         sqlSentence = "INSERT INTO ASPIRANTE_HABLA VALUES ('" + id + "','" + cod + "','" + hablar + "','" + leer + "','"
-                + esc + "'," + puntaje + "," + escoger + ");";
+                + esc + "'," + puntaje + ",'" + id_con + "'," + escoger + ");";
         
         ejecutarSentencia();
     }
@@ -170,9 +170,9 @@ public class DaoIdioma {
     }
     
     
-    public double consultarPuntaje () throws SQLException {
+    public double consultarPuntaje (String id) throws SQLException {
         
-        sqlSentence = "SELECT puntaje FROM ASPIRANTE_HABLA WHERE escoger = TRUE;";
+        sqlSentence = "SELECT puntaje FROM ASPIRANTE_HABLA WHERE id_aspirante = '" + id +"' and escoger = TRUE;";
         
         ejecutarConsulta();
         

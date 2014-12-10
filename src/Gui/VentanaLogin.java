@@ -136,38 +136,63 @@ public class VentanaLogin extends JFrame {
         String user = jtfusername.getText();
         String pass = jpfpassword.getText();
         
-        String tipo = controladorUsuario.tipoUsuario(user, pass);
+        try {
         
-        switch (tipo) {
+            String tipo = controladorUsuario.tipoUsuario(user, pass);
             
-            case "Administrador": {
+            if (!tipo.equals("")) {
+            
+                if (controladorUsuario.verificarSesion(user) == false) {
+
+                controladorUsuario.estadoSesion(user, true);
                 
-                VentanaAdministrador admin = new VentanaAdministrador(user);
-                this.dispose();
+                    switch (tipo) {
+
+                        case "Administrador": {
+
+                            VentanaAdministrador admin = new VentanaAdministrador(user);
+                            this.dispose();
+
+                        }
+                        break;
+
+                        case "Supervisor": {
+
+                            VentanaIniSupervisor sprv = new VentanaIniSupervisor(user);
+                            this.dispose();
+
+                        }
+                        break;
+
+                        case "Digitador": {
+
+                            VentanaPrincipalDigitador dig = new VentanaPrincipalDigitador(user);
+                            this.dispose();
+
+                        }
+                        break;
+
+                    }
+
+                } else {
+
+                    JOptionPane.showMessageDialog(this, "El usuario " + user + " ya ha iniciado sesión", "Múltiple inicio de sesión",
+                            JOptionPane.ERROR_MESSAGE);
+
+                }
                 
-            }break;
+            } else {
                 
-            case "Supervisor": {
-                            
-                VentanaIniSupervisor sprv = new VentanaIniSupervisor(user);
-                this.dispose();
-                
-            }break;
-                
-            case "Digitador": {
-                
-                VentanaPrincipalDigitador dig = new VentanaPrincipalDigitador(user);
-                this.dispose();
-                
-            }break;
-                
-            default: {
-                
-                JOptionPane.showMessageDialog(null, "Usuario o contraseña inválidos", "Error", JOptionPane.ERROR_MESSAGE);
-                jpfpassword.setText("");
-                jtfusername.setText("");
+                JOptionPane.showMessageDialog(this, "Usuario o contraseña inválidos", "Inicio de sesión fallido",
+                            JOptionPane.ERROR_MESSAGE);
                 
             }
+            
+        } catch (SQLException ex) {
+            
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            jpfpassword.setText("");
+            jtfusername.setText("");
         }
         
     }

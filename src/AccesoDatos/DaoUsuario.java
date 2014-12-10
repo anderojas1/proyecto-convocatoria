@@ -7,6 +7,7 @@
 package AccesoDatos;
 
 import java.sql.*;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import logica.Usuario;
 /**
@@ -176,6 +177,51 @@ public class DaoUsuario {
         
         return flag_register;
         
+    }
+    
+    public void estadoSesion (String user, boolean est) throws SQLException {
+        
+        sentenciaSql = "UPDATE ACCESO SET estado = " + est + " WHERE username = '" + user + "';";
+        ejecutarUpdate();
+        
+    }
+    
+    
+    public boolean consultarEstadoSesion (String user) throws SQLException {
+        
+        boolean estado = false;
+        
+        sentenciaSql = "SELECT estado FROM ACCESO WHERE username = '" + user + "';";
+        ejecutarConsulta();
+        
+        if (registros.next() == true) estado = registros.getBoolean(1);
+        
+        return estado;
+    }
+    
+    
+    public void habilitarUsuario (boolean estado, String identificacion) throws SQLException {
+        
+        sentenciaSql = "UPDATE USUARIO SET empleo = " + estado + " WHERE identificacion = '" + identificacion + "';";
+        ejecutarUpdate();
+        
+    }
+    
+    
+    public ArrayList <String> consultarUsuarios (boolean estado) throws SQLException {
+        
+        ArrayList <String> usuarios = new ArrayList<>();
+        
+        sentenciaSql = "SELECT identificacion FROM USUARIO WHERE empleo = " + estado + " AND cargo <> 'Administrador';";
+        ejecutarConsulta();
+        
+        while (registros.next() == true) {
+            
+            usuarios.add(registros.getString(1));
+            
+        }
+        
+        return usuarios;
     }
     
 }

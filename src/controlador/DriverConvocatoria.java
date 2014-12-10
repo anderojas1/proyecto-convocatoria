@@ -28,7 +28,7 @@ public class DriverConvocatoria {
     
     
     public void guardarConvocatoria (String nombre, String descripcion, String fecha_ini, String fecha_fin, String estado, String codigo, 
-                                        String usuario) {
+                                        String usuario) throws SQLException {
         
         Convocatoria crearConv = new Convocatoria(nombre, fecha_ini, fecha_fin, codigo, estado, descripcion);
         
@@ -36,15 +36,26 @@ public class DriverConvocatoria {
             
             daoConvocatoria.crearConvocatoria(crearConv, usuario);
             
-            JOptionPane.showMessageDialog(null, "Se ha creado la convocatoria con exito", "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
-            
         } catch (SQLException ex) {
             
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Registro fallido", JOptionPane.ERROR_MESSAGE);
+            throw ex;
             
         }
+        
     }
     
+    
+    public ArrayList<String> listaConvocatorias(String identificacion){
+        ArrayList<String> convocatorias = new ArrayList();
+        try{
+        
+        convocatorias = daoConvocatoria.nombresConvocatorias(identificacion);
+        
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "No hay convocatorias", JOptionPane.ERROR_MESSAGE);
+        }
+        return convocatorias;
+    }
     
     public ArrayList<String> listaConvocatorias(){
         ArrayList<String> convocatorias = new ArrayList();
@@ -67,6 +78,27 @@ public class DriverConvocatoria {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Consulta erronea", JOptionPane.ERROR_MESSAGE);
         }
         return estado;
+    }
+    
+    public ArrayList<String> consultarConvocatorias () throws SQLException {
+        
+        return daoConvocatoria.consultarConvocatorias();
+        
+    }
+    
+    
+    public String [] consultaDatosConvocatoria (String nombre) throws SQLException {
+        
+        return daoConvocatoria.consultarDetallesConvocatoria(nombre);
+        
+    }
+    
+    
+    public void actualizarConvocatoria (String nombre, String descrip, String estado, String fecha, String convoca) 
+                        throws SQLException {
+        
+        daoConvocatoria.actualizarDetallesConvocatoria(nombre, descrip, estado, fecha, convoca);
+        
     }
     
 }

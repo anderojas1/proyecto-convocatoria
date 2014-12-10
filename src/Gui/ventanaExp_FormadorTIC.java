@@ -46,13 +46,16 @@ public class ventanaExp_FormadorTIC extends JFrame {
     String [] optionsFFormers= {"Sin Experiencia","De 80 a 120 horas","Más de 120 horas"};
     String [] datos_convocatoria;
     //botones
-    JButton JBcancel, JBsave, JBExaest, JBExapro, JBExafor;
+    JButton JBcancel, JBsave, JBExaest, JBExapro, JBExafor, JBFinalizar;
     JTextField campoRuta1, campoRuta2, campoRuta3;
+    private int tipo; 
+    private VentanaPrincipalDigitador ventana_digitador;
 
     public ventanaExp_FormadorTIC(int tipo, String identificacion_aspirante, String[] datos_convocatoria) {
         super("Experiencia como Formador en TIC");
         
         id_aspirante = identificacion_aspirante;
+        this.tipo = tipo;
         this.datos_convocatoria = datos_convocatoria;
         initComponents();
         acommodateComponents();
@@ -64,6 +67,23 @@ public class ventanaExp_FormadorTIC extends JFrame {
         setVisible(true);
     }
 
+       public ventanaExp_FormadorTIC(int tipo, String identificacion_aspirante, String[] datos_convocatoria, VentanaPrincipalDigitador ventana_digitador) {
+        super("Experiencia como Formador en TIC");
+        
+        id_aspirante = identificacion_aspirante;
+        this.tipo = tipo;
+        this.datos_convocatoria = datos_convocatoria;
+        this.ventana_digitador = ventana_digitador;
+        initComponents();
+        acommodateComponents();
+        
+        pack();
+        setSize(500,350);
+        setDefaultCloseOperation(0);
+        setResizable(true);
+        setVisible(true);
+    }
+       
     private void initComponents() {
         //ActionListener
         eventmanager = new EventManager();
@@ -116,7 +136,7 @@ public class ventanaExp_FormadorTIC extends JFrame {
         
         JBsave = new JButton("Guardar");
         
-        
+        JBFinalizar = new JButton("Omitir");
     }
 
     private void acommodateComponents() {
@@ -166,6 +186,7 @@ public class ventanaExp_FormadorTIC extends JFrame {
         
         JPbotnes.add(JBcancel);
         JPbotnes.add(JBsave);
+        JPbotnes.add(JBFinalizar);
         
         container.add(JPbotnes, BorderLayout.SOUTH);
         
@@ -182,6 +203,7 @@ public class ventanaExp_FormadorTIC extends JFrame {
         JBExafor.addActionListener(eventmanager);
         JBcancel.addActionListener(eventmanager);
         JBsave.addActionListener(eventmanager);
+        JBFinalizar.addActionListener(eventmanager);
     }
     
     
@@ -191,6 +213,11 @@ public class ventanaExp_FormadorTIC extends JFrame {
         
     }
     
+    public void ingresarDatoPersona(){//Ventana siguiente
+         JOptionPane.showMessageDialog(this, "Ha finalizado la inscripción del aspirante Felicitaciones!!!");
+         ventana_digitador.setVisible(true);
+         dispose();
+     }
     
     public String guardar(){
         String mensaje="";
@@ -354,14 +381,22 @@ public class ventanaExp_FormadorTIC extends JFrame {
                 
                 if(guardar().equals("")){
                     JOptionPane.showMessageDialog(null, "Se ha guardado con Exito");
+                    
+                    if(tipo == 0){
+                        ingresarDatoPersona();
+                    }else{
                     ventana_opcionesM.setVisible(true);
-                    dispose();
+                    dispose();}
                     
                 }else{
                     JOptionPane.showMessageDialog(null, guardar());
                 }
                 
             }
+            
+           if(e.getSource() == JBFinalizar){
+               ingresarDatoPersona();
+           } 
             
         }
     }

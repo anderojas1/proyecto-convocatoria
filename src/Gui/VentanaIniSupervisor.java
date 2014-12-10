@@ -7,13 +7,23 @@
 package Gui;
 
 
-import javax.swing.*;
-import java.awt.*;
+import controlador.*;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 
  public class VentanaIniSupervisor extends JFrame{
+     
+     DriverAspirante driverAspirante = new DriverAspirante();
 
     Container cont;
     private JPanel inicioSupervisor;
@@ -22,11 +32,13 @@ import java.awt.event.ActionListener;
     private ManejaEvento driverEventos;
 
     private String usuario;
+    private DriverUsuario control;
     
     
     public VentanaIniSupervisor(String user){
         
         usuario = user;
+        control = new DriverUsuario();
         
         cont = getContentPane(); 
         inicioSupervisor = new JPanel();
@@ -39,7 +51,7 @@ import java.awt.event.ActionListener;
         consultar = new JButton("Consultar Aspirante");
         total = new JButton("Ver total Seleccionados");
         salir = new JButton("Cerrar Sesión");
-        driverEventos = new ManejaEvento();
+        driverEventos = new ManejaEvento(this);
         
         Dimension di = new Dimension(800, 500);
         setSize(650,350);
@@ -86,31 +98,92 @@ import java.awt.event.ActionListener;
     }
     
     public void agregarEventos () {
-        informe.addActionListener(driverEventos);
+        
         salir.addActionListener(driverEventos);
+        informe.addActionListener(driverEventos);
         
     }
 
      private class ManejaEvento implements ActionListener{
 
+         Component  parentComponent;
+         
+        public ManejaEvento(Component parent) {
+            parentComponent = parent;
+        }
+
+         
         @Override
         public void actionPerformed(ActionEvent ae) {
-            
-            if(ae.getSource() == informe){
-                VentanaListadoInscritos ventanaInscritos = new VentanaListadoInscritos(usuario);
-                ventanaInscritos.agregarEventos();
-                ventanaInscritos.setVisible(true);
-                dispose();
-                System.err.println("se presiono el bton informe");
+            if(ae.getSource() == salir){
+                 VentanaLogin nuevoLogin = new VentanaLogin();
+                nuevoLogin.addEvents();
+                try {
+                    control.estadoSesion(usuario, false);
+                    dispose();
+                } catch (SQLException ex) {
+                    System.out.println("error al cerrar sesion");
+                }
             }
             
-            if(ae.getSource() == salir){
-                VentanaLogin nuevoLogin = new VentanaLogin();
-                nuevoLogin.addEvents();
-                dispose();
+            if(ae.getSource() == informe){
+            
+                setVisible(false);
+                VentanaListadoInscritos VL = new VentanaListadoInscritos(parentComponent);
+                
+            
             }
         }
          
      }
+     
+    public void generarReporteJornadas () {
+        
+        try {
+        
+            int jornadaMañana = driverAspirante.consultarNumeros("Jornada", "Mañana");
+            int jornadaTarde = driverAspirante.consultarNumeros("Jornada", "Tarde");
+            int jornadaAmbas = driverAspirante.consultarNumeros("Jornada", "Ambas");
+            System.out.println(jornadaMañana + " - " + jornadaTarde + " - " + jornadaAmbas);
+            
+            JOptionPane.showMessageDialog(this, "Estamos en desarrollo", "Módulo en desarrollo", JOptionPane.INFORMATION_MESSAGE);
+            
+        } catch (SQLException ex) {
+            
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Consulta fallida", JOptionPane.ERROR_MESSAGE);
+            
+        }
+        
+    }
+    
+    public void generarReporteGenero () {
+        
+        try {
+            
+            int sexoMasculino = driverAspirante.consultarNumeros("Genero", "Hombre");
+            int sexoFemenino = driverAspirante.consultarNumeros("Genero", "Mujer");
+            
+            Object [][] datos = {{"Hombres", sexoMasculino},{"Mujeres", sexoFemenino}};            
+            
+            //System.out.println(sexoMasculino + " - " + sexoFemenino);
+            
+            Graficos reportes = new Graficos();
+            
+            reportes.recibirParametrosGrafica("Género","titulox","tituloy", datos);
+            
+            JOptionPane.showMessageDialog(this, "Estamos en desarrollo", "Módulo en desarrollo", JOptionPane.INFORMATION_MESSAGE);
+            
+        } catch (SQLException ex) {
+            
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Consulta fallida", JOptionPane.ERROR_MESSAGE);
+            
+        }
+        
+    }
+    
+    public void generarReporteMunicipios () {
+        
+        JOptionPane.showMessageDialog(this, "Estamos en desarrollo", "Módulo en desarrollo", JOptionPane.INFORMATION_MESSAGE);
+    }
 
 }

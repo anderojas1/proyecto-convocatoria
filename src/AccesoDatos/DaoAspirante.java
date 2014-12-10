@@ -11,7 +11,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import logica.*;
 
 /**
@@ -166,6 +165,32 @@ public class DaoAspirante {
     }
     
     
+    public int consultarJornadaLaboral (String jornada) throws SQLException {
+        
+        int total = 0;
+        
+        sentenciaSql = "SELECT count(jornada) FROM ASPIRANTE WHERE jornada = '" + jornada + "';";
+        ejecutarConsulta();
+        
+        if (registros.next() == true) total = registros.getInt(1);
+        
+        return total;
+        
+    }
+    
+    public int consultarGeneroAspirante (String sexo) throws SQLException {
+        
+        int total = 0;
+        
+        sentenciaSql = "SELECT count(sexo) FROM ASPIRANTE WHERE sexo = '" + sexo + "';";
+        ejecutarConsulta();
+        
+        if (registros.next() == true) total = registros.getInt(1);
+        
+        return total;
+        
+    }
+    
     public void ejecutarConsulta () throws SQLException {
         
         conectar = fachada.conectar();		
@@ -176,9 +201,9 @@ public class DaoAspirante {
         
     }
     
-    public ArrayList<Object> getListApirantes(String cod_convocatoria){
+    public ArrayList<Object[]> getListApirantes(String cod_convocatoria){
     
-       ArrayList<Object> lista = new ArrayList<>();
+       ArrayList<Object[]> lista = new ArrayList<>();
        
        sentenciaSql = "SELECT identificacion,p_nombre,s_nombre,p_apellido,s_apellido,municipio_trabaja FROM"
                + " Aspirante WHERE identificacion IN (SELECT identificacion FROM AspiranteConvocatoria WHERE codigo = '"+cod_convocatoria+"');";    
@@ -187,11 +212,11 @@ public class DaoAspirante {
             
             while (registros.next()){
             
-                String [] temp =  new String[4];
+                Object [] temp =  new String[4];
             
                 temp[0] = registros.getString(1);
                 temp[1] = registros.getString(2)+" "+registros.getString(3);
-                temp[2] =  registros.getString(4)+" "+registros.getString(5);
+                temp[2] = registros.getString(4)+" "+registros.getString(5);
                 temp[3] = registros.getString(6);
                 
                 lista.add(temp);
@@ -208,4 +233,40 @@ public class DaoAspirante {
        
     
     }
+    
+    public ArrayList<Object[]> getInfoMunicipios(String cod_convocatoria){
+    
+        ArrayList<Object[]> list = new ArrayList<>();
+        
+        sentenciaSql = "SELECT municipio_trabaja, count(*) FROM ASPIRANTE WHERE identificacion IN "
+                                                                                     + "(SELECT identificacion FROM ASPIRANTECONVOCATORIA"
+                                                                                                        + "WHERE codigo = '"+cod_convocatoria+"') "
+                        + "GROUP BY  municipio_trabaja ORDER BY municipio_trabaja;";
+        try {
+            ejecutarConsulta();
+            
+            while (registros.next()){
+            
+                String municipio = (String)registros.getNString(1);
+                int cantidad = (Integer) registros.getInt(2);
+                
+                Object [] info =  new Object[2];
+                
+                info[0] = municipio;
+                info[1] = cantidad;
+                
+                list.add(info);
+                
+            
+            }
+            return list;
+        } catch (SQLException ex) {
+            System.out.println("error al consultar informacion de los municipios");
+            return null;
+        }
+    
+    }
+    
+    
+    
 }

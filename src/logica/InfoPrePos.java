@@ -21,6 +21,7 @@ public class InfoPrePos {
     private String RtDoctorTic;
     private String cod_convo;
     private int puntModulo;
+    private String cod_conv;
     
     public InfoPrePos(){
     
@@ -34,6 +35,7 @@ public class InfoPrePos {
         RtLicenciado = "N/A";
         cod_convo = "";
         puntModulo = 0;
+        cod_conv = "";
             
     }
 
@@ -116,6 +118,14 @@ public class InfoPrePos {
     public void setCod_convo(String cod_convo) {
         this.cod_convo = cod_convo;
     }
+
+    public String getCod_conv() {
+        return cod_conv;
+    }
+
+    public void setCod_conv(String cod_conv) {
+        this.cod_conv = cod_conv;
+    }
     
-    
+        
 }

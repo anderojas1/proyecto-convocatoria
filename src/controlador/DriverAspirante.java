@@ -84,6 +84,22 @@ public class DriverAspirante {
         return daoaspirante.consultarPuntajeUsuario(id, con);
         
     }
+    
+    
+    public int consultarNumeros (String item, String parametro) throws SQLException {
+        
+        int total = 0;
+        
+        switch (item) {
+            
+            case "Jornada": total = daoaspirante.consultarJornadaLaboral(parametro); break;
+            case "Genero": total = daoaspirante.consultarGeneroAspirante(parametro); break;
+                            
+        }
+        
+        return total;
+        
+    }
          
     
 }

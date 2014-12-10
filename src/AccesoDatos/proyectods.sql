@@ -165,6 +165,7 @@ CREATE TABLE ASPIRANTE_HABLA (
     leer varchar(15) NOT NULL,
     escribir varchar(15) NOT NULL,
     puntaje double precision NOT NULL,
+    cod_convocatoria VARCHAR(15) NOT NULL,
     escoger boolean NOT NULL,
 
     CONSTRAINT aspirante_habla_pk PRIMARY KEY (id_aspirante, cod_idioma),
@@ -173,8 +174,10 @@ CREATE TABLE ASPIRANTE_HABLA (
     REFERENCES ASPIRANTE (identificacion),
 
     CONSTRAINT cod_idioma_fk FOREIGN KEY (cod_idioma)
-    REFERENCES IDIOMA (codigo_idioma)
+    REFERENCES IDIOMA (codigo_idioma),
 
+    CONSTRAINT cod_convocatoria_fk FOREIGN KEY (cod_convocatoria)
+    REFERENCES CONVOCATORIA (codigo)
 );
 
 CREATE TABLE CONOCIMIENTOS_ESPECIFICOS (
@@ -255,6 +258,6 @@ INSERT INTO ACCESO VALUES ('kellys', 'kellys', false , '1');
 INSERT INTO ACCESO VALUES ('andre', 'andre', false , '2');
 INSERT INTO ACCESO VALUES ('jhon', 'jhon', false , '3');
 
-INSERT INTO CONVOCATORIA VALUES('1',  'convocatoria-1', 'la convocatoria-1', '2014/11/28', '2015/11/28', 'abierta', 'kellys');
+INSERT INTO CONVOCATORIA VALUES('1',  'convocatoria-1', 'la convocatoria-1', '2014-11-28', '2015-11-28', 'abierta', 'kellys');
 
 

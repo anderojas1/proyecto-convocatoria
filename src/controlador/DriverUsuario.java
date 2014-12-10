@@ -6,6 +6,7 @@ package controlador;
 
 import AccesoDatos.DaoUsuario;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import logica.Usuario;
 
@@ -51,7 +52,7 @@ public class DriverUsuario {
     }
     
     
-    public String tipoUsuario (String username, String password) {
+    public String tipoUsuario (String username, String password) throws SQLException {
         
         return daoUsuario.identificarTipo (username, password);
         
@@ -68,6 +69,34 @@ public class DriverUsuario {
     public void cambiarContraseña (String id, String pass) throws SQLException {
         
         daoUsuario.cambiarContraseña(id, pass);
+        
+    }
+    
+    
+    public void estadoSesion (String user, boolean estado) throws SQLException {
+        
+        daoUsuario.estadoSesion(user, estado);
+        
+    }
+    
+    
+    public boolean verificarSesion (String user) throws SQLException {
+        
+        return daoUsuario.consultarEstadoSesion(user);
+        
+    }
+    
+    
+    public void habilitarUsuario (boolean estado, String identificacion) throws SQLException {
+        
+        daoUsuario.habilitarUsuario(estado, identificacion);
+        
+    }
+    
+    
+    public ArrayList <String> consultarUsuarios (boolean estado) throws SQLException {
+        
+        return daoUsuario.consultarUsuarios(estado);
         
     }
     

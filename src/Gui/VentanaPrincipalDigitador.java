@@ -8,8 +8,12 @@ package Gui;
  *
  * @author USER
  */
+import controlador.DriverUsuario;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 public class VentanaPrincipalDigitador extends JFrame{
@@ -26,11 +30,12 @@ public class VentanaPrincipalDigitador extends JFrame{
     private VentanaRegDatoPersona registroPersonal;
     private Container cont;
     private JPanel inicioDigitador;
+    private DriverUsuario control;
     
     public  VentanaPrincipalDigitador(String username){
         
         super("Bienvenido @ "+ username);
-        //user = username;
+        user = username;
         cont = getContentPane(); 
         inicioDigitador = new JPanel();        
         titulo = new JLabel("Sistema de Seleccion de Docentes TIC");
@@ -45,6 +50,7 @@ public class VentanaPrincipalDigitador extends JFrame{
         icono = new JLabel(new ImageIcon("src/iconos/graduado.jpg"));
         
         driverEventos = new ManejaEvento(); 
+        control = new DriverUsuario();
        
         
         setLocationRelativeTo(null);
@@ -93,8 +99,10 @@ public class VentanaPrincipalDigitador extends JFrame{
      }
      
      public void ListenerEvent(){
-         cerrar.addActionListener(driverEventos);
+        cerrar.addActionListener(driverEventos);
         ingresar.addActionListener(driverEventos); 
+        editar.addActionListener(driverEventos);
+        consultar.addActionListener(driverEventos);
      }
      
      public void ingresarAspirante(){
@@ -112,14 +120,34 @@ public class VentanaPrincipalDigitador extends JFrame{
         @Override
         public void actionPerformed(ActionEvent ae) {
             if(ae.getSource() == cerrar){
+                
                 VentanaLogin nuevoLogin = new VentanaLogin();
+                
                 nuevoLogin.addEvents();
+                
+                try {
+                    
+                    control.estadoSesion(user, false);
+                
+                } catch (SQLException ex) {
+                
+                    System.out.println("error al cerrar la sesion");
+                }
+                
                 dispose();
-            }
             
-            if(ae.getSource() == ingresar){
+            }else if(ae.getSource() == ingresar){
+                
                 ingresarAspirante();
                 
+            }else if (ae.getSource() == editar){
+                
+                JOptionPane.showMessageDialog(rootPane, "En construccion");
+            
+            }else if(ae.getSource() == consultar){
+                
+                   JOptionPane.showMessageDialog(rootPane, "En construccion");          
+            
             }
         }
          
