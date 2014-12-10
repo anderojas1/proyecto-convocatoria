@@ -565,10 +565,61 @@ public class VentanaRegDatoPersona extends JFrame {
         comboAnio.setVisible(false);
         
                 
+       // buscarConvAsp(aspi.getIdentificacion());
+             
+    }
+    
+    public void habilitarEdicion3(Aspirante aspi){
+ 
+        String tipDoc=comboTipoDoc.getSelectedItem()+"";
+        campoTipoDoc.setText(tipDoc);
+        comboTipoDoc.setVisible(false);
+        campoTipoDoc.setVisible(true);
+        campoTipoDoc.setEditable(false);
+        campoNumIdent.setEditable(false);
+        
+        campoPNombre.setVisible(true);
+        campoPNombre.setText(aspi.getP_nombre());
+        campoPNombre.setEditable(false);
+        
+        campoSNombre.setVisible(true);
+        campoSNombre.setText(aspi.getS_nombre());
+        campoSNombre.setEditable(false);
+        
+        campoPApelli.setVisible(true);
+        campoPApelli.setText(aspi.getP_apellido());
+        campoPApelli.setEditable(false);
+        
+        campoSApelli.setVisible(true);
+        campoSApelli.setText(aspi.getS_apellido());
+        campoSApelli.setEditable(false);
+        
+        lbConvocatoria.setVisible(true);
+        comboConvocatorias.setVisible(true);
+       
+        
+        btconfirmar.setVisible(false);
+        
+        lbNumeroCel.setVisible(false);
+        lbFechaNaci.setVisible(false);
+        lbJorTrabajo.setVisible(false);
+        lbMunicipio.setVisible(false);
+        lbSexo.setVisible(false);
+        lbLugarResiden.setVisible(false);
+        lbLugarNacimiento.setVisible(false);
+       
+        comboMunicipio.setVisible(false);
+        comboJorTrabajo.setVisible(false);
+        comboTipoDoc.setVisible(false);
+        comboSexo.setVisible(false);
+        comboLugResi.setVisible(false);
+        comboLugNaci.setVisible(false);
+        comboDia.setVisible(false);
+        comboMes.setVisible(false);
+        comboAnio.setVisible(false);
+        
+                
         buscarConvAsp(aspi.getIdentificacion());
-        
-        
-        
     }
     
     public void buscarConvAsp(String id_aspirante){
@@ -604,13 +655,14 @@ public class VentanaRegDatoPersona extends JFrame {
         validator.validateInteger(id[0]);
         
         Aspirante asp = contAspirante.consultarAspirante(id[0]);
+       
+        if(asp != null && tipo == 1){
         
-        if(asp == null && tipo == 1){
+            habilitarEdicion3(asp);
         
-            JOptionPane.showMessageDialog(campoNumIdent, "El Aspirante no existe");
-                                   
-                       
-        }else if(asp == null ){
+            System.out.println("valido forma 3");
+        
+        }if(asp == null ){
             
              habilitarEdicion1();
         
