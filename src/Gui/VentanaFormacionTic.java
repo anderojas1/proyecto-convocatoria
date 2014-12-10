@@ -11,6 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -25,7 +27,7 @@ public class VentanaFormacionTic extends JFrame{
     private JComboBox comboTitulos, comboConsecutivo;
     private JTextField campoRuta;
     private JFileChooser chooserSoporte;
-    private JButton btAgregar, btAgregar2, btCancelar, btExaminar, btOmitir, btSiguiente, btEditar, btAceptar, btGuardarEdicion;
+    private JButton btAgregar, btAgregar2, btCancelar, btExaminar, btOmitir, btSiguiente, btEditar, btAceptar, btGuardarEdicion, btDescartar, btAprobar;
     private ManejaEvento driverEventos;
     private DriverFormacionTic contFormacionTic;
     private String id_aspirante;
@@ -163,6 +165,33 @@ public class VentanaFormacionTic extends JFrame{
                 btGuardarEdicion = new JButton("Guardar Cambios");
                 btCancelar = new JButton("Cancelar");
             break;   
+                
+            case 2:
+                
+                if(contFormacionTic.validacionTotal(id_aspirante, datos_convocatoria[0])){
+                    btCancelar = new JButton("Cancelar");
+                    JOptionPane.showMessageDialog(null, "El aspirante ya está calificado en su totalidad para la convocatoria");
+                }else{
+                    JOptionPane.showMessageDialog(null, "El aspirante no está calificado en su totalidad para la convocatoria");
+                lbCurso = new JLabel("Curso:");
+                comboTitulos = new JComboBox();
+                comboTitulos.addItem("Seleccionar");
+                aspiranteFormacion2();
+                btAceptar = new JButton("Aceptar");
+                btEditar = new JButton("Ver");
+                lbConsecutivo= new JLabel("Consecutivo:");
+                comboConsecutivo = new JComboBox();
+                comboConsecutivo.addItem("Seleccionar");
+                lbSoporte = new JLabel("Soporte:");
+                campoRuta = new JTextField("");
+                chooserSoporte = new JFileChooser();
+                btAprobar = new JButton("Aprobar");
+                btDescartar = new JButton("Descartar");
+                btCancelar = new JButton("Cancelar");
+                }
+                
+                
+            break;
         }
         
        
@@ -209,7 +238,19 @@ public class VentanaFormacionTic extends JFrame{
                 principal.add(btGuardarEdicion);
             break;
                 
-            
+            case 2:
+                principal.add(lbCurso);
+                principal.add(comboTitulos);
+                principal.add(btCancelar);
+                principal.add(btEditar);
+                principal.add(btAceptar);
+                principal.add(comboConsecutivo);
+                principal.add(lbConsecutivo);
+                principal.add(lbSoporte);
+                principal.add(campoRuta);
+                principal.add(btAprobar);
+                principal.add(btDescartar);
+            break;
          }
                 principal.setLayout(null);
                 principal.setBackground(Color.WHITE);
@@ -254,15 +295,30 @@ public class VentanaFormacionTic extends JFrame{
             case 1:
                        lbCurso.setBounds(200, 200, 50, 10);
                        comboTitulos.setBounds(250, 200, 438, 25);
-                       lbConsecutivo.setBounds(200, 230, 100, 10);
-                       comboConsecutivo.setBounds(280, 230, 100, 25);
-                       btAceptar.setBounds(400, 230, 100, 25);
+                       lbConsecutivo.setBounds(200, 240, 100, 10);
+                       comboConsecutivo.setBounds(280, 240, 100, 25);
+                       btAceptar.setBounds(400, 240, 100, 25);
                        lbSoporte.setBounds(200, 270, 50, 20);
                        campoRuta.setBounds(200, 300, 400, 25);
                        campoRuta.setEditable(false);
                        btEditar.setBounds(600, 300, 100, 25);
                        btGuardarEdicion.setBounds(450, 340, 150, 25);
                        btCancelar.setBounds(600, 340, 100, 25);
+            break;
+                
+            case 2:
+                       lbCurso.setBounds(200, 200, 50, 10);
+                       comboTitulos.setBounds(250, 200, 438, 25);
+                       lbConsecutivo.setBounds(200, 240, 100, 10);
+                       comboConsecutivo.setBounds(280, 240, 100, 25);
+                       btAceptar.setBounds(400, 240, 100, 25);
+                       lbSoporte.setBounds(200, 270, 50, 20);
+                       campoRuta.setBounds(200, 300, 400, 25);
+                       campoRuta.setEditable(false);
+                       btEditar.setBounds(600, 300, 100, 25);
+                       btAprobar.setBounds(500, 340, 100, 25);
+                       btDescartar.setBounds(600, 340, 100, 25);
+                       btCancelar.setBounds(400, 400, 100, 25);
             break;
         }
     }
@@ -283,12 +339,20 @@ public class VentanaFormacionTic extends JFrame{
             break;*/
             
             case 1:
-                System.out.print("Agregar Eventos");
                 btCancelar.addActionListener(driverEventos);
                 comboTitulos.addItemListener(driverEventos);
                 btAceptar.addActionListener(driverEventos);
                 btEditar.addActionListener(driverEventos);
                 btGuardarEdicion.addActionListener(driverEventos);
+            break;
+                
+            case 2:
+                btCancelar.addActionListener(driverEventos);
+                comboTitulos.addItemListener(driverEventos);
+                btAceptar.addActionListener(driverEventos);
+                btEditar.addActionListener(driverEventos);
+                btAprobar.addActionListener(driverEventos);
+                btDescartar.addActionListener(driverEventos);
             break;
         }
     }
@@ -442,6 +506,17 @@ public class VentanaFormacionTic extends JFrame{
             comboTitulos.addItem(formacionAsp.get(i));
         }
     }
+    
+    public void aspiranteFormacion2(){
+         ArrayList<String> formacionAsp= new ArrayList();
+        formacionAsp = contFormacionTic.consultarFTICAspirante3(id_aspirante, datos_convocatoria[0]);
+        
+        int tam = formacionAsp.size();
+        
+        for (int i=0 ; i < tam; i++){
+            comboTitulos.addItem(formacionAsp.get(i));
+        }
+    }
         
     public void itemConsecutivo(String formacion){
          //System.out.print("Siiii");
@@ -463,6 +538,72 @@ public class VentanaFormacionTic extends JFrame{
         }
    
     }
+    
+        public void itemConsecutivo2(String formacion){
+         //System.out.print("Siiii");
+         int itemCount = comboConsecutivo.getItemCount();
+        
+            for(int i=0;i<itemCount;i++){
+                
+                comboConsecutivo.removeItemAt(0);
+            }
+        ArrayList<String> conse= new ArrayList();
+        
+        conse=contFormacionTic.consultarConsecutivos2(id_aspirante, datos_convocatoria[0], formacion);
+    
+        int tam = conse.size();
+        
+        comboConsecutivo.addItem("Seleccionar");
+        for(int i = 0; i < tam; i++){
+            comboConsecutivo.addItem(conse.get(i));
+        }
+   
+    }
+    
+    public void verDocumento(String ruta){
+        if(Desktop.isDesktopSupported()) {
+ 
+        try {
+        
+            File myFile = new File(ruta);
+       
+            Desktop.getDesktop().open(myFile);
+   
+        } catch (IOException ex) {
+        // no application registered for PDFs
+    
+        }
+
+    }
+    }
+    
+    public void aprobar(){
+            String titulo = comboTitulos.getSelectedItem().toString();
+            String consecutivo = comboConsecutivo.getSelectedItem().toString();
+            contFormacionTic.aprobarF(id_aspirante, datos_convocatoria[0], titulo, consecutivo);
+            JOptionPane.showMessageDialog(null, "Validación Realizada");
+            
+            if(contFormacionTic.validacionTotal(id_aspirante, datos_convocatoria[0])){
+                contFormacionTic.generarPuntaje(id_aspirante, datos_convocatoria[0]);
+                JOptionPane.showMessageDialog(null, "El aspirante ya está calificado en su totalidad para la convocatoria");
+                ventana_opcionesM.setVisible(true);
+                dispose();
+            }
+        }
+    
+    public void descartar(){
+            String titulo = comboTitulos.getSelectedItem().toString();
+            String consecutivo = comboConsecutivo.getSelectedItem().toString();
+            contFormacionTic.descartarF(id_aspirante, datos_convocatoria[0], titulo, consecutivo);
+            JOptionPane.showMessageDialog(null, "Validación Realizada");
+            
+            if(contFormacionTic.validacionTotal(id_aspirante, datos_convocatoria[0])){
+                contFormacionTic.generarPuntaje(id_aspirante, datos_convocatoria[0]);
+                JOptionPane.showMessageDialog(null, "El aspirante ya está calificado en su totalidad para la convocatoria");
+                ventana_opcionesM.setVisible(true);
+                dispose();
+            }
+        }
     
     private class ManejaEvento implements ActionListener, ItemListener{
 
@@ -502,9 +643,18 @@ public class VentanaFormacionTic extends JFrame{
             }
             
             if(ae.getSource() == btEditar){
+                
+                if(tipo == 1){
                 String ruta = seleccionador();
                 System.out.println(ruta);
-                campoRuta.setText(ruta);
+                campoRuta.setText(ruta);}
+                else{
+                    String ruta = campoRuta.getText()+"";
+                    if(ruta.equals("")){
+                        JOptionPane.showMessageDialog(null, "Escooja el titulo y el consecutivo, seleccione Aceptar, y por ultimo Ver");
+                    }else{
+                    verDocumento(ruta);}
+                }
             }
             
             if(ae.getSource() == btGuardarEdicion){
@@ -512,7 +662,13 @@ public class VentanaFormacionTic extends JFrame{
                 campoRuta.setText("");
             }
             
+            if(ae.getSource() == btAprobar){
+                aprobar();
+            }
             
+            if(ae.getSource() == btDescartar){
+                descartar();
+            }
         }
 
         @Override
@@ -520,9 +676,14 @@ public class VentanaFormacionTic extends JFrame{
             
             String tituloF = comboTitulos.getSelectedItem().toString();
             
-            if (ie.getStateChange() == ItemEvent.SELECTED) {
+            if (ie.getStateChange() == ItemEvent.SELECTED && (tipo == 1 || tipo == 2)) {
                     if(ie.getSource() == comboTitulos){
-                        itemConsecutivo(tituloF);
+                        
+                        if(tipo == 1){
+                        itemConsecutivo(tituloF);}
+                        else{
+                             itemConsecutivo2(tituloF);
+                        }
                     }
             }
         }

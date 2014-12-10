@@ -86,6 +86,11 @@ public class DriverUsuario {
         
     }
     
+    public Usuario selectUser (String username){
+    
+       return daoUsuario.selectUsuario(username);
+    
+    }
     
     public void habilitarUsuario (boolean estado, String identificacion) throws SQLException {
         

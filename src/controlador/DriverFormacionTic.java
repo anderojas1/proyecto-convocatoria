@@ -68,11 +68,34 @@ public class DriverFormacionTic {
     }
      
      
+      public ArrayList<String> consultarFTICAspirante3(String identificacion, String codigo){
+       ArrayList<String> form = new ArrayList();
+       
+       try{
+           form = daoFormacionTic.consultarAspiranteFormacionTic3(identificacion, codigo);
+       }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al extraer información. Por favor intente nuevamente");
+       }
+       return form;
+    }
+     
+     
     public ArrayList<String> consultarConsecutivos(String identificacion, String codigo, String formacion){
         ArrayList<String> cons = new ArrayList();
        
        try{
            cons = daoFormacionTic.consultarConsecutivoFormacion(identificacion, codigo, formacion);
+       }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al extraer información (Consecutivos). Por favor intente nuevamente");
+       }
+       return cons;
+    }
+    
+    public ArrayList<String> consultarConsecutivos2(String identificacion, String codigo, String formacion){
+        ArrayList<String> cons = new ArrayList();
+       
+       try{
+           cons = daoFormacionTic.consultarConsecutivoFormacion2(identificacion, codigo, formacion);
        }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Error al extraer información (Consecutivos). Por favor intente nuevamente");
        }
@@ -110,4 +133,38 @@ public class DriverFormacionTic {
     }
     
     
+    public boolean validacionTotal(String identificacion, String codigo){
+        boolean respuesta = false; 
+        try{
+            respuesta = daoFormacionTic.validaciónTotal(identificacion, codigo);
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al consultar la validacion total del aspirante en la convocatoria. Por favor intente nuevamente");
+        }
+        
+        return respuesta;
+    }
+    
+     public void aprobarF(String identificacion, String codigo, String titulo, String consecutivo){
+         try{
+            daoFormacionTic.aprobarF(identificacion, codigo, titulo, consecutivo);
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al validar el puntaje del aspirante en la convocatoria. Por favor intente nuevamente");
+        }
+     }
+     
+     public void descartarF(String identificacion, String codigo, String titulo, String consecutivo){
+         try{
+            daoFormacionTic.descartarF(identificacion, codigo, titulo, consecutivo);
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al validar el puntaje del aspirante en la convocatoria. Por favor intente nuevamente");
+        }
+     }
+     
+     public void generarPuntaje(String identificacion, String codigo){
+          try{
+            daoFormacionTic.generarPuntaje(identificacion, codigo);
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al generar el puntaje maximo del aspirante en la convocatoria. Por favor intente nuevamente");
+        }
+     }
 }

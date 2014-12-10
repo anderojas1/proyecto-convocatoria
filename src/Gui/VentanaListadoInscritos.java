@@ -8,6 +8,7 @@ import controlador.*;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -52,8 +53,10 @@ public class VentanaListadoInscritos extends JFrame {
         parentWindow = vis;
 
         pack();
-        this.setSize(600, 500);
-
+        setSize(new Dimension(900, 650));
+        setResizable(false);
+        setLocationRelativeTo(null);
+        setVisible(true);
         setDefaultCloseOperation(0);
         this.setVisible(true);
     }
@@ -201,4 +204,6 @@ public class VentanaListadoInscritos extends JFrame {
 
         }
     }
+    
+ 
 }

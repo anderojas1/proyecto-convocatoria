@@ -8,12 +8,14 @@ package Gui;
 
 
 import controlador.*;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -28,6 +30,8 @@ import javax.swing.JPanel;
     Container cont;
     private JPanel inicioSupervisor;
     private JLabel encabezado;
+    private JLabel lbEncabezadoi;
+    private JLabel lbFinal;
     private JButton informe, genero, ciudad, jornada, mejores, consultar, total, salir;
     private ManejaEvento driverEventos;
 
@@ -41,6 +45,13 @@ import javax.swing.JPanel;
         control = new DriverUsuario();
         
         cont = getContentPane(); 
+        
+        setSize(new Dimension(900, 650));
+        setResizable(false);
+        setLocationRelativeTo(null);
+        setVisible(true);
+        setDefaultCloseOperation(0);
+        
         inicioSupervisor = new JPanel();
         encabezado = new JLabel("Sistema de Selección de Docentes TIC");
         informe = new JButton("Ver Informe Total");
@@ -50,13 +61,12 @@ import javax.swing.JPanel;
         mejores = new JButton("Ver Mejores 5");
         consultar = new JButton("Consultar Aspirante");
         total = new JButton("Ver total Seleccionados");
-        salir = new JButton("Cerrar Sesión");
+        salir = new JButton("Cerrar Sesion",new ImageIcon("src/iconos/block.png"));
         driverEventos = new ManejaEvento(this);
-        
-        Dimension di = new Dimension(800, 500);
-        setSize(650,350);
-        setMaximumSize(di);    
-        setResizable(false);
+        lbEncabezadoi = new JLabel(new ImageIcon ("src/iconos/encabezado.png"));
+        lbFinal = new JLabel(new ImageIcon ("src/iconos/piePagina.png"));
+        inicioSupervisor.setBackground(Color.WHITE);
+
         
         agregarComponentes();
         acomodarComponentes();
@@ -71,6 +81,8 @@ import javax.swing.JPanel;
         
         inicioSupervisor.setLayout(null);
         inicioSupervisor.add(encabezado);
+        inicioSupervisor.add(lbEncabezadoi);
+        inicioSupervisor.add(lbFinal);
         inicioSupervisor.add(informe);
         inicioSupervisor.add(genero);
         inicioSupervisor.add(ciudad);
@@ -84,16 +96,17 @@ import javax.swing.JPanel;
     
     
     private void acomodarComponentes () {
-        
-         encabezado.setBounds(130, 10, 300, 10);
-         informe.setBounds(50, 100, 200, 20);
-         genero.setBounds(50, 130, 200, 20);
-         ciudad.setBounds(50, 160, 200, 20);
-         jornada.setBounds(50, 190, 200, 20);
-         mejores.setBounds(350, 100, 200, 20);
-         consultar.setBounds(350, 130, 200, 20);
-         total.setBounds(350, 160, 200, 20);
-         salir.setBounds(400, 10, 150, 20);
+        encabezado.setBounds(360, 110, 300, 30);
+        lbEncabezadoi.setBounds(0,0,900,80);
+        lbFinal.setBounds(0, 570, 900, 80);
+         informe.setBounds(200, 200, 200, 30);
+         genero.setBounds(200, 240, 200, 30);
+         ciudad.setBounds(200, 280, 200, 30);
+         jornada.setBounds(200, 320, 200, 30);
+         mejores.setBounds(500, 200, 200, 30);
+         consultar.setBounds(500, 240, 200, 30);
+         total.setBounds(500, 280, 200, 30);
+         salir.setBounds(500, 400, 200, 35);
         
     }
     
@@ -185,5 +198,9 @@ import javax.swing.JPanel;
         
         JOptionPane.showMessageDialog(this, "Estamos en desarrollo", "Módulo en desarrollo", JOptionPane.INFORMATION_MESSAGE);
     }
+    
+     public static void main(String args[]){
+    VentanaIniSupervisor ven =  new VentanaIniSupervisor ("1234");
+     }
 
 }

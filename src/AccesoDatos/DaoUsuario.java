@@ -8,6 +8,8 @@ package AccesoDatos;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import logica.Usuario;
 /**
@@ -176,6 +178,32 @@ public class DaoUsuario {
         }
         
         return flag_register;
+        
+    }
+    
+    public Usuario selectUsuario( String username){
+    
+        System.out.println(username);
+        sentenciaSql =  "SELECT * FROM  USUARIO NATURAL JOIN ACCESO "
+                + "WHERE ACCESO.username = '"+username+"';";
+        
+        Usuario user = null;
+        try {
+            ejecutarConsulta();
+            
+            while(registros.next()){
+               
+            System.out.println(registros.getString(3));
+              user =  new Usuario(registros.getString(3), registros.getString(4), registros.getString(5), registros.getString(6), registros.getString(2), registros.getString(9), registros.getString(10),registros.getString(1), registros.getString(8));
+            }
+            
+             return user;
+            
+            
+        } catch (SQLException ex) {
+            System.out.println("error al concultar usuario");
+            return null;
+        }
         
     }
     
