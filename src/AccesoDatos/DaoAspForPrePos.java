@@ -63,7 +63,9 @@ public class DaoAspForPrePos {
    
     public InfoPrePos getApplicant(String id_asp, String id_conv) {
 
-        sentenciaSql = "SELECT * FROM DocumentosPrePos WHERE identificacion = " + id_asp +"AND cod_convocatoria =" + id_conv+";";
+        JOptionPane.showMessageDialog(null, "Esto es el dao" + id_asp + "%%%"+ id_conv);
+        
+        sentenciaSql = "SELECT * FROM DocumentosPrePos WHERE  id_aspirante = " + id_asp +"AND cod_convocatoria =" + id_conv+";";
 
         String identificacion = "";
         String doc = "";
@@ -75,7 +77,9 @@ public class DaoAspForPrePos {
         String licen = "";
         int puntaje = 0;
         String cod_conv = "";
+        InfoPrePos infoprepos = null;
         
+                         
         try {
 
             conectar = fachada.conectar();
@@ -84,7 +88,7 @@ public class DaoAspForPrePos {
 
             registros = sentencia.executeQuery(sentenciaSql);
 
-            while (registros.next()) {
+            while (registros.next()) { 
 
                 identificacion = (String) registros.getString(1);
                 doc = (String) registros.getString(2);
@@ -97,9 +101,7 @@ public class DaoAspForPrePos {
                 puntaje = Integer.parseInt((String) registros.getString(9));
                 cod_conv = (String) registros.getString(10);
                 
-         }
-           InfoPrePos infoprepos = new InfoPrePos();
-           
+                     
            infoprepos.setIdentificacion(identificacion);
            infoprepos.setRtDoctor(doc);
            infoprepos.setRtDoctorTic(docTic);
@@ -108,9 +110,13 @@ public class DaoAspForPrePos {
            infoprepos.setRtEspecia(espec);
            infoprepos.setRtEspeciaTic(especTic);
            infoprepos.setRtLicenciado(licen);
-
-           return infoprepos;
            
+            }
+
+            return infoprepos;
+           
+                      
+            
         } catch (SQLException ex) {
 
             System.out.println("error consultar aspirante");

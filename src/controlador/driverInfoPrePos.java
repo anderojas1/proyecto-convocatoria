@@ -147,6 +147,7 @@ public class driverInfoPrePos {
         int puntaje_modulo = 0;
         int puntaje_tmp = 0;
         
+        
         puntaje_modulo = objPrePos.getPuntModulo();
      
         try{
