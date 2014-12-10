@@ -137,9 +137,11 @@ public class driverInfoPrePos {
 
     public void recalificar(String id_asp, String id_conv){
         
-        JOptionPane.showMessageDialog(null, id_asp +"&&&"+ id_conv);
+        JOptionPane.showMessageDialog(null, objPrePos.getPuntModulo());
         
         InfoPrePos objPrePos = daoprepos.getApplicant(id_asp, id_conv);
+        
+        
         
         int puntaje_anterior = 0;
         int puntaje_modulo = 0;

@@ -787,6 +787,8 @@ public class VentanaRegDatoPersona extends JFrame {
                 VentanaOpcionesModulo vent =  new VentanaOpcionesModulo(tipo, idAsp , datos_convocatoria);
             
                 vent.asignarEventos();
+                
+                dispose();
             }
         
         }
