@@ -232,7 +232,7 @@ public class VentanaConocimientosEspec extends JFrame {
     }
     
       public void ingresarModulo4(){//Ventana siguiente
-         VentanaRegistrarIdioma modulo4 = new VentanaRegistrarIdioma(tipo, identificacionAspirante, datosConvocatoria);
+         VentanaRegistrarIdioma modulo4 = new VentanaRegistrarIdioma(tipo, identificacionAspirante, datosConvocatoria, ventana_digitador);
          modulo4.asignarEventos();
          dispose();
      }
