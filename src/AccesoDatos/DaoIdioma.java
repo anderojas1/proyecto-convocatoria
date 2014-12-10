@@ -194,4 +194,44 @@ public class DaoIdioma {
         ejecutarSentencia();
         
     }
+    
+    public boolean consultarIdiomaEscogido (String idioma, String id_asp, String id_con) throws SQLException {
+        
+        boolean estado = false;
+        
+        sqlSentence = "select escoger FROM aspirante_habla where id_aspirante = '" + id_asp + "' and cod_convocatoria "
+                + "= '" + id_con + "' and cod_idioma = '" + idioma + "';";
+        
+        ejecutarConsulta();
+        
+        if (registros.next() == true) estado = registros.getBoolean(1);
+        
+        return estado;
+        
+    }
+    
+    
+    public double nuevoPuntajeMaximo (String id_asp, String id_con) throws SQLException {
+        
+        double puntaje = 0.0;
+        
+        sqlSentence = "SELECT max(puntaje) from ASPIRANTE_HABLA where id_aspirante = '" + id_asp + "' and cod_convocatoria"
+                + "= '" + id_con + "';";
+        
+        ejecutarConsulta();
+        
+        if (registros.next() == true) puntaje = registros.getDouble(1);
+        
+        return puntaje;
+        
+    }
+    
+    public void escogerNuevoIdioma (double puntaje, String id_asp, String id_con) throws SQLException {
+        
+        sqlSentence = "Update aspirante_habla set escoger = true where puntaje = " + puntaje + " and id_aspirante "
+                + "= '" +id_asp + "' and cod_convocatoria = '" + id_con + "';";
+        
+        ejecutarSentencia();
+        
+    }
 }

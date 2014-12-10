@@ -73,4 +73,24 @@ public class DriverIdioma {
         
     }
     
+    
+    public boolean consultarIdiomaEscogido (String idioma, String id_asp, String id_con) throws SQLException {
+        
+        return daoIdioma.consultarIdiomaEscogido(idioma, id_asp, id_con);
+        
+    }
+    
+    
+    public double nuevoPuntajeMaximo (String id_asp, String id_con) throws SQLException {
+        
+        return daoIdioma.nuevoPuntajeMaximo(id_asp, id_con);
+        
+    }
+    
+    
+    public void actualizarIdiomaEscogido (double puntaje, String id_asp, String id_conv) throws SQLException {
+        
+        daoIdioma.escogerNuevoIdioma(puntaje, id_asp, id_conv);
+    }
+    
 }

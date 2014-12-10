@@ -30,6 +30,10 @@ public class VentanaRegistrarIdioma extends JFrame {
     private JLabel lbescribir;
     private JLabel lbleer;
     
+    private JLabel lbEditarLeer;
+    private JLabel lbEditarEscribir;
+    private JLabel lbEditarHablar;
+    
     private JLabel lbEditarIdioma;
     private JLabel lbEliminarIdioma;
 
@@ -41,11 +45,23 @@ public class VentanaRegistrarIdioma extends JFrame {
     private JCheckBoxMenuItem jchbescribirMuyBueno;
     private JCheckBoxMenuItem jchbleerRegular;
     private JCheckBoxMenuItem jchbleerBueno;
-    private JCheckBoxMenuItem jchbleerMuyBueno;
-    
+    private JCheckBoxMenuItem jchbleerMuyBueno;    
     private JCheckBoxMenuItem jchbleer;
     private JCheckBoxMenuItem jchbescribir;
     private JCheckBoxMenuItem jchbhablar;
+    
+    private JCheckBoxMenuItem editarhablarRegular;
+    private JCheckBoxMenuItem editarhablarBueno;
+    private JCheckBoxMenuItem editarhablarMuyBueno;
+    private JCheckBoxMenuItem editarescribirRegular;
+    private JCheckBoxMenuItem editarescribirBueno;
+    private JCheckBoxMenuItem editarescribirMuyBueno;
+    private JCheckBoxMenuItem editarleerRegular;
+    private JCheckBoxMenuItem editarleerBueno;
+    private JCheckBoxMenuItem editarleerMuyBueno;    
+    private JCheckBoxMenuItem editarleer;
+    private JCheckBoxMenuItem editarescribir;
+    private JCheckBoxMenuItem editarhablar;
 
     private JComboBox jcbescogerIdioma;
     private JComboBox jcbEditarIdioma;
@@ -117,10 +133,7 @@ public class VentanaRegistrarIdioma extends JFrame {
         
         panelLogo = new JPanel(null);
         panelLogo.setBackground(Color.WHITE);
-        
-        jchbescribir = new JCheckBoxMenuItem();
-        jchbhablar = new JCheckBoxMenuItem();
-        jchbleer = new JCheckBoxMenuItem();
+               
 
         lbtitulo = new JLabel(new ImageIcon("src/iconos/idioma.jpg"));
         lbidioma = new JLabel("Seleccione el idioma");
@@ -128,19 +141,37 @@ public class VentanaRegistrarIdioma extends JFrame {
         lbescribir = new JLabel("Escritura");
         lbleer = new JLabel("Lectura");
         lbEditarIdioma = new JLabel("Seleccione el idioma");
+        lbEditarEscribir = new JLabel("Escritura");
+        lbEditarHablar = new JLabel("Conversación");
+        lbEditarLeer = new JLabel("Lectura");
         lbEliminarIdioma = new JLabel("Seleccione el idioma");
-
+        
+        
+        jchbescribir = new JCheckBoxMenuItem();
+        jchbhablar = new JCheckBoxMenuItem();
+        jchbleer = new JCheckBoxMenuItem();
         jchbhablarRegular = new JCheckBoxMenuItem("Regular");
         jchbhablarBueno = new JCheckBoxMenuItem("Bueno");
         jchbhablarMuyBueno = new JCheckBoxMenuItem("Muy bueno");
-
         jchbescribirRegular = new JCheckBoxMenuItem("Regular");
         jchbescribirBueno = new JCheckBoxMenuItem("Bueno");
         jchbescribirMuyBueno = new JCheckBoxMenuItem("Muy bueno");
-
         jchbleerBueno = new JCheckBoxMenuItem("Bueno");
         jchbleerRegular = new JCheckBoxMenuItem("Regular");
         jchbleerMuyBueno = new JCheckBoxMenuItem("Muy bueno");
+        
+        editarescribir = new JCheckBoxMenuItem();
+        editarhablar = new JCheckBoxMenuItem();
+        editarleer = new JCheckBoxMenuItem();
+        editarhablarRegular = new JCheckBoxMenuItem("Regular");
+        editarhablarBueno = new JCheckBoxMenuItem("Bueno");
+        editarhablarMuyBueno = new JCheckBoxMenuItem("Muy bueno");
+        editarescribirRegular = new JCheckBoxMenuItem("Regular");
+        editarescribirBueno = new JCheckBoxMenuItem("Bueno");
+        editarescribirMuyBueno = new JCheckBoxMenuItem("Muy bueno");
+        editarleerBueno = new JCheckBoxMenuItem("Bueno");
+        editarleerRegular = new JCheckBoxMenuItem("Regular");
+        editarleerMuyBueno = new JCheckBoxMenuItem("Muy bueno");
 
         jcbescogerIdioma = new JComboBox();
         cargarIdiomas();
@@ -201,10 +232,12 @@ public class VentanaRegistrarIdioma extends JFrame {
             
             ArrayList <String> idiomasAspirante = controladorIdioma.consultarIdiomasAspirante(id_aspirante, datosConvocatoria[0]);
             
-            for (String idioma : idiomasAspirante) {
+            for (int i = 0; i < idiomasAspirante.size(); i++) {
                 
-                jcbEditarIdioma.addItem(idioma);
-                jcbEliminarIdioma.addItem(idioma);
+                jcbEditarIdioma.addItem(idiomasAspirante.get(i));
+                jcbEliminarIdioma.addItem(idiomasAspirante.get(i));
+                
+                
                 
             }
             
@@ -250,6 +283,21 @@ public class VentanaRegistrarIdioma extends JFrame {
         panelEditar.add(lbEditarIdioma);
         panelEditar.add(jcbEditarIdioma);
         
+        panelEditar.add(lbEditarHablar);
+        panelEditar.add(editarhablarRegular);
+        panelEditar.add(editarhablarBueno);
+        panelEditar.add(editarhablarMuyBueno);
+
+        panelEditar.add(lbEditarEscribir);
+        panelEditar.add(editarescribirRegular);
+        panelEditar.add(editarescribirBueno);
+        panelEditar.add(editarescribirMuyBueno);
+
+        panelEditar.add(lbEditarLeer);
+        panelEditar.add(editarleerRegular);
+        panelEditar.add(editarleerBueno);
+        panelEditar.add(editarleerMuyBueno);
+        
         panelEliminar.add(lbEliminarIdioma);
         panelEliminar.add(jcbEliminarIdioma);
         panelEliminar.add(jbEliminar);
@@ -282,6 +330,21 @@ public class VentanaRegistrarIdioma extends JFrame {
         jchbleerBueno.setBounds(430, 180, 150, 30);
         jchbleerMuyBueno.setBounds(430, 210, 150, 30);
         
+        lbEditarHablar.setBounds(50, 110, 160, 30);
+        editarhablarRegular.setBounds(50, 150, 150, 30);
+        editarhablarBueno.setBounds(50, 180, 150, 30);
+        editarhablarMuyBueno.setBounds(50, 210, 150, 30);
+        
+        lbEditarEscribir.setBounds(240, 110, 160, 30);
+        editarescribirRegular.setBounds(240, 150, 150, 30);
+        editarescribirBueno.setBounds(240, 180, 150, 30);
+        editarescribirMuyBueno.setBounds(240, 210, 150, 30);
+        
+        lbEditarLeer.setBounds(430, 110, 160, 30);
+        editarleerRegular.setBounds(430, 150, 150, 30);
+        editarleerBueno.setBounds(430, 180, 150, 30);
+        editarleerMuyBueno.setBounds(430, 210, 150, 30);
+        
         jbcancelar.setBounds(300, 290, 110, 30);
         jbregistrar.setBounds(420, 290, 110, 30);
         
@@ -308,6 +371,18 @@ public class VentanaRegistrarIdioma extends JFrame {
         jchbleerMuyBueno.setBackground(Color.WHITE);
         jchbleerRegular.setBackground(Color.WHITE);
         
+        editarescribirBueno.setBackground(Color.WHITE);
+        editarescribirRegular.setBackground(Color.WHITE);
+        editarescribirMuyBueno.setBackground(Color.WHITE);
+        
+        editarhablarBueno.setBackground(Color.WHITE);
+        editarhablarMuyBueno.setBackground(Color.WHITE);
+        editarhablarRegular.setBackground(Color.WHITE);
+        
+        editarleerBueno.setBackground(Color.WHITE);
+        editarleerMuyBueno.setBackground(Color.WHITE);
+        editarleerRegular.setBackground(Color.WHITE);
+        
     }
     
     
@@ -324,6 +399,18 @@ public class VentanaRegistrarIdioma extends JFrame {
         jchbleerRegular.addMouseListener(driverEventos);
         jchbleerBueno.addMouseListener(driverEventos);
         jchbleerMuyBueno.addMouseListener(driverEventos);
+        
+        editarhablarRegular.addMouseListener(driverEventos);
+        editarhablarBueno.addMouseListener(driverEventos);
+        editarhablarMuyBueno.addMouseListener(driverEventos);
+        
+        editarescribirRegular.addMouseListener(driverEventos);
+        editarescribirBueno.addMouseListener(driverEventos);
+        editarescribirMuyBueno.addMouseListener(driverEventos);
+        
+        editarleerRegular.addMouseListener(driverEventos);
+        editarleerBueno.addMouseListener(driverEventos);
+        editarleerMuyBueno.addMouseListener(driverEventos);
         
         jbcancelar.addMouseListener(driverEventos);
         jbregistrar.addMouseListener(driverEventos);
@@ -365,6 +452,43 @@ public class VentanaRegistrarIdioma extends JFrame {
         else {
             
             if (jchbhablarRegular.getState() == true || jchbhablarMuyBueno.getState() == true || jchbhablarBueno.getState() == true) {
+                
+                return true;
+                
+            }
+            
+        }
+        
+        return false;
+        
+    }
+    
+    
+    private boolean validarChecksEditar (String moduloIdioma) {
+                
+        if (moduloIdioma.equals("lectura")) {
+            
+            if (editarleerRegular.getState() == true || editarleerMuyBueno.getState() == true || editarleerBueno.getState() == true) {
+                
+                return true;
+                
+            }
+            
+        }
+        
+        else if (moduloIdioma.equals("escritura")) {
+            
+            if (editarescribirRegular.getState() == true || editarescribirMuyBueno.getState() == true || editarescribirBueno.getState() == true) {
+                
+                return true;
+                
+            }
+            
+        }
+        
+        else {
+            
+            if (editarhablarRegular.getState() == true || editarhablarMuyBueno.getState() == true || editarhablarBueno.getState() == true) {
                 
                 return true;
                 
@@ -459,6 +583,89 @@ public class VentanaRegistrarIdioma extends JFrame {
                                                     "Error campos sin marcar", JOptionPane.ERROR_MESSAGE);
     }
     
+    
+    private void guardarDatosEdicion () {
+        
+        boolean checkLeer = validarChecksEditar("lectura");
+        boolean checkEscribir = validarChecksEditar("escritura");
+        boolean checkHablar = validarChecksEditar("conversacion");
+        
+        if (checkLeer == true && checkHablar == true && checkEscribir == true) {
+            
+            String nombre = jcbEditarIdioma.getSelectedItem().toString();
+            String lee = editarleer.getText();
+            String escribe = editarescribir.getText();
+            String habla = editarhablar.getText();
+            
+            if (lee.equals("") || escribe.equals("") || habla.equals("")) {
+                
+                JOptionPane.showMessageDialog(this, "Error al guardar la selección", "Idioma no "
+                        + "registrado", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            else {
+			
+                try {
+
+                    String codigoIdioma = controladorIdioma.consultarCodigo(nombre);
+
+                    double pun = 0.0;
+                    double nuevo = 0.0;
+                    double puntajeSumar = 0.0;
+                    boolean es = false;
+                    boolean cambia = false;
+
+                    try {
+
+                        pun = controladorIdioma.consultarPuntajeMaximo(id_aspirante, datosConvocatoria[0]);
+
+                        nuevo = calcularPuntaje(habla, lee, escribe);
+
+                        if (pun == 0.0) {
+
+                            es = true;
+                            puntajeSumar = nuevo;
+                        } else if (nuevo > pun) {
+
+                            es = true;
+                            cambia = true;
+                            puntajeSumar = nuevo - pun;
+
+                        }
+
+                    } catch (SQLException ex) {
+
+                    }
+
+                    controladorIdioma.agregarIdiomaAspirante(datosConvocatoria[0], id_aspirante, codigoIdioma, 
+                                                                habla, lee, escribe, nuevo, es, cambia);
+                    
+                    DriverAspirante asp = new DriverAspirante();
+
+                    double puntajeTotalActual = asp.consultarPuntaje(id_aspirante, datosConvocatoria[0]);
+                    
+                    puntajeTotalActual += puntajeSumar;
+
+                    asp.updatePuntajeUsuario(id_aspirante, datosConvocatoria[0], puntajeTotalActual);
+
+                    JOptionPane.showMessageDialog(this, "Se registró el idioma exitosamente", "Idioma registrado", 
+                            JOptionPane.INFORMATION_MESSAGE);
+                    
+                    actualizarIdiomasAspirante();
+
+
+                } catch (SQLException ex) {
+
+                }
+            
+            }
+            
+        }
+        
+        else JOptionPane.showMessageDialog(this, "Debe seleccionar su nivel de manejo del idioma en todos los componentes", 
+                                                    "Error campos sin marcar", JOptionPane.ERROR_MESSAGE);
+    }
+    
     public double calcularPuntaje (String hablar, String leer, String escribir) {
                 
         double puntaje = 0.0;
@@ -479,7 +686,42 @@ public class VentanaRegistrarIdioma extends JFrame {
             String idioma = jcbEliminarIdioma.getSelectedItem().toString();
             String cod_idioma = controladorIdioma.consultarCodigo(idioma);
             
-            controladorIdioma.borrarIdioma(id_aspirante, datosConvocatoria[0], cod_idioma);
+            boolean escoger = controladorIdioma.consultarIdiomaEscogido(cod_idioma, id_aspirante, datosConvocatoria[0]);
+            
+            if (escoger == false) {            
+            
+                controladorIdioma.borrarIdioma(id_aspirante, datosConvocatoria[0], cod_idioma);
+                
+            }
+            
+            else {
+                
+                double puntajeIdioma = controladorIdioma.consultarPuntajeMaximo(id_aspirante, datosConvocatoria[0]);
+                controladorIdioma.borrarIdioma(id_aspirante, datosConvocatoria[0], cod_idioma);
+                
+                double nuevoPuntajeMaximo = controladorIdioma.nuevoPuntajeMaximo(id_aspirante, datosConvocatoria[0]);
+                
+                DriverAspirante asp = new DriverAspirante();
+                double puntajeAspirante = asp.consultarPuntaje(id_aspirante, datosConvocatoria[0]);
+                
+                if (nuevoPuntajeMaximo == 0.0) {
+                    
+                    asp.updatePuntajeUsuario(id_aspirante, datosConvocatoria[0], puntajeAspirante-puntajeIdioma);
+                    
+                }
+                
+                else {
+                    
+                    double puntajeDiferencia = puntajeIdioma - nuevoPuntajeMaximo;
+                    
+                    asp.updatePuntajeUsuario(id_aspirante, datosConvocatoria[0], puntajeAspirante - puntajeDiferencia);
+                    
+                    controladorIdioma.actualizarIdiomaEscogido(nuevoPuntajeMaximo, id_aspirante, datosConvocatoria[0]);
+                    
+                } 
+                
+                
+            }
             
             JOptionPane.showMessageDialog(this, "Se borró el idioma exitosamente", "Operación exitosa", 
                     JOptionPane.INFORMATION_MESSAGE);
