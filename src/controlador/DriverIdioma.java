@@ -32,9 +32,9 @@ public class DriverIdioma {
     }
     
     
-    public ArrayList <String> consultarIdiomasAspirante (String id) throws SQLException {
+    public ArrayList <String> consultarIdiomasAspirante (String id, String id_convocatoria) throws SQLException {
         
-        return daoIdioma.consultarIdiomasAspirante(id);
+        return daoIdioma.consultarIdiomasAspirante(id, id_convocatoria);
         
     }
     
@@ -60,9 +60,9 @@ public class DriverIdioma {
     }
     
     
-    public double consultarPuntajeMaximo (String id) throws SQLException {
+    public double consultarPuntajeMaximo (String id, String convo) throws SQLException {
         
-        return daoIdioma.consultarPuntaje(id);
+        return daoIdioma.consultarPuntaje(id, convo);
         
     }
     
