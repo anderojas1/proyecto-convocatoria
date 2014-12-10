@@ -7,6 +7,7 @@ import controlador.*;
 import logica.*;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.GridBagLayout;
@@ -31,12 +32,12 @@ public class ventanaExp_FormadorTIC extends JFrame {
     private DriverExperienciaFormadorTIC driveExpFormador;
     
    //paneles
-    JPanel JPititulo, JPopciones,JPbotnes, JPruta;
+    JPanel JPventana, JPopciones,JPbotnes, JPruta;
     
     //etiquetas
     
     JLabel JLtitulo, JLformerTICestuciantes, JLformerTICprof;
-    JLabel JLformerFormers;
+    JLabel JLformerFormers, JLEncabezado, JLFinal;
     
     //JComboBox
     
@@ -57,14 +58,27 @@ public class ventanaExp_FormadorTIC extends JFrame {
         id_aspirante = identificacion_aspirante;
         this.tipo = tipo;
         this.datos_convocatoria = datos_convocatoria;
-        initComponents();
-        acommodateComponents();
+        
+        container = getContentPane();
+        
         
         pack();
-        setSize(500,350);
+        setSize(900,650);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(0);
-        setResizable(true);
+        setResizable(false);
+        
+        
+        
+        initComponents();
+        addComponents();
+        acommodateComponents();
+        
+        
+        
+        container.add(JPventana);
         setVisible(true);
+        
     }
 
        public ventanaExp_FormadorTIC(int tipo, String identificacion_aspirante, String[] datos_convocatoria, VentanaPrincipalDigitador ventana_digitador) {
@@ -74,13 +88,26 @@ public class ventanaExp_FormadorTIC extends JFrame {
         this.tipo = tipo;
         this.datos_convocatoria = datos_convocatoria;
         this.ventana_digitador = ventana_digitador;
+        
+        
+        
+        container = getContentPane();
+        
+       pack();
+        setSize(900,650);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(0);
+        setResizable(false);
+        
+        
+        
         initComponents();
+        addComponents();
         acommodateComponents();
         
-        pack();
-        setSize(500,350);
-        setDefaultCloseOperation(0);
-        setResizable(true);
+        
+        
+        container.add(JPventana);
         setVisible(true);
     }
        
@@ -93,15 +120,16 @@ public class ventanaExp_FormadorTIC extends JFrame {
         //objeto de DriverExperienciaFormadorTIC
         driveExpFormador = new DriverExperienciaFormadorTIC();
         
-        //paneles
-        JPititulo = new JPanel();
-        JPopciones = new JPanel();
-        JPbotnes = new JPanel();
-        JPruta = new JPanel();
+        //panel
+        JPventana = new JPanel();
+        
         
         //label
+        
+        JLtitulo = new JLabel("Experiencia como formador en TIC - "+datos_convocatoria[1]);
         JLformerFormers = new JLabel("Formador TIC de formadores");
-        JLtitulo = new JLabel("Experiencia como formador en TIC");
+        JLEncabezado = new JLabel(new ImageIcon ("src/iconos/encabezado.png"));
+        JLFinal = new JLabel(new ImageIcon ("src/iconos/piePagina.png"));
         JLformerTICestuciantes = new JLabel("Formador TIC a estudiantes");
         JLformerTICprof = new JLabel("Formador TIC a profesores");
         
@@ -161,112 +189,141 @@ public class ventanaExp_FormadorTIC extends JFrame {
         
         
     }
-
-    private void acommodateComponents() {
+    
+    public void addComponents(){
         
-        JLabel etiqueta = new JLabel();
-        JLabel JLexperiencia = new JLabel();
-        
-         container = getContentPane();
-        container.setLayout(new BorderLayout());
+        JPventana.add(JLtitulo);
+        JPventana.add(JLEncabezado);
+        JPventana.add(JLFinal);
         
         switch(tipo){
             case 0:
+                
+                
+        JPventana.add(JLformerTICestuciantes);
+        JPventana.add(JCBformerEstudents);
+        
+        JPventana.add(campoRuta1);
+        JPventana.add(JBExaest);
+                
+        JPventana.add(JLformerTICprof);
+        JPventana.add(JCBformerProf);
+        
+        JPventana.add(campoRuta2);
+        JPventana.add(JBExapro);
+        
+        JPventana.add(JLformerFormers);
+        JPventana.add(JCBformerFormers);
+        
+        JPventana.add(campoRuta3);
+        JPventana.add(JBExafor);
+        
                
         
-        JPititulo.setLayout(new BorderLayout());
-        JLtitulo.setHorizontalAlignment(SwingConstants.CENTER);
-        JPititulo.add(JLtitulo, BorderLayout.CENTER);
-        
-        container.add(JPititulo, BorderLayout.NORTH);
-        
-        JLexperiencia.setText("Experiencia");
-        JPopciones.setLayout(new GridLayout(7, 2, 0, 5));
-        
-        JPopciones.add(etiqueta);
-        JLexperiencia.setHorizontalAlignment(SwingConstants.CENTER);
-        JPopciones.add(JLexperiencia);
-        
-        JPopciones.add(JLformerTICestuciantes);
-        JPopciones.add(JCBformerEstudents);
-        
-        JPopciones.add(campoRuta1);
-        JPopciones.add(JBExaest);
+        JPventana.add(JBFinalizar);
+        JPventana.add(JBsave);
+                    
                 
-        JPopciones.add(JLformerTICprof);
-        JPopciones.add(JCBformerProf);
+                break;
+            
+            case 1:
+                
+        JPventana.add(JLformerTICestuciantes);
+        JPventana.add(JCBformerEstudents);
         
-        JPopciones.add(campoRuta2);
-        JPopciones.add(JBExapro);
+        JPventana.add(campoRuta1);
+        JPventana.add(JBExaest);
+                
+        JPventana.add(JLformerTICprof);
+        JPventana.add(JCBformerProf);
         
-        JPopciones.add(JLformerFormers);
-        JPopciones.add(JCBformerFormers);
+        JPventana.add(campoRuta2);
+        JPventana.add(JBExapro);
         
-        JPopciones.add(campoRuta3);
-        JPopciones.add(JBExafor);
+        JPventana.add(JLformerFormers);
+        JPventana.add(JCBformerFormers);
         
-        container.add(JPopciones, BorderLayout.CENTER);
+        JPventana.add(campoRuta3);
+        JPventana.add(JBExafor);
         
+        JPventana.add(JBcancel);
+        JPventana.add(JBsave);
+                
+                break;
+        }
         
+        JPventana.setLayout(null);
+        JPventana.setBackground(Color.WHITE);
         
+    }
+
+    private void acommodateComponents() {
         
+        JLtitulo.setBounds(150, 110, 600, 50);
+        JLtitulo.setHorizontalAlignment (SwingConstants.CENTER);
+        JLtitulo.setFont (new java.awt.Font("Georgia", 3, 18));
         
-        JPbotnes.setLayout(new GridLayout(1, 3, 5, 1));
+    JLEncabezado.setBounds(0,0,900,80);
+    JLFinal.setBounds(0, 570, 900, 80);
         
+               JLformerTICestuciantes.setBounds(200, 200, 200, 40);
+               JCBformerEstudents.setBounds(470, 200, 250, 40);
+               campoRuta1.setBounds(200, 245, 240, 30);
+               JBExaest.setBounds(495, 245, 200, 30);
         
-        JPbotnes.add(JBsave);
-        JPbotnes.add(JBFinalizar);
-        
-        container.add(JPbotnes, BorderLayout.SOUTH);
+               JLformerTICprof.setBounds(200, 285, 200, 40);
+               JCBformerProf.setBounds(470, 285, 250, 40);
+               campoRuta2.setBounds(200, 330, 240, 30);
+               JBExapro.setBounds(495, 330, 200, 30);
+               
+               JLformerFormers.setBounds(200, 370, 200, 40);
+               JCBformerFormers.setBounds(470, 370, 250, 40);
+               campoRuta3.setBounds(200, 415, 240, 30);
+               JBExafor.setBounds(495, 415, 200, 30);
+               
+              
+               
+               
+               JLformerTICestuciantes.setVisible(true);
+               JCBformerEstudents.setVisible(true);
+               campoRuta1.setVisible(true);
+               JBExaest.setVisible(true);
+               
+               JLformerTICprof.setVisible(true);
+               JCBformerProf.setVisible(true);
+               campoRuta2.setVisible(true);
+               JBExapro.setVisible(true);
+    
+               JLformerFormers.setVisible(true);
+               JCBformerFormers.setVisible(true);
+               campoRuta3.setVisible(true);
+               JBExafor.setVisible(true);
+               
+               
+                
+                
+            
+    
+        switch(tipo){
+            case 0:
+               
+                JBFinalizar.setBounds(420, 495, 150, 40);
+                JBsave.setBounds(620, 495, 150, 40);
+                    
+                
+                JBFinalizar.setVisible(true);
+                JBsave.setVisible(true); 
                 
                 break;
                 
             case 1:
                 
-        
-        JPititulo.setLayout(new BorderLayout());
-        JLtitulo.setHorizontalAlignment(SwingConstants.CENTER);
-        JPititulo.add(JLtitulo, BorderLayout.CENTER);
-        
-        container.add(JPititulo, BorderLayout.NORTH);
-        
-        JLexperiencia.setText("Editar Experiencia");
-        JPopciones.setLayout(new GridLayout(7, 2, 0, 5));
-        
-        JPopciones.add(etiqueta);
-        JLexperiencia.setHorizontalAlignment(SwingConstants.CENTER);
-        JPopciones.add(JLexperiencia);
-        
-        JPopciones.add(JLformerTICestuciantes);
-        JPopciones.add(JCBformerEstudents);
-        
-        JPopciones.add(campoRuta1);
-        JPopciones.add(JBExaest);
+                JBcancel.setBounds(420, 495, 150, 40);
+                JBsave.setBounds(620, 495, 150, 40);
+                    
                 
-        JPopciones.add(JLformerTICprof);
-        JPopciones.add(JCBformerProf);
-        
-        JPopciones.add(campoRuta2);
-        JPopciones.add(JBExapro);
-        
-        JPopciones.add(JLformerFormers);
-        JPopciones.add(JCBformerFormers);
-        
-        JPopciones.add(campoRuta3);
-        JPopciones.add(JBExafor);
-        
-        container.add(JPopciones, BorderLayout.CENTER);
-        
-        
-        
-        
-        
-        JPbotnes.setLayout(new GridLayout(1, 3, 5, 1));
-        
-        JPbotnes.add(JBcancel);
-        JPbotnes.add(JBsave);
-        
-        container.add(JPbotnes, BorderLayout.SOUTH);
+                JBcancel.setVisible(true);
+                JBsave.setVisible(true); 
                 
                 break;
         }
