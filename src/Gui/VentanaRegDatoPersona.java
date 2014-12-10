@@ -557,6 +557,30 @@ public class VentanaRegDatoPersona extends JFrame {
         comboMes.setVisible(false);
         comboAnio.setVisible(false);
         
+        buscarConvAsp(aspi.getIdentificacion());
+        
+        
+        
+    }
+    
+    public void buscarConvAsp(String id_aspirante){
+    
+        ArrayList<Convocatoria> conv = contAspirante.consultarConv(id_aspirante);
+        
+        if(conv != null){
+        
+            
+            
+            for (int i = 0; i < conv.size(); i++) {
+            
+                comboConvocatorias.addItem(conv.get(i).getNombre());
+        
+            }
+        
+        btaceptar.setVisible(true);
+        btaceptar.setText("Editar Datos");
+        
+        }
     }
     
     public void validarIdentificación(){

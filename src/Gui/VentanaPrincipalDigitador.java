@@ -77,7 +77,7 @@ public class VentanaPrincipalDigitador extends JFrame{
         inicioDigitador.add (titulo);
         inicioDigitador.add (ingresar);
         inicioDigitador.add (editar);
-        inicioDigitador.add (consultar);
+       // inicioDigitador.add (consultar);
         inicioDigitador.add (cerrar);    
         inicioDigitador.add (icono);
         

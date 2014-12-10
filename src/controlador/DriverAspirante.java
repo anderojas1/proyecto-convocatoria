@@ -5,6 +5,7 @@
 package controlador;
 import AccesoDatos.*;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import logica.*;
 /**
@@ -100,6 +101,16 @@ public class DriverAspirante {
         return total;
         
     }
-         
     
+    public ArrayList <Convocatoria> consultarConv(String id_aspirante){
+    
+       
+    ArrayList <Convocatoria> conv = new ArrayList<>();
+    
+    conv = daoaspirante.consultarConvocatoria(id_aspirante);
+    
+    return conv;
+    
+    }
+       
 }
