@@ -38,6 +38,9 @@ public class VentanaInfoPrePos extends JFrame {
     private JButton btLicen;
     private JButton btMaestria;
     private JButton btMaestriaTic;
+    private JButton btCancelar2;
+    private JButton btActualizar;
+    
 
     private String rtDoctor;
     private String rtDoctorTic;
@@ -96,6 +99,16 @@ public class VentanaInfoPrePos extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
         setDefaultCloseOperation(0);
+        
+        if(tipo == 1 ){
+        
+            btCancelar.setVisible(false);
+            btOmitir.setVisible(false);
+            btAceptar.setVisible(false);
+            
+            btCancelar2.setVisible(true);
+            btActualizar.setVisible(true);
+        }
 
     }
 
@@ -177,6 +190,8 @@ public class VentanaInfoPrePos extends JFrame {
 
         manejador = new ManejaEventos();
 
+        btCancelar2 = new JButton("Cancelar");
+        btActualizar = new JButton("Actualizar");
         driverPrePos = new driverInfoPrePos();
 
     }
@@ -212,7 +227,8 @@ public class VentanaInfoPrePos extends JFrame {
         //panelPrin.add(btCancelar);
         panelPrin.add(btAceptar);
         panelPrin.add(btOmitir);
-
+        panelPrin.add(btActualizar);
+        panelPrin.add(btCancelar2);
         panelPrin.setLayout(null);
         panelPrin.setBackground(Color.WHITE);
 
@@ -255,6 +271,10 @@ public class VentanaInfoPrePos extends JFrame {
         btAceptar.setBounds(425, 450, 110, 30);
         btOmitir.setBounds(585, 450, 110, 30);
 
+        btActualizar.setBounds(425, 450, 110, 30);
+        btActualizar.setVisible(false);
+        btCancelar2.setBounds(585, 450, 110, 30);
+        btCancelar2.setVisible(false);
     }
 
     public void asignarEventos() {
@@ -269,7 +289,9 @@ public class VentanaInfoPrePos extends JFrame {
         btCancelar.addMouseListener(manejador);
         btAceptar.addMouseListener(manejador);
         btOmitir.addMouseListener(manejador);
-
+        btCancelar2.addMouseListener(manejador);
+        btActualizar.addMouseListener(manejador);
+        
     }
 
     public boolean validarCargaArchivos(int seleccion) {
@@ -440,7 +462,17 @@ public class VentanaInfoPrePos extends JFrame {
                 ventanaOpcModulo.setVisible(true);
                 dispose();
 
-            } else if (me.getSource() == btDoctor) {
+            } else if (me.getSource() == btCancelar2) {
+
+                ventanaOpcModulo.setVisible(true);
+                dispose();
+
+            }else if (me.getSource() == btActualizar) {
+
+                driverPrePos.recalificar(iden, datos_convocatoria[0]);
+                driverPrePos.calificador(rtDoctor, rtDoctor, rtMaestria, rtMaestriaTic, rtEspecia, rtEspeciaTic, rtLicen);
+
+            }else if (me.getSource() == btDoctor) {
 
                 rtDoctor = seleccionador();
 
