@@ -165,6 +165,7 @@ CREATE TABLE ASPIRANTE_HABLA (
     leer varchar(15) NOT NULL,
     escribir varchar(15) NOT NULL,
     puntaje double precision NOT NULL,
+    cod_convocatoria VARCHAR(15) NOT NULL,
     escoger boolean NOT NULL,
 
     CONSTRAINT aspirante_habla_pk PRIMARY KEY (id_aspirante, cod_idioma),
