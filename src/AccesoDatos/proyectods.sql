@@ -176,7 +176,7 @@ CREATE TABLE ASPIRANTE_HABLA (
     CONSTRAINT cod_idioma_fk FOREIGN KEY (cod_idioma)
     REFERENCES IDIOMA (codigo_idioma),
 
-    CONSTRAINT cod_convocatoria varchar(10) not null
+    CONSTRAINT cod_convocatoria_fk FOREIGN KEY (cod_convocatoria)
     REFERENCES CONVOCATORIA (codigo)
 );
 
