@@ -72,13 +72,15 @@ public class VentanaRegistrarIdioma extends JFrame {
     private VentanaPrincipalDigitador ventana_digitador;
     
 
-    public VentanaRegistrarIdioma(int tipo, String id, String [] datosConvocatoria) {
+    public VentanaRegistrarIdioma(int tipo, String id, String [] datosConvocatoria, VentanaPrincipalDigitador digitador) {
         
         super("Módulo Registrar Idioma");
         
         this.tipo = tipo;
         id_aspirante = id;
         this.datosConvocatoria = datosConvocatoria;
+        
+        ventana_digitador = digitador;
 
         driverEventos = new ControladorEventos();
         
@@ -110,7 +112,6 @@ public class VentanaRegistrarIdioma extends JFrame {
 
         panel = new JPanel(null);
         panel.setBackground(Color.WHITE);
-        //panel.setBorder(BorderFactory.createTitledBorder("Registrar Idioma - ")); //datosConvocatoria[1])
         
         panelLogo = new JPanel(null);
         panelLogo.setBackground(Color.WHITE);
@@ -145,9 +146,10 @@ public class VentanaRegistrarIdioma extends JFrame {
         jcbEditarIdioma = new JComboBox();
         jcbEliminarIdioma = new JComboBox();
 
-        jbcancelar = new JButton("Cancelar");
+        //jbcancelar = new JButton("Cancelar");
         jbregistrar = new JButton("Guardar");
-        jbsiguiente = new JButton("Siguiente");
+        if (ventana_digitador == null) jbcancelar = new JButton("Cerrar");
+        else jbcancelar = new JButton("Siguiente");
         
         fondoCheckBox();
 
@@ -467,7 +469,17 @@ public class VentanaRegistrarIdioma extends JFrame {
             
             if (me.getSource() == jbcancelar) {
                 
+                if (jbcancelar.getText().equals("Cerrar")) {
+                    
+                    modulos.setVisible(true);
+                    dispose();
+                    
+                }
                 
+                else {
+                    
+                    ingresarModulo5();
+                }
                 
             }
             
@@ -591,7 +603,7 @@ public class VentanaRegistrarIdioma extends JFrame {
     
     public static void main(String[] args) {
         
-        VentanaRegistrarIdioma ido = new VentanaRegistrarIdioma(WIDTH, null, args);
+        VentanaRegistrarIdioma ido = new VentanaRegistrarIdioma(WIDTH, null, args, null);
         
     }
     

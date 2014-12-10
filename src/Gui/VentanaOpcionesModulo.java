@@ -159,7 +159,7 @@ public class VentanaOpcionesModulo extends JFrame {
     }
 
     public void ingresarIdiomas() {//Ventana siguiente
-        VentanaRegistrarIdioma idiomas = new VentanaRegistrarIdioma(tipo, usuario, datos_convocatoria);
+        VentanaRegistrarIdioma idiomas = new VentanaRegistrarIdioma(tipo, usuario, datos_convocatoria, null);
         idiomas.asignarEventos();
         idiomas.configurarVentana(this);
         setVisible(false);
