@@ -9,6 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -19,11 +21,11 @@ public class VentanaFormacionTic extends JFrame{
     private JLabel lbFinal;
     private Container cont;
     private JPanel principal;
-    private JLabel lbEncabezado, lbCurso, lbSoporte;
+    private JLabel lbEncabezado, lbCurso, lbSoporte, lbConsecutivo;
     private JComboBox comboTitulos, comboConsecutivo;
     private JTextField campoRuta;
     private JFileChooser chooserSoporte;
-    private JButton btAgregar, btAgregar2, btCancelar, btExaminar, btOmitir, btSiguiente, btEditar, btAceptar;
+    private JButton btAgregar, btAgregar2, btCancelar, btExaminar, btOmitir, btSiguiente, btEditar, btAceptar, btGuardarEdicion;
     private ManejaEvento driverEventos;
     private DriverFormacionTic contFormacionTic;
     private String id_aspirante;
@@ -62,7 +64,7 @@ public class VentanaFormacionTic extends JFrame{
         iniciarComponentes();
         agregarComponentes();
         acomodarComponentes();
-        //agregarEventos();
+        agregarEventos();
         
         cont.add(principal);
         setVisible(true);
@@ -131,7 +133,7 @@ public class VentanaFormacionTic extends JFrame{
                 btOmitir = new JButton("Omitir");
             break;
             
-            case 1://consultar
+            /*case 1://consultar
                 String [] titulos = new String [] {"Titulo", "Consecutivo", "Soporte", "Puntaje"};
                 modelo = new DefaultTableModel(0, 4);
                 jttablaform =  new JTable(modelo);
@@ -141,23 +143,26 @@ public class VentanaFormacionTic extends JFrame{
                 btCancelar = new JButton("Cancelar");
                 agregarFormacionTic(titulos);
                 consultarInformacionTic();
-            break;
+            break;*/
                 
-            case 2:
+            case 1:
                 lbCurso = new JLabel("Curso:");
                 comboTitulos = new JComboBox();
-                comboTitulos.addItem("Curso TIC minimo 40 horas");
-                comboTitulos.addItem("Curso TIC hasta 90 horas");
-                comboTitulos.addItem("Curso TIC minimo hasta 140 horas certificados o en proceso de certificación");
-                comboTitulos.addItem("Curso TIC mas 140 horas");
+                //comboTitulos.addItem("Curso TIC hasta 90 horas");
+                //comboTitulos.addItem("V");
+                comboTitulos.addItem("Seleccionar");
+                aspiranteFormacion();
                 btAceptar = new JButton("Aceptar");
                 btEditar = new JButton("Editar");
+                lbConsecutivo= new JLabel("Consecutivo:");
                 comboConsecutivo = new JComboBox();
+                comboConsecutivo.addItem("Seleccionar");
                 lbSoporte = new JLabel("Soporte:");
                 campoRuta = new JTextField("");
                 chooserSoporte = new JFileChooser();
-                btExaminar = new JButton("Examinar");
-                
+                btGuardarEdicion = new JButton("Guardar Cambios");
+                btCancelar = new JButton("Cancelar");
+            break;   
         }
         
        
@@ -186,22 +191,25 @@ public class VentanaFormacionTic extends JFrame{
                 principal.add(campoRuta);
             break;
              
-            case 1:
-                System.out.print("Siiii  entraaaa");
+            /*case 1:
                 principal.add(jttablaform);
                 principal.add(btCancelar);
-            break;
+            break;*/
                 
-            case 2:
+            case 1:
                 principal.add(lbCurso);
                 principal.add(comboTitulos);
-                principal.add(btAceptar);
+                principal.add(btCancelar);
                 principal.add(btEditar);
+                principal.add(btAceptar);
                 principal.add(comboConsecutivo);
+                principal.add(lbConsecutivo);
                 principal.add(lbSoporte);
                 principal.add(campoRuta);
-                principal.add(btExaminar);
+                principal.add(btGuardarEdicion);
             break;
+                
+            
          }
                 principal.setLayout(null);
                 principal.setBackground(Color.WHITE);
@@ -215,16 +223,16 @@ public class VentanaFormacionTic extends JFrame{
         switch (tipo){
             case 0:
                         
-                        lbCurso.setBounds(30, 200, 50, 10);
-                        comboTitulos.setBounds(80, 200, 438, 25);
-                        lbSoporte.setBounds(30, 240, 50, 20);
-                        campoRuta.setBounds(30, 270, 400, 25);
+                        lbCurso.setBounds(200, 200, 50, 10);
+                        comboTitulos.setBounds(250, 200, 438, 25);
+                        lbSoporte.setBounds(200, 240, 50, 20);
+                        campoRuta.setBounds(200, 270, 400, 25);
                         campoRuta.setEditable(false);
-                        btExaminar.setBounds(430, 270, 100, 25);
-                        btAgregar.setBounds(320, 320, 100, 25);
-                        btAgregar2.setBounds(320, 320, 100, 25);
+                        btExaminar.setBounds(600, 270, 100, 25);
+                        btAgregar.setBounds(330, 320, 100, 25);
+                        btAgregar2.setBounds(500, 320, 100, 25);
                         btOmitir.setBounds(430, 320, 100, 25);
-                        btSiguiente.setBounds(430, 320, 100, 25);
+                        btSiguiente.setBounds(600, 320, 100, 25);
                         
                         lbEncabezado.setVisible(true);
                         lbCurso.setVisible(false);
@@ -238,10 +246,24 @@ public class VentanaFormacionTic extends JFrame{
                         btSiguiente.setVisible(false);
             break;
                 
-            case 1:
+           /* case 1:
                         btCancelar.setBounds(400, 500, 100, 25);
                         jttablaform.setBounds(50, 200, 800, 300);
-            break;    
+            break;  */
+            
+            case 1:
+                       lbCurso.setBounds(200, 200, 50, 10);
+                       comboTitulos.setBounds(250, 200, 438, 25);
+                       lbConsecutivo.setBounds(200, 230, 100, 10);
+                       comboConsecutivo.setBounds(280, 230, 100, 25);
+                       btAceptar.setBounds(400, 230, 100, 25);
+                       lbSoporte.setBounds(200, 270, 50, 20);
+                       campoRuta.setBounds(200, 300, 400, 25);
+                       campoRuta.setEditable(false);
+                       btEditar.setBounds(600, 300, 100, 25);
+                       btGuardarEdicion.setBounds(450, 340, 150, 25);
+                       btCancelar.setBounds(600, 340, 100, 25);
+            break;
         }
     }
     
@@ -256,8 +278,17 @@ public class VentanaFormacionTic extends JFrame{
                 btSiguiente.addActionListener(driverEventos);
             break;
             
-            case 1:
+           /* case 1:
                 btCancelar.addActionListener(driverEventos);
+            break;*/
+            
+            case 1:
+                System.out.print("Agregar Eventos");
+                btCancelar.addActionListener(driverEventos);
+                comboTitulos.addItemListener(driverEventos);
+                btAceptar.addActionListener(driverEventos);
+                btEditar.addActionListener(driverEventos);
+                btGuardarEdicion.addActionListener(driverEventos);
             break;
         }
     }
@@ -358,6 +389,28 @@ public class VentanaFormacionTic extends JFrame{
         
     }
     
+        public void guardarEditar(){
+        
+        String titulo, ruta, item;
+        String link_soporte;
+        int puntos;
+        if(campoRuta.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Debe Seleccionar un archivo de soporte");
+        }else{
+            titulo = comboTitulos.getSelectedItem().toString();
+            item = comboConsecutivo.getSelectedItem().toString();
+            if(titulo.equals("Seleccionar") || item.equals("Seleccionar")){
+                JOptionPane.showMessageDialog(null, "Debe Seleccionar un archivo de soporte diferente o seleccionar un número de consecutivo");
+            }else{
+            ruta = campoRuta.getText();
+            
+            contFormacionTic.editar(id_aspirante, datos_convocatoria[0], titulo, ruta);
+            JOptionPane.showMessageDialog(null, "Se ha editado la información con Exito!!");
+            }}
+        
+        
+    }
+    
     
     public String seleccionador(){
   
@@ -375,11 +428,43 @@ public class VentanaFormacionTic extends JFrame{
     
         return null;
   
+        }
     }
-
-}
     
-    private class ManejaEvento implements ActionListener{
+    public void aspiranteFormacion(){
+       
+        ArrayList<String> formacionAsp= new ArrayList();
+        formacionAsp = contFormacionTic.consultarFTICAspirante2(id_aspirante, datos_convocatoria[0]);
+        
+        int tam = formacionAsp.size();
+        
+        for (int i=0 ; i < tam; i++){
+            comboTitulos.addItem(formacionAsp.get(i));
+        }
+    }
+        
+    public void itemConsecutivo(String formacion){
+         //System.out.print("Siiii");
+         int itemCount = comboConsecutivo.getItemCount();
+        
+            for(int i=0;i<itemCount;i++){
+                
+                comboConsecutivo.removeItemAt(0);
+            }
+        ArrayList<String> conse= new ArrayList();
+        
+        conse=contFormacionTic.consultarConsecutivos(id_aspirante, datos_convocatoria[0], formacion);
+    
+        int tam = conse.size();
+        
+        comboConsecutivo.addItem("Seleccionar");
+        for(int i = 0; i < tam; i++){
+            comboConsecutivo.addItem(conse.get(i));
+        }
+   
+    }
+    
+    private class ManejaEvento implements ActionListener, ItemListener{
 
            public void actionPerformed(ActionEvent ae) {
             if(ae.getSource() == btExaminar){
@@ -390,7 +475,6 @@ public class VentanaFormacionTic extends JFrame{
             
             if(ae.getSource() == btAgregar){
                 funcionAgregar();
-                //btSiguiente.setVisible(false);
             }
             if(ae.getSource() == btCancelar){
                 ventana_opcionesM.setVisible(true);
@@ -408,6 +492,39 @@ public class VentanaFormacionTic extends JFrame{
             if(ae.getSource() == btSiguiente){
                 ingresarModulo3();
             }
+            
+            if(ae.getSource() == btAceptar){
+                String tituloF = comboTitulos.getSelectedItem().toString();
+                System.out.print(tituloF);
+                String link_soporte;
+                        link_soporte = contFormacionTic.consultarSoporte(id_aspirante, tituloF, datos_convocatoria[0]);
+                        campoRuta.setText(link_soporte);
+            }
+            
+            if(ae.getSource() == btEditar){
+                String ruta = seleccionador();
+                System.out.println(ruta);
+                campoRuta.setText(ruta);
+            }
+            
+            if(ae.getSource() == btGuardarEdicion){
+                guardarEditar();
+                campoRuta.setText("");
+            }
+            
+            
+        }
+
+        @Override
+        public void itemStateChanged(ItemEvent ie) {
+            
+            String tituloF = comboTitulos.getSelectedItem().toString();
+            
+            if (ie.getStateChange() == ItemEvent.SELECTED) {
+                    if(ie.getSource() == comboTitulos){
+                        itemConsecutivo(tituloF);
+                    }
+            }
         }
          
      }
@@ -416,6 +533,7 @@ public class VentanaFormacionTic extends JFrame{
      String[] dato = new String[2];   
      dato[0] = "convo-1";
      dato[1] = "convocatoria-1";
+     //VentanaPrincipalDigitador ventana_digitador= new VentanaPrincipalDigitador("andre");
     VentanaFormacionTic ven =  new VentanaFormacionTic(1, "1234", dato);
 
 }  

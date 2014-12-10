@@ -57,11 +57,11 @@ public class DaoFormacionTic {
         
         } catch(SQLException ex) { 
             
-            JOptionPane.showMessageDialog(null, "Error en base de datos. No se puede guardar");
+            JOptionPane.showMessageDialog(null, "Error en base de datos. Verifique los campos que está ingresando");
         
         } catch (NullPointerException ex) {
             
-            JOptionPane.showMessageDialog(null, "Error en base de datos. No se puede conectar");
+            JOptionPane.showMessageDialog(null, "Error en base de datos. null");
             
         }
 
@@ -78,7 +78,7 @@ public class DaoFormacionTic {
          String soporte="";
          
          sentenciaSql = "SELECT soporte FROM FormacionTic WHERE identificacion ='"+identificacion+"' AND titulo ='"+
-                        titulo+"' AND codigo = '"+codigo+"' ;";
+                        titulo+"' AND codigo_convocatoria = '"+codigo+"' ;";
          
          ejecutarConsulta();
          
@@ -118,6 +118,44 @@ public class DaoFormacionTic {
          return formacion;
      }
      
+     
+      public ArrayList<String> consultarAspiranteFormacionTic2(String identificacion, String codigo) throws SQLException{
+         
+         ArrayList <String> titulos= new ArrayList();
+         
+         sentenciaSql = "SELECT DISTINCT titulo FROM FormacionTic WHERE identificacion ='"+identificacion+"' AND codigo_convocatoria ='"+
+                        codigo+"';";
+         
+         ejecutarConsulta();
+         
+         while (registros.next()) {
+                
+                titulos.add(registros.getString(1));
+                System.out.print(registros.getString(1));
+            }
+         
+         return titulos;
+     }
+      
+     public ArrayList<String> consultarConsecutivoFormacion(String identificacion, String codigo, String formacion)throws SQLException{
+       
+        ArrayList <String> item= new ArrayList();
+         
+         sentenciaSql = "SELECT DISTINCT consecutivo FROM FormacionTic WHERE identificacion ='"+identificacion+"' AND codigo_convocatoria ='"+
+                        codigo+"' AND titulo = '"+formacion+"';";
+         
+         ejecutarConsulta();
+         
+         while (registros.next()) {
+                
+                item.add(registros.getString(1));
+            }
+         
+         return item;
+         
+     }
+     
+      
      public int maximoPuntajeInscripcion(String identificacion_aspirante, String codigo_convocatoria) throws SQLException{
          sentenciaSql="SELECT MAX(puntaje) FROM formaciontic WHERE identificacion = '"+identificacion_aspirante+"' AND codigo_convocatoria = '"+codigo_convocatoria+"';";
          int puntaje=0;
@@ -157,5 +195,12 @@ public class DaoFormacionTic {
          sentenciaSql="UPDATE AspiranteConvocatoria SET puntajetotal = puntajetotal + "+diferencia+" WHERE identificacion = '"+identificacion+"' AND codigo = '"+codigo_convocatoria+"';";
          ejecutarSentencia();
          }
+     }
+     
+     public void editar(String identificacion, String codigo, String titulo, String soporte)throws SQLException{
+         
+         sentenciaSql="UPDATE FormacionTic Set soporte = '"+soporte+"' WHERE identificacion ='"+identificacion+"' AND titulo ='"+
+                        titulo+"' AND codigo_convocatoria = '"+codigo+"' ;";
+         ejecutarSentencia();
      }
 }
