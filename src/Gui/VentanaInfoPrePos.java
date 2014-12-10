@@ -416,7 +416,9 @@ public class VentanaInfoPrePos extends JFrame {
         public void mouseClicked(MouseEvent me) {
 
             if (me.getSource() == btOmitir) {
+           
                 ingresarModulo2();
+            
             }
 
             if (me.getSource() == btAceptar) {
@@ -426,9 +428,8 @@ public class VentanaInfoPrePos extends JFrame {
                     driverPrePos.guardarInfo(indentificacion, rtDoctor, rtDoctorTic, rtMaestria, rtMaestriaTic,
                             rtEspecia, rtEspeciaTic, rtLicen, (String) datos_convocatoria[0]);
 
-                  //  System.err.println(indentificacion + rtDoctor +  rtDoctorTic +  rtMaestria +  rtMaestriaTic + 
-                    //                        rtEspecia +  rtEspeciaTic +  rtLicen);
                     ingresarModulo2();
+                
                 } else {
 
                     JOptionPane.showMessageDialog(null, "Se deben de cargar los archivos de respalfo \n de las casillas seleccionadas");

@@ -74,10 +74,7 @@ public class driverInfoPrePos {
         
         return calificacion;
     }
-    
-    
-   
-    
+ 
     public void SumarPuntaje(){
      
         double puntajeTotal = 0;
@@ -136,4 +133,35 @@ public class driverInfoPrePos {
     
     
     }
+
+
+    public void recalificar(String id_asp, String id_conv){
+        
+        InfoPrePos objPrePos = daoprepos.getApplicant(id_asp, id_conv);
+        
+        int puntaje_anterior = 0;
+        int puntaje_modulo = 0;
+        int puntaje_tmp = 0;
+        
+        puntaje_modulo = objPrePos.getPuntModulo();
+     
+        try{
+        
+            puntaje_anterior = (int) daoAspirante.consultarPuntajeUsuario(id_asp, id_conv);
+        
+        }catch(SQLException e){ System.out.println("Error al acceder a la base de datos");}
+        
+        puntaje_tmp = puntaje_anterior - puntaje_modulo;
+        
+        try{
+        
+            daoAspirante.updatePuntajeUsuario(objPrePos.getIdentificacion(), objPrePos.getCod_convo(), puntaje_tmp);
+        
+        }catch(SQLException es){
+        
+            System.err.println("Error al consultar la base de datos");
+        }
+              
+    }
+
 }
