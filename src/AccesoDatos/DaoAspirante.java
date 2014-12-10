@@ -150,11 +150,11 @@ public class DaoAspirante {
 
                 
                 nombre = (String) registros.getString(2);
-                fInicio = (String) registros.getString(1);
+                fInicio = (String) registros.getString(4);
                 Descrip = (String) registros.getString(3);
-                fCierre = (String) registros.getString(4);
-                estado = (String) registros.getString(5);
-                codigo = (String) registros.getString(6);
+                fCierre = (String) registros.getString(5);
+                estado = (String) registros.getString(6);
+                codigo = (String) registros.getString(1);
                 
                 Convocatoria convT = new Convocatoria(nombre, fInicio, fCierre, codigo, estado, Descrip);
                 
