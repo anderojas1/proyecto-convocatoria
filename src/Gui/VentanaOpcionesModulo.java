@@ -221,6 +221,6 @@ public class VentanaOpcionesModulo extends JFrame {
     }
 
     public static void main(String args[]) {
-        //VentanaOpcionesModulo ven =  new VentanaOpcionesModulo(0, "1234");
+       // VentanaOpcionesModulo ven =  new VentanaOpcionesModulo(0, "1234");
     }
 }

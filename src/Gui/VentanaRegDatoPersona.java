@@ -562,22 +562,39 @@ public class VentanaRegDatoPersona extends JFrame {
     public void validarIdentificación(){
         
         try{
-        String[] id = new String[1];
+       
+            String[] id = new String[1];
         
         
         id[0]=campoNumIdent.getText();
+        
         validator.validateInteger(id[0]);
+        
         Aspirante asp = contAspirante.consultarAspirante(id[0]);
-        if(asp == null){
-        habilitarEdicion1();
-        comboConvocatorias(id[0]);
-        validarAsp = false;
-            }
-        else{
-             validarAsp = true;
-             guardar = true;
-             habilitarEdicion2(asp);  
-             comboConvocatorias(id[0]);
+        
+        if(asp == null && tipo == 1){
+        
+            JOptionPane.showMessageDialog(campoNumIdent, "El Aspirante no existe");
+            
+            
+            
+                       
+        }else if(asp == null ){
+            
+             habilitarEdicion1();
+        
+            comboConvocatorias(id[0]);
+        
+            validarAsp = false;
+        
+        
+        
+        }else{
+         
+            validarAsp = true;
+            guardar = true;
+            habilitarEdicion2(asp);  
+            comboConvocatorias(id[0]);
         }
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(this, "Error en No de identificación: \nIngrese por favor solo numeros \n"+e.getMessage(), "ERROR IDENTIFICACION", JOptionPane.ERROR_MESSAGE);

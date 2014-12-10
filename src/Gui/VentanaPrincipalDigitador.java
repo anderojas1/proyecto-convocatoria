@@ -111,6 +111,14 @@ public class VentanaPrincipalDigitador extends JFrame{
          registrar.configurarVentana(this);
          setVisible(false);
      }
+     
+     public void editar(){
+     
+         VentanaRegDatoPersona registrar = new VentanaRegDatoPersona(1);
+         registrar.asignarEventos();
+         registrar.configurarVentana(this);
+         setVisible(false);  
+     }
  
     
     private class ManejaEvento implements ActionListener{
@@ -142,7 +150,7 @@ public class VentanaPrincipalDigitador extends JFrame{
                 
             }else if (ae.getSource() == editar){
                 
-                JOptionPane.showMessageDialog(rootPane, "En construccion");
+                editar();
             
             }else if(ae.getSource() == consultar){
                 
