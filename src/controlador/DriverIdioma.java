@@ -32,9 +32,9 @@ public class DriverIdioma {
     }
     
     
-    public ArrayList <String> consultarIdiomasAspirante (String id) throws SQLException {
+    public ArrayList <String> consultarIdiomasAspirante (String id, String id_convocatoria) throws SQLException {
         
-        return daoIdioma.consultarIdiomasAspirante(id);
+        return daoIdioma.consultarIdiomasAspirante(id, id_convocatoria);
         
     }
     
@@ -46,7 +46,7 @@ public class DriverIdioma {
     }
     
     
-    public void agregarIdiomaAspirante (String id_aspi, String cod_idioma, String hablar, String leer, 
+    public void agregarIdiomaAspirante (String id_con, String id_aspi, String cod_idioma, String hablar, String leer, 
                                             String escribir, double puntu, boolean escoger, boolean cambia) throws SQLException {
         
         if (cambia == true) {
@@ -55,7 +55,7 @@ public class DriverIdioma {
             
         }
         
-        daoIdioma.agregarIdiomaAspirante(id_aspi, cod_idioma, hablar, leer, escribir, puntu, escoger);
+        daoIdioma.agregarIdiomaAspirante(id_con, id_aspi, cod_idioma, hablar, leer, escribir, puntu, escoger);
         
     }
     

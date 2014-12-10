@@ -78,12 +78,12 @@ public class DaoIdioma {
     }
     
     
-    public ArrayList <String> consultarIdiomasAspirante (String id) throws SQLException {
+    public ArrayList <String> consultarIdiomasAspirante (String id, String id_con) throws SQLException {
         
         consultar = new ArrayList<>();
         
         sqlSentence = "SELECT nombre, leer, escribir, hablar FROM ASPIRANTE_HABLA INNER JOIN IDIOMA ON cod_idioma = codigo_idioma where "
-                + "id_aspirante = '" + id + "';";
+                + "id_aspirante = '" + id + "' and cod_convocatoria = '" + id_con + "';";
 		
         conectar = fachadaConectar.conectar();
         sentencia = conectar.createStatement();
@@ -128,11 +128,11 @@ public class DaoIdioma {
     }
     
     
-    public void agregarIdiomaAspirante (String id, String cod, String hablar, String leer, String esc, 
+    public void agregarIdiomaAspirante (String id_con, String id, String cod, String hablar, String leer, String esc, 
                                             double puntaje, boolean escoger) throws SQLException {
         
         sqlSentence = "INSERT INTO ASPIRANTE_HABLA VALUES ('" + id + "','" + cod + "','" + hablar + "','" + leer + "','"
-                + esc + "'," + puntaje + "," + escoger + ");";
+                + esc + "'," + puntaje + ",'" + id_con + "'," + escoger + ");";
         
         ejecutarSentencia();
     }
