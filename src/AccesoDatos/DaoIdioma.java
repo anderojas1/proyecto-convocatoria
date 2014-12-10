@@ -170,9 +170,10 @@ public class DaoIdioma {
     }
     
     
-    public double consultarPuntaje (String id) throws SQLException {
+    public double consultarPuntaje (String id, String convo) throws SQLException {
         
-        sqlSentence = "SELECT puntaje FROM ASPIRANTE_HABLA WHERE id_aspirante = '" + id +"' and escoger = TRUE;";
+        sqlSentence = "SELECT puntaje FROM ASPIRANTE_HABLA WHERE id_aspirante = '" + id +"' and cod_convocatoria = '"  
+                + convo + "' and escoger = TRUE;";
         
         ejecutarConsulta();
         
@@ -181,6 +182,16 @@ public class DaoIdioma {
         if (registros.next()) puntaje = registros.getDouble(1);
         
         return puntaje;
+        
+    }
+    
+    
+    public void deleteIdioma (String id, String convocatoria, String cod_idioma) throws SQLException {
+        
+        sqlSentence = "DELETE FROM ASPIRANTE_HABLA WHERE id_aspirante = '" + id + "' AND cod_convocatoria = "
+                + "'" + convocatoria + "' and cod_idioma = '" + cod_idioma + "';";
+        
+        ejecutarSentencia();
         
     }
 }

@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.print.event.PrintJobEvent;
 import javax.swing.*;
 
 /**
@@ -53,6 +54,7 @@ public class VentanaRegistrarIdioma extends JFrame {
     private JButton jbcancelar;
     private JButton jbregistrar;
     private JButton jbsiguiente;
+    private JButton jbEliminar;
     
     private JTabbedPane pestañas;
 
@@ -148,6 +150,9 @@ public class VentanaRegistrarIdioma extends JFrame {
 
         //jbcancelar = new JButton("Cancelar");
         jbregistrar = new JButton("Guardar");
+        jbEliminar = new JButton(new ImageIcon("src/iconos/Delete_Icon.png"));
+        jbEliminar.setBackground(Color.WHITE);
+        jbEliminar.setBorder(null);
         if (ventana_digitador == null) jbcancelar = new JButton("Cerrar");
         else jbcancelar = new JButton("Siguiente");
         
@@ -247,6 +252,7 @@ public class VentanaRegistrarIdioma extends JFrame {
         
         panelEliminar.add(lbEliminarIdioma);
         panelEliminar.add(jcbEliminarIdioma);
+        panelEliminar.add(jbEliminar);
         
 
     }
@@ -282,8 +288,9 @@ public class VentanaRegistrarIdioma extends JFrame {
         lbEditarIdioma.setBounds(50, 30, 150, 30);
         jcbEditarIdioma.setBounds(220, 30, 310, 30);
         
-        lbEliminarIdioma.setBounds(50, 30, 150, 30);
-        jcbEliminarIdioma.setBounds(220, 30, 310, 30);
+        lbEliminarIdioma.setBounds(50, 80, 150, 30);
+        jcbEliminarIdioma.setBounds(220, 80, 250, 30);
+        jbEliminar.setBounds(480, 80, 30, 30);
         
     }
     
@@ -321,6 +328,7 @@ public class VentanaRegistrarIdioma extends JFrame {
         jbcancelar.addMouseListener(driverEventos);
         jbregistrar.addMouseListener(driverEventos);
         //jbsiguiente.addMouseListener(driverEventos);
+        jbEliminar.addMouseListener(driverEventos);
         
     }
        
@@ -402,7 +410,7 @@ public class VentanaRegistrarIdioma extends JFrame {
 
                     try {
 
-                        pun = controladorIdioma.consultarPuntajeMaximo(id_aspirante);
+                        pun = controladorIdioma.consultarPuntajeMaximo(id_aspirante, datosConvocatoria[0]);
 
                         nuevo = calcularPuntaje(habla, lee, escribe);
 
@@ -435,6 +443,8 @@ public class VentanaRegistrarIdioma extends JFrame {
 
                     JOptionPane.showMessageDialog(this, "Se registró el idioma exitosamente", "Idioma registrado", 
                             JOptionPane.INFORMATION_MESSAGE);
+                    
+                    actualizarIdiomasAspirante();
 
 
                 } catch (SQLException ex) {
@@ -459,6 +469,30 @@ public class VentanaRegistrarIdioma extends JFrame {
         
         return puntaje;
         
+    }
+    
+    
+    public void borrarIdioma () {
+        
+        try {    
+            
+            String idioma = jcbEliminarIdioma.getSelectedItem().toString();
+            String cod_idioma = controladorIdioma.consultarCodigo(idioma);
+            
+            controladorIdioma.borrarIdioma(id_aspirante, datosConvocatoria[0], cod_idioma);
+            
+            JOptionPane.showMessageDialog(this, "Se borró el idioma exitosamente", "Operación exitosa", 
+                    JOptionPane.INFORMATION_MESSAGE);
+            
+        } catch (SQLException ex) {
+            
+            
+        } catch (NullPointerException ex) {
+            
+            JOptionPane.showMessageDialog(this, "No hay idiomas para eliminar", "Sin idiomas registrados", 
+                    JOptionPane.ERROR_MESSAGE);
+            
+        }            
     }
     
     
@@ -513,6 +547,12 @@ public class VentanaRegistrarIdioma extends JFrame {
             else if (me.getSource() == jbregistrar) {
                 
                 guardarDatos();
+                
+            }
+            
+            else if (me.getSource() == jbEliminar) {
+                
+                borrarIdioma ();
                 
             }
             
@@ -602,6 +642,12 @@ public class VentanaRegistrarIdioma extends JFrame {
 
         @Override
         public void mouseEntered(MouseEvent me) {
+            
+            if (jbEliminar == me.getSource()) {
+                
+                jbEliminar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                
+            }
 
         }
 

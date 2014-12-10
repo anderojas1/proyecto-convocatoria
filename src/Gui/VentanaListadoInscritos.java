@@ -26,7 +26,7 @@ public class VentanaListadoInscritos extends JFrame {
     private JPanel JPsup, JPtable, JPinf;
     private JLabel JLMensaje, JLmensajecantinscritos;
    
-    
+    JTextField JTtotalinscritos;
     
     private JComboBox JCBlistConv;
     private JScrollPane scrollPane;
@@ -68,14 +68,14 @@ public class VentanaListadoInscritos extends JFrame {
 
         JCBlistConv = new JComboBox();
 
-      /**  ArrayList<String> ALlistConvo = controlConv.listaConvocatorias();
+        ArrayList<String> ALlistConvo = controlConv.listaConvocatorias();
 
 
         for (int i = 0; i < ALlistConvo.size(); i++) {
 
             JCBlistConv.addItem(ALlistConvo.get(i));
 
-        }**/
+        }
 
 
 
@@ -97,9 +97,10 @@ public class VentanaListadoInscritos extends JFrame {
 
 
         JLMensaje = new JLabel("Seleccione la convocatoria");
-        JLmensajecantinscritos = new JLabel("Total de inscritos: ");
+        JLmensajecantinscritos = new JLabel("El total de inscritos:");
         
-        
+        JTtotalinscritos = new JTextField();
+        JTtotalinscritos.setEditable(false);
 
     }
 
@@ -122,10 +123,10 @@ public class VentanaListadoInscritos extends JFrame {
         JPtable.setLayout( new BorderLayout());
         
         JPanel JPinscritos = new JPanel();
+        JPinscritos.setLayout(new GridLayout(1, 2, 1, 1));
         
-        JPinscritos.setLayout(new BorderLayout());
-        JPinscritos.add(JLmensajecantinscritos, BorderLayout.WEST);
-       
+        JPinscritos.add(JLmensajecantinscritos);
+        JPinscritos.add(JTtotalinscritos);
         
         JPtable.add(JPinscritos, BorderLayout.NORTH);
         
@@ -135,9 +136,9 @@ public class VentanaListadoInscritos extends JFrame {
         
         container.add(JPtable, BorderLayout.CENTER);
 
-        JPinf.setLayout(new BorderLayout());
+        JPinf.setLayout(new GridLayout(1, 3, 5, 5));
 
-        JPinf.add(JBback, BorderLayout.EAST);
+        JPinf.add(JBback);
 
         container.add(JPinf, BorderLayout.SOUTH);
 
@@ -150,7 +151,7 @@ public class VentanaListadoInscritos extends JFrame {
         
         ArrayList<Object[]> list = controlSuper.getListaAspirantes(conv);
 
-        JLmensajecantinscritos.setText("Total de inscritos: "+String.valueOf(list.size()));
+        JTtotalinscritos.setText(String.valueOf(list.size()));
 
 
         for (int i = 0; i < list.size(); i++) {
@@ -158,6 +159,12 @@ public class VentanaListadoInscritos extends JFrame {
             tableModel.addRow(list.get(i));
         }
 
+
+
+
+        //JPtable.repaint();
+
+        //container.repaint();
 
     }
 
@@ -169,6 +176,8 @@ public class VentanaListadoInscritos extends JFrame {
             if (e.getSource() == JBCargar) {
 
                 // Se debe limpiar la tabla previamente... 
+                
+                JTtotalinscritos.setText("");
                 
                 int rowCount = tableModel.getRowCount();
                 System.out.println(rowCount);
