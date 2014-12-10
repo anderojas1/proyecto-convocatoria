@@ -35,7 +35,7 @@ public class VentanaPrincipalDigitador extends JFrame{
     public  VentanaPrincipalDigitador(String username){
         
         super("Bienvenido @ "+ username);
-        //user = username;
+        user = username;
         cont = getContentPane(); 
         inicioDigitador = new JPanel();        
         titulo = new JLabel("Sistema de Seleccion de Docentes TIC");
