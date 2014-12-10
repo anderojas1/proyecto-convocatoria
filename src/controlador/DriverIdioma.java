@@ -93,4 +93,24 @@ public class DriverIdioma {
         daoIdioma.escogerNuevoIdioma(puntaje, id_asp, id_conv);
     }
     
+    
+    public double puntajeIdioma (String id, String cod_con, String cod_idioma) throws SQLException {
+        
+        return daoIdioma.consultarPuntajeIdioma(id, cod_con, cod_idioma);
+        
+    }
+    
+    
+    public void actualizarPuntajeIdioma (String id_asp, String cod_con, String id_idioma, double pun) throws SQLException {
+        
+        daoIdioma.updatePuntajeIdioma(id_asp, cod_con, id_idioma, pun);
+        
+    }
+    
+    
+    public String [] informacionIdiomas (String id_a, String id_c, String id_idioma) throws SQLException {
+        
+        return daoIdioma.consultarInformacionIdiomas(id_a, id_c, id_idioma);
+        
+    }
 }

@@ -234,4 +234,52 @@ public class DaoIdioma {
         ejecutarSentencia();
         
     }
+    
+    
+    public double consultarPuntajeIdioma (String id_asp, String id_con, String id_idioma) throws SQLException {
+        
+        sqlSentence = "select puntaje from aspirante_habla where id_aspirante = '" + id_asp + "' and cod_convocatoria "
+                + "= '" + id_con + "' and cod_idioma = '" + id_idioma + "';";
+        
+        double pun = 0.0;
+        
+        ejecutarConsulta();
+        
+        if (registros.next() == true) {
+            
+            pun = registros.getDouble(1);
+            
+        }
+        
+        return pun;
+        
+    }
+    
+    
+    public void updatePuntajeIdioma (String id_asp, String cod_con, String cod_idioma, double pun) throws SQLException {
+        
+        sqlSentence = "Update aspirante_habla set puntaje = " + pun + " where id_aspirante = '" + id_asp + "' "
+                + "and cod_idioma = '" + cod_idioma + "' and cod_convocatoria = '"+ cod_con + "';";
+        
+        ejecutarSentencia();
+        
+    }
+    
+    
+    public String [] consultarInformacionIdiomas (String id_asp, String convo, String cod_idioma) throws SQLException {
+        
+        String [] info = new String[3];
+        
+        sqlSentence = "select leer, escribir, hablar from aspirante_habla where id_aspirante = '" + id_asp + "' and "
+                + "cod_convocatoria = '" + convo + "' and cod_idioma = '"+ cod_idioma + "';";
+        
+        if (registros.next()) {
+            
+            info[0] = registros.getString(1);
+            info[1] = registros.getString(2);
+            info[2] = registros.getString(3);
+        }
+        
+        return info;
+    }
 }
