@@ -564,8 +564,8 @@ public class VentanaRegDatoPersona extends JFrame {
         comboMes.setVisible(false);
         comboAnio.setVisible(false);
         
-                
-       // buscarConvAsp(aspi.getIdentificacion());
+        convocatoriasDisponibles(campoNumIdent.getText());
+       
              
     }
     
@@ -634,13 +634,45 @@ public class VentanaRegDatoPersona extends JFrame {
             
                 comboConvocatorias.addItem(conv.get(i).getCodigo()+','+conv.get(i).getNombre());
         
-                //btEditar.setText("Editar Datos");
+                
             btEditar.setVisible(true);
+            
+            }
+               
+        }  
+    }
+    
+    public void convocatoriasDisponibles(String id_aspirante){
+    
+    
+        ArrayList<Convocatoria> conv = contAspirante.consultarConvDis(id_aspirante);
+        
+        if(conv != null){
+        
+            
+       if(conv.size() == 0){
+       
+           //comboConvocatorias.removeItemAt(0);
+           comboConvocatorias.addItem("No Hay convocatorias disponibles");
+       
+       }      
+       else{     
+       
+           
+           for (int i = 0; i < conv.size(); i++) {
+            
+                comboConvocatorias.addItem(conv.get(i).getCodigo()+','+conv.get(i).getNombre());
+        
+            
             }
         
-       
+            btaceptar.setVisible(true);
         
-        }  
+            }
+        }
+       
+        btaceptar.setVisible(true);
+    
     }
     
     public void validarIdentificación(){
@@ -656,15 +688,11 @@ public class VentanaRegDatoPersona extends JFrame {
         
         Aspirante asp = contAspirante.consultarAspirante(id[0]);
        
-        if(asp != null && tipo == 1){
+       
         
-            habilitarEdicion3(asp);
-        
-            System.out.println("valido forma 3");
-        
-        }if(asp == null ){
+        if(asp == null ){
             
-             habilitarEdicion1();
+            habilitarEdicion1();
         
             comboConvocatorias(id[0]);
         
@@ -672,13 +700,21 @@ public class VentanaRegDatoPersona extends JFrame {
         
         
         
-        }else{
+        } if(asp != null && tipo == 0){
          
             validarAsp = true;
             guardar = true;
             habilitarEdicion2(asp);  
             comboConvocatorias(id[0]);
+        
         }
+        
+         if(asp != null && tipo == 1){
+        
+            habilitarEdicion3(asp);
+                            
+        }
+         
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(this, "Error en No de identificación: \nIngrese por favor solo numeros \n"+e.getMessage(), "ERROR IDENTIFICACION", JOptionPane.ERROR_MESSAGE);
         }

@@ -31,6 +31,8 @@ public class VentanaGenerarReportes extends JFrame {
     private ManejarEventos controlarEventos;
     
     private DriverAspirante driverAspirante;
+     
+    private VentanaIniSupervisor superReportes;
     
     public VentanaGenerarReportes () {
         
@@ -137,6 +139,12 @@ public class VentanaGenerarReportes extends JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Consulta fallida", JOptionPane.ERROR_MESSAGE);
             
         }
+        
+    }
+    
+   public void configurarVentana (VentanaIniSupervisor supervisor) {//ventana anterior
+        
+        superReportes = supervisor;
         
     }
     

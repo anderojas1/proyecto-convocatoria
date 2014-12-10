@@ -114,8 +114,17 @@ import javax.swing.JPanel;
         
         salir.addActionListener(driverEventos);
         informe.addActionListener(driverEventos);
+        genero.addActionListener(driverEventos);
         
     }
+    
+    public void ingresarTotalGenero(){//Ventana siguiente agregar
+         VentanaTotalGenero reportes = new VentanaTotalGenero();
+         reportes.agregarEventos();
+         reportes.configurarVentana(this);
+         setVisible(false);
+
+     }
 
      private class ManejaEvento implements ActionListener{
 
@@ -145,6 +154,10 @@ import javax.swing.JPanel;
                 VentanaListadoInscritos VL = new VentanaListadoInscritos(parentComponent);
                 
             
+            }
+            
+            if(ae.getSource() == genero){
+                ingresarModuloReportes();
             }
         }
          

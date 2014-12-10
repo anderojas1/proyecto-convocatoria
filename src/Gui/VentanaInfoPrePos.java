@@ -474,7 +474,7 @@ public class VentanaInfoPrePos extends JFrame {
                 driverPrePos.recalificar(iden, datos_convocatoria[0]);
                 
                 driverPrePos.calificador(rtDoctor, rtDoctor, rtMaestria, rtMaestriaTic, rtEspecia, rtEspeciaTic, rtLicen);
-JOptionPane.showMessageDialog(rootPane, "Se actualizo");
+                JOptionPane.showMessageDialog(rootPane, "Se actualizo");
                 
             }else if (me.getSource() == btDoctor) {
 

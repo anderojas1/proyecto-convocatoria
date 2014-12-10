@@ -44,28 +44,26 @@ public class DaoAspForPrePos {
         String licen = obj.getRtLicenciado();
         int puntaje = obj.getPuntModulo();
         String cod_convo = obj.getCod_convo();
-                        
-        sqlDatos = "INSERT INTO  DocumentosPrePos VALUES (" + "'" + iden  + "', '" + doc  + "', '"+ docTic + "', '" + maest  + "', '" + maestTic +
-                                       "', '" + espec  + "', '" + especTic  + "', '" + licen  + "'," + "'"+ puntaje+"', '"+cod_convo+"'"+");";
-        
-        
+
+        sqlDatos = "INSERT INTO  DocumentosPrePos VALUES (" + "'" + iden + "', '" + doc + "', '" + docTic + "', '" + maest + "', '" + maestTic
+                + "', '" + espec + "', '" + especTic + "', '" + licen + "'," + "'" + puntaje + "', '" + cod_convo + "'" + ");";
+
+
         try {
-            
+
             ejecutarSentencia();
-        } 
-        catch (SQLException ex) {
-        
+        } catch (SQLException ex) {
+
             throw ex;
         }
 
     }
-    
-   
+
     public InfoPrePos getApplicant(String id_asp, String id_conv) {
 
-        JOptionPane.showMessageDialog(null, "Esto es el dao" + id_asp + "%%%"+ id_conv);
-        
-        sentenciaSql = "SELECT * FROM DocumentosPrePos WHERE  id_aspirante = " + id_asp +"AND cod_convocatoria =" + id_conv+";";
+        JOptionPane.showMessageDialog(null, "Esto es el dao" + id_asp + "%%%" + id_conv);
+
+        sentenciaSql = "SELECT * FROM DocumentosPrePos WHERE  id_aspirante = '" + id_asp + "' AND cod_convocatoria = '" + id_conv + "';";
 
         String identificacion = "";
         String doc = "";
@@ -78,8 +76,8 @@ public class DaoAspForPrePos {
         int puntaje = 0;
         String cod_conv = "";
         InfoPrePos infoprepos = null;
-        
-                         
+
+
         try {
 
             conectar = fachada.conectar();
@@ -88,7 +86,7 @@ public class DaoAspForPrePos {
 
             registros = sentencia.executeQuery(sentenciaSql);
 
-            while (registros.next()) { 
+            while (registros.next()) {
 
                 identificacion = (String) registros.getString(1);
                 doc = (String) registros.getString(2);
@@ -100,28 +98,30 @@ public class DaoAspForPrePos {
                 licen = (String) registros.getString(8);
                 puntaje = Integer.parseInt((String) registros.getString(9));
                 cod_conv = (String) registros.getString(10);
-                
-                     
-           infoprepos.setIdentificacion(identificacion);
-           infoprepos.setRtDoctor(doc);
-           infoprepos.setRtDoctorTic(docTic);
-           infoprepos.setRtMaestria(maest);
-           infoprepos.setRtMaestriaTic(maestTic);
-           infoprepos.setRtEspecia(espec);
-           infoprepos.setRtEspeciaTic(especTic);
-           infoprepos.setRtLicenciado(licen);
-           
+
+
+                infoprepos = new InfoPrePos();
+                infoprepos.setIdentificacion(identificacion);
+                infoprepos.setRtDoctor(doc);
+                infoprepos.setRtDoctorTic(docTic);
+                infoprepos.setRtMaestria(maest);
+                infoprepos.setRtMaestriaTic(maestTic);
+                infoprepos.setRtEspecia(espec);
+                infoprepos.setRtEspeciaTic(especTic);
+                infoprepos.setRtLicenciado(licen);
+
+
             }
 
             return infoprepos;
-           
-                      
-            
+
+
+
         } catch (SQLException ex) {
 
             System.out.println("error consultar aspirante");
             return null;
-            
+
 
         } catch (NullPointerException ex) {
 
@@ -155,6 +155,4 @@ public class DaoAspForPrePos {
         }
 
     }
-    
-  
 }
