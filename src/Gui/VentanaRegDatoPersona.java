@@ -599,9 +599,7 @@ public class VentanaRegDatoPersona extends JFrame {
         if(asp == null && tipo == 1){
         
             JOptionPane.showMessageDialog(campoNumIdent, "El Aspirante no existe");
-            
-            
-            
+                                   
                        
         }else if(asp == null ){
             
