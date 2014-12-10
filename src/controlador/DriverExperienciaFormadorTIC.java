@@ -54,4 +54,22 @@ public class DriverExperienciaFormadorTIC {
         }
     }
     
+    public void editarExperiencia(String id, String ExpFormerProf, String ExpFormerEst, String ExpFormertoFormers, String soporte_est, String soporte_pro, String soporte_for, int puntaje_est, int puntaje_pro, int puntaje_for, int puntaje_to, String cod_convo){
+    
+       
+        ExpFormadorTIC expFormerTIC = new ExpFormadorTIC(id, ExpFormerProf, ExpFormerEst, ExpFormertoFormers, soporte_est, soporte_pro, soporte_for, puntaje_est, puntaje_pro, puntaje_for, puntaje_to, cod_convo);
+        
+        DaoExpFormerTIc.editarExperiencia(expFormerTIC);
+        
+    
+    }
+    
+   public void editarPuntajeAspirante(String identificacion, String convocatoria, int puntaje){
+        try{
+            DaoExpFormerTIc.editarPuntajeAspirante(identificacion, convocatoria, puntaje);
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al insertar el puntaje del aspirante en la convocatoria. Por favor intente nuevamente");
+        }
+    }
+    
 }
