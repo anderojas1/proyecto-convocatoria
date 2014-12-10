@@ -232,8 +232,8 @@ public class VentanaConocimientosEspec extends JFrame {
     }
     
       public void ingresarModulo4(){//Ventana siguiente
-         VentanaInformacionIdiomas modulo4 = new VentanaInformacionIdiomas(tipo, identificacionAspirante, datosConvocatoria, ventana_digitador);
-         modulo4.agregarEventos();
+         VentanaRegistrarIdioma modulo4 = new VentanaRegistrarIdioma(tipo, identificacionAspirante, datosConvocatoria);
+         modulo4.asignarEventos();
          dispose();
      }
 

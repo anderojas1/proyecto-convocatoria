@@ -28,6 +28,9 @@ public class VentanaRegistrarIdioma extends JFrame {
     private JLabel lbhablar;
     private JLabel lbescribir;
     private JLabel lbleer;
+    
+    private JLabel lbEditarIdioma;
+    private JLabel lbEliminarIdioma;
 
     private JCheckBoxMenuItem jchbhablarRegular;
     private JCheckBoxMenuItem jchbhablarBueno;
@@ -44,21 +47,28 @@ public class VentanaRegistrarIdioma extends JFrame {
     private JCheckBoxMenuItem jchbhablar;
 
     private JComboBox jcbescogerIdioma;
+    private JComboBox jcbEditarIdioma;
+    private JComboBox jcbEliminarIdioma;
 
     private JButton jbcancelar;
     private JButton jbregistrar;
     private JButton jbsiguiente;
+    
+    private JTabbedPane pestañas;
 
     private JPanel panel;
     private JPanel panelLogo;
     private JPanel panelVentana;
+    private JPanel panelEditar;
+    private JPanel panelEliminar;
     
     private final String id_aspirante;
     
     private int tipo;
     private String[] datosConvocatoria;
     
-    private VentanaInformacionIdiomas informacionIdiomas;
+    private VentanaOpcionesModulo modulos;
+    
     private VentanaPrincipalDigitador ventana_digitador;
     
 
@@ -85,39 +95,22 @@ public class VentanaRegistrarIdioma extends JFrame {
         setVisible(true);
 
     }
-
-        public VentanaRegistrarIdioma(int tipo, String id, String [] datosConvocatoria, VentanaPrincipalDigitador ventana_digitador) {
-        
-        super("Módulo Registrar Idioma");
-        
-        this.tipo = tipo;
-        id_aspirante = id;
-        this.datosConvocatoria = datosConvocatoria;
-        this.ventana_digitador = ventana_digitador;
-
-        driverEventos = new ControladorEventos();
-        
-        controladorIdioma = new DriverIdioma();
-
-        inicializarComponentes();
-        agregarComponentes();
-        acomodarComponentes();
-        
-        setSize(600, 540);
-        setResizable(false);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(0);
-        setVisible(true);
-
-    }
+    
     private void inicializarComponentes() {
         
         panelVentana = new JPanel(null);
         panelVentana.setBackground(Color.WHITE);
+        
+        pestañas = new JTabbedPane();
+        
+        panelEditar = new JPanel(null);
+        panelEditar.setBackground(Color.WHITE);
+        panelEliminar = new JPanel(null);
+        panelEliminar.setBackground(Color.WHITE);
 
         panel = new JPanel(null);
         panel.setBackground(Color.WHITE);
-        panel.setBorder(BorderFactory.createTitledBorder("Registrar Idioma"));
+        //panel.setBorder(BorderFactory.createTitledBorder("Registrar Idioma - ")); //datosConvocatoria[1])
         
         panelLogo = new JPanel(null);
         panelLogo.setBackground(Color.WHITE);
@@ -131,6 +124,8 @@ public class VentanaRegistrarIdioma extends JFrame {
         lbhablar = new JLabel("Conversación");
         lbescribir = new JLabel("Escritura");
         lbleer = new JLabel("Lectura");
+        lbEditarIdioma = new JLabel("Seleccione el idioma");
+        lbEliminarIdioma = new JLabel("Seleccione el idioma");
 
         jchbhablarRegular = new JCheckBoxMenuItem("Regular");
         jchbhablarBueno = new JCheckBoxMenuItem("Bueno");
@@ -146,6 +141,9 @@ public class VentanaRegistrarIdioma extends JFrame {
 
         jcbescogerIdioma = new JComboBox();
         cargarIdiomas();
+        
+        jcbEditarIdioma = new JComboBox();
+        jcbEliminarIdioma = new JComboBox();
 
         jbcancelar = new JButton("Cancelar");
         jbregistrar = new JButton("Guardar");
@@ -154,6 +152,13 @@ public class VentanaRegistrarIdioma extends JFrame {
         fondoCheckBox();
 
         getContentPane().add(panelVentana);
+        
+    }
+    
+    
+    public void configurarVentana (VentanaOpcionesModulo opc) {
+        
+        modulos = opc;
         
     }
     
@@ -181,7 +186,11 @@ public class VentanaRegistrarIdioma extends JFrame {
     private void agregarComponentes() {
         
         panelVentana.add(panelLogo);
-        panelVentana.add(panel);
+        panelVentana.add(pestañas);
+        
+        pestañas.addTab("Registrar", panel);
+        pestañas.addTab("Editar", panelEditar);
+        pestañas.addTab("Eliminar", panelEliminar);
 
         panelLogo.add(lbtitulo);
 
@@ -205,13 +214,19 @@ public class VentanaRegistrarIdioma extends JFrame {
 
         panel.add(jbcancelar);
         panel.add(jbregistrar);
-        //panel.add(jbsiguiente);
+        
+        panelEditar.add(lbEditarIdioma);
+        panelEditar.add(jcbEditarIdioma);
+        
+        panelEliminar.add(lbEliminarIdioma);
+        panelEliminar.add(jcbEliminarIdioma);
+        
 
     }
 
     private void acomodarComponentes() {
         
-        panel.setBounds(5, 130, 585, 370);
+        pestañas.setBounds(5, 110, 585, 370);
         panelLogo.setBounds(0, 0, 600, 100);
 
         lbtitulo.setBounds(0, 0, 600, 100);
@@ -236,7 +251,12 @@ public class VentanaRegistrarIdioma extends JFrame {
         
         jbcancelar.setBounds(300, 290, 110, 30);
         jbregistrar.setBounds(420, 290, 110, 30);
-        //jbsiguiente.setBounds(420, 320, 110, 30);
+        
+        lbEditarIdioma.setBounds(50, 30, 150, 30);
+        jcbEditarIdioma.setBounds(220, 30, 310, 30);
+        
+        lbEliminarIdioma.setBounds(50, 30, 150, 30);
+        jcbEliminarIdioma.setBounds(220, 30, 310, 30);
         
     }
     
@@ -276,13 +296,8 @@ public class VentanaRegistrarIdioma extends JFrame {
         //jbsiguiente.addMouseListener(driverEventos);
         
     }
+       
     
-    
-    public void configurarVentana (VentanaInformacionIdiomas ventana) {
-        
-        informacionIdiomas = ventana;
-        
-    }
     
     public void ingresarModulo5(){//Ventana siguiente
          ventanaExp_FormadorTIC modulo5 = new ventanaExp_FormadorTIC(tipo, id_aspirante, datosConvocatoria, ventana_digitador);
@@ -392,10 +407,6 @@ public class VentanaRegistrarIdioma extends JFrame {
 
                     JOptionPane.showMessageDialog(this, "Se registró el idioma exitosamente", "Idioma registrado", JOptionPane.INFORMATION_MESSAGE);
 
-                    informacionIdiomas.setVisible(true);
-                    informacionIdiomas.actualizarInformacionIdiomas(nombre, lee, escribe, habla);
-
-                    dispose();
 
                 } catch (SQLException ex) {
 
@@ -456,8 +467,7 @@ public class VentanaRegistrarIdioma extends JFrame {
             
             if (me.getSource() == jbcancelar) {
                 
-                informacionIdiomas.setVisible(true);
-                dispose();
+                
                 
             }
             
@@ -577,6 +587,13 @@ public class VentanaRegistrarIdioma extends JFrame {
         }
 
     }    
+    
+    
+    public static void main(String[] args) {
+        
+        VentanaRegistrarIdioma ido = new VentanaRegistrarIdioma(WIDTH, null, args);
+        
+    }
     
     
 }
