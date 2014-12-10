@@ -273,6 +273,8 @@ public class DaoIdioma {
         sqlSentence = "select leer, escribir, hablar from aspirante_habla where id_aspirante = '" + id_asp + "' and "
                 + "cod_convocatoria = '" + convo + "' and cod_idioma = '"+ cod_idioma + "';";
         
+        ejecutarConsulta();
+        
         if (registros.next()) {
             
             info[0] = registros.getString(1);
@@ -281,5 +283,17 @@ public class DaoIdioma {
         }
         
         return info;
+    }
+    
+    
+    public void guardarEdicionIdiomas (String aspirante, String convocatoria, String idioma, String leer, String hablar,
+            String escribir) throws SQLException {
+        
+        sqlSentence = "update aspirante_habla set leer = '"+ leer + "', hablar = '" + hablar + "', escribir = "
+                + "'" + escribir + "' where id_aspirante = '" + aspirante + "' and cod_convocatoria = '" + convocatoria + "' "
+                + "and cod_idioma = '" + idioma + "';";
+        
+        ejecutarSentencia();
+        
     }
 }

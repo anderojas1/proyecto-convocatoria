@@ -66,7 +66,7 @@ public class VentanaFormacionTic extends JFrame{
         iniciarComponentes();
         agregarComponentes();
         acomodarComponentes();
-        agregarEventos();
+        //agregarEventos();
         
         cont.add(principal);
         setVisible(true);

@@ -217,6 +217,22 @@ public class VentanaRegistrarIdioma extends JFrame {
         
     }
     
+    public void limpiarChecksEdicion () {
+        
+        editarescribirBueno.setSelected(false);
+        editarescribirMuyBueno.setSelected(false);
+        editarescribirRegular.setSelected(false);
+        
+        editarhablarBueno.setSelected(false);
+        editarhablarMuyBueno.setSelected(false);
+        editarhablarRegular.setSelected(false);
+        
+        editarleerBueno.setSelected(false);
+        editarleerMuyBueno.setSelected(false);
+        editarleerRegular.setSelected(false);
+        
+    }
+    
     
     public void configurarVentana (VentanaOpcionesModulo opc) {
         
@@ -667,6 +683,9 @@ public class VentanaRegistrarIdioma extends JFrame {
                                 
                                 controladorIdioma.actualizarPuntajeIdioma(id_aspirante, datosConvocatoria[0], codigoIdioma, nuevo);
                                 
+                                controladorIdioma.guardarEdicionIdiomas(id_aspirante, datosConvocatoria[0], 
+                                        codigoIdioma, lee, habla, escribe);
+                                
                             } else {
                                 
                                 if (nuevo > puntajeMaximo) {
@@ -678,6 +697,9 @@ public class VentanaRegistrarIdioma extends JFrame {
                                 
                                     controladorIdioma.actualizarPuntajeIdioma(id_aspirante, datosConvocatoria[0], 
                                             codigoIdioma, nuevo);
+                                    controladorIdioma.guardarEdicionIdiomas(id_aspirante, datosConvocatoria[0], 
+                                        codigoIdioma, lee, habla, escribe);
+                                    
                                     
                                 }
                                 
@@ -686,6 +708,8 @@ public class VentanaRegistrarIdioma extends JFrame {
                                     controladorIdioma.actualizarPuntajeIdioma(id_aspirante, datosConvocatoria[0], 
                                             codigoIdioma, nuevo);
                                     
+                                    controladorIdioma.guardarEdicionIdiomas(id_aspirante, datosConvocatoria[0], 
+                                        codigoIdioma, lee, habla, escribe);
                                     
                                     
                                 }
@@ -702,6 +726,10 @@ public class VentanaRegistrarIdioma extends JFrame {
                             JOptionPane.INFORMATION_MESSAGE);
                     
                     actualizarIdiomasAspirante();
+                    
+                    limpiarChecksEdicion();
+                    
+                    llenarCampos();
 
 
                 } catch (SQLException ex) {
@@ -821,20 +849,59 @@ public class VentanaRegistrarIdioma extends JFrame {
         
         try {
         
-            String cod = controladorIdioma.consultarCodigo(nombreIdioma);
+            String cod = controladorIdioma.consultarCodigo(nombreIdioma);            
             String info[] = controladorIdioma.informacionIdiomas(id_aspirante, datosConvocatoria[0], cod);
+                        
+            if (info[0].equals("Muy bueno")) {
+                editarleerMuyBueno.setSelected(true);
+                editarleer = editarleerMuyBueno;
+            }
+            else if (info[0].equals("Bueno")) {
+                editarleerBueno.setSelected(true);
+                editarleer = editarleerBueno;
+            }
+            else {
+                editarleerRegular.setSelected(true);
+                editarleer = editarleerRegular;
+            }
             
-            if (info[0].equals("Muy bueno")) editarleerMuyBueno.setSelected(true);
-            else if (info[0].equals("Bueno")) editarleerBueno.setSelected(true);
-            else editarleerRegular.setSelected(true);
+            if (info[1].equals("Muy bueno")) {
+                
+                editarescribirMuyBueno.setSelected(true);
+                editarescribir = editarescribirMuyBueno;
+            }
             
-            if (info[1].equals("Muy bueno")) editarescribirMuyBueno.setSelected(true);
-            else if (info[1].equals("Bueno")) editarescribirBueno.setSelected(true);
-            else editarescribirRegular.setSelected(true);
+            else if (info[1].equals("Bueno")) {
+                
+                editarescribirBueno.setSelected(true);
+                editarleer = editarescribirBueno;
+                
+            }
+            else {
+                
+                editarescribirRegular.setSelected(true);
+                editarescribir = editarescribirRegular;
+            }
             
-            if (info[2].equals("Muy bueno")) editarhablarMuyBueno.setSelected(true);
-            else if (info[2].equals("Bueno")) editarhablarBueno.setSelected(true);
-            else editarhablarRegular.setSelected(true);
+            if (info[2].equals("Muy bueno")) {
+                
+                editarhablarMuyBueno.setSelected(true);
+                editarescribir = editarhablarMuyBueno;
+                
+            }
+            
+            else if (info[2].equals("Bueno")) {
+                                
+                editarhablarBueno.setSelected(true);
+                editarescribir = editarhablarBueno;
+                
+            }
+            
+            else {
+                
+                editarhablarRegular.setSelected(true);
+                editarescribir = editarhablarRegular;
+            }
             
         } catch (SQLException ex) {
             

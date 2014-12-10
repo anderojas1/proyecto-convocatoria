@@ -113,4 +113,11 @@ public class DriverIdioma {
         return daoIdioma.consultarInformacionIdiomas(id_a, id_c, id_idioma);
         
     }
+    
+    public void guardarEdicionIdiomas (String aspirante, String convocatoria, String idioma, String leer, String hablar,
+            String escribir) throws SQLException {
+        
+        daoIdioma.guardarEdicionIdiomas(aspirante, convocatoria, idioma, leer, hablar, escribir);
+        
+    }
 }
