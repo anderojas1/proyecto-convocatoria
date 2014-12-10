@@ -112,5 +112,15 @@ public class DriverAspirante {
     return conv;
     
     }
+    
+    public ArrayList <Convocatoria> consultarConvDis(String id_aspirante){
+    
+    ArrayList <Convocatoria> conv = new ArrayList<>();
+    
+    conv = daoaspirante.consultarConvocatoriaDis(id_aspirante);
+    
+    return conv;
+    
+    }
        
 }

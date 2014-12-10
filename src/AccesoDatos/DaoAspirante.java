@@ -178,6 +178,71 @@ public class DaoAspirante {
     
     }
     
+    
+     public ArrayList <Convocatoria> consultarConvocatoriaDis(String id_aspirante){
+     
+       ArrayList <Convocatoria> conv = new ArrayList<>();
+        
+                
+        sentenciaSql = "(SELECT  DISTINCT *  "+
+                       " FROM convocatoria INNER JOIN aspiranteconvocatoria ON aspiranteconvocatoria.codigo = convocatoria.codigo"+
+                           " WHERE aspiranteconvocatoria.identificacion = '"+ id_aspirante + "' )" + 
+                              "EXCEPT" +
+                                "(SELECT * FROM convocatoria INNER JOIN aspiranteconvocatoria ON aspiranteconvocatoria.codigo = convocatoria.codigo" + 
+                                        " WHERE estado = 'abierta');";
+    
+        System.out.println("&&&&&& desde el dao  "+sentenciaSql);
+        
+        String nombre = "";
+        String fInicio = "";
+        String Descrip = "";
+        String fCierre = "";
+        String estado = "";
+        String codigo = "";
+        
+         try {
+
+            conectar = fachada.conectar();
+
+            sentencia = conectar.createStatement();
+
+            //System.out.println("^^^^^^%%%%%" + sentenciaSql);
+            
+            registros = sentencia.executeQuery(sentenciaSql);
+
+             
+            while (registros.next()) {
+
+                
+                nombre = (String) registros.getString(2);
+                fInicio = (String) registros.getString(4);
+                Descrip = (String) registros.getString(3);
+                fCierre = (String) registros.getString(5);
+                estado = (String) registros.getString(6);
+                codigo = (String) registros.getString(1);
+                
+                Convocatoria convT = new Convocatoria(nombre, fInicio, fCierre, codigo, estado, Descrip);
+                
+                conv.add(convT);
+            }
+            return conv;
+           
+        
+        } catch (SQLException ex) {
+
+            System.err.println("error consultar aspirante");
+            return null;
+            
+
+        } catch (NullPointerException ex) {
+
+            System.out.println("no se pudo crear aspirante");
+            return null;
+
+        }
+     
+     }
+    
     public void AspiranteConvocatoria(String idAsp, String codConv) throws SQLException{
         sentenciaSql="INSERT INTO AspiranteConvocatoria VALUES ('"+idAsp+"', '"+codConv+"', 0.0, false);";
         
