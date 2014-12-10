@@ -183,6 +183,7 @@ public class VentanaOpcionesModulo extends JFrame {
 
         VentanaConocimientosEspec conocEspecific = new VentanaConocimientosEspec(tipo, usuario, datos_convocatoria);
         conocEspecific.configurarVentana(this);
+        conocEspecific.agregarEventos();
         setVisible(false);
 
     }

@@ -194,4 +194,92 @@ public class DaoIdioma {
         ejecutarSentencia();
         
     }
+    
+    public boolean consultarIdiomaEscogido (String idioma, String id_asp, String id_con) throws SQLException {
+        
+        boolean estado = false;
+        
+        sqlSentence = "select escoger FROM aspirante_habla where id_aspirante = '" + id_asp + "' and cod_convocatoria "
+                + "= '" + id_con + "' and cod_idioma = '" + idioma + "';";
+        
+        ejecutarConsulta();
+        
+        if (registros.next() == true) estado = registros.getBoolean(1);
+        
+        return estado;
+        
+    }
+    
+    
+    public double nuevoPuntajeMaximo (String id_asp, String id_con) throws SQLException {
+        
+        double puntaje = 0.0;
+        
+        sqlSentence = "SELECT max(puntaje) from ASPIRANTE_HABLA where id_aspirante = '" + id_asp + "' and cod_convocatoria"
+                + "= '" + id_con + "';";
+        
+        ejecutarConsulta();
+        
+        if (registros.next() == true) puntaje = registros.getDouble(1);
+        
+        return puntaje;
+        
+    }
+    
+    public void escogerNuevoIdioma (double puntaje, String id_asp, String id_con) throws SQLException {
+        
+        sqlSentence = "Update aspirante_habla set escoger = true where puntaje = " + puntaje + " and id_aspirante "
+                + "= '" +id_asp + "' and cod_convocatoria = '" + id_con + "';";
+        
+        ejecutarSentencia();
+        
+    }
+    
+    
+    public double consultarPuntajeIdioma (String id_asp, String id_con, String id_idioma) throws SQLException {
+        
+        sqlSentence = "select puntaje from aspirante_habla where id_aspirante = '" + id_asp + "' and cod_convocatoria "
+                + "= '" + id_con + "' and cod_idioma = '" + id_idioma + "';";
+        
+        double pun = 0.0;
+        
+        ejecutarConsulta();
+        
+        if (registros.next() == true) {
+            
+            pun = registros.getDouble(1);
+            
+        }
+        
+        return pun;
+        
+    }
+    
+    
+    public void updatePuntajeIdioma (String id_asp, String cod_con, String cod_idioma, double pun) throws SQLException {
+        
+        sqlSentence = "Update aspirante_habla set puntaje = " + pun + " where id_aspirante = '" + id_asp + "' "
+                + "and cod_idioma = '" + cod_idioma + "' and cod_convocatoria = '"+ cod_con + "';";
+        
+        ejecutarSentencia();
+        
+    }
+    
+    
+    public String [] consultarInformacionIdiomas (String id_asp, String convo, String cod_idioma) throws SQLException {
+        
+        String [] info = new String[3];
+        
+        sqlSentence = "select leer, escribir, hablar from aspirante_habla where id_aspirante = '" + id_asp + "' and "
+                + "cod_convocatoria = '" + convo + "' and cod_idioma = '"+ cod_idioma + "';";
+        
+        if (registros.next()) {
+            
+            info[0] = registros.getString(1);
+            info[1] = registros.getString(2);
+            info[2] = registros.getString(3);
+        }
+        
+        return info;
+    }
 }
