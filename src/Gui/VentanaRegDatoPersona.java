@@ -52,6 +52,7 @@ public class VentanaRegDatoPersona extends JFrame {
     private JButton btCancelar;
     private JButton btconfirmar;
     private JButton btaceptar;
+    private JButton btEditar;
     //declaracion paneles
     private JPanel panelPrin;
     //declaracion objetos de control
@@ -321,6 +322,8 @@ public class VentanaRegDatoPersona extends JFrame {
 
 
         panelPrin = new JPanel();
+         
+        btEditar = new JButton("Editar");
 
         manejador = new ManejaEventos();
         
@@ -370,6 +373,7 @@ public class VentanaRegDatoPersona extends JFrame {
         panelPrin.add(btCancelar);
         panelPrin.add(btconfirmar);
         panelPrin.add(btaceptar);
+        panelPrin.add(btEditar);
         
 
         panelPrin.setLayout(null);
@@ -427,6 +431,8 @@ public class VentanaRegDatoPersona extends JFrame {
        
         btCancelar.setBounds(700, 430, 110, 30);
         btaceptar.setBounds(580, 430, 110, 30);
+        btEditar.setVisible(false);
+        btEditar.setBounds(580, 430, 110, 30);
 
 
 
@@ -445,6 +451,7 @@ public class VentanaRegDatoPersona extends JFrame {
         campoNumCel.addMouseListener(manejador);
         btconfirmar.addMouseListener(manejador);
         btaceptar.addMouseListener(manejador);
+        btEditar.addMouseListener(manejador);
     }
     
     
@@ -535,7 +542,7 @@ public class VentanaRegDatoPersona extends JFrame {
         
         lbConvocatoria.setVisible(true);
         comboConvocatorias.setVisible(true);
-        btaceptar.setVisible(true);
+       
         
         btconfirmar.setVisible(false);
         
@@ -557,6 +564,7 @@ public class VentanaRegDatoPersona extends JFrame {
         comboMes.setVisible(false);
         comboAnio.setVisible(false);
         
+                
         buscarConvAsp(aspi.getIdentificacion());
         
         
@@ -573,14 +581,15 @@ public class VentanaRegDatoPersona extends JFrame {
             
             for (int i = 0; i < conv.size(); i++) {
             
-                comboConvocatorias.addItem(conv.get(i).getNombre());
+                comboConvocatorias.addItem(conv.get(i).getCodigo()+','+conv.get(i).getNombre());
         
+                //btEditar.setText("Editar Datos");
+            btEditar.setVisible(true);
             }
         
-        btaceptar.setVisible(true);
-        btaceptar.setText("Editar Datos");
+       
         
-        }
+        }  
     }
     
     public void validarIdentificación(){
@@ -765,6 +774,19 @@ public class VentanaRegDatoPersona extends JFrame {
                  if(guardar){
                  ingresarModulo1();
                  }
+            }else if(me.getSource() == btEditar){
+            
+                ventana_digitador.setVisible(false);
+                
+                String idAsp = campoNumIdent.getText();
+                
+                String convSelec = (String)comboConvocatorias.getSelectedItem();
+                
+                datos_convocatoria = convSelec.split(",");
+                                
+                VentanaOpcionesModulo vent =  new VentanaOpcionesModulo(tipo, idAsp , datos_convocatoria);
+            
+                vent.asignarEventos();
             }
         
         }
