@@ -44,16 +44,11 @@ public class DaoAspForPrePos {
         String licen = obj.getRtLicenciado();
         int puntaje = obj.getPuntModulo();
         String cod_convo = obj.getCod_convo();
-        
-        
-        // System.err.println(iden +"\n"+ doc + "\n"+  docTic +"\n"+   maest +"\n"+   maestTic +"\n"+  
-          //                                  espec + "\n"+  especTic +"\n"+   licen);
-         
+                        
         sqlDatos = "INSERT INTO  DocumentosPrePos VALUES (" + "'" + iden  + "', '" + doc  + "', '"+ docTic + "', '" + maest  + "', '" + maestTic +
                                        "', '" + espec  + "', '" + especTic  + "', '" + licen  + "'," + "'"+ puntaje+"', '"+cod_convo+"'"+");";
         
-        //System.err.println(sqlDatos);
-
+        
         try {
             
             ejecutarSentencia();
@@ -66,9 +61,9 @@ public class DaoAspForPrePos {
     }
     
    
-    public InfoPrePos getApplicant(String id) {
+    public InfoPrePos getApplicant(String id_asp, String id_conv) {
 
-        sentenciaSql = "SELECT * FROM DocumentosPrePos WHERE identificacion = " + id + ";";
+        sentenciaSql = "SELECT * FROM DocumentosPrePos WHERE identificacion = " + id_asp +"AND cod_convocatoria =" + id_conv+";";
 
         String identificacion = "";
         String doc = "";
@@ -79,6 +74,7 @@ public class DaoAspForPrePos {
         String especTic = "";
         String licen = "";
         int puntaje = 0;
+        String cod_conv = "";
         
         try {
 
@@ -99,6 +95,7 @@ public class DaoAspForPrePos {
                 especTic = (String) registros.getString(7);
                 licen = (String) registros.getString(8);
                 puntaje = Integer.parseInt((String) registros.getString(9));
+                cod_conv = (String) registros.getString(10);
                 
          }
            InfoPrePos infoprepos = new InfoPrePos();
@@ -152,4 +149,6 @@ public class DaoAspForPrePos {
         }
 
     }
+    
+  
 }
