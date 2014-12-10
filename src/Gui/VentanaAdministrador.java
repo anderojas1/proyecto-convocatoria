@@ -9,8 +9,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
@@ -27,7 +25,10 @@ public class VentanaAdministrador extends JFrame {
     private JPanel JPbotones;
     private JPanel JPCerrarSesion;
     private JLabel JLTitulo;
-    private Imagen imagen;
+    private JLabel JLadduser;
+    private JLabel JLcrearConv;
+    private JLabel JLediatrconv;
+ 
     private JPanel JPpanelPrincipal;
     private EventManager eventmanager;
     private Container container;
@@ -43,12 +44,11 @@ public class VentanaAdministrador extends JFrame {
         
         user = usuario;
         
-        pack();
-        
+        setSize(new Dimension(700, 500));
+        setResizable(false);
+        setLocationRelativeTo(null);
+        setVisible(true);
         setDefaultCloseOperation(0);
-        setSize(600, 200);
-        setResizable(true);
-        setVisible(true); 
     }
 
     private void initComponents() {
@@ -61,10 +61,14 @@ public class VentanaAdministrador extends JFrame {
         JPTitulo = new JPanel();
         JPbotones = new JPanel();
         JPCerrarSesion = new JPanel();
-        imagen = new Imagen();
+        
+        JPpanelPrincipal = new JPanel();
 
         //etiqueta
-        JLTitulo = new JLabel("Sistema de Selección de docentes TIC");
+        JLTitulo = new JLabel(new ImageIcon("src/iconos/encabezado.png"));
+        JLadduser = new JLabel(new ImageIcon("src/iconos/user+.jpg"));
+        JLediatrconv =  new JLabel(new ImageIcon("src/iconos/editar.jpg"));
+        JLcrearConv = new JLabel(new ImageIcon("src/iconos/crear_convocatoria.jpg"));
         
        
 
@@ -91,36 +95,50 @@ public class VentanaAdministrador extends JFrame {
     }
 
     private void AcommodateComponents() {
-        container = this.getContentPane();
-
-        container.setLayout(new GridLayout(3, 1, 5, 5));
+        
+        JPpanelPrincipal.setLayout(null);
 
         //titulo
-        JPTitulo.setLayout(new BorderLayout());
-        JLTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        JPTitulo.add(JLTitulo, BorderLayout.CENTER);
         
-        //JPTitulo.add(imagen,BorderLayout.EAST);
-        container.add(JPTitulo);
+        
+        JPpanelPrincipal.add(JLTitulo);
+        JLTitulo.setBounds(0, 0, 700, 80);
+        
+        
+        
 
         //panel botones
 
-        JPbotones.setLayout(new GridLayout(1, 3, 5, 5));
-
-
-        JPbotones.add(JBCreateUser);
-        JPbotones.add(JBModifConv);
-        JPbotones.add(JBAbrirConv);
         
-        container.add(JPbotones);
+
+        JPpanelPrincipal.add(JLadduser);
+        JLadduser.setBounds(50, 100, 180, 100);
+        JPpanelPrincipal.add(JBCreateUser);
+        JBCreateUser.setBounds(50, 200, 180, 50);
+        
+        JPpanelPrincipal.add(JLcrearConv);
+        JLcrearConv.setBounds(250, 100, 180, 100);
+        JPpanelPrincipal.add(JBAbrirConv);
+        JBAbrirConv.setBounds(250, 200, 180, 50);
+        
+        
+        JPpanelPrincipal.add(JLediatrconv);
+        JLediatrconv.setBounds(450, 100, 180, 100);
+        JPpanelPrincipal.add(JBModifConv);
+        JBModifConv.setBounds(450, 200, 180, 50);
+        
+        
+        
         
         //cerrar sesion
-        JPCerrarSesion.setLayout(new BorderLayout());
-        JPCerrarSesion.add(JBCerrarSesion, BorderLayout.EAST);
+        
+       JPpanelPrincipal.add(JBCerrarSesion);
+       JBCerrarSesion.setBounds(235, 400, 180, 50);
        
-        container.add(JPCerrarSesion);
+       
 
-
+       JPpanelPrincipal.setBackground(Color.WHITE);
+       getContentPane().add(JPpanelPrincipal);
 
     }
     
@@ -219,30 +237,12 @@ public class VentanaAdministrador extends JFrame {
     }
     
     
-   
-    public class Imagen extends JPanel {
+   public static void main(String args[]){
 
-public Imagen() {
-this.setSize(300, 400); //se selecciona el tamaño del panel
-}
+        VentanaAdministrador vad = new VentanaAdministrador("1");
 
-//Se crea un método cuyo parámetro debe ser un objeto Graphics
-
-public void paint(Graphics grafico) {
-Dimension height = getSize();
-
-//Se selecciona la imagen que tenemos en el paquete de la //ruta del programa
-
-ImageIcon Img = new ImageIcon(getClass().getResource("/Images/gear.jpg")); 
-
-//se dibuja la imagen que tenemos en el paquete Images //dentro de un panel
-
-grafico.drawImage(Img.getImage(), 0, 0, height.width, height.height, null);
-
-setOpaque(false);
-super.paintComponent(grafico);
-}
-}
+     }
+ 
     
 
  
