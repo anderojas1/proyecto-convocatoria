@@ -32,9 +32,9 @@ public class DriverIdioma {
     }
     
     
-    public ArrayList <String> consultarIdiomasAspirante (String id) throws SQLException {
+    public ArrayList <String> consultarIdiomasAspirante (String id, String id_convocatoria) throws SQLException {
         
-        return daoIdioma.consultarIdiomasAspirante(id);
+        return daoIdioma.consultarIdiomasAspirante(id, id_convocatoria);
         
     }
     

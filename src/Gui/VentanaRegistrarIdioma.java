@@ -151,7 +151,9 @@ public class VentanaRegistrarIdioma extends JFrame {
         if (ventana_digitador == null) jbcancelar = new JButton("Cerrar");
         else jbcancelar = new JButton("Siguiente");
         
-        fondoCheckBox();
+        fondoCheckBox();        
+        
+        actualizarIdiomasAspirante();
 
         getContentPane().add(panelVentana);
         
@@ -182,6 +184,29 @@ public class VentanaRegistrarIdioma extends JFrame {
             
         }
         
+    }
+    
+    
+    private void actualizarIdiomasAspirante () {
+        
+        jcbEditarIdioma.removeAllItems();
+        jcbEliminarIdioma.removeAllItems();
+        
+        try {
+            
+            ArrayList <String> idiomasAspirante = controladorIdioma.consultarIdiomasAspirante(id_aspirante, datosConvocatoria[0]);
+            
+            for (String idioma : idiomasAspirante) {
+                
+                jcbEditarIdioma.addItem(idioma);
+                jcbEliminarIdioma.addItem(idioma);
+                
+            }
+            
+        } catch (SQLException ex) {
+            
+            
+        }
     }
     
 
@@ -600,14 +625,6 @@ public class VentanaRegistrarIdioma extends JFrame {
 
         }
 
-    }    
-    
-    
-    public static void main(String[] args) {
-        
-        VentanaRegistrarIdioma ido = new VentanaRegistrarIdioma(WIDTH, null, args, null);
-        
-    }
-    
+    }      
     
 }
