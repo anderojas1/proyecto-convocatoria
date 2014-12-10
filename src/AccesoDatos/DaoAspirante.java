@@ -238,7 +238,7 @@ public class DaoAspirante {
         
     }
     
-    public int consultarGeneroAspirante (String sexo) throws SQLException {
+    public int consultarGeneroAspirante (String sexo, String codigo) throws SQLException {
         
         int total = 0;
         

@@ -71,6 +71,8 @@ public class DaoConvocatoria {
     
     }
     
+
+    
     
     public ArrayList<String> nombresConvocatorias(String identificacion) throws SQLException {
         ArrayList<String> nombres = new ArrayList();
@@ -171,4 +173,6 @@ public class DaoConvocatoria {
         ejecutarSentencia();
         
     }
+    
+ 
 }
