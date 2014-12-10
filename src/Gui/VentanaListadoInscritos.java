@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author kegisan
@@ -24,8 +25,8 @@ public class VentanaListadoInscritos extends JFrame{
     
   private JTable tabla;
   private JScrollPane panelScroll;
-  private String titColumna[];
-  private String datoColumna[][];
+  
+  
   private JComboBox convocatoria;
   private JLabel JLtitulo, JLconvo, JLaspirantes;
   private JButton JBbuscar, JBretroceder;
@@ -37,6 +38,7 @@ public class VentanaListadoInscritos extends JFrame{
   private int num;
   private ArrayList<Object> aspirantes;
   private String usuario;
+  private DefaultTableModel modelo;
   
   
     public VentanaListadoInscritos(String user){
@@ -44,11 +46,19 @@ public class VentanaListadoInscritos extends JFrame{
         super("Listado Inscritos");
     usuario = user;
     
-    inicializar();
-    ajustar();
+    
+    
+    
+    
+   
     // Creamos las columnas y las cargamos con los datos que van a
     // aparecer en la pantalla
-   
+    
+    
+    
+
+     inicializar();
+    ajustar();
 
     // Cambiamos el color de la zona seleccionada (rojo/blanco)
     //tabla.setSelectionForeground( Color.white );
@@ -72,6 +82,7 @@ public class VentanaListadoInscritos extends JFrame{
         contConvocatoria = new DriverConvocatoria();
         eventmanager = new EventManager();
         driversuper = new DriverSupervisor();
+       
         
         aspirantes = new ArrayList<>();
         
@@ -80,11 +91,13 @@ public class VentanaListadoInscritos extends JFrame{
         JPtabla = new JPanel();
         JPretro = new JPanel();
         
+
         
         // Creamos una instancia del componente Swing
 
-        
-    panelScroll = new JScrollPane( tabla );
+        panelScroll = new JScrollPane();
+        panelScroll.setVisible(true);
+    
     
     num = 0;
     
@@ -99,10 +112,13 @@ public class VentanaListadoInscritos extends JFrame{
             convocatoria.addItem(nombreC.get(i));
         }
       
+     
+        
         
      JBbuscar = new JButton("Buscar");
+     JBbuscar.setVisible(true);
      JBretroceder = new JButton("Retroceder");
-        
+     
     }
 
     public void ajustar(){
@@ -132,10 +148,11 @@ public class VentanaListadoInscritos extends JFrame{
         
              
         
-        
-        JPtabla.setLayout(new BorderLayout());
+         JPtabla.setLayout(new BorderLayout());
         JPtabla.add(panelScroll, BorderLayout.CENTER);
         container.add(JPtabla, BorderLayout.CENTER);
+        
+      
         
         JPretro.setLayout(new BorderLayout());
         JPretro.add(JBretroceder, BorderLayout.EAST);
@@ -146,6 +163,10 @@ public class VentanaListadoInscritos extends JFrame{
         
     }
     
+    public void mostrartabla(){
+         
+    }
+    
      public void agregarEventos(){
         JBbuscar.addActionListener(eventmanager);
         JBretroceder.addActionListener(eventmanager);
@@ -154,43 +175,89 @@ public class VentanaListadoInscritos extends JFrame{
     
      // Creamos las etiquetas que sirven de título a cada una de
   // las columnas de la tabla
-  public void CreaColumnas() {
-    titColumna = new String[4];
+  public String [] CreaColumnas() {
+    String titColumna[];
+           titColumna = new String[4];
     
     
       titColumna[0] = "Identificacion";
       titColumna[1] = "Nombres";
       titColumna[2] = "Apellidos";
       titColumna[3] = "Municipio_trabajo";
-    
+    System.out.println("hola soy crear columna");
+    return titColumna;
   }
   
   // Creamos los datos para cada uno de los elementos de la tabla
-  public void CargaDatos() {
-    datoColumna = new String[num][4];
-    
-    for( int iY=0; iY < num; iY++ ) {
-        String [] aspirante;
-       aspirante = (String []) aspirantes.get(iY);
-      for( int iX=0; iX < 4; iX++ ) {
-	datoColumna[iY][iX] = aspirante[iX];
+//  public void CargaDatos() {
+//    datoColumna = new String[num][4];
+//    
+//    for( int iY=0; iY < num; iY++ ) {
+//        String [] aspirante;
+//       aspirante = (String []) aspirantes.get(iY);
+//      for( int iX=0; iX < 4; iX++ ) {
+//	datoColumna[iY][iX] = aspirante[iX];
+//      
+//     
+//     }
+//    }
+  
+   public void CargaDatos() {
+//    datoColumna = new String[num][4];
+//    
+//     String [] aspirante; 
+//   
+//    for( int iY=0; iY < num; iY++ ) {
+//      
+//       aspirante = (String []) aspirantes.get(iY);
+//      for( int iX=0; iX < 4; iX++ ) {
+//	datoColumna[iY][iX] = aspirante[iX];
+//    }
+//    }
+       String convocatoriagua = convocatoria.getSelectedItem()+"";
+                String partes[] = convocatoriagua.split(",");
+                String codconv = partes[0];
+                aspirantes = driversuper.getListaAspirantes(codconv);
+                num = aspirantes.size();
+               String datoColumna[];
+               
+                
+                System.out.println("este es la cantida de aspirantes: "+num);
+                
+                datoColumna = new String[4];
+                  String [] aspirante; 
+   
+                  int i = 0;
+       while (i>num){
       
-      }
+       aspirante = (String []) aspirantes.get(i);
+      for( int iX=0; iX < 4; iX++ ) {
+	datoColumna[iX] = aspirante[iX];
+        System.out.println("este es el dato "+aspirante[iX]);
     }
+      modelo.addRow(datoColumna);
+      i++;
+    }
+   
+    
     
     
     
   }
   
-  public void tabla(){
-       tabla = new JTable( datoColumna,titColumna );
+   public void tabla(){
+   tabla = new JTable( modelo);
     // Aquí se configuran algunos de los parámetros que permite 
     // variar la JTable
     tabla.setShowHorizontalLines( true );
     tabla.setRowSelectionAllowed( true );
     tabla.setColumnSelectionAllowed( true );
-  }
- 
+    
+    panelScroll.add(tabla);
+    
+    
+ System.out.println("hola soy crear tabla");
+   }
 
      public class EventManager implements ActionListener  {
 
@@ -200,17 +267,19 @@ public class VentanaListadoInscritos extends JFrame{
            if(e.getSource()== JBbuscar){
                System.out.println("Hola soy boton buscar");
                
-               String convocatoriagua = convocatoria.getSelectedItem()+"";
-                String partes[] = convocatoriagua.split(",");
-                String codconv = partes[0];
-                aspirantes = driversuper.getListaAspirantes(codconv);
-                num = aspirantes.size();
-                
-                System.out.println("este es la cantida de aspirantes: "+num);
-                
-                CreaColumnas();
+               
+             
+                modelo = new DefaultTableModel(null,CreaColumnas());
                 CargaDatos();
+                 
                 tabla();
+                
+              
+        JPconvo.updateUI();
+        JPtabla.updateUI();
+                
+                
+                System.out.println("Se ejecuto todo hasta aqui");
                 
             }
            
