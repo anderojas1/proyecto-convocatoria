@@ -87,9 +87,24 @@ import java.util.*;
         cont.add(inicioSupervisor);
         setVisible(true);
         
-         
+         cargarConvocatorias();
         
     }
+    
+   private void cargarConvocatorias(){
+   
+       ArrayList <String> convo = new ArrayList();
+               
+        convo  = driverConv.listaConvocatorias();
+        
+        comboCov.removeItemAt(0);
+        
+        for (int i = 0; i < convo.size(); i++) {
+            
+            comboCov.addItem(convo.get(i));
+           
+        }   
+   }
     
     private void agregarComponentes () {
         
@@ -142,9 +157,9 @@ import java.util.*;
 
      }
 
-    private Object conv(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    private Object conv(int i) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 
      private class ManejaEvento implements ActionListener{
 
