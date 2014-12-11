@@ -201,9 +201,12 @@ import java.util.*;
             int jornadaMañana = driverAspirante.consultarNumeros("Jornada", "Mañana");
             int jornadaTarde = driverAspirante.consultarNumeros("Jornada", "Tarde");
             int jornadaAmbas = driverAspirante.consultarNumeros("Jornada", "Ambas");
-           
-            System.out.println(jornadaMañana + " - " + jornadaTarde + " - " + jornadaAmbas);
             
+            Object [][] datos = {{"Mañana", jornadaMañana},{"Tarde", jornadaTarde}, {"Ambas jornadas", jornadaAmbas}};
+           
+            Graficos reporte = new Graficos();
+            
+            reporte.recibirParametrosGrafica("Reporte por jornadas", "Género", "Total", datos);
            // JOptionPane.showMessageDialog(this, "Estamos en desarrollo", "Módulo en desarrollo", JOptionPane.INFORMATION_MESSAGE);
             
         } catch (SQLException ex) {
@@ -228,8 +231,6 @@ import java.util.*;
             Graficos reportes = new Graficos();
             
             reportes.recibirParametrosGrafica("Género","titulox","tituloy", datos);
-            
-            JOptionPane.showMessageDialog(this, "Estamos en desarrollo", "Módulo en desarrollo", JOptionPane.INFORMATION_MESSAGE);
             
         } catch (SQLException ex) {
             
