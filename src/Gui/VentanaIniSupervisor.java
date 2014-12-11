@@ -211,11 +211,15 @@ import java.util.*;
      
     public void generarReporteJornadas () {
         
+        String convoca = (String)comboCov.getSelectedItem();
+        
+        String  convocaArray [] = convoca.split(",");
+        
         try {
         
-            int jornadaMañana = driverAspirante.consultarNumeros("Jornada", "Mañana");
-            int jornadaTarde = driverAspirante.consultarNumeros("Jornada", "Tarde");
-            int jornadaAmbas = driverAspirante.consultarNumeros("Jornada", "Ambas");
+            int jornadaMañana = driverAspirante.consultarNumeros("Jornada", "Mañana", convocaArray[0]);
+            int jornadaTarde = driverAspirante.consultarNumeros("Jornada", "Tarde", convocaArray[0]);
+            int jornadaAmbas = driverAspirante.consultarNumeros("Jornada", "Ambas", convocaArray[0]);
             
             Object [][] datos = {{"Mañana", jornadaMañana},{"Tarde", jornadaTarde}, {"Ambas jornadas", jornadaAmbas}};
            
@@ -233,11 +237,15 @@ import java.util.*;
     }
     
     public void generarReporteGenero () {
+       
+        String convoca = (String)comboCov.getSelectedItem();
+        
+        String  convocaArray [] = convoca.split(",");
         
         try {
             
-            int sexoMasculino = driverAspirante.consultarNumeros("Genero", "Hombre");
-            int sexoFemenino = driverAspirante.consultarNumeros("Genero", "Mujer");
+            int sexoMasculino = driverAspirante.consultarNumeros("Genero", "Hombre", convocaArray[0]);
+            int sexoFemenino = driverAspirante.consultarNumeros("Genero", "Mujer", convocaArray[0]);
             
             Object [][] datos = {{"Hombres", sexoMasculino},{"Mujeres", sexoFemenino}};            
             
