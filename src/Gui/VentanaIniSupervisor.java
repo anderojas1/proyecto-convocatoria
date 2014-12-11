@@ -157,7 +157,7 @@ import javax.swing.JPanel;
             }
             
             if(ae.getSource() == genero){
-                ingresarModuloReportes();
+               // ingresarModuloReportes();
             }
         }
          
