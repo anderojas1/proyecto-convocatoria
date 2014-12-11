@@ -290,11 +290,12 @@ public class DaoAspirante {
     }
     
     
-    public int consultarJornadaLaboral (String jornada) throws SQLException {
+    public int consultarJornadaLaboral (String jornada, String parametr) throws SQLException {
         
         int total = 0;
         
-        sentenciaSql = "SELECT count(jornada) FROM ASPIRANTE WHERE jornada = '" + jornada + "';";
+        sentenciaSql = "SELECT count(jornada) FROM ASPIRANTE  NATURAL JOIN ASPIRANTECONVOCATORIA WHERE jornada = '" + jornada + "' AND codigo = '"+ parametr +"' ;";
+        
         ejecutarConsulta();
         
         if (registros.next() == true) total = registros.getInt(1);
@@ -307,7 +308,7 @@ public class DaoAspirante {
         
         int total = 0;
         
-        sentenciaSql = "SELECT count(sexo) FROM ASPIRANTE WHERE sexo = '" + sexo + "';";
+        sentenciaSql = "SELECT count(sexo) FROM ASPIRANTE NATURAL JOIN ASPIRANTECONVOCATORIA WHERE sexo = '" + sexo + "' AND codigo = '"+ codigo+"';";
         ejecutarConsulta();
         
         if (registros.next() == true) total = registros.getInt(1);
