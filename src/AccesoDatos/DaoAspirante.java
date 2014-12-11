@@ -294,7 +294,7 @@ public class DaoAspirante {
         
         int total = 0;
         
-        sentenciaSql = "SELECT count(jornada) FROM ASPIRANTE  NATURAL JOIN ASPIRANTECONVOCATORIA WHERE jornada = '" + jornada + "' AND codigo = '"+ parametr +"' ;";
+        sentenciaSql = "SELECT count(*) FROM ASPIRANTE  NATURAL JOIN ASPIRANTECONVOCATORIA WHERE jornada = '" + jornada + "' AND codigo = '"+ parametr +"' ;";
         
         ejecutarConsulta();
         

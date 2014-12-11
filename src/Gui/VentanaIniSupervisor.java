@@ -149,13 +149,7 @@ import java.util.*;
         jornada.addActionListener(driverEventos);
     }
     
-    public void ingresarTotalGenero(){//Ventana siguiente agregar
-         VentanaTotalGenero reportes = new VentanaTotalGenero();
-         reportes.agregarEventos();
-         reportes.configurarVentana(this);
-         setVisible(false);
-
-     }
+    
 
 //    private Object conv(int i) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -216,7 +210,7 @@ import java.util.*;
         String  convocaArray [] = convoca.split(",");
         
         try {
-        
+            System.out.println(convocaArray[0]);
             int jornadaMañana = driverAspirante.consultarNumeros("Jornada", "Mañana", convocaArray[0]);
             int jornadaTarde = driverAspirante.consultarNumeros("Jornada", "Tarde", convocaArray[0]);
             int jornadaAmbas = driverAspirante.consultarNumeros("Jornada", "Ambas", convocaArray[0]);

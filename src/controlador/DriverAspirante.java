@@ -93,11 +93,11 @@ public class DriverAspirante {
         
         switch (item) {
             
-            case "Jornada": total = daoaspirante.consultarJornadaLaboral(parametro , codConv); 
+            case "Jornada": total = daoaspirante.consultarJornadaLaboral(codConv, parametro); 
             
             break;
             
-            case "Genero": total = daoaspirante.consultarGeneroAspirante(parametro , codConv);
+            case "Genero": total = daoaspirante.consultarGeneroAspirante(codConv, parametro);
             
             break;
                             
