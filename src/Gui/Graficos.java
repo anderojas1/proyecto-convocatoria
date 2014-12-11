@@ -157,7 +157,7 @@ public class Graficos extends JFrame{
         for (int i = 0; i < datos.length; i++) {
               
                 String nom = (String)datos[i][0];
-                int num = Integer.parseInt((String)datos[i][1]);
+                int num = Integer.parseInt(datos[i][1].toString());
                 
                 System.out.println("###" + nom + "###" + num + "###");
                 dataset.setValue(num, nom, nom);
