@@ -230,7 +230,7 @@ import java.util.*;
             
             Graficos reportes = new Graficos();
             
-            reportes.recibirParametrosGrafica("Género","titulox","tituloy", datos);
+            reportes.recibirParametrosGrafica("Reporte género","género","total", datos);
             
         } catch (SQLException ex) {
             
