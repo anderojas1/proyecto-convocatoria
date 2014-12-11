@@ -97,7 +97,7 @@ public class DriverAspirante {
             
             break;
             
-            case "Genero": total = daoaspirante.consultarGeneroAspirante(item,parametro);
+            case "Genero": total = daoaspirante.consultarGeneroAspirante(item, parametro);
             
             break;
                             

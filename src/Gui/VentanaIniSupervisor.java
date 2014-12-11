@@ -21,6 +21,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JComboBox;
+import java.util.*;
 
 
  public class VentanaIniSupervisor extends JFrame{
@@ -34,6 +36,8 @@ import javax.swing.JPanel;
     private JLabel lbFinal;
     private JButton informe, genero, ciudad, jornada, mejores, consultar, total, salir;
     private ManejaEvento driverEventos;
+    private JComboBox comboCov; 
+    private DriverConvocatoria driverConv;
 
     private String usuario;
     private DriverUsuario control;
@@ -66,6 +70,14 @@ import javax.swing.JPanel;
         lbEncabezadoi = new JLabel(new ImageIcon ("src/iconos/encabezado.png"));
         lbFinal = new JLabel(new ImageIcon ("src/iconos/piePagina.png"));
         inicioSupervisor.setBackground(Color.WHITE);
+        
+        comboCov =  new JComboBox ();
+        comboCov.addItem("No hay convocatorias disonibles");
+        
+         driverConv = new DriverConvocatoria();
+         
+       
+       
 
         
         agregarComponentes();
@@ -74,6 +86,8 @@ import javax.swing.JPanel;
         
         cont.add(inicioSupervisor);
         setVisible(true);
+        
+         
         
     }
     
@@ -91,6 +105,7 @@ import javax.swing.JPanel;
         inicioSupervisor.add(consultar);
         inicioSupervisor.add(total);
         inicioSupervisor.add(salir);
+        inicioSupervisor.add(comboCov);
         
     }
     
@@ -107,7 +122,8 @@ import javax.swing.JPanel;
          consultar.setBounds(500, 240, 200, 30);
          total.setBounds(500, 280, 200, 30);
          salir.setBounds(500, 400, 200, 35);
-        
+         comboCov.setBounds(200, 400, 250, 35);
+         
     }
     
     public void agregarEventos () {
@@ -115,7 +131,7 @@ import javax.swing.JPanel;
         salir.addActionListener(driverEventos);
         informe.addActionListener(driverEventos);
         genero.addActionListener(driverEventos);
-        
+        jornada.addActionListener(driverEventos);
     }
     
     public void ingresarTotalGenero(){//Ventana siguiente agregar
@@ -125,6 +141,10 @@ import javax.swing.JPanel;
          setVisible(false);
 
      }
+
+    private Object conv(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
      private class ManejaEvento implements ActionListener{
 
@@ -157,10 +177,21 @@ import javax.swing.JPanel;
             }
             
             if(ae.getSource() == genero){
-               // ingresarModuloReportes();
+              
+                generarReporteGenero();
+            
             }
-        }
+            
+            if(ae.getSource() == jornada){
+            
+                generarReporteJornadas();
+                
+            }
+                
+                
          
+     }
+     
      }
      
     public void generarReporteJornadas () {
@@ -170,9 +201,10 @@ import javax.swing.JPanel;
             int jornadaMañana = driverAspirante.consultarNumeros("Jornada", "Mañana");
             int jornadaTarde = driverAspirante.consultarNumeros("Jornada", "Tarde");
             int jornadaAmbas = driverAspirante.consultarNumeros("Jornada", "Ambas");
+           
             System.out.println(jornadaMañana + " - " + jornadaTarde + " - " + jornadaAmbas);
             
-            JOptionPane.showMessageDialog(this, "Estamos en desarrollo", "Módulo en desarrollo", JOptionPane.INFORMATION_MESSAGE);
+           // JOptionPane.showMessageDialog(this, "Estamos en desarrollo", "Módulo en desarrollo", JOptionPane.INFORMATION_MESSAGE);
             
         } catch (SQLException ex) {
             
