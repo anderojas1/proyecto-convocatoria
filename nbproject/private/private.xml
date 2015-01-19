@@ -2,15 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/home/anderojas/Proyectos/DS1/proyecto-convocatoria/src/Gui/ViewValidator.java</file>
-            <file>file:/home/anderojas/Proyectos/DS1/proyecto-convocatoria/src/logica/Convocatoria.java</file>
-            <file>file:/home/anderojas/Proyectos/DS1/proyecto-convocatoria/src/AccesoDatos/DaoUsuario.java</file>
-            <file>file:/home/anderojas/Proyectos/DS1/proyecto-convocatoria/src/AccesoDatos/Fachada.java</file>
-            <file>file:/home/anderojas/Proyectos/DS1/proyecto-convocatoria/src/Gui/VentanaRegUsuario.java</file>
-            <file>file:/home/anderojas/Proyectos/DS1/proyecto-convocatoria/src/Gui/VentanaLogin.java</file>
-            <file>file:/home/anderojas/Proyectos/DS1/proyecto-convocatoria/src/controlador/DriverUsuario.java</file>
-            <file>file:/home/anderojas/Proyectos/DS1/proyecto-convocatoria/src/AccesoDatos/proyectods.sql</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
