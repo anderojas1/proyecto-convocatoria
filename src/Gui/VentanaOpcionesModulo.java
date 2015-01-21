@@ -177,6 +177,7 @@ public class VentanaOpcionesModulo extends JFrame {
         formadorTic.agregarEventos();
         formadorTic.configurarVentana(this);
         setVisible(false);
+        dispose();
     }
 
     public void ingresarConocimientosEspecificos() {

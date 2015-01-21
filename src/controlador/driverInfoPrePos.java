@@ -140,8 +140,7 @@ public class driverInfoPrePos {
         JOptionPane.showMessageDialog(null, objPrePos.getPuntModulo());
         
         InfoPrePos objPrePos = daoprepos.getApplicant(id_asp, id_conv);
-        
-        
+      
         
         int puntaje_anterior = 0;
         int puntaje_modulo = 0;

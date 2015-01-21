@@ -87,14 +87,24 @@ public class DriverAspirante {
     }
     
     
-    public int consultarNumeros (String item, String parametro) throws SQLException {
+    public int consultarNumeros (String item, String codConv, String parametro) throws SQLException {
         
         int total = 0;
         
         switch (item) {
             
+<<<<<<< HEAD
             case "Jornada": total = daoaspirante.consultarJornadaLaboral(parametro); break;
             //case "Genero": total = daoaspirante.consultarGeneroAspirante(parametro); break;
+=======
+            case "Jornada": total = daoaspirante.consultarJornadaLaboral(codConv, parametro); 
+            
+            break;
+            
+            case "Genero": total = daoaspirante.consultarGeneroAspirante(codConv, parametro);
+            
+            break;
+>>>>>>> origin/master
                             
         }
         
